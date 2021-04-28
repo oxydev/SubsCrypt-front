@@ -1,0 +1,26 @@
+// Abstract files
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+// Components
+@import "components/buttons";
+@import "components/containers";
+
+// Core files
+@import "core/fonts";
+@import "core/resets";
+@import "core/typography";
+
+// Layout
+@import "layout/footer";
+@import "layout/header";
+@import "layout/sidebar";
+
+// Pages
+@import "pages/login";
+
+// Sections
+@import "sections/wallet";
+
+// Vendor Files
+@import "vendors/bootstrap";
