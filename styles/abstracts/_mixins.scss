@@ -1,0 +1,41 @@
+@mixin pushAuto {
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin font($size, $weight, $color, $height) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  line-height: $height;
+}
+
+@mixin flexBox($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin backgroundImage($position: center, $size: contain) {
+  background-position: $position;
+  background-size: $size;
+  background-repeat: no-repeat;
+}
+
+@mixin absoluteCenter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
