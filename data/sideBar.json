@@ -1,0 +1,41 @@
+{
+  "sideBar": {
+    "menuItem": [
+      {
+        "name": "Dashboard",
+        "url": "/dashboard",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "My Subscrypts",
+        "url": "/my-subscrypts",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "Profile Setting",
+        "url": "/profile-setting",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "Lorem ipsum",
+        "url": "/lorem-ipsum",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "Invite friends",
+        "url": "/invite-friends",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "FAQ",
+        "url": "/faq",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "Blog",
+        "url": "/blog",
+        "icon": "/dashbord.png"
+      }
+    ]
+  }
+}

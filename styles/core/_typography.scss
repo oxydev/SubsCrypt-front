@@ -1,0 +1,23 @@
+//Font family
+$basic-font-family: Rubik;
+
+//
+
+html {
+  font-family: $basic-font-family;
+  font-size: $fontSize-root;
+}
+
+@mixin text--heading1 {
+  @include font($fontSize-heading1, $fontWeight-bold);
+}
+@mixin text--heading2 {
+  @include font($fontSize-heading2, $fontWeight-bold);
+}
+@mixin text--heading3 {
+  @include font($fontSize-heading3, $fontWeight-bold);
+}
+
+@mixin text-body--small--regular {
+  @include font($fontSize-body--small, $fontWeight-regular);
+}

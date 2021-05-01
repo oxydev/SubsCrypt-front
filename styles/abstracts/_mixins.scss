@@ -11,7 +11,7 @@
   position: $pos;
 }
 
-@mixin font($size, $weight, $color, $height) {
+@mixin font($size, $weight, $color: $primary, $height: 1.4) {
   font-size: $size;
   font-weight: $weight;
   color: $color;
