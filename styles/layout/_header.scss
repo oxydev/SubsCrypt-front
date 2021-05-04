@@ -4,6 +4,7 @@
   justify-content: flex-end;
   border-bottom: 1px solid $gray--notInKit-1;
   width: 100%;
+  padding: 24px 47px;
 }
 
 //Styles for login box in the header
@@ -31,8 +32,16 @@
 }
 .UserMenu-button {
   border-radius: 12px;
-  background-image: url("/icons/png/userMenuBtn.png");
-
+  background: $light-BG;
+  border: 1px solid $gray--notInKit-1;
+  position: relative;
   @include box(54px, 40px);
-  @include backgroundImage(center, 20px);
+  cursor: pointer;
+
+  &::after {
+    background-image: url("/icons/png/userMenuBtn.png");
+    @include pseudo;
+    @include backgroundImage(center, 20px);
+    @include square(100%);
+  }
 }
