@@ -3,6 +3,7 @@ import { Container } from "next/App";
 import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
+import Main from "../componenets/layOut/Main";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,10 +16,11 @@ export default function App({ Component, pageProps }) {
       </Head>
       <div className="WholePageWrapper">
         <SideBar />
-        <div>
+        <Main>
           <Header />
           <Component {...pageProps} />
-        </div>
+        </Main>
+        <div></div>
       </div>
     </Container>
   );

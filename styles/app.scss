@@ -12,10 +12,12 @@
 @import "core/typography";
 
 // Layout
+@import "layout/Main";
 @import "layout/body";
 @import "layout/footer";
 @import "layout/header";
 @import "layout/sidebar";
+@import "layout/containers";
 
 // Pages
 @import "pages/login";

@@ -1,0 +1,22 @@
+//Styles for different containers in the project
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 -24px;
+  padding: 24px;
+}
+[class*="Container"] {
+  flex-grow: 1;
+  flex-shrink: 0;
+  margin: 0 24px;
+}
+.Container--fullWidth {
+  width: 100%;
+}
+.Container--medium {
+  max-width: 768px;
+}
+.ontainer--small {
+  max-width: 360px;
+}
