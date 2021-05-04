@@ -28,7 +28,6 @@
 @mixin backgroundImage($position: center, $size: contain) {
   background-position: $position;
   background-size: $size;
-  background-repeat: no-repeat;
 }
 
 @mixin absoluteCenter {
@@ -38,4 +37,18 @@
   left: 0;
   bottom: 0;
   margin: auto;
+}
+
+@mixin box($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin square($width) {
+  @include box($width, $width);
+}
+
+@mixin circle($radius) {
+  @include square($radius);
+  border-radius: 50%;
 }

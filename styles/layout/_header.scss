@@ -1,0 +1,38 @@
+//Styles for the header
+.Header {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid $gray--notInKit-1;
+  width: 100%;
+}
+
+//Styles for login box in the header
+.LoginBox {
+  display: flex;
+  align-items: center;
+  border: 1px solid $green;
+  border-radius: 12px;
+  padding: 0 23px;
+}
+.Avatar {
+  @include circle(24px);
+  @include backgroundImage;
+}
+.UserName {
+  color: $green;
+  line-height: 2.4rem;
+  margin-left: 20px;
+
+  @include text-body--large--medium;
+}
+//Styles for usermenu in the header
+.UserMenu {
+  margin-left: 12px;
+}
+.UserMenu-button {
+  border-radius: 12px;
+  background-image: url("/icons/png/userMenuBtn.png");
+
+  @include box(54px, 40px);
+  @include backgroundImage(center, 20px);
+}

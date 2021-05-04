@@ -21,3 +21,7 @@ html {
 @mixin text-body--small--regular {
   @include font($fontSize-body--small, $fontWeight-regular);
 }
+
+@mixin text-body--large--medium {
+  @include font($fontSize-body--large, $fontWeight-medium);
+}

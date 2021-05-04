@@ -2,6 +2,7 @@ import "../styles/app.scss";
 import { Container } from "next/App";
 import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
+import Header from "../componenets/layOut/header";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }) {
       <div className="WholePageWrapper">
         <SideBar />
         <div>
+          <Header />
           <Component {...pageProps} />
         </div>
       </div>
