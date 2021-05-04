@@ -1,5 +1,5 @@
 import "../styles/app.scss";
-import { Container } from "next/App";
+import { Container } from "next/app";
 import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
