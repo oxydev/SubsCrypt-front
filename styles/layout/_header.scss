@@ -20,11 +20,11 @@
   @include backgroundImage;
 }
 .UserName {
-  color: $green;
   line-height: 2.4rem;
   margin-left: 20px;
 
   @include text-body--large--medium;
+  color: $green;
 }
 //Styles for usermenu in the header
 .UserMenu {
