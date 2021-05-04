@@ -1,0 +1,26 @@
+{
+  "networks": [
+    {
+      "name": "Polkadot",
+      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+    },
+    {
+      "name": "Binance",
+      "imageURL": "/icons/png/networks/BinanceLogo.png"
+    }
+  ],
+  "wallets": [
+    {
+      "name": "Metamask",
+      "imageURL": "/icons/png/wallets/MetamaskLogo.png"
+    },
+    {
+      "name": "WalletConnect",
+      "imageURL": "/icons/png/wallets/WalletConnectLogo.png"
+    },
+    {
+      "name": "Binance Chain Wallet",
+      "imageURL": "/icons/png/wallets/BinanceChainWalletLogo.png"
+    }
+  ]
+}

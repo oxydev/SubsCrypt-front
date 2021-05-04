@@ -2,14 +2,15 @@
 @import "abstracts/mixins";
 @import "abstracts/variables";
 
-// Components
-@import "components/buttons";
-@import "components/containers";
-
 // Core files
 @import "core/fonts";
 @import "core/resets";
 @import "core/typography";
+
+// Components
+@import "components/wallet/walletConnection.scss";
+@import "components/buttons";
+@import "components/containers";
 
 // Layout
 @import "layout/Main";
