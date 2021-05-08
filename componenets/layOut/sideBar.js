@@ -14,7 +14,7 @@ export default function SideBar() {
   return (
     <div className="SideBar">
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
-      <img className="SideBar-logo" src="/Logo/Logo--light.png"></img>
+      <img className="SideBar-logo" src="/logo/Logo--light.png"></img>
     </div>
   );
 }
