@@ -3,12 +3,12 @@
     "menuItem": [
       {
         "name": "Dashboard",
-        "url": "/dashboard",
+        "url": "/",
         "icon": "/dashbord.png"
       },
       {
         "name": "My Subscrypts",
-        "url": "/my-subscrypts",
+        "url": "/mySubscryptions",
         "icon": "/dashbord.png"
       },
       {
