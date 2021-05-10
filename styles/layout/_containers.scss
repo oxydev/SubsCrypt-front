@@ -2,9 +2,8 @@
 .row {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 0 -24px;
-  padding: 24px;
 }
 [class*="Container--"] {
   flex-grow: 1;
@@ -17,6 +16,6 @@
 .Container--medium {
   max-width: 768px;
 }
-.ontainer--small {
+.Container--small {
   max-width: 360px;
 }

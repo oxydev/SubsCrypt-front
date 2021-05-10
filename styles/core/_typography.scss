@@ -12,10 +12,25 @@ html {
   @include font($fontSize-heading1, $fontWeight-bold);
 }
 @mixin text--heading2 {
-  @include font($fontSize-heading2, $fontWeight-bold);
+  @include font($fontSize-heading2, $fontWeight-bold, 1.5);
 }
 @mixin text--heading3 {
   @include font($fontSize-heading3, $fontWeight-bold);
+}
+
+@mixin text-footNote {
+  @include font($fontSize-footNote, $fontWeight-light);
+}
+
+@mixin text-body--lightSmall--light {
+  @include font($fontSize-body--lightSmall, $fontWeight-light);
+}
+
+@mixin text-body--varySmall--light {
+  @include font($fontSize-body--verySmall, $fontWeight-light);
+}
+@mixin text-body--varySmall--regular {
+  @include font($fontSize-body--verySmall, $fontWeight-regular);
 }
 
 @mixin text-body--small--regular {
@@ -24,6 +39,10 @@ html {
 
 @mixin text-body--small--light {
   @include font($fontSize-body--lightSmall, $fontWeight-light);
+}
+
+@mixin text-body--large--regular {
+  @include font($fontSize-body--large, $fontWeight-regular, 1.5);
 }
 
 @mixin text-body--large--medium {

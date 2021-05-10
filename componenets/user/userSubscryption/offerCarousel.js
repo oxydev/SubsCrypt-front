@@ -6,7 +6,7 @@ export default function OfferCarousel() {
   const offerCards = data.offers.map((item) => <OfferCard offer={item} />);
   return (
     <div className="OfferCarousel">
-      <div className="OffersList">{offerCards}</div>
+      <div className="OfferCarousel-itemList">{offerCards}</div>
       <button className="OfferCarousel-prevBtn" />
       <button className="OfferCarousel-nextBtn" />
     </div>

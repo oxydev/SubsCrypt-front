@@ -1,0 +1,40 @@
+.SubscryptionOffers {
+  border: 1px solid #e6e7eb;
+  border-radius: $borderRadius--small;
+  padding: 78px 97px 64px;
+  position: relative;
+
+  & > h1 {
+    @include text-body--large--regular;
+    color: $gray-3;
+    margin-bottom: 67px;
+    position: relative;
+
+    &::before {
+      @include pseudo;
+      @include box(19px, 17px);
+      background-image: url("/icons/png/sunscryption/Wallet.png");
+      @include backgroundImage;
+      left: -30px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+}
+.SubscryptionOffers::after {
+  @include pseudo;
+  @include box(139px, 126px);
+  background-image: url("/icons/png/sunscryption/OffersIcon.png");
+  @include backgroundImage;
+  top: 47px;
+  right: 140px;
+}
+.OfferPart {
+  & > h2 {
+    @include text-body--lightSmall--light;
+    color: $gray-3;
+    margin-bottom: 24px;
+    max-width: 379px;
+  }
+}

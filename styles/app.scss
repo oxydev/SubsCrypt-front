@@ -8,7 +8,10 @@
 @import "core/typography";
 
 // Components
-@import "components/wallet/walletConnection.scss";
+@import "components/MySubscryption/subscryptionOffers";
+@import "components/MySubscryption/offerCard";
+@import "components/MySubscryption/offerCarousel";
+@import "components/wallet/walletConnection";
 @import "components/buttons";
 @import "components/containers";
 
@@ -22,6 +25,7 @@
 
 // Pages
 @import "pages/login";
+@import "pages/userDashboard";
 
 // Sections
 @import "sections/wallet";

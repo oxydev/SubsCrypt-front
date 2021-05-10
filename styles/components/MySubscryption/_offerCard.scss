@@ -1,0 +1,73 @@
+.OfferCard {
+  border: 1px solid $gray-6;
+  border-radius: $borderRadius--regular;
+  margin: 0 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  @include box(156px, 153px);
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    & > h1 {
+      @include text-body--varySmall--light;
+    }
+  }
+  main {
+    @include text-footNote;
+    color: $gray-4;
+    margin-bottom: 16px;
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+  }
+  footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.OfferLogo {
+  @include circle(24px);
+  margin-right: 15px;
+}
+.OfferCard-Provider {
+  @include text-footNote;
+  color: $gray-4;
+}
+.OfferCard-description {
+  color: $gray-3;
+  margin-bottom: 2px;
+  line-height: 10px;
+}
+.OfferCard-payMethod {
+  display: flex;
+
+  label {
+    @include text-footNote;
+    color: $gray-4;
+  }
+}
+
+.OfferCard-coinSelect {
+  display: none;
+}
+.OfferCard-payBtn {
+  @include box(61px, 12px);
+  display: inline-block;
+  border-radius: 6px;
+  background: $purple-BG--linear;
+  border: none;
+  outline: none;
+  @include text-body--varySmall--regular;
+  color: $white;
+  span {
+    @include text-footNote;
+    color: inherit;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+}

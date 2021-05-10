@@ -11,7 +11,7 @@
   position: $pos;
 }
 
-@mixin font($size, $weight, $color: $primary, $height: 1.4) {
+@mixin font($size, $weight, $height: 1.4, $color: $primary) {
   font-size: $size;
   font-weight: $weight;
   color: $color;
@@ -48,7 +48,7 @@
   @include box($width, $width);
 }
 
-@mixin circle($radius) {
-  @include square($radius);
+@mixin circle($diameter) {
+  @include square($diameter);
   border-radius: 50%;
 }

@@ -5,7 +5,12 @@ export default function MySubscryptions() {
   return (
     <div className="userDashboard">
       <h1>My Subscryption</h1>
-      <SubscryptionOffers />
+      <div className="row">
+        <div className="Container--medium">
+          <SubscryptionOffers />
+        </div>
+        <div className="Container--small"></div>
+      </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 * {
@@ -33,5 +34,10 @@ h6 {
 }
 
 input:focus {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
   outline: none;
 }

@@ -5,7 +5,7 @@ export default function OfferCard(props) {
   return (
     <section className="OfferCard">
       <header>
-        <img className="OfferLogo" src={offer.logo} />
+        <img className="OfferLogo" src={offer.logoURL} />
         <h1>{offer.name}</h1>
       </header>
       <main>
@@ -13,7 +13,7 @@ export default function OfferCard(props) {
           <p className="OfferCard-Provider">{offer.provider}</p>
           <p className="OfferCard-Rate">{offer.rate}</p>
         </div>
-        <p>{offer.description}</p>
+        <p className="OfferCard-description">{offer.description}</p>
         <div>
           <h6>Duration</h6>
           <p>{offer.duration}</p>
@@ -24,14 +24,17 @@ export default function OfferCard(props) {
         </div>
       </main>
       <footer>
-        <div>
+        <div className="OfferCard-payMethod">
           <label>Pay with</label>
           <select className="OfferCard-coinSelect">
             <option value="coin1">coin1</option>
             <option value="coin2">coin2</option>
           </select>
         </div>
-        <button onClick={() => {}}>{offer.price + "USSD"}</button>
+        <button className="OfferCard-payBtn" onClick={() => {}}>
+          {offer.price}
+          <span>USSD</span>
+        </button>
       </footer>
     </section>
   );
