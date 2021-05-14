@@ -1,0 +1,104 @@
+.UserPlanCard {
+  display: flex;
+  align-items: flex-start;
+  border-top: 2px solid #e6e7eb;
+  padding: 16px 0;
+
+  &:last-child {
+    border-bottom: 2px solid #e6e7eb;
+  }
+}
+.UserPlan-logo {
+  @include circle(64px);
+  object-fit: auto;
+  margin-right: 24px;
+}
+.UserPlan-specs {
+  margin-right: 32px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+.UserPlan-featurBox {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin-top: auto;
+  padding-right: 15%;
+  @include text-body--verySmall--light;
+
+  &:last-child {
+    margin-top: 0;
+  }
+  h6 {
+    @include text-body--verySmall--light;
+    color: $gray-3;
+  }
+  p {
+    @include text-body--verySmall--light;
+    color: $gray-4;
+  }
+}
+.UserPlan-name {
+  @include text-body--lightSmall--light;
+  line-height: 16px;
+  margin: 7px 0;
+  width: 144px;
+}
+.UserPlan-Provider {
+  @include text-body--lightSmall--light;
+  color: $gray-4;
+  margin-bottom: 14px;
+}
+.UserPlan-desc {
+  @include text-body--lightSmall--light;
+  color: $gray-3;
+  width: 221px;
+  margin: 7px 0;
+}
+.UserPlan-rate {
+  display: flex;
+  margin-top: 7px;
+  h6,
+  p {
+    @include text-body--verySmall--light;
+    color: $gray-4;
+  }
+  h6 {
+    margin-right: auto;
+  }
+}
+.UsePlanPercentage {
+  height: 11px;
+  width: 218px;
+  background-image: url("/temp/ServiceBarUsage.png");
+  margin: 7px 0;
+}
+.UsePlan-useAnnounce {
+  @include text-body--verySmall--light;
+  color: $gray-3;
+  margin-bottom: 15px;
+  max-width: 128px;
+}
+.UserPlan-PayPart {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+}
+.UserPlan-payMethod {
+  margin-right: auto;
+}
+.UserPlan-payMethod {
+  @include text-body--verySmall--light;
+  color: $gray-4;
+}
+.UserPlan-coinSelect {
+  display: none;
+}
+.UserPlan-refundBtn {
+  @include secondaryButtons(42px, 21px);
+}
+.UserPlan-renewBtn {
+  @include primaryButtons(75px, 21px);
+  margin-left: 8px;
+}

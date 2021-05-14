@@ -1,5 +1,6 @@
 // Abstract files
 @import "abstracts/mixins";
+@import "abstracts/placeHolder";
 @import "abstracts/variables";
 
 // Core files
@@ -11,6 +12,7 @@
 @import "components/MySubscryption/subscryptionOffers";
 @import "components/MySubscryption/offerCard";
 @import "components/MySubscryption/offerCarousel";
+@import "components/MySubscryption/userPlanCard";
 @import "components/wallet/walletConnection";
 @import "components/buttons";
 @import "components/containers";

@@ -3,6 +3,8 @@
   border-radius: $borderRadius--small;
   padding: 78px 97px 64px;
   position: relative;
+  //
+  display: none;
 
   & > h1 {
     @include text-body--large--regular;

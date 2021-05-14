@@ -52,3 +52,25 @@
   @include square($diameter);
   border-radius: 50%;
 }
+
+//buttons
+@mixin primaryButtons($width, $height) {
+  @include box($width, $height);
+  display: inline-block;
+  border-radius: $height / 2;
+  background: $purple-BG--linear;
+  border: none;
+  outline: none;
+  @include text-body--verySmall--regular;
+  color: $white;
+}
+@mixin secondaryButtons($width, $height) {
+  @include box($width, $height);
+  display: inline-block;
+  border-radius: $height / 2;
+  background: transparent;
+  border: 1px solid $gray-5;
+  outline: none;
+  @include text-body--verySmall--regular;
+  color: $gray-3;
+}
