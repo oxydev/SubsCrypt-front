@@ -50,7 +50,7 @@ $fontSize-footNote: 0.6rem;
 //font weight
 $fontWeight-black: 900;
 $fontWeight-bold: bold;
-$fontWeight-medium: 500;
+$fontWeight-medium: 600;
 $fontWeight-regular: normal;
 $fontWeight-light: 300;
 
@@ -64,3 +64,6 @@ $box-shadow: 0 4px 15px 0 #000;
 //Border radius
 $borderRadius--regular: 12px;
 $borderRadius--small: 8px;
+
+//Borders
+$border-main: 1px solid $gray-5;

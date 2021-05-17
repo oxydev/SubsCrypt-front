@@ -1,7 +1,7 @@
 // Abstract files
+@import "abstracts/variables";
 @import "abstracts/mixins";
 @import "abstracts/placeHolder";
-@import "abstracts/variables";
 
 // Core files
 @import "core/fonts";
@@ -9,13 +9,16 @@
 @import "core/typography";
 
 // Components
+@import "components/buttons";
+@import "components/containers";
+@import "components/input";
 @import "components/MySubscryption/subscryptionOffers";
 @import "components/MySubscryption/offerCard";
 @import "components/MySubscryption/offerCarousel";
 @import "components/MySubscryption/userPlanCard";
+@import "components/provider/newPlanCreation";
+@import "components/provider/providerInfo";
 @import "components/wallet/walletConnection";
-@import "components/buttons";
-@import "components/containers";
 
 // Layout
 @import "layout/Main";
@@ -28,6 +31,7 @@
 // Pages
 @import "pages/login";
 @import "pages/userDashboard";
+@import "pages/providerSignUp";
 
 // Sections
 @import "sections/wallet";

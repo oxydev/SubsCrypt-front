@@ -69,7 +69,7 @@
   display: inline-block;
   border-radius: $height / 2;
   background: transparent;
-  border: 1px solid $gray-5;
+  border: $border-main;
   outline: none;
   @include text-body--verySmall--regular;
   color: $gray-3;

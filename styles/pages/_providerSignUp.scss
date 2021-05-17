@@ -1,0 +1,7 @@
+.ProviderSignUp {
+  padding-top: 73px;
+  & > h1 {
+    @include text--heading2;
+    margin-bottom: 51px;
+  }
+}

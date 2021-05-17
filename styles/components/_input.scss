@@ -1,0 +1,12 @@
+//Styles for different input html elements
+%MainTextInput {
+  border: $border-main;
+  outline: none;
+  border-radius: $borderRadius--small;
+  padding: 12px 16px;
+  @include text-body--small--regular;
+  line-height: 2.8rem;
+  &::placeholder {
+    color: $gray-4;
+  }
+}

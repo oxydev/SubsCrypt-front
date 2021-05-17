@@ -4,12 +4,14 @@ export default function ProviderInfo(props) {
   return (
     <section className="ProviderInfo">
       <h1>Service Provider Infromation</h1>
-      <form>
+      <form className="ProviderForm">
         <div className="ProviderForm-info">
           <label for="ProviderName">Service Provide Name</label>
           <input type="text" name="ProviderName" placeholder="Name of the service provider" />
+          <p>Your company or website who provides services</p>
           <label for="ProviderDescription">Service Provider Description</label>
           <input type="text" name="ProviderDescription" placeholder="Description" />
+          <p>A description of your company or website. Will be shown in a tooltip</p>
         </div>
         <div className="ProviderForm-photoUpload">
           <label>Upload Brand Photo</label>
