@@ -29,6 +29,7 @@ html {
 @mixin text-body--verySmall--light {
   @include font($fontSize-body--verySmall, $fontWeight-light);
 }
+
 @mixin text-body--verySmall--regular {
   @include font($fontSize-body--verySmall, $fontWeight-regular);
 }
@@ -39,6 +40,10 @@ html {
 
 @mixin text-body--small--light {
   @include font($fontSize-body--lightSmall, $fontWeight-light);
+}
+
+@mixin text-body--standard--regular {
+  @include font($fontSize-body--standard, $fontWeight-regular, 1.5);
 }
 
 @mixin text-body--large--regular {

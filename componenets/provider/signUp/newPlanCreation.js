@@ -4,8 +4,8 @@ export default function NewPlanCreation() {
   return (
     <section className="NewPlanCreation">
       <h1>Create a Subscryption Plan #1</h1>
-      <form>
-        <div>
+      <form className="PlanForm">
+        <div className="PlanForm-info">
           <label for="PlanTitle">Plan Title</label>
           <input type="text" name="PlanTitle" placeholder="e.g. One Month of Premium Membership" />
           <p>Short and specific title of the plan</p>
@@ -28,19 +28,19 @@ export default function NewPlanCreation() {
             Users can refund <span>XX percent</span> of the plan at any time. Minimum amount is %70.
           </p>
         </div>
-        <div>
+        <div className="PlanForm-financial">
           <label for="PlanTokens">Users can pay via these tokens</label>
-          <div>
+          <div className="PlanForm-payCheckbox">
             <input type="checkbox" name="Polkadot"></input>
             <img src="/icons/png/networks/PolkadotLogo.png" />
             <label for="Polkadot">Polkadot (DOT)</label>
           </div>
-          <div>
+          <div className="PlanForm-payCheckbox">
             <input type="checkbox" name="Polkadot"></input>
             <img src="/icons/png/networks/PolkadotLogo.png" />
             <label for="Polkadot">Polkadot (DOT)</label>
           </div>
-          <div>
+          <div className="PlanForm-payCheckbox">
             <input type="checkbox" name="Polkadot"></input>
             <img src="/icons/png/networks/PolkadotLogo.png" />
             <label for="Polkadot">Polkadot (DOT)</label>
@@ -54,7 +54,7 @@ export default function NewPlanCreation() {
           <p>This field only accept numbers with two decimals</p>
         </div>
       </form>
-      <button>Add another plan</button>
+      <button className="PlansForm-addBtn">Add another plan</button>
     </section>
   );
 }

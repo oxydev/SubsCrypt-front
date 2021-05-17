@@ -1,15 +1,19 @@
-.ProviderInfo {
+.ProviderInfo,
+.NewPlanCreation {
+  margin-bottom: 66px;
   & > h1 {
     @include text-body--large--medium;
     margin-bottom: 16px;
   }
 }
-.ProviderForm {
+.ProviderForm,
+.PlanForm {
   padding-top: 16px;
   border-top: 1px solid #e6e7eb;
   display: flex;
   label,
-  input {
+  input,
+  select {
     display: block;
     width: 100%;
   }
@@ -17,7 +21,8 @@
     @include text-body--small--regular;
     margin-bottom: 6px;
   }
-  input {
+  input,
+  select {
     @extend %MainTextInput;
     margin-bottom: 6px;
   }
@@ -27,13 +32,15 @@
     margin-bottom: 32px;
   }
 }
-.ProviderForm-info {
+.ProviderForm-info,
+.PlanForm-info {
   max-width: 462px;
   margin-right: 48px;
   flex-shrink: 0;
   flex-grow: 1;
 }
-.ProviderForm-photoUpload {
+.ProviderForm-photoUpload,
+.PlanForm-financial {
   max-width: 258px;
   flex-shrink: 0;
   flex-grow: 1;
@@ -52,4 +59,41 @@
   @include backgroundImage;
   background-size: auto;
   margin: 24px 0;
+}
+
+.PlanForm-financial {
+  text-align: left;
+  & > label {
+    margin-bottom: 9px;
+  }
+}
+.PlanForm-payCheckbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  input {
+    width: fit-content;
+    margin-right: 16px;
+  }
+  img {
+    margin-right: 16px;
+    @include circle(48px);
+  }
+}
+.PlansForm-addBtn {
+  @include text-body--standard--regular;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    @include pseudo;
+    @include square(42px);
+    @include backgroundImage;
+    background-image: url("/icons/png/uploadBtn.png");
+    position: static;
+    margin-right: 24px;
+  }
 }
