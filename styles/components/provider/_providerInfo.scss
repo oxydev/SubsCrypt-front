@@ -1,0 +1,55 @@
+.ProviderInfo {
+  & > h1 {
+    @include text-body--large--medium;
+    margin-bottom: 16px;
+  }
+}
+.ProviderForm {
+  padding-top: 16px;
+  border-top: 1px solid #e6e7eb;
+  display: flex;
+  label,
+  input {
+    display: block;
+    width: 100%;
+  }
+  label {
+    @include text-body--small--regular;
+    margin-bottom: 6px;
+  }
+  input {
+    @extend %MainTextInput;
+    margin-bottom: 6px;
+  }
+  p {
+    @include text-body--lightSmall--light;
+    color: $gray-4;
+    margin-bottom: 32px;
+  }
+}
+.ProviderForm-info {
+  max-width: 462px;
+  margin-right: 48px;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+.ProviderForm-photoUpload {
+  max-width: 258px;
+  flex-shrink: 0;
+  flex-grow: 1;
+  text-align: center;
+
+  p {
+    text-align: left;
+  }
+}
+.PhotoUploadBtn {
+  border: 1px dashed $gray-4;
+  @include circle(128px);
+  display: inline-block;
+  background-color: transparent;
+  background-image: url("/icons/png/uploadBtn.png");
+  @include backgroundImage;
+  background-size: auto;
+  margin: 24px 0;
+}
