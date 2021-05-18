@@ -5,3 +5,21 @@
     margin-bottom: 51px;
   }
 }
+.ProviderRegisteration {
+  border-top: $border-main;
+  padding-top: 32px;
+  margin-bottom: 446px;
+  display: flex;
+  align-items: center;
+  p {
+    @include text-body--lightSmall--regular;
+    color: $gray-4;
+    margin-right: 48px;
+  }
+  button {
+    @include primaryButtons(260px, 40px);
+    border-radius: $borderRadius--small;
+    @include text-body--standard--regular;
+    color: #fff;
+  }
+}

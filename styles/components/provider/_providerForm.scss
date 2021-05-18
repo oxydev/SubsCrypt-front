@@ -87,6 +87,7 @@
   outline: none;
   display: flex;
   align-items: center;
+  margin-top: 6px;
 
   &::before {
     @include pseudo;

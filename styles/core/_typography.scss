@@ -26,6 +26,10 @@ html {
   @include font($fontSize-body--lightSmall, $fontWeight-light);
 }
 
+@mixin text-body--lightSmall--regular {
+  @include font($fontSize-body--lightSmall, $fontWeight-regular);
+}
+
 @mixin text-body--verySmall--light {
   @include font($fontSize-body--verySmall, $fontWeight-light);
 }
