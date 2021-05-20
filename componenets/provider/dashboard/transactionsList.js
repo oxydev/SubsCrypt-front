@@ -17,13 +17,15 @@ export default function TransactionsList(props) {
   return (
     <section className="TransactionsList">
       <h1>All Transactions</h1>
-      <table>
+      <table className="TransactionsTable">
         <thead>
-          <th>April 12, 2021</th>
-          <th>Plan</th>
-          <th>Duration</th>
-          <th>Time</th>
-          <th>Ammount</th>
+          <tr>
+            <th>April 12, 2021</th>
+            <th>Plan</th>
+            <th>Duration</th>
+            <th>Time</th>
+            <th>Ammount</th>
+          </tr>
         </thead>
         <tbody>{transactions}</tbody>
       </table>
