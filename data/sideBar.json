@@ -17,6 +17,11 @@
         "icon": "/dashbord.png"
       },
       {
+        "name": "Provider Dashboard",
+        "url": "/providerDashboard",
+        "icon": "/dashbord.png"
+      },
+      {
         "name": "Profile Setting",
         "url": "/profile-setting",
         "icon": "/dashbord.png"
