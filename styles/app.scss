@@ -17,6 +17,7 @@
 @import "components/MySubscryption/offerCarousel";
 @import "components/MySubscryption/userPlanCard";
 @import "components/provider/providerForm";
+@import "components/provider/totalIncome";
 @import "components/wallet/walletConnection";
 
 // Layout
@@ -31,6 +32,7 @@
 @import "pages/login";
 @import "pages/userDashboard";
 @import "pages/providerSignUp";
+@import "pages/providerDashboard";
 
 // Sections
 @import "sections/wallet";
