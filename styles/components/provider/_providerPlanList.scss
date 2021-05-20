@@ -1,0 +1,34 @@
+.ProviderPlansList {
+  position: relative;
+  & > h1 {
+    @include text-body--large--medium;
+    margin-bottom: 26px;
+  }
+
+  & > div {
+    display: flex;
+  }
+}
+.ProviderPlansList-addPlanBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  @include text-body--standard--regular;
+  color: #8a8f99;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    @include pseudo;
+    @include circle(48px);
+    @include backgroundImage;
+    background-image: url("/icons/png/uploadBtn.png");
+    background-size: 16px;
+    position: static;
+    margin-right: 24px;
+    background-color: $gray-6;
+  }
+}
