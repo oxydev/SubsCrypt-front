@@ -1,0 +1,14 @@
+{
+  "user": {
+    "id": "1234567890",
+    "type": "user",
+    "name": "Hamid",
+    "wallet": "MetaMask",
+    "network": "Polkadot"
+  },
+  "provider": "0123456789",
+  "type": "provider",
+  "name": "Saber",
+  "wallet": "MetaMask",
+  "network": "Polkadot"
+}

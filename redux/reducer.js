@@ -7,7 +7,7 @@ state : {
         id: ...,
         type: ...,
         name: ...,
-        decription: ...,
+        description: ...,
         wallet: ...,
         network: ...
     },
@@ -18,6 +18,7 @@ state : {
         credit: ...
     }
     definedPlans: [
+
         {
             id: ...,
             name: ...,
@@ -66,3 +67,49 @@ state : {
 
 }
 */
+
+import * as actions from "./actionTypes";
+
+const initailState = {
+  user: {},
+  wallet: {},
+  definedPlans: [],
+  activePlans: [],
+};
+
+export default function reducer(state = initailState, action) {
+  switch (action.type) {
+    case actions.USER_LOGIN:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case actions.USER_GETPLANS:
+      return {
+        ...state,
+        activePlans: {
+          id: action.payload.id,
+          name: action.payload.name,
+          provider: action.payload.provider,
+          activationDate: action.payload.activationData,
+          expireDate: action.payload.expireDate,
+          duration: action.payload.duration,
+          refundPolicy: action.payload.refundPolicy,
+          useAmmount: action.payload.useAmmount,
+          payMethods: action.payload.payMethods,
+        },
+      };
+    case actions.USER_GETWALLET:
+      return {
+        ...state,
+        wallet: {
+          id: action.payload.id,
+          name: action.payload.name,
+          logo: action.payload.logo,
+          credit: action.payload.credit,
+        },
+      };
+    default:
+      return state;
+  }
+}
