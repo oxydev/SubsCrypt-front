@@ -1,5 +1,3 @@
-import { Profiler } from "react";
-import { useDispatch } from "react-redux";
 import LoginPart from "../componenets/wallet/loginPart";
 import WalletConnection from "../componenets/wallet/walletConnection";
 import data from "../data/testData/sampleUser.json";
