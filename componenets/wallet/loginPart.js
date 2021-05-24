@@ -1,6 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserLoggedIn } from "../../redux/actions";
+import data from "../../data/testData/sampleUser.json";
 
 export default function LoginPart(props) {
+  const user = data.user;
+
+  useDispatch({ type: "USER_LOGIN", payLoad: user });
+
   return (
     <section className="Login">
       <h6>or</h6>

@@ -70,6 +70,7 @@ state : {
 
 import * as actions from "./actionTypes";
 
+//Initializing the states
 const initailState = {
   user: {},
   wallet: {},
@@ -77,6 +78,7 @@ const initailState = {
   activePlans: [],
 };
 
+//Defining the reduxer function
 export default function reducer(state = initailState, action) {
   switch (action.type) {
     case actions.USER_LOGIN:
