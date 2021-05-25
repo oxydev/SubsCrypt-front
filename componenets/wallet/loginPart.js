@@ -6,8 +6,6 @@ import data from "../../data/testData/sampleUser.json";
 export default function LoginPart(props) {
   const user = data.user;
 
-  useDispatch({ type: "USER_LOGIN", payLoad: user });
-
   return (
     <section className="Login">
       <h6>or</h6>
