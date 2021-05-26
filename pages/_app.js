@@ -4,7 +4,7 @@ import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
-import Store from "../context/store";
+import { Store } from "../context/store";
 
 export default function App({ Component, pageProps }) {
   return (
