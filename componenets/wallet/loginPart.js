@@ -1,26 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/store";
-import dynamic from "next/dynamic";
-// const subscrypt = dynamic(
-//   () => {
-//     return import("@oxydev/subscrypt");
-//   },
-//   { ssr: false }
-// );
+import { loadUserData } from "../../dataFunctions/getData";
+import { useRouter } from "next/router";
 
 export default function LoginPart(props) {
+  const router = useRouter();
   const { globalState, dispatch } = useContext(UserContext);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
 
   async function handleLogin(e) {
     e.preventDefault();
-    const subscrypt = await import("@oxydev/subscrypt");
-    const response = subscrypt.retrieveWholeDataWithUsername(
-      loginData.username,
-      loginData.password
-    );
-    console.log(response);
+    loadUserData(loginData.username, loginData.password, dispatch);
   }
+
+  useEffect(() => {
+    if (globalState.user) {
+      router.push("/mySubscryptions");
+    }
+  });
 
   return (
     <section className="Login">

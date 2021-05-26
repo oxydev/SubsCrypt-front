@@ -11,15 +11,16 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOAD_USER":
       return { ...state, user: action.payload };
+    case "LOAD_USER_PLANS":
+      return { ...state, plans: action.payload };
     default:
       return { ...state };
   }
 };
 
-//Defining the global state and dispatching fucntion
-
 //Defining the Store functional component to wrap the _app.js and all the components in the project
 export const Store = (props) => {
+  //Defining the global state and dispatching fucntion
   const [globalState, dispatch] = useReducer(reducer, initialState);
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
