@@ -3,7 +3,7 @@ import Link from "next/link";
 import data from "../../data/sideBar.json";
 
 const sideBarMenuItems = data.sideBar.menuItem.map((item) => (
-  <li>
+  <li key={item.name}>
     <Link href={item.url}>
       <a>{item.name}</a>
     </Link>

@@ -21,7 +21,6 @@ export default function LoginPart(props) {
     );
     console.log(response);
   }
-  console.log(loginData);
 
   return (
     <section className="Login">
