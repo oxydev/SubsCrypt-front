@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import SubscryptionOffers from "../componenets/user/userSubscryption/subscryptionOffers";
-import UserPlansList from "../componenets/user/userSubscryption/userPlansList";
-import { UserContext } from "../context/store";
+import SubscryptionOffers from "../../componenets/user/userSubscryption/subscryptionOffers";
+import UserPlansList from "../../componenets/user/userSubscryption/userPlansList";
+import { UserContext } from "../../context/store";
 
 export default function MySubscryptions() {
   const { globalState, disptach } = useContext(UserContext);

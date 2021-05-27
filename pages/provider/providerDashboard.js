@@ -1,7 +1,7 @@
 import React from "react";
-import ProviderPlansList from "../componenets/provider/dashboard/providerPlansList";
-import TotalIncome from "../componenets/provider/dashboard/totalIncome";
-import TransactionsList from "../componenets/provider/dashboard/transactionsList";
+import ProviderPlansList from "../../componenets/provider/dashboard/providerPlansList";
+import TotalIncome from "../../componenets/provider/dashboard/totalIncome";
+import TransactionsList from "../../componenets/provider/dashboard/transactionsList";
 
 export default function ProviderDashboard(props) {
   return (

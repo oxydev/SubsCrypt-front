@@ -3,9 +3,9 @@ import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
-import Home from "./index";
+import Login from "./login";
 import { Store } from "../context/store";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import React from "react";
 import Cookies from "js-cookie";
 
@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
             <SideBar />
             <Main>
               <Header />
-              {auth ? <Component {...pageProps} /> : <Home />}
+              {auth ? <Component {...pageProps} /> : <Login />}
             </Main>
             <div></div>
           </div>
