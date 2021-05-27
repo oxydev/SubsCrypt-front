@@ -1,23 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/store";
-import { loadUserData } from "../../dataFunctions/getData";
+import { authContext } from "../../pages/_app";
+import { checkAuth } from "../../dataFunctions/getData";
 import { useRouter } from "next/router";
 
 export default function LoginPart(props) {
   const router = useRouter();
   const { globalState, dispatch } = useContext(UserContext);
+  const { auth, setAuth } = useContext(authContext);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
 
   async function handleLogin(e) {
     e.preventDefault();
-    loadUserData(loginData.username, loginData.password, dispatch);
+    checkAuth(loginData.username, loginData.password, dispatch, setAuth);
   }
 
-  useEffect(() => {
-    if (globalState.user) {
-      router.push("/mySubscryptions");
-    }
-  });
+  console.log(globalState);
 
   return (
     <section className="Login">
