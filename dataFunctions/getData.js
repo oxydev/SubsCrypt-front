@@ -21,6 +21,8 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
         dispatch({ type: "LOAD_USER", payload: { username: username, type: "provider" } });
         setAuth(true);
         Cookies.set("subscrypt", username);
+        Cookies.set("SubscryptPass", password);
+        Cookies.set("SubscryptType", "provider");
       } else {
         checkUser(username, password);
       }
@@ -39,6 +41,8 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
           dispatch({ type: "LOAD_USER", payload: { username: username, type: "user" } });
           setAuth(true);
           Cookies.set("subscrypt", username);
+          Cookies.set("SubscryptPass", password);
+          Cookies.set("SubscryptType", "user");
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           setAuth(false);
