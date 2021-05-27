@@ -1,4 +1,5 @@
 //get user data function
+import Cookies from "js-cookie";
 
 //Function for getting the user plan data after loging in
 export const loadUserData = async (username, password, dispatch) => {
@@ -19,6 +20,7 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
       if (result.result == true) {
         dispatch({ type: "LOAD_USER", payload: { username: username, type: "provider" } });
         setAuth(true);
+        Cookies.set("subscrypt", username);
       } else {
         checkUser(username, password);
       }
@@ -36,6 +38,7 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
         if (result.result == true) {
           dispatch({ type: "LOAD_USER", payload: { username: username, type: "user" } });
           setAuth(true);
+          Cookies.set("subscrypt", username);
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           setAuth(false);

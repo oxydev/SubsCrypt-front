@@ -5,13 +5,22 @@ import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
 import Home from "./index";
 import { Store } from "../context/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
+import Cookies from "js-cookie";
 
 export const authContext = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    if (Cookies.get("subscrypt")) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  });
 
   return (
     <>
