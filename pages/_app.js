@@ -8,11 +8,13 @@ import { Store } from "../context/store";
 import { useContext, useEffect, useState } from "react";
 import React from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export const authContext = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (Cookies.get("subscrypt")) {
@@ -20,7 +22,7 @@ export default function App({ Component, pageProps }) {
     } else {
       setAuth(false);
     }
-  });
+  }, []);
 
   return (
     <>
@@ -33,7 +35,7 @@ export default function App({ Component, pageProps }) {
             <SideBar />
             <Main>
               <Header />
-              {auth ? <Component {...pageProps} /> : <Login />}
+              {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
             </Main>
             <div></div>
           </div>
