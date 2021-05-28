@@ -6,7 +6,6 @@ export const loadUserData = async (username, password, dispatch) => {
   const subscrypt = await import("@oxydev/subscrypt");
   await subscrypt.retrieveWholeDataWithUsername(username, password).then((result) => {
     dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
-    dispatch({ type: "LOAD_USER", payload: { username: username } });
     return "userLoaded";
   });
 };
@@ -18,7 +17,10 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
     .providerCheckAuthWithUsername(username, password)
     .then((result) => {
       if (result.result == true) {
-        dispatch({ type: "LOAD_USER", payload: { username: username, type: "provider" } });
+        dispatch({
+          type: "LOAD_USER",
+          payload: { username: username, password: password, type: "provider" },
+        });
         setAuth(true);
         Cookies.set("subscrypt", username);
         Cookies.set("SubscryptPass", password);
@@ -38,7 +40,10 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
       .userCheckAuthWithUsername(username, password)
       .then((result) => {
         if (result.result == true) {
-          dispatch({ type: "LOAD_USER", payload: { username: username, type: "user" } });
+          dispatch({
+            type: "LOAD_USER",
+            payload: { username: username, password: password, type: "user" },
+          });
           setAuth(true);
           Cookies.set("subscrypt", username);
           Cookies.set("SubscryptPass", password);

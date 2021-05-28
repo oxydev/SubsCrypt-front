@@ -9,12 +9,16 @@ export default function Home() {
   const { globalState, dispatch } = useContext(UserContext);
   const { auth } = useContext(authContext);
   const userName = Cookies.get("subscrypt");
+  const password = Cookies.get("subscryptPass");
   const userType = Cookies.get("SubscryptType");
 
-  if (auth && !globalState.user) {
-    dispatch({ type: "LOAD_USER", payload: { username: userName, type: userType } });
-  }
   useEffect(() => {
+    if (auth && !globalState.user) {
+      dispatch({
+        type: "LOAD_USER",
+        payload: { username: userName, password: password, type: userType },
+      });
+    }
     if (userType == "provider") {
       router.push("/provider/");
     } else {
