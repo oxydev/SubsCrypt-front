@@ -1,4 +1,7 @@
-import React, { useReducer } from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useReducer } from "react";
+import { authContext } from "../pages/_app";
+import Cookies from "js-cookie";
 
 //Initialize the global state
 const initialState = {};
@@ -22,8 +25,22 @@ const reducer = (state, action) => {
 
 //Defining the Store functional component to wrap the _app.js and all the components in the project
 export const Store = (props) => {
+  const router = useRouter();
+  const { auth } = useContext(authContext);
+  const userName = Cookies.get("subscrypt");
+  const password = Cookies.get("subscryptPass");
+  const userType = Cookies.get("SubscryptType");
+
   //Defining the global state and dispatching fucntion
   const [globalState, dispatch] = useReducer(reducer, initialState);
+
+  if (auth && !globalState.user) {
+    dispatch({
+      type: "LOAD_USER",
+      payload: { username: userName, password: password, type: userType },
+    });
+  }
+
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
   );

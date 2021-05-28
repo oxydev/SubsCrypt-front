@@ -15,8 +15,6 @@ export default function LoginPart(props) {
     checkAuth(loginData.username, loginData.password, dispatch, setAuth);
   }
 
-  console.log(globalState);
-
   return (
     <section className="Login">
       <h6>or</h6>
