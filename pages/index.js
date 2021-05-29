@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../context/store";
-import { authContext } from "../pages/_app";
+import { useEffect } from "react";
 import Cookies from "js-cookie";
 
 export default function Home() {

@@ -5,7 +5,6 @@ import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
 import Login from "./login";
 import { Store } from "../context/store";
-import { useContext, useEffect, useState } from "react";
 import React from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";

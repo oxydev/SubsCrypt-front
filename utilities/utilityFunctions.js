@@ -22,11 +22,8 @@ export const timeStamptoDate = (timeStamp) => {
 
 export const usePercentage = (activationDate, duration) => {
   const currentTimeStamp = new Date().getTime();
-  console.log(currentTimeStamp);
   const currentMilliseconds = currentTimeStamp - activationDate;
-  console.log(currentMilliseconds);
   const percentage = Math.floor((currentMilliseconds / duration) * 100);
-  console.log(currentMilliseconds / duration);
   if (percentage > 100) {
     return 100;
   } else {
