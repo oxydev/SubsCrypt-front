@@ -71,3 +71,6 @@ export const connectToWallet = async (wallets, dispatch) => {
   });
   return accounts;
 };
+
+//Get plans data of a provider
+// export const loadPlans = async (provider, )
