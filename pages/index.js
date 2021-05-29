@@ -6,8 +6,7 @@ import Cookies from "js-cookie";
 
 export default function Home() {
   const router = useRouter();
-  const { globalState, dispatch } = useContext(UserContext);
-  const { auth } = useContext(authContext);
+  const userType = Cookies.get("subscryptType");
 
   useEffect(() => {
     if (userType == "provider") {

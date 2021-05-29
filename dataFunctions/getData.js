@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 
 //Function for getting the user plan data after loging in
 export const loadUserData = async (username, password, dispatch) => {
+  console.log(username, password);
   const subscrypt = await import("@oxydev/subscrypt");
   await subscrypt.retrieveWholeDataWithUsername(username, password).then((result) => {
     dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
@@ -23,8 +24,8 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
         });
         setAuth(true);
         Cookies.set("subscrypt", username);
-        Cookies.set("SubscryptPass", password);
-        Cookies.set("SubscryptType", "provider");
+        Cookies.set("subscryptPass", password);
+        Cookies.set("subscryptType", "provider");
       } else {
         checkUser(username, password);
       }
@@ -46,8 +47,8 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
           });
           setAuth(true);
           Cookies.set("subscrypt", username);
-          Cookies.set("SubscryptPass", password);
-          Cookies.set("SubscryptType", "user");
+          Cookies.set("subscryptPass", password);
+          Cookies.set("subscryptType", "user");
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           setAuth(false);

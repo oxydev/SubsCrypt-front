@@ -29,7 +29,7 @@ export const Store = (props) => {
   const { auth } = useContext(authContext);
   const userName = Cookies.get("subscrypt");
   const password = Cookies.get("subscryptPass");
-  const userType = Cookies.get("SubscryptType");
+  const userType = Cookies.get("subscryptType");
 
   //Defining the global state and dispatching fucntion
   const [globalState, dispatch] = useReducer(reducer, initialState);
@@ -40,6 +40,7 @@ export const Store = (props) => {
       payload: { username: userName, password: password, type: userType },
     });
   }
+  console.log(globalState);
 
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
