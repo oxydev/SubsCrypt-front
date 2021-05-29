@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import { authContext } from "../pages/_app";
 import Cookies from "js-cookie";
+import { connectToWallet } from "../dataFunctions/getData";
 
 //Initialize the global state
 const initialState = {};
@@ -18,6 +19,8 @@ const reducer = (state, action) => {
       return { ...state, plans: action.payload };
     case "INVALID_LOGIN":
       return { ...state, user: action.payload };
+    case "LOAD_WALLETS":
+      return { ...state, wallets: action.payload };
     default:
       return { ...state };
   }
@@ -40,6 +43,12 @@ export const Store = (props) => {
       payload: { username: userName, password: password, type: userType },
     });
   }
+
+  useEffect(() => {
+    const walletAccounts = globalState.wallets;
+    connectToWallet(walletAccounts, dispatch);
+  }, []);
+
   console.log(globalState);
 
   return (

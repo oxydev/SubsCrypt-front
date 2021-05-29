@@ -52,7 +52,6 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
 
 //Function for getting the user plan data after loging in
 export const loadUserData = async (username, password, dispatch) => {
-  console.log(username, password);
   const subscrypt = await import("@oxydev/subscrypt");
   await subscrypt.retrieveWholeDataWithUsername(username, password).then((result) => {
     dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
@@ -60,4 +59,15 @@ export const loadUserData = async (username, password, dispatch) => {
   });
 };
 
-//Function for getting provider data after login
+//Wallet connection
+export const connectToWallet = async (wallets, dispatch) => {
+  const subscrypt = await import("@oxydev/subscrypt");
+  await subscrypt.getWalletAccess();
+  const accounts = await subscrypt.getWalletAccounts().then((result) => {
+    if (!(JSON.stringify(wallets) === JSON.stringify(result))) {
+      console.log("test");
+      dispatch({ type: "LOAD_WALLETS", payload: result });
+    }
+  });
+  return accounts;
+};

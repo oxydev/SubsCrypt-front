@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { connectToWallet } from "../dataFunctions/getData";
 
 export default function Home() {
   const router = useRouter();
   const userType = Cookies.get("subscryptType");
 
   useEffect(() => {
-    console.log(userType);
     if (userType == "provider") {
       router.push("/provider/");
     } else {
