@@ -1,16 +1,6 @@
 //get user data function
 import Cookies from "js-cookie";
 
-//Function for getting the user plan data after loging in
-export const loadUserData = async (username, password, dispatch) => {
-  console.log(username, password);
-  const subscrypt = await import("@oxydev/subscrypt");
-  await subscrypt.retrieveWholeDataWithUsername(username, password).then((result) => {
-    dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
-    return "userLoaded";
-  });
-};
-
 export const checkAuth = async (username, password, dispatch, setAuth) => {
   const subscrypt = await import("@oxydev/subscrypt");
   //Function that check the authentication of a provider an if not check it with user.
@@ -59,3 +49,15 @@ export const checkAuth = async (username, password, dispatch, setAuth) => {
       });
   }
 };
+
+//Function for getting the user plan data after loging in
+export const loadUserData = async (username, password, dispatch) => {
+  console.log(username, password);
+  const subscrypt = await import("@oxydev/subscrypt");
+  await subscrypt.retrieveWholeDataWithUsername(username, password).then((result) => {
+    dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
+    return "userLoaded";
+  });
+};
+
+//Function for getting provider data after login

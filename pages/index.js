@@ -7,6 +7,7 @@ export default function Home() {
   const userType = Cookies.get("subscryptType");
 
   useEffect(() => {
+    console.log(userType);
     if (userType == "provider") {
       router.push("/provider/");
     } else {

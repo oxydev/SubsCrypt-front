@@ -8,6 +8,7 @@ import { Store } from "../context/store";
 import React from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export const authContext = React.createContext();
 
