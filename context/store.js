@@ -21,6 +21,8 @@ const reducer = (state, action) => {
       return { ...state, user: action.payload };
     case "LOAD_WALLETS":
       return { ...state, wallets: action.payload };
+    case "LOAD_PROVIDER_PLANS":
+      return { ...state, plans: [action.payload] };
     default:
       return { ...state };
   }

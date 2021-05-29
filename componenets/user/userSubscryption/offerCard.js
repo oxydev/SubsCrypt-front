@@ -1,26 +1,30 @@
 import React from "react";
+import localData from "../../../data/providerPlans.json";
+import * as utils from "../../../utilities/utilityFunctions";
 
 export default function OfferCard(props) {
-  const offer = props.offer;
+  const plan = props.offer;
+  const index = props.index;
+  const localPlans = localData.plans[index];
   return (
     <section className="OfferCard">
       <header>
-        <img className="OfferLogo" src={offer.logoURL} />
-        <h1>{offer.name}</h1>
+        <img className="OfferLogo" src={localPlans.logoURL} />
+        <h1>{localPlans.name}</h1>
       </header>
       <main>
         <div>
-          <p className="OfferCard-Provider">{offer.provider}</p>
-          <p className="OfferCard-Rate">{offer.rate}</p>
+          <p className="OfferCard-Provider">{localPlans.provider}</p>
+          <p className="OfferCard-Rate">{localPlans.rate}</p>
         </div>
-        <p className="OfferCard-description">{offer.description}</p>
+        <p className="OfferCard-description">{localPlans.description}</p>
         <div>
           <h6>Duration</h6>
-          <p>{offer.duration}</p>
+          <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>
         </div>
         <div>
           <h6>Refund Policy</h6>
-          <p>{offer.refundPolicy}</p>
+          <p>{"% " + plan.max_refund_permille_policy + " Refund"}</p>
         </div>
       </main>
       <footer>
@@ -32,7 +36,7 @@ export default function OfferCard(props) {
           </select>
         </div>
         <button className="OfferCard-payBtn" onClick={() => {}}>
-          {offer.price}
+          {plan.price}
           <span>USSD</span>
         </button>
       </footer>

@@ -73,4 +73,9 @@ export const connectToWallet = async (wallets, dispatch) => {
 };
 
 //Get plans data of a provider
-// export const loadPlans = async (provider, )
+export const loadPlan = async (providerAddress, planIndex, dispatch) => {
+  const subscrypt = await import("@oxydev/subscrypt");
+  await subscrypt.getPlanData(providerAddress, planIndex).then((result) => {
+    dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
+  });
+};

@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import ProviderDashboard from "./providerDashboard";
 import { UserContext } from "../../context/store";
-import { loadUserData } from "../../dataFunctions/getData";
+import { loadPlan } from "../../dataFunctions/getData";
+import data from "../../data/testData/providerAddress.json";
 
 export default function ProviderHome() {
   const { globalState, dispatch } = useContext(UserContext);
 
-  const user = globalState.user;
   if (!globalState.plans) {
-    loadUserData(user.username, user.password, dispatch);
+    loadPlan(data.providerAddress, 0, dispatch);
   }
 
   return (
