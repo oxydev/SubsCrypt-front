@@ -29,7 +29,7 @@ export default function LoginPart(props) {
           }}
         />
         <input
-          type="text"
+          type="password"
           placeholder="Password"
           onChange={(e) => {
             setLoginData({ ...loginData, password: e.target.value });
