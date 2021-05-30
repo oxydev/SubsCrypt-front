@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import OfferCarousel from "./offerCarousel";
 import data from "../../../data/testData/providerAddress.json";
 import { UserContext } from "../../../context/store";
@@ -7,11 +7,13 @@ import { loadPlan } from "../../../dataFunctions/getData";
 export default function SubscryptionOffers() {
   const { globalState, dispatch } = useContext(UserContext);
   const providerAddress = data.providerAddress;
-  if (globalState.providerPlans && globalState.providerPlans.length == 0) {
-    loadPlan(providerAddress, 0, dispatch);
-    loadPlan(providerAddress, 1, dispatch);
-    loadPlan(providerAddress, 2, dispatch);
-  }
+  useEffect(() => {
+    if (globalState.providerPlans && globalState.providerPlans.length == 0) {
+      loadPlan(providerAddress, 0, dispatch);
+      loadPlan(providerAddress, 1, dispatch);
+      loadPlan(providerAddress, 2, dispatch);
+    }
+  }, []);
 
   return (
     <section className="SubscryptionOffers">
