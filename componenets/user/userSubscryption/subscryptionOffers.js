@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import OfferCarousel from "./offerCarousel";
+import data from "../../../data/testData/providerAddress.json";
+import { UserContext } from "../../../context/store";
+import { loadPlan } from "../../../dataFunctions/getData";
 
 export default function SubscryptionOffers() {
+  const { globalState, dispatch } = useContext(UserContext);
+  const providerAddress = data.providerAddress;
+  if (globalState.providerPlans.length == 0) {
+    loadPlan(providerAddress, 0, dispatch);
+    loadPlan(providerAddress, 1, dispatch);
+    loadPlan(providerAddress, 2, dispatch);
+  }
+
   return (
     <section className="SubscryptionOffers">
       <h1>Currently you dont have any active plans</h1>

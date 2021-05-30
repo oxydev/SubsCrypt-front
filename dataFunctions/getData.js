@@ -68,7 +68,9 @@ export const loadUserDataByWallet = async (walletAddress, dispatch) => {
   console.log("wallet");
   await (await subscrypt).retrieveWholeDataWithWallet(walletAddress).then((result) => {
     console.log(result);
-    dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
+    if (result.status == "Fetched") {
+      dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
+    }
     return "userLoaded";
   });
 };
@@ -90,6 +92,7 @@ export const connectToWallet = async (wallets, dispatch, setAuth) => {
 //Get plans data of a provider
 export const loadPlan = async (providerAddress, planIndex, dispatch) => {
   await (await subscrypt).getPlanData(providerAddress, planIndex).then((result) => {
+    console.log(result);
     dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
   });
 };

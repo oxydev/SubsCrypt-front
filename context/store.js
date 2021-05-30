@@ -7,7 +7,7 @@ import { loadPlan, loadUserData, loadUserDataByWallet } from "../dataFunctions/g
 import data from "../data/testData/providerAddress.json";
 
 //Initialize the global state
-const initialState = {};
+const initialState = { providerPlans: [] };
 
 //Craeting the context to pass to the components in the app tree
 export const UserContext = React.createContext(initialState);
@@ -24,7 +24,7 @@ const reducer = (state, action) => {
     case "LOAD_WALLETS":
       return { ...state, wallets: action.payload };
     case "LOAD_PROVIDER_PLANS":
-      return { ...state, providerPlans: [action.payload] };
+      return { ...state, providerPlans: [...state.providerPlans, action.payload] };
     case "LOG_OUT":
       return {};
     default:
