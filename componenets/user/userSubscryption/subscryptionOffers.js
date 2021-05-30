@@ -7,7 +7,7 @@ import { loadPlan } from "../../../dataFunctions/getData";
 export default function SubscryptionOffers() {
   const { globalState, dispatch } = useContext(UserContext);
   const providerAddress = data.providerAddress;
-  if (globalState.providerPlans.length == 0) {
+  if (globalState.providerPlans && globalState.providerPlans.length == 0) {
     loadPlan(providerAddress, 0, dispatch);
     loadPlan(providerAddress, 1, dispatch);
     loadPlan(providerAddress, 2, dispatch);
