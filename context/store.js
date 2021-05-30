@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 import { authContext } from "../pages/_app";
 import Cookies from "js-cookie";
 import { connectToWallet } from "../dataFunctions/getData";
-import { loadPlan, loadUserData } from "../dataFunctions/getData";
+import { loadPlan, loadUserData, loadUserDataByWallet } from "../dataFunctions/getData";
 import data from "../data/testData/providerAddress.json";
 
 //Initialize the global state
@@ -42,9 +42,8 @@ export const Store = (props) => {
   const [globalState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const walletAccounts = globalState.wallets;
-    console.log("test");
-    connectToWallet(walletAccounts, dispatch);
+    // const walletAccounts = globalState.wallets;
+    // connectToWallet(walletAccounts, dispatch);
     if (Cookies.get("subscrypt")) {
       setAuth(true);
       dispatch({
@@ -57,6 +56,9 @@ export const Store = (props) => {
       if (userType == "provider") {
         loadPlan(data.providerAddress, 0, dispatch);
       }
+    } else if (Cookies.get("subscryptWallet")) {
+      connectToWallet([], dispatch, setAuth);
+      loadUserDataByWallet(Cookies.get("subscryptWallet"), dispatch);
     }
   }, []);
 
