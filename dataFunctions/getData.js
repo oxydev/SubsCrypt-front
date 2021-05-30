@@ -119,6 +119,18 @@ export const renewPlan = async (
   ).renew(address, injector, callback, providerAddress, planIndex, charcteristicValue);
 };
 
+export const subscribePlan = async (
+  address,
+  injector,
+  callback,
+  providerAddress,
+  planIndex) => {
+  injector = await injector.then((res) => res);
+  await (
+    await subscrypt
+  ).subscribe(address, injector, callback, providerAddress, planIndex, "0x3534676a919e4dfb214574e8ce5e2d67bac2159a6571f952c2fd11de31a07270","user2",[]);
+};
+
 //Get Injector
 export const getWalletInjector = async (address) => {
   let injector;
