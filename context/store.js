@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useReducer } from "react";
 import { authContext } from "../pages/_app";
 import Cookies from "js-cookie";
 import { connectToWallet } from "../dataFunctions/getData";
+import { loadPlan, loadUserData } from "../dataFunctions/getData";
+import data from "../data/testData/providerAddress.json";
 
 //Initialize the global state
 const initialState = {};
@@ -22,7 +24,7 @@ const reducer = (state, action) => {
     case "LOAD_WALLETS":
       return { ...state, wallets: action.payload };
     case "LOAD_PROVIDER_PLANS":
-      return { ...state, plans: [action.payload] };
+      return { ...state, providerPlans: [action.payload] };
     default:
       return { ...state };
   }
@@ -31,7 +33,7 @@ const reducer = (state, action) => {
 //Defining the Store functional component to wrap the _app.js and all the components in the project
 export const Store = (props) => {
   const router = useRouter();
-  const { auth } = useContext(authContext);
+  const { auth, setAuth } = useContext(authContext);
   const userName = Cookies.get("subscrypt");
   const password = Cookies.get("subscryptPass");
   const userType = Cookies.get("subscryptType");
@@ -39,17 +41,35 @@ export const Store = (props) => {
   //Defining the global state and dispatching fucntion
   const [globalState, dispatch] = useReducer(reducer, initialState);
 
-  if (auth && !globalState.user) {
-    dispatch({
-      type: "LOAD_USER",
-      payload: { username: userName, password: password, type: userType },
-    });
-  }
-
   useEffect(() => {
     const walletAccounts = globalState.wallets;
+    console.log("test");
     connectToWallet(walletAccounts, dispatch);
+    if (Cookies.get("subscrypt")) {
+      setAuth(true);
+      dispatch({
+        type: "LOAD_USER",
+        payload: { username: userName, password: password, type: userType },
+      });
+      if (userType == "user") {
+        loadUserData(userName, password, dispatch);
+      }
+      if (userType == "provider") {
+        loadPlan(data.providerAddress, 0, dispatch);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (globalState.user) {
+      if (globalState.user.type == "user" && router.pathname == "/provider") {
+        router.push("/");
+      }
+      if (globalState.user.type == "provider" && router.pathname == "/user") {
+        router.push("/");
+      }
+    }
+  });
 
   console.log(globalState);
 

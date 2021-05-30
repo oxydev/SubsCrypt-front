@@ -11,9 +11,7 @@ export default function UserHome() {
   const { globalState, dispatch } = useContext(UserContext);
 
   const user = globalState.user;
-  if (!globalState.plans) {
-    loadUserData(user.username, user.password, dispatch);
-  }
+
   const plans = globalState.plans;
 
   return (

@@ -16,14 +16,6 @@ export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (Cookies.get("subscrypt")) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }, []);
-
   return (
     <>
       <Head>
