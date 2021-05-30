@@ -59,6 +59,7 @@ export const Store = (props) => {
         loadPlan(data.providerAddress, 0, dispatch);
       }
     } else if (Cookies.get("subscryptWallet")) {
+      setAuth(true);
       connectToWallet([], dispatch, setAuth);
       loadUserDataByWallet(Cookies.get("subscryptWallet"), dispatch);
     }

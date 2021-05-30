@@ -9,12 +9,28 @@ import React from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Loading from "../componenets/layOut/loading";
 
 export const authContext = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    router.events.on("routeChangeStart", (url) => {
+      setLoading(true);
+    });
+    router.events.on("routeChangeComplete", (url) => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 200);
+    });
+    setTimeout(() => {
+      setLoading(false);
+    }, 200);
+  }, []);
 
   return (
     <>
@@ -26,8 +42,14 @@ export default function App({ Component, pageProps }) {
           <div className="WholePageWrapper">
             <SideBar />
             <Main>
-              <Header />
-              {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+              {loading ? (
+                <Loading />
+              ) : (
+                <>
+                  <Header />
+                  {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                </>
+              )}
             </Main>
             <div></div>
           </div>
