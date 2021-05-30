@@ -6,8 +6,14 @@ export default function OfferCard(props) {
   const plan = props.offer;
   const index = props.index;
   const localPlans = localData.plans[index];
+  const planIndex = plan.planIndex;
+
+  function handleSubscribe() {
+    console.log(planIndex);
+  }
+
   return (
-    <section className="OfferCard">
+    <section className="OfferCard" onClick={handleSubscribe}>
       <header>
         <img className="OfferLogo" src={localPlans.logoURL} />
         <h1>{localPlans.name}</h1>
