@@ -1,4 +1,5 @@
 //get user data function
+import { address } from "@oxydev/subscrypt/src/polkadot_utils/configs/config";
 import Cookies from "js-cookie";
 
 export const checkAuth = async (username, password, dispatch, setAuth) => {
@@ -78,4 +79,40 @@ export const loadPlan = async (providerAddress, planIndex, dispatch) => {
   await subscrypt.getPlanData(providerAddress, planIndex).then((result) => {
     dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
   });
+};
+
+//Refund a plan
+export const refundPlan = async (address, injector, callback, providerAddress, planIndex) => {
+  const subscrypt = await import("@oxydev/subscrypt");
+  await subscrypt.refund(address, injector, callback, providerAddress, planIndex);
+};
+
+//Refund a plan
+export const renewPlan = async (
+  address,
+  injector,
+  callback,
+  providerAddress,
+  planIndex,
+  charcteristicValue
+) => {
+  const subscrypt = await import("@oxydev/subscrypt");
+  await subscrypt.renew(
+    address,
+    injector,
+    callback,
+    providerAddress,
+    planIndex,
+    charcteristicValue
+  );
+};
+
+//Get Injector
+export const getWalletInjector = async (address) => {
+  const subscrypt = await import("@oxydev/subscrypt");
+  let injector;
+  await subscrypt.getInjector(address).then((result) => {
+    injector = result;
+  });
+  return injector;
 };

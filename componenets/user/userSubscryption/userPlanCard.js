@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import localData from "../../../data/sunscryptionPlans.json";
 import * as utils from "../../../utilities/utilityFunctions";
+import { refundPlan, renewPlan, getWalletInjector } from "../../../dataFunctions/getData";
+import { UserContext } from "../../../context/store";
+import data from "../../../data/testData/providerAddress.json";
 
 export default function UserPlanCard(props) {
   const plan = props.plan.plan;
   const index = props.index;
   const localPlans = localData.userPlans[index];
+  const { globalState, dispatch } = useContext(UserContext);
+
+  const walletAddress = globalState.wallets[1].address;
+  const providerAddress = data.providerAddress;
+  // const injector = getWalletInjector(walletAddress);
+
+  function handleRefund() {
+    refundPlan(walletAddress, "injector", callback, providerAddress, 0);
+  }
+  function handleRenew() {
+    renewPlan(walletAddress, "injector", callback, providerAddress, 0, "value1");
+  }
+  function callback({ event = [], status }) {
+    console.log(status);
+  }
 
   return (
     <section className="UserPlanCard">
@@ -62,10 +80,10 @@ export default function UserPlanCard(props) {
               <option value="coin2">coin2</option>
             </select>
           </div>
-          <button className="UserPlan-refundBtn" onClick={() => {}}>
+          <button className="UserPlan-refundBtn" onClick={handleRefund}>
             Refund
           </button>
-          <button className="UserPlan-renewBtn" onClick={() => {}}>
+          <button className="UserPlan-renewBtn" onClick={handleRenew}>
             Renew
           </button>
         </div>
