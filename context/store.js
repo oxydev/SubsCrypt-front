@@ -25,6 +25,8 @@ const reducer = (state, action) => {
       return { ...state, wallets: action.payload };
     case "LOAD_PROVIDER_PLANS":
       return { ...state, providerPlans: [action.payload] };
+    case "LOG_OUT":
+      return {};
     default:
       return { ...state };
   }
