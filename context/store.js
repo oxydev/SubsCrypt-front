@@ -7,7 +7,7 @@ import { loadPlan, loadUserData, loadUserDataByWallet } from "../dataFunctions/g
 import data from "../data/testData/providerAddress.json";
 
 //Initialize the global state
-const initialState = { providerPlans: [] };
+const initialState = { providerPlans: [], user: {}, plans: [] };
 
 //Craeting the context to pass to the components in the app tree
 export const UserContext = React.createContext(initialState);
@@ -41,6 +41,7 @@ export const Store = (props) => {
   const [globalState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    console.log("store");
     checkAuthByCookie(dispatch, setAuth);
   }, []);
 

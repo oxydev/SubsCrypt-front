@@ -66,7 +66,6 @@ export const loadUserData = async (username, password, dispatch) => {
 
 //Function for getting the user plan data after loging in
 export const loadUserDataByWallet = async (walletAddress, dispatch) => {
-  console.log("wallet");
   await (await subscrypt).retrieveWholeDataWithWallet(walletAddress).then((result) => {
     console.log(result);
     if (result.status == "Fetched") {
@@ -84,6 +83,7 @@ export const connectToWallet = async (wallets, dispatch, setAuth) => {
       dispatch({ type: "LOAD_WALLETS", payload: result });
       dispatch({ type: "LOAD_USER", payload: { type: "user", userWallet: result[1] } });
       Cookies.set("subscryptWallet", result[1].address);
+      loadUserDataByWallet(result[1], dispatch);
       setAuth(true);
     }
   });
@@ -151,6 +151,7 @@ export const checkAuthByCookie = (dispatch, setAuth) => {
   const password = Cookies.get("subscryptPass");
   const userType = Cookies.get("subscryptType");
   const userWallet = Cookies.get("subscryptWallet");
+  console.log("checkAuthbyCookie");
   if (userName) {
     setAuth(true);
     dispatch({
@@ -166,6 +167,5 @@ export const checkAuthByCookie = (dispatch, setAuth) => {
   } else if (userWallet) {
     setAuth(true);
     connectToWallet([], dispatch, setAuth);
-    loadUserDataByWallet(userWallet, dispatch);
   }
 };

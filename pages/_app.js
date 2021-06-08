@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 
 export const authContext = React.createContext();
+export const loadingContext = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
@@ -37,24 +38,26 @@ export default function App({ Component, pageProps }) {
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
       </Head>
-      <authContext.Provider value={{ auth, setAuth }}>
-        <Store>
-          <div className="WholePageWrapper">
-            <SideBar />
-            <Main>
-              {loading ? (
-                <Loading />
-              ) : (
-                <>
-                  <Header />
-                  {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
-                </>
-              )}
-            </Main>
-            <div></div>
-          </div>
-        </Store>
-      </authContext.Provider>
+      <loadingContext.Provider value={{ loading, setLoading }}>
+        <authContext.Provider value={{ auth, setAuth }}>
+          <Store>
+            <div className="WholePageWrapper">
+              <SideBar />
+              <Main>
+                {loading ? (
+                  <Loading />
+                ) : (
+                  <>
+                    <Header />
+                    {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                  </>
+                )}
+              </Main>
+              <div></div>
+            </div>
+          </Store>
+        </authContext.Provider>
+      </loadingContext.Provider>
     </>
   );
 }

@@ -1,15 +1,16 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useContext } from "react";
 import { UserContext } from "../context/store";
 
 export default function Home() {
   const router = useRouter();
   const { globalState } = useContext(UserContext);
+  console.log("index");
   const userType = globalState.user.type;
 
   if (userType == "provider") {
     router.push("/provider/");
-  } else {
+  } else if (userType == "user") {
     router.push("/user/");
   }
 
