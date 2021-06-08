@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/store";
 import { authContext } from "../../pages/_app";
-import { checkAuth } from "../../dataFunctions/getData";
+import { checkAuthWithUserName } from "../../dataFunctions/getData";
 import { useRouter } from "next/router";
 
 export default function LoginPart(props) {
@@ -12,7 +12,7 @@ export default function LoginPart(props) {
 
   async function handleLogin(e) {
     e.preventDefault();
-    checkAuth(loginData.username, loginData.password, dispatch, setAuth);
+    checkAuthWithUserName(loginData.username, loginData.password, dispatch, setAuth);
   }
 
   return (

@@ -1,9 +1,10 @@
 //get user data function
 import Cookies from "js-cookie";
 const subscrypt = import("@oxydev/subscrypt");
+import data from "../data/testData/providerAddress.json";
 
-export const checkAuth = async (username, password, dispatch, setAuth) => {
-  //Function that check the authentication of a provider an if not check it with user.
+export const checkAuthWithUserName = async (username, password, dispatch, setAuth) => {
+  //Function that check the authentication of a provider by user name and password an if not check it with user.
 
   const provider = await (
     await subscrypt
@@ -119,16 +120,20 @@ export const renewPlan = async (
   ).renew(address, injector, callback, providerAddress, planIndex, charcteristicValue);
 };
 
-export const subscribePlan = async (
-  address,
-  injector,
-  callback,
-  providerAddress,
-  planIndex) => {
+export const subscribePlan = async (address, injector, callback, providerAddress, planIndex) => {
   injector = await injector.then((res) => res);
   await (
     await subscrypt
-  ).subscribe(address, injector, callback, providerAddress, planIndex, "0x3534676a919e4dfb214574e8ce5e2d67bac2159a6571f952c2fd11de31a07270","user2",[]);
+  ).subscribe(
+    address,
+    injector,
+    callback,
+    providerAddress,
+    planIndex,
+    "0x3534676a919e4dfb214574e8ce5e2d67bac2159a6571f952c2fd11de31a07270",
+    "user2",
+    []
+  );
 };
 
 //Get Injector
@@ -138,4 +143,29 @@ export const getWalletInjector = async (address) => {
     injector = result;
   });
   return injector;
+};
+
+//Redesining the functions
+export const checkAuthByCookie = (dispatch, setAuth) => {
+  const userName = Cookies.get("subscrypt");
+  const password = Cookies.get("subscryptPass");
+  const userType = Cookies.get("subscryptType");
+  const userWallet = Cookies.get("subscryptWallet");
+  if (userName) {
+    setAuth(true);
+    dispatch({
+      type: "LOAD_USER",
+      payload: { username: userName, password: password, type: userType },
+    });
+    if (userType == "user") {
+      loadUserData(userName, password, dispatch);
+    }
+    if (userType == "provider") {
+      loadPlan(data.providerAddress, 0, dispatch);
+    }
+  } else if (userWallet) {
+    setAuth(true);
+    connectToWallet([], dispatch, setAuth);
+    loadUserDataByWallet(userWallet, dispatch);
+  }
 };

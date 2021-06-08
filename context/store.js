@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useReducer } from "react";
 import { authContext } from "../pages/_app";
 import Cookies from "js-cookie";
-import { connectToWallet } from "../dataFunctions/getData";
+import { connectToWallet, checkAuthByCookie } from "../dataFunctions/getData";
 import { loadPlan, loadUserData, loadUserDataByWallet } from "../dataFunctions/getData";
 import data from "../data/testData/providerAddress.json";
 
@@ -36,33 +36,12 @@ const reducer = (state, action) => {
 export const Store = (props) => {
   const router = useRouter();
   const { auth, setAuth } = useContext(authContext);
-  const userName = Cookies.get("subscrypt");
-  const password = Cookies.get("subscryptPass");
-  const userType = Cookies.get("subscryptType");
 
   //Defining the global state and dispatching fucntion
   const [globalState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    // const walletAccounts = globalState.wallets;
-    // connectToWallet(walletAccounts, dispatch);
-    if (Cookies.get("subscrypt")) {
-      setAuth(true);
-      dispatch({
-        type: "LOAD_USER",
-        payload: { username: userName, password: password, type: userType },
-      });
-      if (userType == "user") {
-        loadUserData(userName, password, dispatch);
-      }
-      if (userType == "provider") {
-        loadPlan(data.providerAddress, 0, dispatch);
-      }
-    } else if (Cookies.get("subscryptWallet")) {
-      setAuth(true);
-      connectToWallet([], dispatch, setAuth);
-      loadUserDataByWallet(Cookies.get("subscryptWallet"), dispatch);
-    }
+    checkAuthByCookie(dispatch, setAuth);
   }, []);
 
   useEffect(() => {

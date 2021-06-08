@@ -1,18 +1,17 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Cookies from "js-cookie";
-import { connectToWallet } from "../dataFunctions/getData";
+import { UserContext } from "../context/store";
 
 export default function Home() {
   const router = useRouter();
-  const userType = Cookies.get("subscryptType");
+  const { globalState } = useContext(UserContext);
+  const userType = globalState.user.type;
 
-  useEffect(() => {
-    if (userType == "provider") {
-      router.push("/provider/");
-    } else {
-      router.push("/user/");
-    }
-  });
+  if (userType == "provider") {
+    router.push("/provider/");
+  } else {
+    router.push("/user/");
+  }
+
   return <div className="LoginPage"></div>;
 }

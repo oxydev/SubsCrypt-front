@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/oxydev/SubsCrypt-front#readme",
   "dependencies": {
-    "@oxydev/subscrypt": "oxydev/SubsCrypt-npm-library#fallback_setter_function",
+    "@oxydev/subscrypt": "oxydev/SubsCrypt-npm-library#main",
     "js-cookie": "^2.2.1",
     "next": "^10.1.3",
     "react": "^17.0.2",
