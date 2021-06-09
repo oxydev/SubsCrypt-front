@@ -1,6 +1,6 @@
 import React from "react";
-import NewPlanCreation from "../componenets/provider/signUp/newPlanCreation";
-import ProviderInfo from "../componenets/provider/signUp/providerInfo";
+import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
+import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 
 export default function ProviderSignUp(props) {
   return (
