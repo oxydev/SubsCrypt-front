@@ -48,10 +48,10 @@ export const Store = (props) => {
   useEffect(() => {
     if (globalState.user) {
       if (globalState.user.type == "user" && router.pathname == "/provider") {
-        router.push("/");
+        router.push("/user/");
       }
       if (globalState.user.type == "provider" && router.pathname == "/user") {
-        router.push("/");
+        router.push("/provider/");
       }
     }
   });

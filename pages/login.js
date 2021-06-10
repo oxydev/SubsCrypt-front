@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import UserLogin from "./user/login";
-import ProviderLogin from "./provider/login";
+import UserLogin from "./user/userLogin";
+import ProviderLogin from "./provider/providerLogin";
 import ProviderSignUp from "./provider/providerSignUp";
 
 export default function Login() {
