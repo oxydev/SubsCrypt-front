@@ -76,14 +76,13 @@ export const loadUserDataByWallet = async (walletAddress, dispatch) => {
 };
 
 //Wallet connection
-export const connectToWallet = async (wallets, dispatch, setAuth) => {
+export const connectToWallet = async (wallets, type, dispatch, setAuth) => {
   await (await subscrypt).getWalletAccess();
   const accounts = await (await subscrypt).getWalletAccounts().then((result) => {
     if (!(JSON.stringify(wallets) === JSON.stringify(result))) {
       dispatch({ type: "LOAD_WALLETS", payload: result });
-      dispatch({ type: "LOAD_USER", payload: { type: "user", userWallet: result[1] } });
+      dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[1] } });
       Cookies.set("subscryptWallet", result[1].address);
-      loadUserDataByWallet(result[1], dispatch);
       setAuth(true);
     }
   });

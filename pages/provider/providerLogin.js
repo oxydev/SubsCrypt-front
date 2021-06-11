@@ -22,7 +22,7 @@ export default function ProviderLogin() {
 
   return (
     <div className="LoginPage">
-      <WalletConnection />
+      <WalletConnection type="provider" />
       <LoginPart handler={handleProviderLogin} />
     </div>
   );

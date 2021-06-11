@@ -22,7 +22,7 @@ export default function UserLogin() {
 
   return (
     <div className="LoginPage">
-      <WalletConnection />
+      <WalletConnection type="user" />
       <LoginPart handler={handleUserLogin} />
     </div>
   );
