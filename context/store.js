@@ -1,10 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useReducer } from "react";
 import { authContext } from "../pages/_app";
-import Cookies from "js-cookie";
-import { connectToWallet, checkAuthByCookie } from "../dataFunctions/getData";
-import { loadPlan, loadUserData, loadUserDataByWallet } from "../dataFunctions/getData";
-import data from "../data/testData/providerAddress.json";
+import { checkAuthByCookie } from "../dataFunctions/getData";
 
 //Initialize the global state
 const initialState = { providerPlans: [], user: {}, plans: [] };
