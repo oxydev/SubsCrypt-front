@@ -11,28 +11,33 @@ export default function Login() {
   const router = useRouter();
 
   function handleUserLogin() {
-    setAuth(true);
-    router.push("/user/userLogin");
+    setRole("user");
   }
 
   function handleProviderLogin() {
-    setAuth(true);
-    router.push("/provider/providerLogin");
+    setRole("provider");
   }
 
   function handleProviderSignUp() {
-    setAuth(true);
-    router.push("/provider/providerSignUp");
+    setRole("providerSignUp");
   }
 
-  return (
-    <section className="MainLoginPage">
-      {/* <WalletConnection />
+  if (role == "none") {
+    return (
+      <section className="MainLoginPage">
+        {/* <WalletConnection />
         <LoginPart /> */}
-      <h1>Choose your role to login</h1>
-      <button onClick={handleUserLogin}>Login as a User</button>
-      <button onClick={handleProviderLogin}>Login as a Provider</button>
-      <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
-    </section>
-  );
+        <h1>Choose your role to login</h1>
+        <button onClick={handleUserLogin}>Login as a User</button>
+        <button onClick={handleProviderLogin}>Login as a Provider</button>
+        <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
+      </section>
+    );
+  } else if (role == "user") {
+    return <UserLogin />;
+  } else if (role == "provider") {
+    return <ProviderLogin />;
+  } else if (role == "providerSignUp") {
+    return <ProviderSignUp />;
+  }
 }
