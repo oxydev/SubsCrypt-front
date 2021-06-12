@@ -4,7 +4,7 @@ import { authContext } from "../pages/_app";
 import { checkAuthByCookie } from "../dataFunctions/publicDataFunctions";
 
 //Initialize the global state
-const initialState = { providerPlans: [], user: {}, plans: [] };
+const initialState = { providerPlans: [], user: {}, plans: [], wallets: [] };
 
 //Craeting the context to pass to the components in the app tree
 export const UserContext = React.createContext(initialState);
@@ -23,7 +23,7 @@ const reducer = (state, action) => {
     case "LOAD_PROVIDER_PLANS":
       return { ...state, providerPlans: [...state.providerPlans, action.payload] };
     case "LOG_OUT":
-      return {};
+      return initialState;
     default:
       return { ...state };
   }

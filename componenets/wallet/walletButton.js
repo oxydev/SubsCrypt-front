@@ -10,7 +10,7 @@ export default function WalletButton(props) {
   const type = props.type;
 
   function handleWalletConnection() {
-    connectToWallet([], "user", dispatch, setAuth);
+    connectToWallet([], type, dispatch, setAuth);
   }
   return (
     <div

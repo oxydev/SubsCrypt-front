@@ -6,7 +6,7 @@ import { UserContext } from "../../../context/store";
 export default function OfferCarousel() {
   const { globalState, dispatch } = useContext(UserContext);
   let plans = [];
-  if (globalState.providerPlans) {
+  if (globalState.providerPlans.length > 0) {
     plans.push(...globalState.providerPlans);
   }
 
