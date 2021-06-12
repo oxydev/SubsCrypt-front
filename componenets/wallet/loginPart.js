@@ -1,18 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/store";
 import { authContext } from "../../pages/_app";
-import { checkAuthWithUserName } from "../../dataFunctions/getData";
+import { checkAuthWithUserName } from "../../dataFunctions/publicDataFunctions";
 import { useRouter } from "next/router";
 
 export default function LoginPart(props) {
   const router = useRouter();
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const handleLogin = props.handler;
-
-  // async function handleLogin(e, userName, password) {
-  //   e.preventDefault();
-  //   checkAuthWithUserName(loginData.username, loginData.password, dispatch, setAuth);
-  // }
 
   return (
     <section className="Login">

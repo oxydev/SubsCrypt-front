@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import OfferCarousel from "./offerCarousel";
 import data from "../../../data/testData/providerAddress.json";
 import { UserContext } from "../../../context/store";
-import { loadPlan } from "../../../dataFunctions/getData";
+import { loadPlan } from "../../../dataFunctions/publicDataFunctions";
 
 export default function SubscryptionOffers() {
   const { globalState, dispatch } = useContext(UserContext);

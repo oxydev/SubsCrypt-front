@@ -165,6 +165,6 @@ export const checkAuthByCookie = (dispatch, setAuth) => {
     }
   } else if (userWallet) {
     setAuth(true);
-    connectToWallet([], dispatch, setAuth);
+    // connectToWallet([], "user", dispatch, setAuth);
   }
 };

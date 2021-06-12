@@ -6,7 +6,7 @@ import {
   refundPlan,
   renewPlan,
   connectToWallet,
-} from "../../../dataFunctions/getData";
+} from "../../../dataFunctions/publicDataFunctions";
 import { UserContext } from "../../../context/store";
 import { authContext } from "../../../pages/_app";
 import data from "../../../data/testData/providerAddress.json";
@@ -22,7 +22,7 @@ export default function UserPlanCard(props) {
   // console.log(globalState.wallets[1])
 
   async function handleRefund() {
-    await connectToWallet([], dispatch, setAuth);
+    await connectToWallet([], "user", dispatch, setAuth);
     refundPlan(
       globalState.wallets[1].address,
       getWalletInjector(globalState.wallets[1]),
@@ -33,7 +33,7 @@ export default function UserPlanCard(props) {
   }
 
   async function handleRenew() {
-    await connectToWallet([], dispatch, setAuth);
+    await connectToWallet([], "user", dispatch, setAuth);
     renewPlan(
       globalState.wallets[1].address,
       getWalletInjector(globalState.wallets[1]),

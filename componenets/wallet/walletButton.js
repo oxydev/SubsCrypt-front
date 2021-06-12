@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { connectToWallet } from "../../dataFunctions/getData";
+import { connectToWallet } from "../../dataFunctions/publicDataFunctions";
 import { UserContext } from "../../context/store";
 import { authContext } from "../../pages/_app";
 
@@ -10,7 +10,7 @@ export default function WalletButton(props) {
   const type = props.type;
 
   function handleWalletConnection() {
-    connectToWallet([], type, dispatch, setAuth);
+    connectToWallet([], "user", dispatch, setAuth);
   }
   return (
     <div

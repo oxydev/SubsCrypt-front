@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import localData from "../../../data/providerPlans.json";
 import * as utils from "../../../utilities/utilityFunctions";
-import { subscribePlan, getWalletInjector } from "../../../dataFunctions/getData";
+import { subscribePlan, getWalletInjector } from "../../../dataFunctions/publicDataFunctions";
 import { UserContext } from "../../../context/store";
 import data from "../../../data/testData/providerAddress.json";
 

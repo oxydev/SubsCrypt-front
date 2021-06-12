@@ -3,7 +3,7 @@ import LoginPart from "../../componenets/wallet/loginPart";
 import WalletConnection from "../../componenets/wallet/walletConnection";
 import { UserContext } from "../../context/store";
 import { authContext } from "../../pages/_app";
-import { checkProviderAuthWithUserName } from "../../dataFunctions/userGetData";
+import { checkProviderAuthWithUserName } from "../../dataFunctions/userDataFunctions";
 import { useRouter } from "next/router";
 
 export default function ProviderLogin() {

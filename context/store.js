@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useReducer } from "react";
 import { authContext } from "../pages/_app";
-import { checkAuthByCookie } from "../dataFunctions/getData";
+import { checkAuthByCookie } from "../dataFunctions/publicDataFunctions";
 
 //Initialize the global state
 const initialState = { providerPlans: [], user: {}, plans: [] };
