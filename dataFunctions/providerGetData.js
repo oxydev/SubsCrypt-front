@@ -3,14 +3,11 @@ const subscrypt = import("@oxydev/subscrypt");
 import data from "../data/testData/providerAddress.json";
 
 export const checkProviderAuthWithUserName = async (username, password, dispatch, setAuth) => {
-  console.log(username, password);
-  console.log(await (await subscrypt).isConnected());
   await (
     await subscrypt
   )
     .providerCheckAuthWithUsername(username, password)
     .then((result) => {
-      console.log(result);
       if (result.result == true) {
         dispatch({
           type: "LOAD_USER",

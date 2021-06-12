@@ -41,7 +41,6 @@ export const Store = (props) => {
   const [globalState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    console.log("store");
     checkAuthByCookie(dispatch, setAuth);
   }, []);
 

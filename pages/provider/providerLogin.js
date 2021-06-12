@@ -11,11 +11,6 @@ export default function ProviderLogin() {
   const { globalState, dispatch } = useContext(UserContext);
   const { auth, setAuth } = useContext(authContext);
 
-  // useEffect(() => {
-  //   console.log("login");
-  //   router.replace("/login");
-  // }, []);
-
   function handleProviderLogin(userName, password) {
     checkProviderAuthWithUserName(userName, password, dispatch, setAuth);
   }

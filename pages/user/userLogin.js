@@ -11,11 +11,6 @@ export default function UserLogin() {
   const { globalState, dispatch } = useContext(UserContext);
   const { auth, setAuth } = useContext(authContext);
 
-  // useEffect(() => {
-  //   console.log("login");
-  //   router.replace("/login");
-  // }, [])
-
   function handleUserLogin(userName, password) {
     checkUserAuthWithUserName(userName, password, dispatch, setAuth);
   }

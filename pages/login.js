@@ -10,25 +10,17 @@ export default function Login() {
   const { setAuth } = useContext(authContext);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   console.log("login");
-  //   router.replace("/login");
-  // }, []);
-
   function handleUserLogin() {
-    console.log("user");
     setAuth(true);
     router.push("/user/userLogin");
   }
 
   function handleProviderLogin() {
-    console.log("provider");
     setAuth(true);
     router.push("/provider/providerLogin");
   }
 
   function handleProviderSignUp() {
-    console.log("SignUp");
     setAuth(true);
     router.push("/provider/providerSignUp");
   }
