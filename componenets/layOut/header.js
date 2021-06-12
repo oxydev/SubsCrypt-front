@@ -14,6 +14,8 @@ export default function Header() {
   function handleLogOut() {
     Cookies.remove("subscrypt");
     Cookies.remove("subscryptWallet");
+    Cookies.remove("subscryptPassword");
+    Cookies.remove("subscryptType");
     setAuth(false);
     dispatch({
       type: "LOG_OUT",

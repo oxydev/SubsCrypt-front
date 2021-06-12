@@ -157,14 +157,14 @@ export const checkAuthByCookie = (dispatch, setAuth) => {
       type: "LOAD_USER",
       payload: { username: userName, password: password, type: userType },
     });
-    if (userType == "user") {
-      loadUserData(userName, password, dispatch);
-    }
-    if (userType == "provider") {
-      loadPlan(data.providerAddress, 0, dispatch);
-    }
+    // if (userType == "user") {
+    //   loadUserData(userName, password, dispatch);
+    // }
+    // if (userType == "provider") {
+    //   loadPlan(data.providerAddress, 0, dispatch);
+    // }
   } else if (userWallet) {
     setAuth(true);
-    // connectToWallet([], "user", dispatch, setAuth);
+    connectToWallet([], userType, dispatch, setAuth);
   }
 };
