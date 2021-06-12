@@ -11,6 +11,9 @@ export default function Header() {
   const { globalState, dispatch } = useContext(UserContext);
   const { setAuth } = useContext(authContext);
 
+  const userName = globalState.user.username;
+  const userWallet = globalState.user.userWallet;
+
   function handleLogOut() {
     Cookies.remove("subscrypt");
     Cookies.remove("subscryptWallet");
@@ -23,11 +26,14 @@ export default function Header() {
     });
     router.push("/");
   }
+
   return (
     <div className="Header">
       <div className="LoginBox">
         <img className="Avatar" src={user.avatar} />
-        <p className="UserName">{user.name}</p>
+        <p className="UserName">
+          {userName ? "@ " + userName : userWallet ? userWallet.address : "Connect Wallet"}
+        </p>
       </div>
       <div className="UserMenu" onClick={handleLogOut}>
         <div className="UserMenu-button"></div>

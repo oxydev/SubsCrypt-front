@@ -13,7 +13,9 @@
   align-items: center;
   border: 1px solid $green;
   border-radius: $borderRadius--regular;
-  padding: 0 23px;
+  padding: 0 46px 0 23px;
+  max-width: 232px;
+  overflow: hidden;
 }
 .Avatar {
   @include circle(24px);
@@ -22,6 +24,9 @@
 .UserName {
   line-height: 2.4rem;
   margin-left: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 119px;
 
   @include text-body--large--medium;
   color: $green;
