@@ -6,7 +6,6 @@ import Main from "../componenets/layOut/Main";
 import Login from "./login";
 import { Store } from "../context/store";
 import React from "react";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
