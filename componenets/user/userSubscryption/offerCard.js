@@ -16,8 +16,10 @@ export default function OfferCard(props) {
 
   function handleSubscribe() {
     console.log(walletAddress);
-    getWalletInjector(walletAddress);
-    subscribePlan(walletAddress, injector, callback, providerAddress, planIndex);
+    // password
+    // username
+    console.log(localPlans)
+    subscribePlan(walletAddress.address, getWalletInjector(walletAddress), callback, providerAddress, planIndex);
   }
   function callback({ events = [], status }) {
     console.log("Transaction status:", status.type);
