@@ -30,3 +30,10 @@ export const usePercentage = (activationDate, duration) => {
     return percentage;
   }
 };
+
+export const middleDots = (text) => {
+  const length = text.length;
+  const firstPart = text.substring(0, 3);
+  const lastPart = text.substring(length - 3, length);
+  return firstPart + "..." + lastPart;
+};

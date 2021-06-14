@@ -4,7 +4,7 @@ import userData from "../../data/userIdentity.json";
 import { UserContext } from "../../context/store";
 import { authContext } from "../../pages/_app";
 import Cookies from "js-cookie";
-import { username } from "@oxydev/subscrypt/src/polkadot_utils/configs/testConfig";
+import { middleDots } from "../../utilities/utilityFunctions";
 
 export default function Header() {
   const user = userData.none;
@@ -33,7 +33,11 @@ export default function Header() {
       <div className={userName || userWallet ? "LoginBox" : "LoginBox Green"}>
         <img className="Avatar" src={user.avatar} />
         <p className="UserName">
-          {userName ? "@ " + userName : userWallet ? userWallet.address : "Connect Wallet"}
+          {userName
+            ? "@ " + userName
+            : userWallet
+            ? middleDots(userWallet.address)
+            : "Connect Wallet"}
         </p>
       </div>
       <div className="UserMenu" onClick={handleLogOut}>
