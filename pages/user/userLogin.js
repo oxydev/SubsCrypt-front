@@ -4,13 +4,22 @@ import WalletConnection from "../../componenets/wallet/walletConnection";
 import { UserContext } from "../../context/store";
 import { authContext } from "../../pages/_app";
 import { loadingContext } from "../_app";
-import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+
 const subscrypt = import("@oxydev/subscrypt");
 
 export default function UserLogin() {
   const { globalState, dispatch } = useContext(UserContext);
   const { auth, setAuth } = useContext(authContext);
   const { loading, setLoading } = useContext(loadingContext);
+
+  //Function for getting the user plan data after loging in
+  const loadUserData = async (username, password) => {
+    await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
+      setLoading(false);
+      dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
+    });
+  };
 
   //Check user authentication by username and password
   const checkUserAuthWithUserName = async (username, password) => {
@@ -20,7 +29,6 @@ export default function UserLogin() {
     )
       .userCheckAuthWithUsername(username, password)
       .then((result) => {
-        setLoading(false);
         if (result.result == true) {
           dispatch({
             type: "LOAD_USER",
@@ -30,6 +38,9 @@ export default function UserLogin() {
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
           Cookies.set("subscryptType", "user");
+
+          //fetchinn the user plans after login
+          loadUserData(username, password);
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           setAuth(false);

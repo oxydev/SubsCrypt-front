@@ -33,15 +33,6 @@ export default function UserHome() {
     });
   };
 
-  useEffect(() => {
-    console.log(loading);
-    if (password) {
-      loadUserData();
-    } else if (userWallet) {
-      loadUserDataByWallet();
-    }
-  }, []);
-
   return (
     <div className="userDashboard">
       <h1>My Subscryption</h1>
