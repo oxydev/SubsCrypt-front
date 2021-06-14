@@ -13,10 +13,10 @@ export default function OfferCard(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const walletAddress = globalState.user.userWallet;
   const providerAddress = data.providerAddress;
-  const injector = getWalletInjector(walletAddress);
 
   function handleSubscribe() {
     console.log(walletAddress);
+    getWalletInjector(walletAddress);
     subscribePlan(walletAddress, injector, callback, providerAddress, planIndex);
   }
   function callback({ events = [], status }) {
