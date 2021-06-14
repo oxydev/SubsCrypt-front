@@ -28,9 +28,11 @@ export default function Login() {
         {/* <WalletConnection />
         <LoginPart /> */}
         <h1>Choose your role to login</h1>
-        <button onClick={handleUserLogin}>Login as a User</button>
-        <button onClick={handleProviderLogin}>Login as a Provider</button>
-        <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
+        <div>
+          <button onClick={handleUserLogin}>Login as a User</button>
+          <button onClick={handleProviderLogin}>Login as a Provider</button>
+          <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
+        </div>
       </section>
     );
   } else if (role == "user") {

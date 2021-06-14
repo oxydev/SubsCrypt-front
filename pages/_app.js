@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }) {
                   <Loading />
                 ) : (
                   <>
-                    <Header />
+                    {auth && <Header />}
                     {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
                     {/* <Component {...pageProps} /> */}
                   </>
