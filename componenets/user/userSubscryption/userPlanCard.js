@@ -17,6 +17,7 @@ export default function UserPlanCard(props) {
   const localPlans = localData.userPlans[index];
   const { globalState, dispatch } = useContext(UserContext);
   const { setAuth } = useContext(authContext);
+  const status = props.plan.status;
 
   const providerAddress = data.providerAddress;
   // console.log(globalState.wallets[1])
@@ -44,6 +45,10 @@ export default function UserPlanCard(props) {
     );
   }
 
+  async function handleSubscribe() {
+    console.log("subscribe");
+  }
+
   function callback({ events = [], status }) {
     console.log("Transaction status:", status.type);
 
@@ -60,7 +65,15 @@ export default function UserPlanCard(props) {
   }
 
   return (
-    <section className="UserPlanCard">
+    <section
+      className={
+        status == -1
+          ? "UserPlanCard expired"
+          : status > 90
+          ? "UserPlanCard warning"
+          : "UserPlanCard"
+      }
+    >
       <img className="UserPlan-logo" src={localPlans.logoURL} />
       <div className="UserPlan-specs">
         <p className="UserPlan-name">{localPlans.name}</p>
@@ -114,12 +127,22 @@ export default function UserPlanCard(props) {
               <option value="coin2">coin2</option>
             </select>
           </div>
-          <button className="UserPlan-refundBtn" onClick={handleRefund}>
-            Refund
-          </button>
-          <button className="UserPlan-renewBtn" onClick={handleRenew}>
-            Renew
-          </button>
+          {status == -1 ? (
+            <>
+              <button className="UserPlan-subscribeBtn" onClick={handleSubscribe}>
+                Subscribe
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="UserPlan-refundBtn" onClick={handleRefund}>
+                Refund
+              </button>
+              <button className="UserPlan-renewBtn" onClick={handleRenew}>
+                Renew
+              </button>
+            </>
+          )}
         </div>
       </div>
     </section>

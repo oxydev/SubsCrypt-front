@@ -2,10 +2,18 @@
   display: flex;
   align-items: flex-start;
   border-top: 2px solid #e6e7eb;
-  padding: 16px 0;
+  padding: 16px 30px;
 
   &:last-child {
     border-bottom: 2px solid #e6e7eb;
+  }
+
+  &.expired {
+    background-color: $gray-5;
+  }
+
+  &.warning {
+    background-color: $warning;
   }
 }
 .UserPlan-logo {
@@ -43,7 +51,7 @@
   @include text-body--lightSmall--light;
   line-height: 16px;
   margin: 7px 0;
-  width: 170px;
+  width: 150px;
 }
 .UserPlan-Provider {
   @include text-body--lightSmall--light;
@@ -53,7 +61,7 @@
 .UserPlan-desc {
   @include text-body--lightSmall--light;
   color: $gray-3;
-  width: 221px;
+  width: 201px;
   margin: 7px 0;
 }
 .UserPlan-rate {
@@ -70,9 +78,10 @@
 }
 .UsePlanPercentage {
   height: 11px;
-  width: 218px;
+  width: 198px;
   background-image: url("/temp/ServiceBarUsage.png");
   margin: 7px 0;
+  background-size: contain;
 }
 .UsePlan-useAnnounce {
   @include text-body--verySmall--light;
@@ -101,4 +110,8 @@
 .UserPlan-renewBtn {
   @include primaryButtons(75px, 21px);
   margin-left: 8px;
+}
+.UserPlan-subscribeBtn {
+  @include primaryButtons(100px, 21px);
+  width: 100px;
 }
