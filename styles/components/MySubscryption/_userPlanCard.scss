@@ -114,4 +114,8 @@
 .UserPlan-subscribeBtn {
   @include primaryButtons(100px, 21px);
   width: 100px;
+
+  &.loading {
+    opacity: 0.5;
+  }
 }
