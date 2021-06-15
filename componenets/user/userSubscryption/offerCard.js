@@ -20,25 +20,29 @@ export default function OfferCard(props) {
   //Modal element for subscribing to the plan
   const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
 
-  function handelModalSubmit(e) {
+  //Submit function for Subscription modal
+  function handelModalSubmit(e, formData) {
     e.preventDefault();
+    setModal(null);
+    console.log(formData);
   }
 
+  //Subscription function
   function handleSubscribe() {
     console.log(walletAddress);
     setModal(modalElement);
-
     // password
     // username
     console.log(localPlans);
-    subscribePlan(
-      walletAddress.address,
-      getWalletInjector(walletAddress),
-      callback,
-      providerAddress,
-      planIndex
-    );
+    // subscribePlan(
+    //   walletAddress.address,
+    //   getWalletInjector(walletAddress),
+    //   callback,
+    //   providerAddress,
+    //   planIndex
+    // );
   }
+
   function callback({ events = [], status }) {
     console.log("Transaction status:", status.type);
 

@@ -6,7 +6,7 @@ export default function SubscriptionModal(props) {
   const { plan, handleSubmit } = props;
   const characteristics = plan.characteristics;
   const characsInputs = characteristics.map((item) => (
-    <div className="Modal-InputPart">
+    <div key={item} className="Modal-InputPart">
       <label>{item}</label>
       <input
         type="text"
@@ -17,14 +17,12 @@ export default function SubscriptionModal(props) {
     </div>
   ));
 
-  console.log(formData);
-
   return (
     <section className="SubscriptionModal">
       <h1>Complete the subscription form</h1>
       <form
-        onSubmit={() => {
-          handleSubmit(formData);
+        onSubmit={(e) => {
+          handleSubmit(e, formData);
         }}
       >
         <div className="Modal-InputPart">
