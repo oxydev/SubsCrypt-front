@@ -3,7 +3,9 @@ import localData from "../../../data/providerPlans.json";
 import * as utils from "../../../utilities/utilityFunctions";
 import { subscribePlan, getWalletInjector } from "../../../dataFunctions/publicDataFunctions";
 import { UserContext } from "../../../context/store";
+import { modalContext } from "../../../context/modal";
 import data from "../../../data/testData/providerAddress.json";
+import SubscriptionModal from "./subscriptionModal";
 
 export default function OfferCard(props) {
   const plan = props.offer;
@@ -11,15 +13,31 @@ export default function OfferCard(props) {
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
   const { globalState, dispatch } = useContext(UserContext);
+  const { modal, setModal } = useContext(modalContext);
   const walletAddress = globalState.user.userWallet;
   const providerAddress = data.providerAddress;
 
+  //Modal element for subscribing to the plan
+  const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
+
+  function handelModalSubmit(e) {
+    e.preventDefault();
+  }
+
   function handleSubscribe() {
     console.log(walletAddress);
+    setModal(modalElement);
+
     // password
     // username
-    console.log(localPlans)
-    subscribePlan(walletAddress.address, getWalletInjector(walletAddress), callback, providerAddress, planIndex);
+    console.log(localPlans);
+    subscribePlan(
+      walletAddress.address,
+      getWalletInjector(walletAddress),
+      callback,
+      providerAddress,
+      planIndex
+    );
   }
   function callback({ events = [], status }) {
     console.log("Transaction status:", status.type);

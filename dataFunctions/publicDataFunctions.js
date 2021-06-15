@@ -94,8 +94,19 @@ export const loadPlan = async (providerAddress, planIndex, dispatch) => {
   await (await subscrypt).getPlanData(providerAddress, planIndex).then((result) => {
     console.log(result);
     result.result.planIndex = planIndex;
-    dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
+    // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
+    getCharacs(providerAddress, planIndex, result.result);
   });
+
+  async function getCharacs(address, index, plans) {
+    await (await subscrypt).getPlanCharacteristics(address, index).then((result) => {
+      console.log(result);
+      if (result.status == "Fetched") {
+        plans.characteristics = result.result;
+        dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plans });
+      }
+    });
+  }
 };
 
 //Refund a plan

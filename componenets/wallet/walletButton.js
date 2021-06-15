@@ -36,12 +36,24 @@ export default function WalletButton(props) {
         setAuth(true);
         if (type == "user") {
           loadUserDataByWallet(result[1].address);
+          usernameGetter(result[1].address);
         } else {
           setLoading(false);
         }
       }
     });
-    return accounts;
+    async function usernameGetter(address) {
+      await (await subscrypt).getUsername().then((result) => {
+        console.log(result);
+        if (result.status == "Fetched") {
+          dispatch({
+            type: "LOAD_USER",
+            payload: { ...globalState.user, username: result.result },
+          });
+          Cookies.set("subscrypt", result.result);
+        }
+      });
+    }
   };
 
   function handleWalletConnection() {

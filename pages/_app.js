@@ -5,6 +5,7 @@ import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
 import Login from "./login";
 import { Store } from "../context/store";
+import { Modal } from "../context/modal";
 import React from "react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -40,21 +41,23 @@ export default function App({ Component, pageProps }) {
       <loadingContext.Provider value={{ loading, setLoading }}>
         <authContext.Provider value={{ auth, setAuth }}>
           <Store>
-            <div className="WholePageWrapper">
-              <SideBar />
-              <Main>
-                {loading ? (
-                  <Loading />
-                ) : (
-                  <>
-                    {auth && <Header />}
-                    {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
-                    {/* <Component {...pageProps} /> */}
-                  </>
-                )}
-              </Main>
-              <div></div>
-            </div>
+            <Modal>
+              <div className="WholePageWrapper">
+                <SideBar />
+                <Main>
+                  {loading ? (
+                    <Loading />
+                  ) : (
+                    <>
+                      {auth && <Header />}
+                      {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                      {/* <Component {...pageProps} /> */}
+                    </>
+                  )}
+                </Main>
+                <div></div>
+              </div>
+            </Modal>
           </Store>
         </authContext.Provider>
       </loadingContext.Provider>
