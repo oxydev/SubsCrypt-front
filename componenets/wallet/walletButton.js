@@ -40,31 +40,36 @@ export default function WalletButton(props) {
         console.log(addressList);
         if (addressList.length == 1) {
           Cookies.set("addressIndex", 0);
+          handleconfim(result, 0);
         } else {
           const modalElement = (
             <WalletSelectionModal
               addressList={addressList}
               handleSubmit={(value) => {
-                console.log(value - 1);
-                Cookies.set("addressIndex", value - 1);
+                console.log(value);
+                Cookies.set("addressIndex", value);
                 setModal(null);
+                handleconfim(result, value);
               }}
             />
           );
           setModal(modalElement);
         }
-        dispatch({ type: "LOAD_WALLETS", payload: result });
-        dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[name] } });
-        Cookies.set("subscryptWallet", result[name].address);
-        setAuth(true);
-        if (type === "user") {
-          loadUserDataByWallet(result[name].address);
-          usernameGetter(result[name].address);
-        } else {
-          setLoading(false);
-        }
       }
     });
+
+    function handleconfim(result, index) {
+      dispatch({ type: "LOAD_WALLETS", payload: result });
+      dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[index] } });
+      Cookies.set("subscryptWallet", result[index].address);
+      setAuth(true);
+      if (type === "user") {
+        loadUserDataByWallet(result[index].address);
+        usernameGetter(result[index].address);
+      } else {
+        setLoading(false);
+      }
+    }
 
     async function usernameGetter(address) {
       await (await subscrypt).getUsername(address).then((result) => {

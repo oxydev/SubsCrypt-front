@@ -17,7 +17,7 @@ export default function WalletSelectionModal(props) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit(value);
+          handleSubmit(value - 1);
         }}
       >
         <input
