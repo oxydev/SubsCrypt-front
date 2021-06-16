@@ -5,7 +5,7 @@ export default function PercentageBar(props) {
   return (
     <div className="PercentageBar">
       <div className="percentage" style={{ right: `${100 - percentage}%` }}>
-        <span className="PercentNum">% {percentage}</span>
+        <span className="PercentNum">{percentage}</span>
       </div>
     </div>
   );
