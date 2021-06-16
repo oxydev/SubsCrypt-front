@@ -5,8 +5,8 @@ import {
   getWalletInjector,
   refundPlan,
   renewPlan,
-  connectToWallet,
-} from "../../../dataFunctions/publicDataFunctions";
+  connectToWallet, subscribePlan,
+} from '../../../dataFunctions/publicDataFunctions'
 import { UserContext } from "../../../context/store";
 import { authContext } from "../../../pages/_app";
 import { modalContext } from "../../../context/modal";
@@ -59,6 +59,29 @@ export default function UserPlanCard(props) {
     e.preventDefault();
     setModal(null);
     console.log(formData);
+    function getPlanCharsFromData (formData) {
+      var planChar = []
+      Object.keys(formData).forEach( key => {
+          if (key !== 'username' && key !== 'password')
+            planChar.push(formData[key])
+
+        }
+      )
+      return planChar
+    }
+
+    var planChar = getPlanCharsFromData(formData)
+    console.log(planChar)
+    subscribePlan(
+      walletAddress.address,
+      getWalletInjector(walletAddress),
+      callback,
+      providerAddress,
+      index,
+      formData.username,
+      formData.password,
+      planChar
+    )
   }
 
   //Subscription function

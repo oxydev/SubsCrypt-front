@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/oxydev/SubsCrypt-front#readme",
   "dependencies": {
-    "@oxydev/subscrypt": "oxydev/SubsCrypt-npm-library#main",
+    "@oxydev/subscrypt": "file:///Users/saber/Documents/GitHub/SubsCrypt-npm-library",
     "js-cookie": "^2.2.1",
     "next": "^10.1.3",
     "react": "^17.0.2",

@@ -64,12 +64,16 @@ export const Store = (props) => {
     await (await subscrypt).getWalletAccess();
     const accounts = await (await subscrypt).getWalletAccounts().then((result) => {
       if (!(JSON.stringify(wallets) === JSON.stringify(result))) {
+        var name = window.prompt(JSON.stringify(result[0].address) + '\n' + JSON.stringify(result[1].address) + '\n'
+          + JSON.stringify(result[2].address) +'\n' + JSON.stringify(result[3].address) + '\n' + JSON.stringify(result[4].address) + '\nEnter number: '
+        )
+        console.log(name)
         dispatch({ type: "LOAD_WALLETS", payload: result });
-        dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[1] } });
-        Cookies.set("subscryptWallet", result[1].address);
+        dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[name] } });
+        Cookies.set("subscryptWallet", result[name].address);
         setAuth(true);
         if (type == "user") {
-          loadUserDataByWallet(result[1].address);
+          loadUserDataByWallet(result[name].address);
         } else {
           setLoading(false);
         }
