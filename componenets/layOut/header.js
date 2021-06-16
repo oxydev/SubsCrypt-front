@@ -20,6 +20,7 @@ export default function Header() {
     Cookies.remove("subscryptWallet");
     Cookies.remove("subscryptPass");
     Cookies.remove("subscryptType");
+    Cookies.remove("addressIndex");
     setAuth(false);
     dispatch({
       type: "LOG_OUT",
