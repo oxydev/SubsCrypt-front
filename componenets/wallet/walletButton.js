@@ -53,8 +53,6 @@ export default function WalletButton(props) {
           );
           setModal(modalElement);
         }
-
-        var name = 0;
         dispatch({ type: "LOAD_WALLETS", payload: result });
         dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[name] } });
         Cookies.set("subscryptWallet", result[name].address);
