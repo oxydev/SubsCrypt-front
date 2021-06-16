@@ -5,13 +5,15 @@ import {
   getWalletInjector,
   refundPlan,
   renewPlan,
-  connectToWallet, subscribePlan,
-} from '../../../dataFunctions/publicDataFunctions'
+  connectToWallet,
+  subscribePlan,
+} from "../../../dataFunctions/publicDataFunctions";
 import { UserContext } from "../../../context/store";
 import { authContext } from "../../../pages/_app";
 import { modalContext } from "../../../context/modal";
 import data from "../../../data/testData/providerAddress.json";
 import SubscriptionModal from "./subscriptionModal";
+import PercentageBar from "../../gadjets/percentageBar";
 
 const subscrypt = import("@oxydev/subscrypt");
 
@@ -26,6 +28,12 @@ export default function UserPlanCard(props) {
   const walletAddress = globalState.user.userWallet;
   const providerAddress = data.providerAddress;
   const [localLoading, setLocalLoading] = useState(false);
+
+  //plan amounts
+  const usedPercentage = utils.usePercentage(
+    parseInt(props.plan.subscription_time.replace(/,/g, "")),
+    parseInt(plan.duration.replace(/,/g, ""))
+  );
 
   //Get plan charactrisics
   async function getCharacs() {
@@ -59,19 +67,16 @@ export default function UserPlanCard(props) {
     e.preventDefault();
     setModal(null);
     console.log(formData);
-    function getPlanCharsFromData (formData) {
-      var planChar = []
-      Object.keys(formData).forEach( key => {
-          if (key !== 'username' && key !== 'password')
-            planChar.push(formData[key])
-
-        }
-      )
-      return planChar
+    function getPlanCharsFromData(formData) {
+      var planChar = [];
+      Object.keys(formData).forEach((key) => {
+        if (key !== "username" && key !== "password") planChar.push(formData[key]);
+      });
+      return planChar;
     }
 
-    var planChar = getPlanCharsFromData(formData)
-    console.log(planChar)
+    var planChar = getPlanCharsFromData(formData);
+    console.log(planChar);
     subscribePlan(
       walletAddress.address,
       getWalletInjector(walletAddress),
@@ -81,7 +86,7 @@ export default function UserPlanCard(props) {
       formData.username,
       formData.password,
       planChar
-    )
+    );
   }
 
   //Subscription function
@@ -147,7 +152,7 @@ export default function UserPlanCard(props) {
         </div>
         <div className="UserPlan-featurBox">
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy + " Refund"}</p>
+          <p>{"% " + plan.max_refund_permille_policy / 10 + " Refund"}</p>
         </div>
       </div>
       <div className="UserPlan-specs">
@@ -169,18 +174,15 @@ export default function UserPlanCard(props) {
       <div className="UserPlan-specs">
         <div className="UserPlan-rate">
           <h6>Rate this provider</h6>
-          <p>{localPlans.rateAmmount}</p>
-          <p>{localPlans.rateNumber}</p>
+          <p>{localPlans.rateAmmount} rates </p>
+          {/* <p>{localPlans.rateNumber}</p> */}
         </div>
-        <div className="UsePlanPercentage"></div>
+        <div className="UsePlanPercentage">
+          <PercentageBar percentage={usedPercentage} />
+        </div>
         <p className="UsePlan-useAnnounce">
-          You have used{" "}
-          {"%" +
-            utils.usePercentage(
-              parseInt(props.plan.subscription_time.replace(/,/g, "")),
-              parseInt(plan.duration.replace(/,/g, ""))
-            )}{" "}
-          of the service Refundable amount: {plan.refundAmmount}
+          You have used {"%" + usedPercentage} of the service Refundable amount:{" "}
+          {plan.refundAmmount}
         </p>
         <div className="UserPlan-PayPart">
           <div className="UserPlan-payMethod">

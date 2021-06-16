@@ -45,6 +45,7 @@
   p {
     @include text-body--verySmall--light;
     color: $gray-4;
+    text-align: right;
   }
 }
 .UserPlan-name {
@@ -79,7 +80,6 @@
 .UsePlanPercentage {
   height: 11px;
   width: 198px;
-  background-image: url("/temp/ServiceBarUsage.png");
   margin: 7px 0;
   background-size: contain;
 }
