@@ -80,3 +80,13 @@
   width: 100%;
   cursor: pointer;
 }
+
+.Modal-closeBtn {
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  @include square(20px);
+  @include cross(15px);
+}

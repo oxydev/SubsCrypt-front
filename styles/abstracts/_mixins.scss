@@ -83,3 +83,18 @@
     box-shadow: $box-shadow--card;
   }
 }
+
+@mixin cross($width) {
+  &::after,
+  &::before {
+    @include pseudo();
+    @include box($width, 2px);
+    @include absoluteCenter();
+    background-color: $gray-3;
+    transform-origin: center;
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
