@@ -40,22 +40,27 @@ export const DataFunctions = (props) => {
         //todo popup
         const addressList = result.map((item) => item.address);
         console.log(addressList);
-        if (addressList.length == 1) {
-          Cookies.set("addressIndex", 0);
-          handleconfim(result, 0);
+        const indexCookie = Cookies.get("addressIndex");
+        if (indexCookie) {
+          handleconfim(result, indexCookie);
         } else {
-          const modalElement = (
-            <WalletSelectionModal
-              addressList={addressList}
-              handleSubmit={(value) => {
-                console.log(value);
-                Cookies.set("addressIndex", value);
-                setModal(null);
-                handleconfim(result, value);
-              }}
-            />
-          );
-          setModal(modalElement);
+          if (addressList.length == 1) {
+            Cookies.set("addressIndex", 0);
+            handleconfim(result, 0);
+          } else {
+            const modalElement = (
+              <WalletSelectionModal
+                addressList={addressList}
+                handleSubmit={(value) => {
+                  console.log(value);
+                  Cookies.set("addressIndex", value);
+                  setModal(null);
+                  handleconfim(result, value);
+                }}
+              />
+            );
+            setModal(modalElement);
+          }
         }
       }
     });
@@ -270,6 +275,7 @@ export const DataFunctions = (props) => {
     refundPlan,
     renewPlan,
     subscribePlan,
+    getWalletInjector,
   };
   return <dataContext.Provider value={contextValue}>{props.children}</dataContext.Provider>;
 };
