@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../../../context/store";
 
 export default function SubscriptionModal(props) {
   const [formData, setFormData] = useState({});
+  const { globalState, dispatch } = useContext(UserContext);
+  const username = globalState.user.username;
 
   const { plan, handleSubmit } = props;
   const characteristics = plan.characteristics;
@@ -25,15 +28,17 @@ export default function SubscriptionModal(props) {
           handleSubmit(e, formData);
         }}
       >
-        <div className="Modal-InputPart">
-          <label>username:</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setFormData({ ...formData, username: e.target.value });
-            }}
-          />
-        </div>
+        {!username && (
+          <div className="Modal-InputPart">
+            <label>username:</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setFormData({ ...formData, username: e.target.value });
+              }}
+            />
+          </div>
+        )}
 
         <div className="Modal-InputPart">
           <label>password:</label>

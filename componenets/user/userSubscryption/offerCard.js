@@ -17,6 +17,7 @@ export default function OfferCard(props) {
   const { getWalletInjector, subscribePlan } = useContext(dataContext);
   const walletAddress = globalState.user.userWallet;
   const providerAddress = data.providerAddress;
+  console.log(globalState);
 
   //Modal element for subscribing to the plan
   const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;

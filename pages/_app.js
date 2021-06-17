@@ -41,8 +41,8 @@ export default function App({ Component, pageProps }) {
       </Head>
       <loadingContext.Provider value={{ loading, setLoading }}>
         <authContext.Provider value={{ auth, setAuth }}>
-          <Modal>
-            <Store>
+          <Store>
+            <Modal>
               <DataFunctions>
                 <div className="WholePageWrapper">
                   <SideBar />
@@ -60,8 +60,8 @@ export default function App({ Component, pageProps }) {
                   <div></div>
                 </div>
               </DataFunctions>
-            </Store>
-          </Modal>
+            </Modal>
+          </Store>
         </authContext.Provider>
       </loadingContext.Provider>
     </>

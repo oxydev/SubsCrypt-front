@@ -68,7 +68,7 @@ export const DataFunctions = (props) => {
       dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[index] } });
       Cookies.set("subscryptWallet", result[index].address);
       setAuth(true);
-      if (type === "user") {
+      if (type == "user") {
         loadUserDataByWallet(result[index].address);
         usernameGetter(result[index].address);
       } else {
