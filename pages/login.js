@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
 import ProviderSignUp from "./provider/providerSignUp";
@@ -11,7 +10,6 @@ export default function Login() {
   const [role, setRole] = useState("none");
   const { checkAuthByCookie } = useContext(dataContext);
   const { auth } = useContext(authContext);
-  const router = useRouter();
 
   //get coockies
   const password = Cookies.get("subscryptPass");
@@ -29,9 +27,11 @@ export default function Login() {
     setRole("providerSignUp");
   }
 
+  //Check the cookies and auth if cokkies are set
   if (!auth && (password || userWallet)) {
     checkAuthByCookie();
   }
+
   if (role == "none") {
     return (
       <section className="MainLoginPage">

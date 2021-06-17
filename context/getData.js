@@ -15,8 +15,6 @@ export const DataFunctions = (props) => {
   const { modal, setModal } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
 
-  const checkAuthbyCookie = () => {};
-
   //Function for getting the user plan data after loging in
   const loadUserDataByWallet = async (address) => {
     await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
@@ -168,16 +166,22 @@ export const DataFunctions = (props) => {
     const userType = Cookies.get("subscryptType");
     const userWallet = Cookies.get("subscryptWallet");
     if (password) {
-      setAuth(true);
-      dispatch({
-        type: "LOAD_USER",
-        payload: { username: userName, password: password, type: userType },
-      });
       if (userType == "user") {
+        setAuth(true);
+        dispatch({
+          type: "LOAD_USER",
+          payload: { username: userName, password: password, type: "user" },
+        });
         loadUserData(userName, password);
       }
       if (userType == "provider") {
         setLoading(false);
+        setAuth(true);
+        dispatch({
+          type: "LOAD_USER",
+          payload: { username: userName, password: password, type: "provider" },
+        });
+        loadUserData(userName, password);
         console.log("A provider has been logged in");
       }
     } else if (userWallet) {
@@ -266,7 +270,6 @@ export const DataFunctions = (props) => {
 
   const contextValue = {
     connectToWallet,
-    checkAuthbyCookie,
     loadUserData,
     checkUserAuthWithUserName,
     checkProviderAuthWithUserName,
