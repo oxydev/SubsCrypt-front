@@ -7,8 +7,8 @@
         "icon": "/dashbord.png"
       },
       {
-        "name": "My Subscrypts",
-        "url": "/user/",
+        "name": "New Offers",
+        "url": "/user/newOffers",
         "icon": "/dashbord.png"
       },
       {
