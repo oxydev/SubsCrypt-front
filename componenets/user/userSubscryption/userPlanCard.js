@@ -18,8 +18,14 @@ export default function UserPlanCard(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const { setAuth } = useContext(authContext);
   const { modal, setModal } = useContext(modalContext);
-  const { getWalletInjector, refundPlan, renewPlan, connectToWallet, subscribePlan } =
-    useContext(dataContext);
+  const {
+    getWalletInjector,
+    refundPlan,
+    renewPlan,
+    connectToWallet,
+    subscribePlan,
+    handleSubscribtion,
+  } = useContext(dataContext);
   const status = props.plan.status;
   const walletAddress = globalState.user.userWallet;
   const providerAddress = data.providerAddress;
@@ -33,15 +39,13 @@ export default function UserPlanCard(props) {
 
   //Get plan charactrisics
   async function getCharacs() {
-    console.log(props.plan.providerAddress, props.plan.planIndex);
     await (await subscrypt)
       .getPlanCharacteristics(props.plan.provider, props.plan.plan_index)
       .then((result) => {
         console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
-          let modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
-          setModal(modalElement);
+          handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback);
           setLocalLoading(false);
         }
       });
@@ -58,32 +62,32 @@ export default function UserPlanCard(props) {
     );
   }
 
-  //Submit function for Subscription modal
-  function handelModalSubmit(e, formData) {
-    e.preventDefault();
-    setModal(null);
-    console.log(formData);
-    function getPlanCharsFromData(formData) {
-      var planChar = [];
-      Object.keys(formData).forEach((key) => {
-        if (key !== "username" && key !== "password") planChar.push(formData[key]);
-      });
-      return planChar;
-    }
+  // //Submit function for Subscription modal
+  // function handelModalSubmit(e, formData) {
+  //   e.preventDefault();
+  //   setModal(null);
+  //   console.log(formData);
+  //   function getPlanCharsFromData(formData) {
+  //     var planChar = [];
+  //     Object.keys(formData).forEach((key) => {
+  //       if (key !== "username" && key !== "password") planChar.push(formData[key]);
+  //     });
+  //     return planChar;
+  //   }
 
-    var planChar = getPlanCharsFromData(formData);
-    console.log(planChar);
-    subscribePlan(
-      walletAddress.address,
-      getWalletInjector(walletAddress),
-      callback,
-      providerAddress,
-      index,
-      formData.username,
-      formData.password,
-      planChar
-    );
-  }
+  //   var planChar = getPlanCharsFromData(formData);
+  //   console.log(planChar);
+  //   subscribePlan(
+  //     walletAddress.address,
+  //     getWalletInjector(walletAddress),
+  //     callback,
+  //     providerAddress,
+  //     index,
+  //     formData.username,
+  //     formData.password,
+  //     planChar
+  //   );
+  // }
 
   //Subscription function
   function handleSubscribe() {

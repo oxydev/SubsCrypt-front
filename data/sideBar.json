@@ -3,7 +3,7 @@
     "menuItem": [
       {
         "name": "Dashboard",
-        "url": "/",
+        "url": "/user/",
         "icon": "/dashbord.png"
       },
       {

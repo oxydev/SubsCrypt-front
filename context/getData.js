@@ -3,6 +3,7 @@ import { loadingContext, authContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
 import WalletSelectionModal from "../componenets/wallet/walletSelectionModal";
+import SubscriptionModal from "../componenets/user/userSubscryption/subscriptionModal";
 import Cookies from "js-cookie";
 
 const subscrypt = import("@oxydev/subscrypt");
@@ -27,10 +28,13 @@ export const DataFunctions = (props) => {
   };
 
   //Wallet connection
-  const connectToWallet = async (wallets, type) => {
-    setLoading(true);
+  const connectToWallet = async (wallets, type, callback) => {
+    console.log("wallet");
+    if (!auth) {
+      setLoading(true);
+    }
     await (await subscrypt).getWalletAccess();
-    const accounts = await (await subscrypt).getWalletAccounts().then((result) => {
+    await (await subscrypt).getWalletAccounts().then((result) => {
       if (!(JSON.stringify(wallets) === JSON.stringify(result))) {
         // var name = window.prompt(JSON.stringify(result[0].address) + '\n' + JSON.stringify(result[1].address) + '\n'
         //   + JSON.stringify(result[2].address) +'\n' + JSON.stringify(result[3].address) + '\n' + JSON.stringify(result[4].address) + '\nEnter number: '
@@ -65,14 +69,21 @@ export const DataFunctions = (props) => {
 
     function handleconfim(result, index) {
       dispatch({ type: "LOAD_WALLETS", payload: result });
-      dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[index] } });
       Cookies.set("subscryptWallet", result[index].address);
-      setAuth(true);
-      if (type == "user") {
-        loadUserDataByWallet(result[index].address);
-        usernameGetter(result[index].address);
+      if (auth) {
+        dispatch({ type: "LOAD_USER_WALLET", payload: result[index] });
       } else {
-        setLoading(false);
+        dispatch({ type: "LOAD_USER", payload: { type: type, userWallet: result[index] } });
+        setAuth(true);
+        if (type == "user") {
+          loadUserDataByWallet(result[index].address);
+          usernameGetter(result[index].address);
+        } else {
+          setLoading(false);
+        }
+      }
+      if (callback) {
+        callback(result[index]);
       }
     }
 
@@ -268,6 +279,52 @@ export const DataFunctions = (props) => {
     return injector;
   };
 
+  const handleSubscribtion = (providerAddress, plan, planIndex, callback, manualAddress) => {
+    const walletAddress = globalState.user.userWallet;
+
+    const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
+
+    function handelModalSubmit(e, formData) {
+      e.preventDefault();
+      setModal(null);
+      console.log(formData);
+
+      function getPlanCharsFromData(formData) {
+        var planChar = [];
+        Object.keys(formData).forEach((key) => {
+          if (key !== "username" && key !== "password") planChar.push(formData[key]);
+        });
+        return planChar;
+      }
+
+      var planChar = getPlanCharsFromData(formData);
+      console.log(planChar);
+      subscribePlan(
+        walletAddress.address,
+        getWalletInjector(walletAddress),
+        callback,
+        providerAddress,
+        planIndex,
+        formData.username,
+        formData.password,
+        planChar
+      );
+    }
+
+    if (manualAddress) {
+      setModal(modalElement);
+    } else {
+      if (!walletAddress) {
+        connectToWallet([], "user", (confirmAddress) => {
+          console.log(walletAddress);
+          handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
+        });
+      } else {
+        setModal(modalElement);
+      }
+    }
+  };
+
   const contextValue = {
     connectToWallet,
     loadUserData,
@@ -279,6 +336,7 @@ export const DataFunctions = (props) => {
     renewPlan,
     subscribePlan,
     getWalletInjector,
+    handleSubscribtion,
   };
   return <dataContext.Provider value={contextValue}>{props.children}</dataContext.Provider>;
 };

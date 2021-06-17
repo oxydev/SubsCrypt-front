@@ -2,10 +2,8 @@ import React, { useContext } from "react";
 import localData from "../../../data/providerPlans.json";
 import * as utils from "../../../utilities/utilityFunctions";
 import { UserContext } from "../../../context/store";
-import { modalContext } from "../../../context/modal";
 import { dataContext } from "../../../context/getData";
 import data from "../../../data/testData/providerAddress.json";
-import SubscriptionModal from "./subscriptionModal";
 
 export default function OfferCard(props) {
   const plan = props.offer;
@@ -13,47 +11,13 @@ export default function OfferCard(props) {
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
   const { globalState, dispatch } = useContext(UserContext);
-  const { modal, setModal } = useContext(modalContext);
-  const { getWalletInjector, subscribePlan } = useContext(dataContext);
-  const walletAddress = globalState.user.userWallet;
+  const { handleSubscribtion } = useContext(dataContext);
   const providerAddress = data.providerAddress;
   console.log(globalState);
 
-  //Modal element for subscribing to the plan
-  const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
-
-  //Submit function for Subscription modal
-  function handelModalSubmit(e, formData) {
-    e.preventDefault();
-    setModal(null);
-    console.log(formData);
-
-    function getPlanCharsFromData(formData) {
-      var planChar = [];
-      Object.keys(formData).forEach((key) => {
-        if (key !== "username" && key !== "password") planChar.push(formData[key]);
-      });
-      return planChar;
-    }
-
-    var planChar = getPlanCharsFromData(formData);
-    console.log(planChar);
-    subscribePlan(
-      walletAddress.address,
-      getWalletInjector(walletAddress),
-      callback,
-      providerAddress,
-      planIndex,
-      formData.username,
-      formData.password,
-      planChar
-    );
-  }
-
   //Subscription function
   function handleSubscribe() {
-    console.log(walletAddress);
-    setModal(modalElement);
+    handleSubscribtion(providerAddress, plan, planIndex, callback);
   }
 
   function callback({ events = [], status }) {
