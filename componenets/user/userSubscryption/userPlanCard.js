@@ -1,16 +1,10 @@
 import React, { useState, useContext } from "react";
 import localData from "../../../data/sunscryptionPlans.json";
 import * as utils from "../../../utilities/utilityFunctions";
-import {
-  getWalletInjector,
-  refundPlan,
-  renewPlan,
-  connectToWallet,
-  subscribePlan,
-} from "../../../dataFunctions/publicDataFunctions";
 import { UserContext } from "../../../context/store";
 import { authContext } from "../../../pages/_app";
 import { modalContext } from "../../../context/modal";
+import { dataContext } from "../../../context/getData";
 import data from "../../../data/testData/providerAddress.json";
 import SubscriptionModal from "./subscriptionModal";
 import PercentageBar from "../../gadjets/percentageBar";
@@ -24,6 +18,8 @@ export default function UserPlanCard(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const { setAuth } = useContext(authContext);
   const { modal, setModal } = useContext(modalContext);
+  const { getWalletInjector, refundPlan, renewPlan, connectToWallet, subscribePlan } =
+    useContext(dataContext);
   const status = props.plan.status;
   const walletAddress = globalState.user.userWallet;
   const providerAddress = data.providerAddress;

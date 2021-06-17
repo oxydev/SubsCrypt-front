@@ -1,7 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/store";
-import { authContext } from "../../pages/_app";
-import { checkAuthWithUserName } from "../../dataFunctions/publicDataFunctions";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function LoginPart(props) {

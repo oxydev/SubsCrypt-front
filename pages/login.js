@@ -4,11 +4,18 @@ import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
 import ProviderSignUp from "./provider/providerSignUp";
 import { authContext } from "./_app";
+import { dataContext } from "../context/getData";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [role, setRole] = useState("none");
-  const { setAuth } = useContext(authContext);
+  const { checkAuthByCookie } = useContext(dataContext);
+  const { auth } = useContext(authContext);
   const router = useRouter();
+
+  //get coockies
+  const password = Cookies.get("subscryptPass");
+  const userWallet = Cookies.get("subscryptWallet");
 
   function handleUserLogin() {
     setRole("user");
@@ -22,6 +29,9 @@ export default function Login() {
     setRole("providerSignUp");
   }
 
+  if (!auth && (password || userWallet)) {
+    checkAuthByCookie();
+  }
   if (role == "none") {
     return (
       <section className="MainLoginPage">
