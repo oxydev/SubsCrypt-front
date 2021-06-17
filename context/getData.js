@@ -5,12 +5,14 @@ import { UserContext } from "./store";
 import WalletSelectionModal from "../componenets/wallet/walletSelectionModal";
 import SubscriptionModal from "../componenets/user/userSubscryption/subscriptionModal";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const subscrypt = import("@oxydev/subscrypt");
 
 export const dataContext = React.createContext({});
 
 export const DataFunctions = (props) => {
+  const router = useRouter();
   const { auth, setAuth } = useContext(authContext);
   const { loading, setLoading } = useContext(loadingContext);
   const { modal, setModal } = useContext(modalContext);
@@ -68,7 +70,7 @@ export const DataFunctions = (props) => {
       }
     });
 
-    function handleconfim(result, index) {
+    function handleConfirm(result, index) {
       dispatch({ type: "LOAD_WALLETS", payload: result });
       Cookies.set("subscryptWallet", result[index].address);
       if (auth) {
@@ -326,6 +328,21 @@ export const DataFunctions = (props) => {
     }
   };
 
+  //Log out function
+  const handleLogOut = () => {
+    Cookies.remove("subscrypt");
+    Cookies.remove("subscryptWallet");
+    Cookies.remove("subscryptPass");
+    Cookies.remove("subscryptType");
+    Cookies.remove("addressIndex");
+    setAuth(false);
+    dispatch({
+      type: "LOG_OUT",
+      payload: {},
+    });
+    router.push("/");
+  };
+
   const contextValue = {
     connectToWallet,
     loadUserData,
@@ -338,6 +355,7 @@ export const DataFunctions = (props) => {
     subscribePlan,
     getWalletInjector,
     handleSubscribtion,
+    handleLogOut,
   };
   return <dataContext.Provider value={contextValue}>{props.children}</dataContext.Provider>;
 };

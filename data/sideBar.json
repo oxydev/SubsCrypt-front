@@ -41,5 +41,30 @@
         "icon": "/dashbord.png"
       }
     ]
+  },
+
+  "PublicSideBar": {
+    "menuItem": [
+      {
+        "name": "Dashboard",
+        "url": "/user/",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "Add plan",
+        "url": "/user/newOffers",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "New Offers",
+        "url": "/user/newOffers",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "Log Out",
+        "url": "/",
+        "icon": "/dashbord.png"
+      }
+    ]
   }
 }

@@ -11,6 +11,8 @@ export default function SideBar() {
     sideBarData = data.UserSideBar;
   } else if (type == "provider") {
     sideBarData = data.ProviderSideBar;
+  } else {
+    sideBarData = data.PublicSideBar;
   }
   const sideBarMenuItems = sideBarData.menuItem.map((item) => (
     <li key={item.name}>
