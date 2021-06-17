@@ -40,15 +40,16 @@ export const DataFunctions = (props) => {
         //   + JSON.stringify(result[2].address) +'\n' + JSON.stringify(result[3].address) + '\n' + JSON.stringify(result[4].address) + '\nEnter number: '
         // )
         //todo popup
+        Cookies.set("subscryptType", type);
         const addressList = result.map((item) => item.address);
         console.log(addressList);
         const indexCookie = Cookies.get("addressIndex");
         if (indexCookie) {
-          handleconfim(result, indexCookie);
+          handleConfirm(result, indexCookie);
         } else {
           if (addressList.length == 1) {
             Cookies.set("addressIndex", 0);
-            handleconfim(result, 0);
+            handleConfirm(result, 0);
           } else {
             const modalElement = (
               <WalletSelectionModal
@@ -57,7 +58,7 @@ export const DataFunctions = (props) => {
                   console.log(value);
                   Cookies.set("addressIndex", value);
                   setModal(null);
-                  handleconfim(result, value);
+                  handleConfirm(result, value);
                 }}
               />
             );
