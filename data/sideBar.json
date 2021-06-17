@@ -1,5 +1,5 @@
 {
-  "sideBar": {
+  "UserSideBar": {
     "menuItem": [
       {
         "name": "Dashboard",
@@ -12,33 +12,32 @@
         "icon": "/dashbord.png"
       },
       {
-        "name": "Provider",
-        "url": "/provider/providerSignUp",
+        "name": "Log Out",
+        "url": "/",
+        "icon": "/dashbord.png"
+      }
+    ]
+  },
+  "ProviderSideBar": {
+    "menuItem": [
+      {
+        "name": "Dashboard",
+        "url": "/user/",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Provider Dashboard",
-        "url": "/provider/providerDashboard",
+        "name": "Add plan",
+        "url": "/user/newOffers",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Profile Setting",
-        "url": "/profile-setting",
+        "name": "New Offers",
+        "url": "/user/newOffers",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Invite friends",
-        "url": "/invite-friends",
-        "icon": "/dashbord.png"
-      },
-      {
-        "name": "FAQ",
-        "url": "/faq",
-        "icon": "/dashbord.png"
-      },
-      {
-        "name": "Blog",
-        "url": "/blog",
+        "name": "Log Out",
+        "url": "/",
         "icon": "/dashbord.png"
       }
     ]
