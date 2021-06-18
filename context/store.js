@@ -16,6 +16,8 @@ const reducer = (state, action) => {
       return { ...state, user: { ...state.user, userWallet: action.payload } };
     case "LOAD_USER_PLANS":
       return { ...state, plans: action.payload };
+    case "LOAD_ONE_USER_PLANS":
+      return { ...state, plans: [...state.plans, action.payload] };
     case "INVALID_LOGIN":
       return { ...state, user: action.payload };
     case "LOAD_WALLETS":

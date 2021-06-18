@@ -21,12 +21,24 @@ export const DataFunctions = (props) => {
   //Function for getting the user plan data after loging in
   const loadUserDataByWallet = async (address) => {
     await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
-      setLoading(false);
       if (result.status == "Fetched") {
-        setLoading(false);
-        dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
+        let plans = result.result;
+        plans.map((item) => {
+          getCharacs(item.provider, item.plan_index, item);
+        });
       }
     });
+
+    async function getCharacs(provider, index, plan) {
+      await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
+        console.log(result);
+        if (result.status == "Fetched") {
+          const newPlan = { ...plan, characteristics: result.result };
+          setLoading(false);
+          dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
+        }
+      });
+    }
   };
 
   //Wallet connection
@@ -113,9 +125,22 @@ export const DataFunctions = (props) => {
   //Function for getting the user plan data after loging in
   const loadUserData = async (username, password) => {
     await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
-      setLoading(false);
-      dispatch({ type: "LOAD_USER_PLANS", payload: result.result });
+      let plans = result.result;
+      plans.map((item) => {
+        getCharacs(item.provider, item.plan_index, item);
+      });
     });
+
+    async function getCharacs(provider, index, plan) {
+      await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
+        console.log(result);
+        if (result.status == "Fetched") {
+          const newPlan = { ...plan, characteristics: result.result };
+          setLoading(false);
+          dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
+        }
+      });
+    }
   };
 
   //Check user authentication by username and password
