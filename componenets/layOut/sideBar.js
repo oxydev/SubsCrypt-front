@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
+import { dataContext } from "../../context/getData";
 
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
+  const { handleLogOut } = useContext(dataContext);
   const type = globalState.user.type;
   let sideBarData;
   if (type == "user") {
@@ -17,7 +19,17 @@ export default function SideBar() {
   const sideBarMenuItems = sideBarData.menuItem.map((item) => (
     <li key={item.name}>
       <Link href={item.url}>
-        <a>{item.name}</a>
+        <a
+          onClick={
+            item.name == "Log Out"
+              ? () => {
+                  handleLogOut();
+                }
+              : ""
+          }
+        >
+          {item.name}
+        </a>
       </Link>
     </li>
   ));
