@@ -6,7 +6,7 @@ export default function SubscriptionModal(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const username = globalState.user.username;
 
-  const { plan, handleSubmit } = props;
+  const { plan, handleSubmit, renew } = props;
   const characteristics = plan.characteristics;
   const characsInputs = characteristics.map((item) => (
     <div key={item} className="Modal-InputPart">
@@ -28,27 +28,30 @@ export default function SubscriptionModal(props) {
           handleSubmit(e, formData);
         }}
       >
-        {!username && (
+        {!username ||
+          !renew(
+            <div className="Modal-InputPart">
+              <label>username:</label>
+              <input
+                type="text"
+                onChange={(e) => {
+                  setFormData({ ...formData, username: e.target.value });
+                }}
+              />
+            </div>
+          )}
+
+        {!renew && (
           <div className="Modal-InputPart">
-            <label>username:</label>
+            <label>password:</label>
             <input
-              type="text"
+              type="password"
               onChange={(e) => {
-                setFormData({ ...formData, username: e.target.value });
+                setFormData({ ...formData, password: e.target.value });
               }}
             />
           </div>
         )}
-
-        <div className="Modal-InputPart">
-          <label>password:</label>
-          <input
-            type="password"
-            onChange={(e) => {
-              setFormData({ ...formData, password: e.target.value });
-            }}
-          />
-        </div>
 
         {characsInputs}
 

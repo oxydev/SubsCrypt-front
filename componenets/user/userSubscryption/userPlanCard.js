@@ -23,8 +23,9 @@ export default function UserPlanCard(props) {
     refundPlan,
     renewPlan,
     connectToWallet,
-    subscribePlan,
     handleSubscribtion,
+    handleRenewPlan,
+    handleRefundPlan,
   } = useContext(dataContext);
   const status = props.plan.status;
   const walletAddress = globalState.user.userWallet;
@@ -51,72 +52,24 @@ export default function UserPlanCard(props) {
       });
   }
 
-  async function handleRefund() {
-    await connectToWallet([], "user", dispatch, setAuth);
-    refundPlan(
-      globalState.wallets[1].address,
-      getWalletInjector(globalState.wallets[1]),
-      callback,
-      providerAddress,
-      0
-    );
-  }
-
-  // //Submit function for Subscription modal
-  // function handelModalSubmit(e, formData) {
-  //   e.preventDefault();
-  //   setModal(null);
-  //   console.log(formData);
-  //   function getPlanCharsFromData(formData) {
-  //     var planChar = [];
-  //     Object.keys(formData).forEach((key) => {
-  //       if (key !== "username" && key !== "password") planChar.push(formData[key]);
-  //     });
-  //     return planChar;
-  //   }
-
-  //   var planChar = getPlanCharsFromData(formData);
-  //   console.log(planChar);
-  //   subscribePlan(
-  //     walletAddress.address,
-  //     getWalletInjector(walletAddress),
-  //     callback,
-  //     providerAddress,
-  //     index,
-  //     formData.username,
-  //     formData.password,
-  //     planChar
-  //   );
-  // }
-
   //Subscription function
   function handleSubscribe() {
     setLocalLoading(true);
     console.log(walletAddress);
     getCharacs();
-    // password
-    // username
-    // subscribePlan(
-    //   walletAddress.address,
-    //   getWalletInjector(walletAddress),
-    //   callback,
-    //   providerAddress,
-    //   planIndex
-    // );
   }
 
-  async function handleRenew() {
-    await connectToWallet([], "user", dispatch, setAuth);
-    renewPlan(
-      globalState.wallets[1].address,
-      getWalletInjector(globalState.wallets[1]),
-      callback,
-      providerAddress,
-      0,
-      ["value1"]
-    );
+  //Refunding function
+  function handleRefund() {
+    handleRefundPlan(props.plan.provider, plan, props.plan.plan_index, callback);
   }
 
+  //Renew function
+  function handleRenew() {
+    handleRenewPlan(props.plan.provider, plan, props.plan.plan_index, callback);
+  }
+
+  //callback function
   function callback({ events = [], status }) {
     console.log("Transaction status:", status.type);
 

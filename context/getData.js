@@ -288,8 +288,12 @@ export const DataFunctions = (props) => {
     return injector;
   };
 
+  //function for handle the subscription flow
   const handleSubscribtion = (providerAddress, plan, planIndex, callback, manualAddress) => {
-    const walletAddress = globalState.user.userWallet;
+    let walletAddress = globalState.user.userWallet;
+    if (!walletAddress) {
+      walletAddress = manualAddress;
+    }
 
     const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
 
@@ -320,17 +324,82 @@ export const DataFunctions = (props) => {
       );
     }
 
-    if (manualAddress) {
-      setModal(modalElement);
+    if (!walletAddress) {
+      connectToWallet([], "user", (confirmAddress) => {
+        console.log(walletAddress);
+        handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
+      });
     } else {
-      if (!walletAddress) {
-        connectToWallet([], "user", (confirmAddress) => {
-          console.log(walletAddress);
-          handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
+      setModal(modalElement);
+    }
+  };
+
+  //Function for handling the Renew flow
+  const handleRenewPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
+    let walletAddress = globalState.user.userWallet;
+    if (!walletAddress) {
+      walletAddress = manualAddress;
+    }
+
+    const modalElement = (
+      <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} renew={true} />
+    );
+
+    function handelModalSubmit(e, formData) {
+      e.preventDefault();
+      setModal(null);
+      console.log(formData);
+
+      function getPlanCharsFromData(formData) {
+        var planChar = [];
+        Object.keys(formData).forEach((key) => {
+          if (key !== "username" && key !== "password") planChar.push(formData[key]);
         });
-      } else {
-        setModal(modalElement);
+        return planChar;
       }
+
+      var planChar = getPlanCharsFromData(formData);
+      console.log(planChar);
+      renewPlan(
+        walletAddress.address,
+        getWalletInjector(walletAddress),
+        callback,
+        providerAddress,
+        planIndex,
+        planChar
+      );
+    }
+
+    if (!walletAddress) {
+      connectToWallet([], "user", (confirmAddress) => {
+        console.log(walletAddress);
+        handleRenewPlan(providerAddress, plan, planIndex, callback, confirmAddress);
+      });
+    } else {
+      setModal(modalElement);
+    }
+  };
+
+  //Function for handling the Refund flow
+  const handleRefundPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
+    let walletAddress = globalState.user.userWallet;
+    if (!walletAddress) {
+      walletAddress = manualAddress;
+    }
+
+    if (!walletAddress) {
+      connectToWallet([], "user", (confirmAddress) => {
+        console.log(walletAddress);
+        handleRefundPlan(providerAddress, plan, planIndex, callback, confirmAddress);
+      });
+    } else {
+      refundPlan(
+        walletAddress.address,
+        getWalletInjector(walletAddress),
+        callback,
+        providerAddress,
+        planIndex
+      );
     }
   };
 
@@ -361,6 +430,8 @@ export const DataFunctions = (props) => {
     subscribePlan,
     getWalletInjector,
     handleSubscribtion,
+    handleRenewPlan,
+    handleRefundPlan,
     handleLogOut,
   };
   return <dataContext.Provider value={contextValue}>{props.children}</dataContext.Provider>;
