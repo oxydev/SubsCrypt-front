@@ -15,7 +15,7 @@ export const DataFunctions = (props) => {
   const router = useRouter();
   const { auth, setAuth } = useContext(authContext);
   const { loading, setLoading } = useContext(loadingContext);
-  const { modal, setModal } = useContext(modalContext);
+  const { modal, setModal, setCallBack } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
 
   //Function for getting the user plan data after loging in
@@ -60,11 +60,17 @@ export const DataFunctions = (props) => {
                   console.log(value);
                   Cookies.set("addressIndex", value);
                   setModal(null);
+                  setCallBack(() => () => {});
                   handleConfirm(result, value);
                 }}
               />
             );
             setModal(modalElement);
+            if (!auth) {
+              setCallBack(() => () => {
+                handleLogOut();
+              });
+            }
           }
         }
       }

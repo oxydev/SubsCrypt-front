@@ -4,9 +4,11 @@ export const modalContext = React.createContext();
 
 export const Modal = (props) => {
   const [modal, setModal] = useState(null);
-
+  const [callBack, setCallBack] = useState(() => () => {
+    console.log("close");
+  });
   return (
-    <modalContext.Provider value={{ modal, setModal }}>
+    <modalContext.Provider value={{ modal, setModal, setCallBack }}>
       <>
         {props.children}
         <div className={modal ? "ModalContainer" : "ModalContainer hidden"}>
@@ -15,6 +17,7 @@ export const Modal = (props) => {
             className="Modal-closeBtn"
             onClick={() => {
               setModal(null);
+              callBack();
             }}
           ></span>
         </div>
@@ -22,6 +25,7 @@ export const Modal = (props) => {
           className={modal ? "Filler" : "Filler hidden"}
           onClick={(e) => {
             setModal(null);
+            callBack();
           }}
         ></div>
       </>

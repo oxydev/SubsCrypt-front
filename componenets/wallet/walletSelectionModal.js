@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { modalContext } from "../../context/modal";
 
 export default function WalletSelectionModal(props) {
-  const { addressList, handleSubmit } = props;
+  const { addressList, handleSubmit, callBack } = props;
   const [value, setValue] = useState(0);
   const addresses = addressList.map((item, index) => (
     <li key={index}>
       <span>{item}</span>
     </li>
   ));
+
   return (
     <section className="WalletSelectionModal">
       <h1>Select an address to continue</h1>
