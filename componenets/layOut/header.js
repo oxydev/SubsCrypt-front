@@ -1,14 +1,16 @@
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import userData from "../../data/userIdentity.json";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import { middleDots } from "../../utilities/utilityFunctions";
+import Link from "next/link";
 
 export default function Header() {
   const user = userData.none;
   const { globalState, dispatch } = useContext(UserContext);
   const { handleLogOut } = useContext(dataContext);
+  const [showMenu, setShownMenu] = useState(false);
 
   const userName = globalState.user.username;
   const userWallet = globalState.user.userWallet;
@@ -39,9 +41,30 @@ export default function Header() {
             : "Connect Wallet"}
         </p>
       </div>
-      <div className="UserMenu" onClick={handleLogOut}>
+      <div
+        className="UserMenu"
+        onMouseOver={() => {
+          setShownMenu(true);
+        }}
+        onMouseOut={() => {
+          setShownMenu(false);
+        }}
+      >
         <div className="UserMenu-button"></div>
-        <div className="UserMenu-menu"></div>
+        <div className={showMenu ? "UserMenu-menu" : "UserMenu-menu hidden"}>
+          <ul>
+            <li>
+              <Link href="/profile">
+                <a>Profile Setting</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="javascript:;">
+                <a onClick={handleLogOut}>LogOut</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

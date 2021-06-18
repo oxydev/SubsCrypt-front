@@ -44,6 +44,7 @@
 //Styles for usermenu in the header
 .UserMenu {
   margin-left: 12px;
+  position: relative;
 }
 .UserMenu-button {
   border-radius: $borderRadius--regular;
@@ -58,5 +59,44 @@
     @include pseudo;
     @include backgroundImage(center, 20px);
     @include square(100%);
+  }
+}
+
+.UserMenu-menu {
+  display: block;
+  background-color: $white;
+  box-shadow: $box-shadow--card;
+  border-radius: $borderRadius--regular;
+  padding: 14px;
+  position: absolute;
+  right: 0;
+  top: 53px;
+  width: 214px;
+
+  &::after {
+    @include pseudo();
+    @include box(214px, 20px);
+    position: absolute;
+    top: -20px;
+    right: 0;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 9px 35px;
+      @include text-body--verySmall--light;
+      color: $gray-4;
+      border-bottom: $border-main;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &.hidden {
+    display: none;
   }
 }
