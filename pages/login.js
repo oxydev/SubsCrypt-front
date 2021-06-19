@@ -5,6 +5,7 @@ import ProviderSignUp from "./provider/providerSignUp";
 import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function Login() {
   const [role, setRole] = useState("none");
@@ -32,24 +33,41 @@ export default function Login() {
     checkAuthByCookie();
   }
 
-  if (role == "none") {
-    return (
-      <section className="MainLoginPage">
-        {/* <WalletConnection />
-        <LoginPart /> */}
-        <h1>Choose your role to login</h1>
-        <div>
-          <button onClick={handleUserLogin}>Login as a User</button>
-          <button onClick={handleProviderLogin}>Login as a Provider</button>
-          <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
-        </div>
-      </section>
-    );
-  } else if (role == "user") {
-    return <UserLogin />;
-  } else if (role == "provider") {
-    return <ProviderLogin />;
-  } else if (role == "providerSignUp") {
-    return <ProviderSignUp />;
-  }
+  // if (role == "none") {
+  //   return (
+  //     <section className="MainLoginPage">
+  //       {/* <WalletConnection />
+  //       <LoginPart /> */}
+  //       <h1>Choose your role to login</h1>
+  //       <div>
+  //         <button onClick={handleUserLogin}>Login as a User</button>
+  //         <button onClick={handleProviderLogin}>Login as a Provider</button>
+  //         <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
+  //       </div>
+  //     </section>
+  //   );
+  // } else if (role == "user") {
+  //   return <UserLogin />;
+  // } else if (role == "provider") {
+  //   return <ProviderLogin />;
+  // } else if (role == "providerSignUp") {
+  //   return <ProviderSignUp />;
+  // }
+
+  return (
+    <section className="MainLoginPage">
+      <h1>Choose your role to login</h1>
+      <div>
+        <Link href="/user/userLogin">
+          <a>Login as a User</a>
+        </Link>
+        <Link href="/user/providerLogin">
+          <a>Login as a Provider</a>
+        </Link>
+        <Link href="/user/providerSignUp">
+          <a>Sign Up as a Provider</a>
+        </Link>
+      </div>
+    </section>
+  );
 }

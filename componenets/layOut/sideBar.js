@@ -25,7 +25,7 @@ export default function SideBar() {
               ? () => {
                   handleLogOut();
                 }
-              : ""
+              : JSON.stringify(item.func)
           }
         >
           {item.name}
