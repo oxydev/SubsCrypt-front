@@ -26,6 +26,8 @@ export const usePercentage = (activationDate, duration) => {
   const percentage = Math.floor((currentMilliseconds / duration) * 100);
   if (percentage > 100) {
     return 100;
+  } else if (percentage < 0) {
+    return 0;
   } else {
     return percentage;
   }
