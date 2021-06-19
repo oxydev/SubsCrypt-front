@@ -34,12 +34,6 @@ export default function App({ Component, pageProps }) {
     }, 200);
   }, []);
 
-  useEffect(() => {
-    if (!auth) {
-      router.push("/login");
-    }
-  }, [auth]);
-
   return (
     <>
       <Head>
@@ -58,8 +52,8 @@ export default function App({ Component, pageProps }) {
                     ) : (
                       <>
                         {auth && <Header />}
-                        {/* {auth ? <Component {...pageProps} /> : <Login {...pageProps} />} */}
-                        <Component {...pageProps} />
+                        {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                        {/* <Component {...pageProps} /> */}
                       </>
                     )}
                   </Main>

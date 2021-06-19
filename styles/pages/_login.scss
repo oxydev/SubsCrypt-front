@@ -17,8 +17,7 @@
     flex-direction: column;
   }
 
-  button,
-  a {
+  button {
     outline: none;
     border: $border-main;
     border-radius: $borderRadius--regular;
@@ -27,7 +26,6 @@
     margin-bottom: 10px;
     @include text-body--small--regular;
     color: #8a8f99;
-    text-align: center;
   }
 }
 
