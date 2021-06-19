@@ -8,6 +8,7 @@ export default function SubscriptionModal (props) {
 
   const { plan, handleSubmit, renew } = props
   console.log(plan)
+
   const characteristics = plan.characteristics
   const characsInputs = characteristics.map((item) => (
     <div key={item} className="Modal-InputPart">
