@@ -12,6 +12,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOAD_USER":
       return { ...state, user: action.payload };
+    case "LOAD_USER_USERNAME":
+      return { ...state, user: { ...state.user, username: action.payload } };
     case "LOAD_USER_WALLET":
       return { ...state, user: { ...state.user, userWallet: action.payload } };
     case "LOAD_USER_PLANS":

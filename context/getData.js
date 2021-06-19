@@ -113,8 +113,8 @@ export const DataFunctions = (props) => {
         console.log(result);
         if (result.status == "Fetched") {
           dispatch({
-            type: "LOAD_USER",
-            payload: { ...globalState.user, username: result.result },
+            type: "LOAD_USER_USERNAME",
+            payload: result.result,
           });
           Cookies.set("subscrypt", result.result);
         }
