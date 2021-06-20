@@ -47,22 +47,22 @@
     "menuItem": [
       {
         "name": "Dashboard",
-        "url": "/user/",
+        "id": "PublicDashboard",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Add plan",
-        "url": "/user/newOffers",
+        "name": "Login as a user",
+        "id": "PublicUser",
         "icon": "/dashbord.png"
       },
       {
-        "name": "New Offers",
-        "url": "/user/newOffers",
+        "name": "Login as a Provider",
+        "id": "PublicProvider",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Log Out",
-        "url": "/",
+        "name": "Sign up as a provider",
+        "id": "publicSignUp",
         "icon": "/dashbord.png"
       }
     ]

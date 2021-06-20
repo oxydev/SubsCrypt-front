@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
 import ProviderSignUp from "./provider/providerSignUp";
@@ -31,6 +31,30 @@ export default function Login() {
   if (!auth && (password || userWallet)) {
     checkAuthByCookie();
   }
+
+  //Set change the status by clicking on sidebar links
+  useEffect(() => {
+    const mainLoginLink = document.getElementById("PublicDashboard");
+    const userLoginLink = document.getElementById("PublicUser");
+    const providerLoginLink = document.getElementById("PublicProvider");
+    const signUpLink = document.getElementById("publicSignUp");
+
+    mainLoginLink.onclick = () => {
+      setRole("none");
+    };
+
+    userLoginLink.onclick = () => {
+      setRole("user");
+    };
+
+    providerLoginLink.onclick = () => {
+      setRole("provider");
+    };
+
+    signUpLink.onclick = () => {
+      setRole("providerSignUp");
+    };
+  });
 
   if (role == "none") {
     return (
