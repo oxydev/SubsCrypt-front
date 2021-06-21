@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 
 export default function ProviderSignUp(props) {
+  const [info, setInfo] = useState({});
+  const [planList, setPlanList] = useState([{ coins: [] }]);
+
   return (
     <section className="ProviderSignUp">
       <h1>Sign up as a Service Provider</h1>
       <div className="row">
         <div className="Container--medium">
-          <ProviderInfo />
-          <NewPlanCreation />
+          <ProviderInfo info={info} setInfo={setInfo} />
+          <NewPlanCreation planList={planList} setPlanList={setPlanList} index={0} />
           <div className="ProviderRegisteration">
             <p>
               For signing up you need to send a transaction on chain to put the data in smart
