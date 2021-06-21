@@ -137,7 +137,14 @@ export default function NewPlanCreation(props) {
           <p>This field only accept numbers with two decimals</p>
         </div>
       </form>
-      <button className="PlansForm-addBtn">Add another plan</button>
+      <button
+        className="PlansForm-addBtn"
+        onClick={() => {
+          setPlanList([...planList, { coins: [] }]);
+        }}
+      >
+        Add another plan
+      </button>
     </section>
   );
 }

@@ -5,6 +5,14 @@ import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 export default function ProviderSignUp(props) {
   const [info, setInfo] = useState({});
   const [planList, setPlanList] = useState([{ coins: [] }]);
+  let planFormList = planList.map((item, index) => (
+    <NewPlanCreation
+      key={"PlanForm" + index}
+      planList={planList}
+      setPlanList={setPlanList}
+      index={index}
+    />
+  ));
 
   return (
     <section className="ProviderSignUp">
@@ -12,7 +20,7 @@ export default function ProviderSignUp(props) {
       <div className="row">
         <div className="Container--medium">
           <ProviderInfo info={info} setInfo={setInfo} />
-          <NewPlanCreation planList={planList} setPlanList={setPlanList} index={0} />
+          {planFormList}
           <div className="ProviderRegisteration">
             <p>
               For signing up you need to send a transaction on chain to put the data in smart
