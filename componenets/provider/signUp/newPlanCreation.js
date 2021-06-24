@@ -106,30 +106,8 @@ export default function NewPlanCreation(props) {
               value="polkadot"
               type="checkbox"
               name="Polkadot"
-              onChange={(e) => {
-                handleCoinCheckBox(e);
-              }}
-            ></input>
-            <img src="/icons/png/networks/PolkadotLogo.png" />
-            <label htmlFor="Polkadot">Polkadot (DOT)</label>
-          </div>
-          <div className="PlanForm-payCheckbox">
-            <input
-              value="bitCoin"
-              type="checkbox"
-              name="Polkadot"
-              onChange={(e) => {
-                handleCoinCheckBox(e);
-              }}
-            ></input>
-            <img src="/icons/png/networks/PolkadotLogo.png" />
-            <label htmlFor="Polkadot">Polkadot (DOT)</label>
-          </div>
-          <div className="PlanForm-payCheckbox">
-            <input
-              value="dollar"
-              type="checkbox"
-              name="Polkadot"
+              checked
+              disabled
               onChange={(e) => {
                 handleCoinCheckBox(e);
               }}
