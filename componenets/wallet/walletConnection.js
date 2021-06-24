@@ -11,7 +11,7 @@ export default function WalletConnection(props) {
   ));
   return (
     <section className="WalletConnection">
-      <h1>Connect yout Wallet</h1>
+      <h1>Connect your Wallet</h1>
       <h2>Choose Network</h2>
       <div className="Networks">{networks}</div>
       <h2>Choose Wallet</h2>

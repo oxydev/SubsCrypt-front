@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
+import WalletConnection from "../../componenets/wallet/walletConnection";
 
 export default function ProviderSignUp(props) {
   const [info, setInfo] = useState({});
@@ -16,6 +17,7 @@ export default function ProviderSignUp(props) {
 
   return (
     <section className="ProviderSignUp">
+      <WalletConnection type="provider" />
       <h1>Sign up as a Service Provider</h1>
       <div className="row">
         <div className="Container--medium">
