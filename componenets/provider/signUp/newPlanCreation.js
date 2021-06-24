@@ -24,12 +24,25 @@ export default function NewPlanCreation(props) {
       setPlanList([...planList]);
     }
   }
+
+  function toggleVisibility() {
+    const status = planList[index].visibility;
+    if (status == "visible") {
+      handlePlanListUpdate("visibility", "hidden");
+    } else {
+      handlePlanListUpdate("visibility", "visible");
+    }
+  }
   console.log(planList);
 
   return (
-    <section className="NewPlanCreation">
-      <h1>
-        Create a Subscryption Plan #1
+    <section
+      className={
+        planList[index].visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"
+      }
+    >
+      <h1 onClick={toggleVisibility}>
+        Create a Subscryption Plan #{index + 1}
         <span></span>
       </h1>
       <form className="PlanForm">
