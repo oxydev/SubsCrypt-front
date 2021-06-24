@@ -23,6 +23,14 @@ export default function ProviderSignUp(props) {
         <div className="Container--medium">
           <ProviderInfo info={info} setInfo={setInfo} />
           {planFormList}
+          <button
+            className="PlansForm-addBtn"
+            onClick={() => {
+              setPlanList([...planList, { coins: [] }]);
+            }}
+          >
+            Add another plan
+          </button>
           <div className="ProviderRegisteration">
             <p>
               For signing up you need to send a transaction on chain to put the data in smart
