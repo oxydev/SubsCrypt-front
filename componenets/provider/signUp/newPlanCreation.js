@@ -90,8 +90,7 @@ export default function NewPlanCreation(props) {
             />
           </div>
           <p>
-            Users can refund <span>{refundValue} percent</span> of the plan at any time. Minimum
-            amount is %70.
+            Users can refund <span>{refundValue} percent</span> of the plan at any time.
           </p>
           <label>Special Charactristics of the plan</label>
           <div className="PlansForm-tag">
