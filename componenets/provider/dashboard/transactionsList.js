@@ -2,8 +2,8 @@ import React from "react";
 import data from "../../../data/transactions.json";
 
 export default function TransactionsList(props) {
-  const transactions = data.transactions.map((item) => (
-    <tr>
+  const transactions = data.transactions.map((item, index) => (
+    <tr key={"transaction" + index}>
       <td>{item.type}</td>
       <td>{item.plan}</td>
       <td>{item.duration}</td>

@@ -1,9 +1,33 @@
 .ProviderInfo,
 .NewPlanCreation {
-  margin-bottom: 66px;
+  // margin-bottom: 66px;
   & > h1 {
     @include text-body--large--medium;
     margin-bottom: 16px;
+    position: relative;
+    width: fit-content;
+    cursor: pointer;
+
+    span {
+      @include pseudo;
+      @include square(20px);
+      background-image: url("/icons/png/downArrow.png");
+      background-position: center;
+      right: -40px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+
+  &.hidden {
+    & > h1 > span {
+      transform: scaleY(-1);
+    }
+    .PlanForm {
+      max-height: 0;
+      overflow: hidden;
+    }
   }
 }
 .ProviderForm,
@@ -78,23 +102,5 @@
   img {
     margin-right: 16px;
     @include circle(48px);
-  }
-}
-.PlansForm-addBtn {
-  @include text-body--standard--regular;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  margin-top: 6px;
-
-  &::before {
-    @include pseudo;
-    @include square(42px);
-    @include backgroundImage;
-    background-image: url("/icons/png/uploadBtn.png");
-    position: static;
-    margin-right: 24px;
   }
 }

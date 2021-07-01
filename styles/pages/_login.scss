@@ -1,3 +1,34 @@
+.MainLoginPage {
+  width: 441px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  h1 {
+    @include text--heading3;
+    margin-bottom: 40px;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    outline: none;
+    border: $border-main;
+    border-radius: $borderRadius--regular;
+    background-color: transparent;
+    padding: 7px 20px 9px;
+    margin-bottom: 10px;
+    @include text-body--small--regular;
+    color: #8a8f99;
+  }
+}
+
 .LoginPage {
   display: flex;
   flex-direction: column;

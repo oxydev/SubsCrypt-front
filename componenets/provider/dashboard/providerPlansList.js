@@ -1,9 +1,18 @@
-import React from "react";
-import data from "../../../data/providerPlans.json";
+import React, { useContext } from "react";
 import OfferCard from "../../user/userSubscryption/offerCard";
+import { UserContext } from "../../../context/store";
 
 export default function ProviderPlansList(props) {
-  const plansCard = data.plans.map((item) => <OfferCard offer={item} />);
+  const { globalState, dispatch } = useContext(UserContext);
+
+  let plans = [];
+  if (globalState.plans) {
+    plans.push(...globalState.plans);
+  }
+
+  const plansCard = plans.map((item, index) => (
+    <OfferCard key={"providerPlan" + index} offer={item} index={index} />
+  ));
   return (
     <section className="ProviderPlansList">
       <h1>Your Plans</h1>

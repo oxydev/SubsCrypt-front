@@ -28,6 +28,8 @@ $primary: #0d0d2b;
 
 //Other colors
 $green: #6fcf97;
+$warning: #ffcc00;
+$purple: #d71eae;
 
 //Font-size
 $fontSize-root: 10px;
@@ -42,10 +44,10 @@ $fontSize-title--small: 1.6rem;
 $fontSize-body--large: 2rem;
 $fontSize-body--standard: 1.8rem;
 $fontSize-body--small: 1.6rem;
-$fontSize-body--lightSmall: 1.2rem;
-$fontSize-body--verySmall: 0.8rem;
+$fontSize-body--lightSmall: 1.4rem;
+$fontSize-body--verySmall: 1.2rem;
 
-$fontSize-footNote: 0.6rem;
+$fontSize-footNote: 1rem;
 
 //font weight
 $fontWeight-black: 900;
@@ -60,6 +62,7 @@ $purple-BG--linear: linear-gradient(to bottom, #c528fc, #d71eae);
 
 //Shodows
 $box-shadow: 0 4px 15px 0 #000;
+$box-shadow--card: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 
 //Border radius
 $borderRadius--regular: 12px;
@@ -67,3 +70,21 @@ $borderRadius--small: 8px;
 
 //Borders
 $border-main: 1px solid $gray-5;
+
+//old font sizes
+// $fontSize-root: 10px;
+
+// $fontSize-heading1: 6.4rem;
+// $fontSize-heading2: 4rem;
+// $fontSize-heading3: 3.2rem;
+
+// $fontSize-title--large: 3.2rem;
+// $fontSize-title--small: 1.6rem;
+
+// $fontSize-body--large: 2rem;
+// $fontSize-body--standard: 1.8rem;
+// $fontSize-body--small: 1.6rem;
+// $fontSize-body--lightSmall: 1.2rem;
+// $fontSize-body--verySmall: 0.8rem;
+
+// $fontSize-footNote: 0.6rem;

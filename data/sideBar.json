@@ -1,49 +1,68 @@
 {
-  "sideBar": {
+  "UserSideBar": {
     "menuItem": [
       {
         "name": "Dashboard",
+        "url": "/user/",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "New Offers",
+        "url": "/user/newOffers",
+        "icon": "/dashbord.png"
+      },
+      {
+        "name": "Log Out",
         "url": "/",
         "icon": "/dashbord.png"
-      },
+      }
+    ]
+  },
+  "ProviderSideBar": {
+    "menuItem": [
       {
-        "name": "My Subscrypts",
-        "url": "/mySubscryptions",
+        "name": "Dashboard",
+        "url": "/user/",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Provider",
-        "url": "/providerSignUp",
+        "name": "Add plan",
+        "url": "/user/newOffers",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Provider Dashboard",
-        "url": "/providerDashboard",
+        "name": "New Offers",
+        "url": "/user/newOffers",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Profile Setting",
-        "url": "/profile-setting",
+        "name": "Log Out",
+        "url": "/",
+        "icon": "/dashbord.png"
+      }
+    ]
+  },
+
+  "PublicSideBar": {
+    "menuItem": [
+      {
+        "name": "Dashboard",
+        "id": "PublicDashboard",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Lorem ipsum",
-        "url": "/lorem-ipsum",
+        "name": "Login as a user",
+        "id": "PublicUser",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Invite friends",
-        "url": "/invite-friends",
+        "name": "Login as a Provider",
+        "id": "PublicProvider",
         "icon": "/dashbord.png"
       },
       {
-        "name": "FAQ",
-        "url": "/faq",
-        "icon": "/dashbord.png"
-      },
-      {
-        "name": "Blog",
-        "url": "/blog",
+        "name": "Sign up as a provider",
+        "id": "publicSignUp",
         "icon": "/dashbord.png"
       }
     ]

@@ -29,6 +29,20 @@
       "ExpireDate": "14 February 2021",
       "usePercentage": "%78",
       "refundAmmount": "$2.39"
+    },{
+      "name": "Spotify 1 Month Premium Membersh...",
+      "logoURL": "/logo/offersLogo/Spotify.png",
+      "description": "One month premium membership of Spotify premium in US only.",
+      "provider": "Spotify",
+      "rateNumber": 4.99,
+      "rateAmmount": 1936,
+      "duration": "1 Month",
+      "refundPolicy": "%80 Refund",
+      "price": 9.99,
+      "activationDate": "14 January 2021",
+      "ExpireDate": "14 February 2021",
+      "usePercentage": "%78",
+      "refundAmmount": "$2.39"
     }
   ]
 }

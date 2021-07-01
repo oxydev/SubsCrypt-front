@@ -1,0 +1,22 @@
+.ImageUploader {
+  margin: 30px 0;
+  a {
+    display: block;
+    @include circle(128px);
+    border: 2px dashed $gray-4;
+    margin: auto;
+    background-color: transparent;
+    background-image: url("/icons/png/uploadBtn.png");
+    @include backgroundImage;
+    background-size: auto;
+  }
+
+  input {
+    display: none;
+  }
+
+  .FileName {
+    margin: 20px 0 10px;
+    text-align: center;
+  }
+}

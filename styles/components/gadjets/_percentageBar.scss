@@ -1,0 +1,23 @@
+.PercentageBar {
+  width: 100%;
+  height: 100%;
+  border: 1px solid $purple;
+  border-radius: 5px;
+  position: relative;
+}
+.percentage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-image: $purple-BG--linear;
+}
+.PercentNum {
+  @include text-footNote;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  color: $white;
+  z-index: 5;
+  line-height: 11px;
+}

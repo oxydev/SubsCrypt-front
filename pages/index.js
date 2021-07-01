@@ -1,18 +1,28 @@
-import { Profiler } from "react";
-import { useDispatch } from "react-redux";
-import LoginPart from "../componenets/wallet/loginPart";
-import WalletConnection from "../componenets/wallet/walletConnection";
-import data from "../data/testData/sampleUser.json";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../context/store";
+import { authContext } from "./_app";
 
 export default function Home() {
-  const user = data.user;
+  const router = useRouter();
+  const { globalState } = useContext(UserContext);
+  const { auth } = useContext(authContext);
 
-  // const data = useSelector(state);
-  // console.log(data);
-  return (
-    <div className="LoginPage">
-      <WalletConnection />
-      <LoginPart />
-    </div>
-  );
+  const userType = globalState.user.type;
+
+  if (userType == "provider") {
+    router.push("/provider/");
+  } else if (userType == "user") {
+    router.push("/user/");
+  }
+
+  // if (!auth) {
+  //   router.push("./login");
+  // } else if (userType == "user") {
+  //   router.push("./user/");
+  // } else if (userType == "provider") {
+  //   router.push("./provider");
+  // }
+
+  return <div className="LoginPage"></div>;
 }

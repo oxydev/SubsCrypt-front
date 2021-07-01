@@ -1,8 +1,9 @@
 .SubscryptionOffers {
   border: 1px solid #e6e7eb;
   border-radius: $borderRadius--small;
-  padding: 78px 97px 64px;
+  padding: 78px 47px 64px;
   position: relative;
+  width: 100%;
   //
   // display: none;
 
@@ -29,8 +30,8 @@
   @include box(139px, 126px);
   background-image: url("/icons/png/sunscryption/OffersIcon.png");
   @include backgroundImage;
-  top: 47px;
-  right: 140px;
+  top: 10%;
+  right: 15%;
 }
 .OfferPart {
   & > h2 {
