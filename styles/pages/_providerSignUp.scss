@@ -3,6 +3,26 @@
   & > h1 {
     @include text--heading2;
     margin-bottom: 51px;
+    margin-top: 60px;
+  }
+}
+.PlansForm-addBtn {
+  @include text-body--standard--regular;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  margin-bottom: 66px;
+
+  &::before {
+    @include pseudo;
+    @include square(42px);
+    @include backgroundImage;
+    background-image: url("/icons/png/uploadBtn.png");
+    position: static;
+    margin-right: 24px;
   }
 }
 .ProviderRegisteration {

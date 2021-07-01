@@ -5,7 +5,7 @@ import WalletConnection from "../../componenets/wallet/walletConnection";
 
 export default function ProviderSignUp(props) {
   const [info, setInfo] = useState({});
-  const [planList, setPlanList] = useState([{ coins: [] }]);
+  const [planList, setPlanList] = useState([{ visibility: "visible", coins: [] }]);
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation
       key={"PlanForm" + index}
@@ -15,6 +15,14 @@ export default function ProviderSignUp(props) {
     />
   ));
 
+  function addAnotherPlan() {
+    const list = planList;
+    for (const item of list) {
+      item.visibility = "hidden";
+    }
+    setPlanList([...list, { visibility: "visible", coins: [] }]);
+  }
+
   return (
     <section className="ProviderSignUp">
       <WalletConnection type="provider" />
@@ -23,6 +31,9 @@ export default function ProviderSignUp(props) {
         <div className="Container--medium">
           <ProviderInfo info={info} setInfo={setInfo} />
           {planFormList}
+          <button className="PlansForm-addBtn" onClick={addAnotherPlan}>
+            Add another plan
+          </button>
           <div className="ProviderRegisteration">
             <p>
               For signing up you need to send a transaction on chain to put the data in smart

@@ -1,4 +1,5 @@
 import React from "react";
+import ImageUploader from "./imageUploader";
 
 export default function ProviderInfo(props) {
   const { info, setInfo } = props;
@@ -31,7 +32,7 @@ export default function ProviderInfo(props) {
         </div>
         <div className="ProviderForm-photoUpload">
           <label>Upload Brand Photo</label>
-          <button className="PhotoUploadBtn"></button>
+          <ImageUploader />
           <p>
             Upload PNG or SVG file 48 pixel x 48 pixel. This photo will be published in plans as the
             provider reference.

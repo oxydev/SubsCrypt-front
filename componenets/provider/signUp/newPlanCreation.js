@@ -24,11 +24,27 @@ export default function NewPlanCreation(props) {
       setPlanList([...planList]);
     }
   }
+
+  function toggleVisibility() {
+    const status = planList[index].visibility;
+    if (status == "visible") {
+      handlePlanListUpdate("visibility", "hidden");
+    } else {
+      handlePlanListUpdate("visibility", "visible");
+    }
+  }
   console.log(planList);
 
   return (
-    <section className="NewPlanCreation">
-      <h1>Create a Subscryption Plan #1</h1>
+    <section
+      className={
+        planList[index].visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"
+      }
+    >
+      <h1 onClick={toggleVisibility}>
+        Create a Subscryption Plan #{index + 1}
+        <span></span>
+      </h1>
       <form className="PlanForm">
         <div className="PlanForm-info">
           <label htmlFor="PlanTitle">Plan Title</label>
@@ -74,8 +90,7 @@ export default function NewPlanCreation(props) {
             />
           </div>
           <p>
-            Users can refund <span>{refundValue} percent</span> of the plan at any time. Minimum
-            amount is %70.
+            Users can refund <span>{refundValue} percent</span> of the plan at any time.
           </p>
           <label>Special Charactristics of the plan</label>
           <div className="PlansForm-tag">
@@ -90,30 +105,8 @@ export default function NewPlanCreation(props) {
               value="polkadot"
               type="checkbox"
               name="Polkadot"
-              onChange={(e) => {
-                handleCoinCheckBox(e);
-              }}
-            ></input>
-            <img src="/icons/png/networks/PolkadotLogo.png" />
-            <label htmlFor="Polkadot">Polkadot (DOT)</label>
-          </div>
-          <div className="PlanForm-payCheckbox">
-            <input
-              value="bitCoin"
-              type="checkbox"
-              name="Polkadot"
-              onChange={(e) => {
-                handleCoinCheckBox(e);
-              }}
-            ></input>
-            <img src="/icons/png/networks/PolkadotLogo.png" />
-            <label htmlFor="Polkadot">Polkadot (DOT)</label>
-          </div>
-          <div className="PlanForm-payCheckbox">
-            <input
-              value="dollar"
-              type="checkbox"
-              name="Polkadot"
+              checked
+              disabled
               onChange={(e) => {
                 handleCoinCheckBox(e);
               }}
@@ -137,14 +130,6 @@ export default function NewPlanCreation(props) {
           <p>This field only accept numbers with two decimals</p>
         </div>
       </form>
-      <button
-        className="PlansForm-addBtn"
-        onClick={() => {
-          setPlanList([...planList, { coins: [] }]);
-        }}
-      >
-        Add another plan
-      </button>
     </section>
   );
 }
