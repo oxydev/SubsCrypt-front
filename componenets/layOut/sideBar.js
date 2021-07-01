@@ -18,20 +18,35 @@ export default function SideBar() {
   }
   const sideBarMenuItems = sideBarData.menuItem.map((item) => (
     <li key={item.name}>
-      <Link href={item.url ? item.url : "#"}>
-        <a
+      {item.url ? (
+        <Link href={tem.url}>
+          <a
+            id={item.id}
+            onClick={
+              item.name == "Log Out"
+                ? () => {
+                    handleLogOut();
+                  }
+                : () => {}
+            }
+          >
+            {item.name}
+          </a>
+        </Link>
+      ) : (
+        <p
           id={item.id}
           onClick={
             item.name == "Log Out"
               ? () => {
                   handleLogOut();
                 }
-              : ""
+              : () => {}
           }
         >
           {item.name}
-        </a>
-      </Link>
+        </p>
+      )}
     </li>
   ));
   return (
