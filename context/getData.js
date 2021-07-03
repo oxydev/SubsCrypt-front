@@ -23,6 +23,7 @@ export const DataFunctions = (props) => {
     await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
       if (result.status == "Fetched") {
         let plans = result.result;
+        //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
         plans.map((item) => {
           getCharacs(item.provider, item.plan_index, item);
         });
@@ -126,6 +127,8 @@ export const DataFunctions = (props) => {
   const loadUserData = async (username, password) => {
     await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
       let plans = result.result;
+      //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
+
       plans.map((item) => {
         getCharacs(item.provider, item.plan_index, item);
       });
