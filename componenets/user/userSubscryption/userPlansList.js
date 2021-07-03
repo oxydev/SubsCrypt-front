@@ -46,7 +46,7 @@ export default function UserPlansList(props) {
   plans = activePlans.concat(expiredPlans);
 
   const userPlans = plans.map((plan, index) => (
-    <UserPlanCard key={plan.plan_index + plan.provider} plan={plan} index={index} />
+    <UserPlanCard key={index + plan.provider} plan={plan} index={index} />
   ));
 
   return <div className="UserPlansList">{userPlans}</div>;

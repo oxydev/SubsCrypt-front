@@ -20,16 +20,15 @@ export const DataFunctions = (props) => {
 
   //Function for getting the user plan data after loging in
   const loadUserDataByWallet = async (address) => {
-    await (await subscrypt)
-      .retrieveWholeDataWithWallet(address)
-      .then((result) => {
-        if (result.status == "Fetched") {
-          let plans = result.result;
-          plans.map((item) => {
-            getCharacs(item.provider, item.plan_index, item);
-          });
-        }
-      });
+    await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
+      if (result.status == "Fetched") {
+        let plans = result.result;
+        //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
+        plans.map((item) => {
+          getCharacs(item.provider, item.plan_index, item);
+        });
+      }
+    });
 
     async function getCharacs(provider, index, plan) {
       await (await subscrypt)
@@ -146,13 +145,12 @@ export const DataFunctions = (props) => {
 
   //Function for getting the user plan data after loging in
   const loadUserData = async (username, password) => {
-    await (await subscrypt)
-      .retrieveWholeDataWithUsername(username, password)
-      .then((result) => {
-        let plans = result.result;
-        plans.map((item) => {
-          getCharacs(item.provider, item.plan_index, item);
-        });
+    await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
+      let plans = result.result;
+      //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
+
+      plans.map((item) => {
+        getCharacs(item.provider, item.plan_index, item);
       });
 
     async function getCharacs(provider, index, plan) {
