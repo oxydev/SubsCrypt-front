@@ -5,6 +5,7 @@ import ProviderSignUp from "./provider/providerSignUp";
 import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
+import WalletConnection from "../componenets/wallet/walletConnection";
 
 export default function Login() {
   const [role, setRole] = useState("none");
@@ -74,6 +75,6 @@ export default function Login() {
   } else if (role == "provider") {
     return <ProviderLogin />;
   } else if (role == "providerSignUp") {
-    return <ProviderSignUp />;
+    return <WalletConnection type="provider" />;
   }
 }

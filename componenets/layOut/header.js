@@ -59,7 +59,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="javascript:;">
+              <Link href="#">
                 <a onClick={handleLogOut}>LogOut</a>
               </Link>
             </li>

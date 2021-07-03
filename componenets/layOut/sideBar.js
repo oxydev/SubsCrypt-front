@@ -19,7 +19,7 @@ export default function SideBar() {
   const sideBarMenuItems = sideBarData.menuItem.map((item) => (
     <li key={item.name}>
       {item.url ? (
-        <Link href={tem.url}>
+        <Link href={item.url}>
           <a
             id={item.id}
             onClick={

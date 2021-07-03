@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
-import WalletConnection from "../../componenets/wallet/walletConnection";
 
 export default function ProviderSignUp(props) {
   const [info, setInfo] = useState({});
-  const [planList, setPlanList] = useState([{ visibility: "visible", coins: [] }]);
+  const [planList, setPlanList] = useState([
+    { visibility: "visible", coins: [] },
+  ]);
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation
       key={"PlanForm" + index}
@@ -23,9 +24,14 @@ export default function ProviderSignUp(props) {
     setPlanList([...list, { visibility: "visible", coins: [] }]);
   }
 
+  function handleRegister() {
+    console.log("New provider has been registered!");
+    console.log(info);
+    console.log(planList);
+  }
+
   return (
     <section className="ProviderSignUp">
-      <WalletConnection type="provider" />
       <h1>Sign up as a Service Provider</h1>
       <div className="row">
         <div className="Container--medium">
@@ -36,10 +42,17 @@ export default function ProviderSignUp(props) {
           </button>
           <div className="ProviderRegisteration">
             <p>
-              For signing up you need to send a transaction on chain to put the data in smart
-              contract on blockchain. Normal gas fee applies.
+              For signing up you need to send a transaction on chain to put the
+              data in smart contract on blockchain. Normal gas fee applies.
             </p>
-            <button>Register</button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleRegister();
+              }}
+            >
+              Register
+            </button>
           </div>
         </div>
         <div className="Container--small"></div>

@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 export default function ImageUploader() {
   const inputRF = useRef(null);
   const [file, setFile] = useState();
-  const [url, setUrl] = useState("/icons/png/uploadBtn.png");
+  const [url, setUrl] = useState("/icons/png/uploadButton.png");
 
   let reader = new FileReader();
 
@@ -13,7 +13,7 @@ export default function ImageUploader() {
 
   function uploadHandler(file) {
     console.log(file.name);
-    const newUrl = reader.readAsDataURL(file);
+    const newUrl = URL.createObjectURL(file);
     setUrl(newUrl);
     console.log(newUrl);
     setFile(file);
@@ -44,15 +44,25 @@ export default function ImageUploader() {
   }
   return (
     <div className="ImageUploader">
-      <div className="UploadZone" onDrop={dropHandler} onDragOver={dragOverHandler}>
+      <div
+        className="UploadZone"
+        onDrop={dropHandler}
+        onDragOver={dragOverHandler}
+      >
         <a
           href="javascript:;"
-          style={{ backgroundColor: `${url}` }}
+          style={{ backgroundImage: `url(${url})` }}
           onClick={() => {
             handleUploadClick();
           }}
         ></a>
-        <input ref={inputRF} type="file" id="upload" name="upload" onChange={inputChangeHandler} />
+        <input
+          ref={inputRF}
+          type="file"
+          id="upload"
+          name="upload"
+          onChange={inputChangeHandler}
+        />
       </div>
       <p className="FileName">{file ? file.name : ""}</p>
     </div>

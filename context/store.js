@@ -25,7 +25,15 @@ const reducer = (state, action) => {
     case "LOAD_WALLETS":
       return { ...state, wallets: action.payload };
     case "LOAD_PROVIDER_PLANS":
-      return { ...state, providerPlans: [...state.providerPlans, action.payload] };
+      return {
+        ...state,
+        providerPlans: [...state.providerPlans, action.payload],
+      };
+    case "REGISTERED":
+      return {
+        ...state,
+        user: { ...state.user, registered: action.payload },
+      };
     case "LOG_OUT":
       return initialState;
     default:
@@ -54,6 +62,8 @@ export const Store = (props) => {
   console.log(globalState);
 
   return (
-    <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={{ globalState, dispatch }}>
+      {props.children}
+    </UserContext.Provider>
   );
 };
