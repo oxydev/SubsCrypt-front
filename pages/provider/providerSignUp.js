@@ -24,6 +24,12 @@ export default function ProviderSignUp(props) {
     setPlanList([...list, { visibility: "visible", coins: [] }]);
   }
 
+  function handleRegister() {
+    console.log("New provider has been registered!");
+    console.log(info);
+    console.log(planList);
+  }
+
   return (
     <section className="ProviderSignUp">
       <h1>Sign up as a Service Provider</h1>
@@ -39,7 +45,14 @@ export default function ProviderSignUp(props) {
               For signing up you need to send a transaction on chain to put the
               data in smart contract on blockchain. Normal gas fee applies.
             </p>
-            <button>Register</button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleRegister();
+              }}
+            >
+              Register
+            </button>
           </div>
         </div>
         <div className="Container--small"></div>

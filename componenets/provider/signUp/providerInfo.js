@@ -13,6 +13,8 @@ export default function ProviderInfo(props) {
           <label htmlFor="ProviderName">Service Provide Name</label>
           <input
             type="text"
+            required
+            minLength={3}
             name="ProviderName"
             placeholder="Name of the service provider"
             onChange={(e) => {
@@ -25,6 +27,8 @@ export default function ProviderInfo(props) {
           </label>
           <input
             type="text"
+            required
+            minLength={10}
             name="ProviderDescription"
             placeholder="Description"
             onChange={(e) => {
@@ -37,6 +41,8 @@ export default function ProviderInfo(props) {
           <label htmlFor="ProviderUserName">Service Provider Username</label>
           <input
             type="text"
+            required
+            minLength={6}
             name="ProviderUserName"
             placeholder="Username"
             onChange={(e) => {
