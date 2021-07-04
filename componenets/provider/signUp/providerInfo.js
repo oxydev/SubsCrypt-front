@@ -64,7 +64,6 @@ export default function ProviderInfo(props) {
             minLength={6}
             name="ProviderPassword"
             placeholder="type your password"
-            value={info.ProviderUsername}
             onChange={(e) => {
               setInfo({ ...info, ProviderPassword: e.target.value });
             }}
@@ -77,7 +76,6 @@ export default function ProviderInfo(props) {
             minLength={6}
             name="ProviderConfirmedPassword"
             placeholder="Repeat your password"
-            value={info.ProviderUsername}
             onChange={(e) => {
               setInfo({ ...info, ProviderConfirmedPasswords: e.target.value });
             }}
