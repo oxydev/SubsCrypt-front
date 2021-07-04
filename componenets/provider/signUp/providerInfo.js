@@ -65,7 +65,6 @@ export default function ProviderInfo(props) {
             name="ProviderPassword"
             placeholder="type your password"
             value={info.ProviderUsername}
-            disabled={defaultUsername ? true : false}
             onChange={(e) => {
               setInfo({ ...info, ProviderPassword: e.target.value });
             }}
@@ -79,7 +78,6 @@ export default function ProviderInfo(props) {
             name="ProviderConfirmedPassword"
             placeholder="Repeat your password"
             value={info.ProviderUsername}
-            disabled={defaultUsername ? true : false}
             onChange={(e) => {
               setInfo({ ...info, ProviderConfirmedPasswords: e.target.value });
             }}
