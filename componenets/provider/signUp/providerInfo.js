@@ -12,7 +12,7 @@ export default function ProviderInfo(props) {
     if (defaultUsername) {
       setInfo({ ...info, ProviderUsername: defaultUsername });
     }
-  }, []);
+  }, [globalState]);
 
   return (
     <section className="ProviderInfo">
