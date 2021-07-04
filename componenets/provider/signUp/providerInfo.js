@@ -31,6 +31,7 @@ export default function ProviderInfo(props) {
             }}
           />
           <p>Your company or website who provides services</p>
+
           <label htmlFor="ProviderDescription">Service Provider Description</label>
           <input
             type="text"
@@ -43,6 +44,7 @@ export default function ProviderInfo(props) {
             }}
           />
           <p>A description of your company or website. Will be shown in a tooltip</p>
+
           <label htmlFor="ProviderUserName">Service Provider Username</label>
           <input
             type="text"
@@ -57,6 +59,7 @@ export default function ProviderInfo(props) {
             }}
           />
           <p>Your username will store on the block chain.</p>
+
           <label htmlFor="ProviderPassword">Service Provider Password</label>
           <input
             type="password"
@@ -68,8 +71,9 @@ export default function ProviderInfo(props) {
               setInfo({ ...info, ProviderPassword: e.target.value });
             }}
           />
-          <p>Confirm your password</p>
-          <label htmlFor="ProviderConfirmedPassword">Service Provider Username</label>
+          <p>Choose a password for your account.</p>
+
+          <label htmlFor="ProviderConfirmedPassword">Password confirmation</label>
           <input
             type="password"
             required
@@ -80,8 +84,9 @@ export default function ProviderInfo(props) {
               setInfo({ ...info, ProviderConfirmedPasswords: e.target.value });
             }}
           />
-          <p>Edit your money address if needed.</p>
-          <label htmlFor="ProviderCMoneyAddress">Service Provider Username</label>
+          <p>Confirm your password.</p>
+
+          <label htmlFor="ProviderCMoneyAddress">Service Provider Money Address</label>
           <input
             type="text"
             required
@@ -93,7 +98,7 @@ export default function ProviderInfo(props) {
               setInfo({ ...info, ProviderMoneyAddress: e.target.value });
             }}
           />
-          <p>This is the main money address for your account.</p>
+          <p>Edit your money address if needed.</p>
         </div>
         <div className="ProviderForm-photoUpload">
           <label>Upload Brand Photo</label>
