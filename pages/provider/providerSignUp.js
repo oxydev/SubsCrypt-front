@@ -1,33 +1,113 @@
-import React, { useState } from "react";
-import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
-import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
+import React, { useContext, useState } from 'react'
+import NewPlanCreation from '../../componenets/provider/signUp/newPlanCreation'
+import ProviderInfo from '../../componenets/provider/signUp/providerInfo'
+import { dataContext } from '../../context/getData'
+import { UserContext } from '../../context/store'
 
-export default function ProviderSignUp(props) {
-  const [info, setInfo] = useState({});
+export default function ProviderSignUp (props) {
+  const { providerRegisterHandler } = useContext(dataContext)
+  const { globalState, dispatch } = useContext(UserContext)
+
+  const [info, setInfo] = useState({})
   const [planList, setPlanList] = useState([
-    { visibility: "visible", coins: [] },
-  ]);
+    { visibility: 'visible', coins: [] },
+  ])
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation
-      key={"PlanForm" + index}
+      key={'PlanForm' + index}
       planList={planList}
       setPlanList={setPlanList}
       index={index}
     />
-  ));
+  ))
 
-  function addAnotherPlan() {
-    const list = planList;
+  function addAnotherPlan () {
+    const list = planList
     for (const item of list) {
-      item.visibility = "hidden";
+      item.visibility = 'hidden'
     }
-    setPlanList([...list, { visibility: "visible", coins: [] }]);
+    setPlanList([...list, { visibility: 'visible', coins: [] }])
   }
 
-  function handleRegister() {
-    console.log("New provider has been registered!");
-    console.log(info);
-    console.log(planList);
+  function callback ({ events = [], status }) {
+    console.log('Transaction status:', status.type)
+
+    if (status.isInBlock) {
+      console.log('Included at block hash', status.asInBlock.toHex())
+      console.log('Events:')
+      console.log(events)
+      events.forEach(({ event: { data, method, section }, phase }) => {
+        console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString())
+      })
+    } else if (status.isFinalized) {
+      console.log('Finalized block hash', status.asFinalized.toHex())
+    }
+  }
+
+  function handleRegister () {
+    console.log('New provider has been registered!')
+    console.log(info)
+    console.log(planList)
+    console.log(globalState)
+    var wallet = globalState.user.userWallet
+
+    function parseDurations (planList) {
+      var dur = []
+      planList.forEach((plan) => {
+        if (plan.duration === '1 m')
+          dur.push(30 * 24 * 60 * 60 * 1000)
+        else if (plan.duration === '3 m')
+          dur.push(3 * 30 * 24 * 60 * 60 * 1000)
+        else if (plan.duration === '6 m')
+          dur.push(6 * 30 * 24 * 60 * 60 * 1000)
+      })
+      return dur
+    }
+
+    function parsePrices (planList) {
+      var prices = []
+      planList.forEach((plan) => {
+        prices.push(Number(plan.price) * 10 ** 12)
+      })
+      return prices
+    }
+
+    function parsePolicies (planList) {
+      var policies = []
+      planList.forEach((plan) => {
+        policies.push(plan.refund * 10)
+      })
+      return policies
+    }
+
+    function parseChars (planList) {
+      const plansChars = []
+      planList.forEach((plan) => {
+        const chars = []
+        plan.characteristics.forEach((char) => {
+          chars.push(char.text)
+        })
+        plansChars.push(chars)
+      })
+      return plansChars
+    }
+
+    var durations = parseDurations(planList)
+    var prices = parsePrices(planList)
+    var refundPolicies = parsePolicies(planList)
+    var plansChars = parseChars(planList)
+
+    console.log(plansChars)
+    console.log(durations)
+
+    console.log(prices)
+    console.log(refundPolicies)
+
+    providerRegisterHandler(wallet, callback,
+      durations, prices, refundPolicies,
+      info.moneyAddress, info.ProviderUsername,
+      info.ProviderPassword, plansChars)
+
   }
 
   return (
@@ -35,7 +115,7 @@ export default function ProviderSignUp(props) {
       <h1>Sign up as a Service Provider</h1>
       <div className="row">
         <div className="Container--medium">
-          <ProviderInfo info={info} setInfo={setInfo} />
+          <ProviderInfo info={info} setInfo={setInfo}/>
           {planFormList}
           <button className="PlansForm-addBtn" onClick={addAnotherPlan}>
             Add another plan
@@ -47,8 +127,8 @@ export default function ProviderSignUp(props) {
             </p>
             <button
               onClick={(e) => {
-                e.preventDefault();
-                handleRegister();
+                e.preventDefault()
+                handleRegister()
               }}
             >
               Register
@@ -58,5 +138,5 @@ export default function ProviderSignUp(props) {
         <div className="Container--small"></div>
       </div>
     </section>
-  );
+  )
 }

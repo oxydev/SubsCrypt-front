@@ -76,9 +76,9 @@ export default function NewPlanCreation(props) {
               handlePlanListUpdate("duration", e.target.value);
             }}
           >
-            <option value="1">1 Month</option>
-            <option vlaue="3">3 months</option>
-            <option value="6">6 months</option>
+            <option value="1 m">1 Month</option>
+            <option value="3 m">3 Months</option>
+            <option value="6 m">6 Months</option>
           </select>
           <p>Select from the list</p>
           <label>Refund Policy</label>
@@ -122,7 +122,7 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanPrice"
-            placeholder="$ xx.xx"
+            placeholder="DOT xx.xx"
             onChange={(e) => {
               handlePlanListUpdate("price", e.target.value);
             }}

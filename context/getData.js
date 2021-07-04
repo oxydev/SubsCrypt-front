@@ -102,9 +102,10 @@ export const DataFunctions = (props) => {
           payload: { type: type, userWallet: result[index] },
         })
         setAuth(true)
+        usernameGetter(result[index].address)
+
         if (type == 'user') {
           loadUserDataByWallet(result[index].address)
-          usernameGetter(result[index].address)
         } else {
           setLoading(false)
           checkIfSignedUp(result[index].address)
@@ -131,9 +132,9 @@ export const DataFunctions = (props) => {
     async function checkIfSignedUp (walletAddress) {
       await (await subscrypt).getPlanLength(walletAddress).then((result) => {
         console.log(result)
-        if (result.status == 'Fetched') {
+        if (result.status === 'Fetched') {
           const planLength = parseInt(result.result)
-          if (planLength == 0) {
+          if (planLength === 0) {
             dispatch({ type: 'REGISTERED', payload: false })
           } else {
             dispatch({ type: 'REGISTERED', payload: true })
@@ -359,6 +360,37 @@ export const DataFunctions = (props) => {
     })
   }
 
+  const providerRegisterHandler = async (
+    address,
+    callback,
+    durations,
+    prices,
+    refundPolicies,
+    moneyAddress,
+    username,
+    pass,
+    planChars
+  ) => {
+    var injector = getWalletInjector(address)
+    await (await subscrypt).getSha2(pass).then(async (res) => {
+      injector = await injector.then((res) => res)
+      await (
+        await subscrypt
+      ).providerRegister(
+        address,
+        injector,
+        callback,
+        durations,
+        prices,
+        refundPolicies,
+        moneyAddress,
+        username,
+        res.result,
+        planChars
+      )
+    })
+  }
+
   //Get Injector
   const getWalletInjector = async (address) => {
     let injector
@@ -557,6 +589,7 @@ export const DataFunctions = (props) => {
     handleRenewPlan,
     handleRefundPlan,
     handleLogOut,
+    providerRegisterHandler
   }
   return (
     <dataContext.Provider value={contextValue}>
