@@ -10,7 +10,7 @@ export default function ProviderSignUp(props) {
 
   const [info, setInfo] = useState({ ProviderMoneyAddress: globalState.user.userWallet.address });
   const [planList, setPlanList] = useState([
-    { visibility: "visible", coins: [], characteristics: [] },
+    { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 },
   ]);
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation

@@ -102,7 +102,7 @@ export default function ProviderInfo(props) {
         </div>
         <div className="ProviderForm-photoUpload">
           <label>Upload Brand Photo</label>
-          <ImageUploader />
+          <ImageUploader info={info} setInfo={setInfo} />
           <p>
             Upload PNG or SVG file 48 pixel x 48 pixel. This photo will be published in plans as the
             provider reference.

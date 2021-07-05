@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 
-export default function ImageUploader() {
+export default function ImageUploader(props) {
+  const { info, setInfo } = props;
   const inputRF = useRef(null);
   const [file, setFile] = useState();
   const [url, setUrl] = useState("/icons/png/uploadButton.png");
@@ -17,6 +18,7 @@ export default function ImageUploader() {
     setUrl(newUrl);
     console.log(newUrl);
     setFile(file);
+    setInfo({ ...info, image: file });
   }
 
   function handleUploadClick() {
@@ -44,11 +46,7 @@ export default function ImageUploader() {
   }
   return (
     <div className="ImageUploader">
-      <div
-        className="UploadZone"
-        onDrop={dropHandler}
-        onDragOver={dragOverHandler}
-      >
+      <div className="UploadZone" onDrop={dropHandler} onDragOver={dragOverHandler}>
         <a
           href="javascript:;"
           style={{ backgroundImage: `url(${url})` }}
@@ -56,13 +54,7 @@ export default function ImageUploader() {
             handleUploadClick();
           }}
         ></a>
-        <input
-          ref={inputRF}
-          type="file"
-          id="upload"
-          name="upload"
-          onChange={inputChangeHandler}
-        />
+        <input ref={inputRF} type="file" id="upload" name="upload" onChange={inputChangeHandler} />
       </div>
       <p className="FileName">{file ? file.name : ""}</p>
     </div>
