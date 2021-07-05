@@ -9,7 +9,9 @@ export default function ProviderSignUp(props) {
   const { globalState, dispatch } = useContext(UserContext);
 
   const [info, setInfo] = useState({ ProviderMoneyAddress: globalState.user.userWallet.address });
-  const [planList, setPlanList] = useState([{ visibility: "visible", coins: [] }]);
+  const [planList, setPlanList] = useState([
+    { visibility: "visible", coins: [], characteristics: [] },
+  ]);
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation
       key={"PlanForm" + index}
@@ -24,7 +26,7 @@ export default function ProviderSignUp(props) {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [] }]);
+    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
   }
 
   function callback({ events = [], status }) {

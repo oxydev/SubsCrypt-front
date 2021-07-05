@@ -30,6 +30,19 @@
     }
   }
 }
+
+.RemovePlanBtn {
+  border: 1px solid $gray-4;
+  display: block;
+  @include circle(20px);
+  position: absolute;
+  left: -40px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: $white;
+  @include cross(10px);
+}
 .ProviderForm,
 .PlanForm {
   padding-top: 16px;
