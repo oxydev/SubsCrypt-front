@@ -16,10 +16,10 @@ export default function ProviderInfo(props) {
 
   return (
     <section className="ProviderInfo">
-      <h1>Service Provider Infromation</h1>
+      <h1>Service Provider Information</h1>
       <div className="ProviderForm">
         <div className="ProviderForm-info">
-          <label htmlFor="ProviderName">Service Provide Name</label>
+          <label htmlFor="ProviderName">Service Provider Name</label>
           <input
             type="text"
             required

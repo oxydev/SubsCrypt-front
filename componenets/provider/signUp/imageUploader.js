@@ -13,7 +13,7 @@ export default function ImageUploader(props) {
   }
 
   function uploadHandler(file) {
-    console.log(file.name);
+    console.log(file);
     const newUrl = URL.createObjectURL(file);
     setUrl(newUrl);
     console.log(newUrl);
@@ -30,6 +30,7 @@ export default function ImageUploader(props) {
 
     if (e.dataTransfer.items) {
       if (e.dataTransfer.items[0].kind === "file") {
+        console.log(e.dataTransfer.items[0])
         let file = e.dataTransfer.items[0].getAsFile();
         uploadHandler(file);
       }
@@ -37,7 +38,7 @@ export default function ImageUploader(props) {
       // Use DataTransfer interface to access the file(s)
       for (var i = 0; i < e.dataTransfer.files.length; i++) {
         let file = e.dataTransfer.files[0].name;
-        uploadHandler(flie);
+        uploadHandler(file);
       }
     }
   }
