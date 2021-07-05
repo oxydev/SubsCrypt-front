@@ -45,12 +45,14 @@ export default function NewPlanCreation(props) {
         Create a Subscryption Plan #{index + 1}
         <span></span>
       </h1>
-      <form className="PlanForm">
+      <div className="PlanForm">
         <div className="PlanForm-info">
           <label htmlFor="PlanTitle">Plan Title</label>
           <input
             type="text"
             name="PlanTitle"
+            required
+            minLength={3}
             placeholder="e.g. One Month of Premium Membership"
             onChange={(e) => {
               handlePlanListUpdate("title", e.target.value);
@@ -61,6 +63,8 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanDescription"
+            required
+            minLength={3}
             placeholder="Information about the plan"
             onChange={(e) => {
               handlePlanListUpdate("description", e.target.value);
@@ -122,6 +126,7 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanPrice"
+            required
             placeholder="DOT xx.xx"
             onChange={(e) => {
               handlePlanListUpdate("price", e.target.value);
@@ -129,7 +134,7 @@ export default function NewPlanCreation(props) {
           />
           <p>This field only accept numbers with two decimals</p>
         </div>
-      </form>
+      </div>
     </section>
   );
 }

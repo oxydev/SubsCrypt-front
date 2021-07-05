@@ -17,7 +17,7 @@ export default function ProviderInfo(props) {
   return (
     <section className="ProviderInfo">
       <h1>Service Provider Infromation</h1>
-      <form className="ProviderForm">
+      <div className="ProviderForm">
         <div className="ProviderForm-info">
           <label htmlFor="ProviderName">Service Provide Name</label>
           <input
@@ -108,7 +108,7 @@ export default function ProviderInfo(props) {
             provider reference.
           </p>
         </div>
-      </form>
+      </div>
     </section>
   );
 }

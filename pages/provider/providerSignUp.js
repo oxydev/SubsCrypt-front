@@ -111,30 +111,45 @@ export default function ProviderSignUp(props) {
     );
   }
 
+  function makeFieldsVisible() {
+    const list = planList;
+    for (const item of list) {
+      item.visibility = "visible";
+    }
+    setPlanList([...list]);
+  }
+
   return (
     <section className="ProviderSignUp">
       <h1>Sign up as a Service Provider</h1>
       <div className="row">
         <div className="Container--medium">
-          <ProviderInfo info={info} setInfo={setInfo} />
-          {planFormList}
-          <button className="PlansForm-addBtn" onClick={addAnotherPlan}>
-            Add another plan
-          </button>
-          <div className="ProviderRegisteration">
-            <p>
-              For signing up you need to send a transaction on chain to put the data in smart
-              contract on blockchain. Normal gas fee applies.
-            </p>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleRegister();
-              }}
-            >
-              Register
+          <form
+            onSubmit={(e) => {
+              handleRegister(e);
+            }}
+          >
+            <ProviderInfo info={info} setInfo={setInfo} />
+            {planFormList}
+            <button className="PlansForm-addBtn" onClick={addAnotherPlan}>
+              Add another plan
             </button>
-          </div>
+            <div className="ProviderRegisteration">
+              <p>
+                For signing up you need to send a transaction on chain to put the data in smart
+                contract on blockchain. Normal gas fee applies.
+              </p>
+              <input
+                type="submit"
+                className="RegisterBtn"
+                onClick={() => {
+                  makeFieldsVisible();
+                  console.log("hamid");
+                }}
+                value="Register"
+              ></input>
+            </div>
+          </form>
         </div>
         <div className="Container--small"></div>
       </div>

@@ -36,10 +36,11 @@
     color: $gray-4;
     margin-right: 48px;
   }
-  button {
+  .RegisterBtn {
     @include primaryButtons(260px, 40px);
     border-radius: $borderRadius--small;
     @include text-body--standard--regular;
     color: #fff;
+    cursor: pointer;
   }
 }
