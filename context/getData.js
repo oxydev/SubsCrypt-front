@@ -258,7 +258,6 @@ export const DataFunctions = (props) => {
           payload: { username: userName, password: password, type: "provider" },
         });
         dispatch({ type: "REGISTERED", payload: true });
-        loadUserData(userName, password);
         console.log("A provider has been logged in");
       }
     } else if (userWallet) {
