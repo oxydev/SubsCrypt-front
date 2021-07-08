@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 export default function ProfileSetting() {
-  const [dat, setData] = useState({});
+  const [data, setData] = useState({});
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(data);
+  }
   return (
     <section className="ProfileSetting">
       <h1>Profile Setting</h1>
@@ -9,10 +14,10 @@ export default function ProfileSetting() {
         <div className="Container--medium">
           <div className="ResetPassword">
             <h2>Change Password</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <input
                 className="CurrentPassField"
-                type="text"
+                type="password"
                 required
                 placeholder="Current Password"
                 onChange={(e) => {
@@ -21,7 +26,7 @@ export default function ProfileSetting() {
               />
               <input
                 className="NewPassField"
-                type="text"
+                type="password"
                 required
                 placeholder="New Password"
                 onChange={(e) => {
@@ -30,7 +35,7 @@ export default function ProfileSetting() {
               />
               <input
                 className="NewPassField"
-                type="text"
+                type="password"
                 required
                 placeholder="Repeat the New Password"
                 onChange={(e) => {
