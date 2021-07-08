@@ -10,7 +10,7 @@ export default function ProviderSignUp (props) {
 
   const [info, setInfo] = useState({ ProviderMoneyAddress: globalState.user.userWallet.address })
   const [planList, setPlanList] = useState([
-        { visibility: 'visible', coins: [], characteristics: [], duration: '1 m', refund: 20 },
+    { visibility: 'visible', coins: [], characteristics: [], duration: '1 m', refund: 20 },
   ])
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation
@@ -59,29 +59,34 @@ export default function ProviderSignUp (props) {
       }
       axios(config)
         .then(function (response) {
-          console.log(response)
-          planList.forEach((plan, index) => {
-            console.log(index)
-            data = new FormData()
-            data.append('providerAddress', globalState.user.userWallet.address)
-            data.append('planName', plan.title)
-            data.append('planIndex', index)
-            data.append('description', plan.description)
-            console.log(data)
-            var config = {
-              method: 'patch',
-              url: 'http://206.189.154.160:3000/profile/updateProductProfile',
-              data: data
-            }
+          if (response.status === 200) {
+            planList.forEach((plan, index) => {
+              console.log(index)
 
-            axios(config)
-              .then(function (response) {
-                console.log(JSON.stringify(response.data))
-              })
-              .catch(function (error) {
-                console.log(error)
-              })
-          })
+              var config = {
+                method: 'patch',
+                url: 'http://206.189.154.160:3000/profile/updateProductProfile',
+                data: {
+                  'providerAddress': globalState.user.userWallet.address,
+                  'planName': plan.title,
+                  'planIndex': index,
+                  'description': plan.description
+                },
+                headers: {
+                  'Content-Type': `application/json`,
+                },
+                crossDomain: true
+              }
+
+              axios(config)
+                .then(function (response) {
+                  console.log(JSON.stringify(response.data))
+                })
+                .catch(function (error) {
+                  console.log(error)
+                })
+            })
+          }
         })
         .catch(function (error) {
           alert('error')
@@ -99,36 +104,6 @@ export default function ProviderSignUp (props) {
     console.log(planList)
     console.log(globalState)
     var wallet = globalState.user.userWallet
-    planList.forEach((plan, index) => {
-      console.log(index)
-      var axios = require('axios')
-      var FormData = require('form-data')
-      var data = new FormData()
-
-      data.append('providerAddress', globalState.user.userWallet.address)
-      data.append('planName', plan.title)
-      data.append('planIndex', index)
-      data.append('description', plan.description)
-      console.log(data)
-      var config = {
-        method: 'patch',
-        url: 'http://206.189.154.160:3000/profile/updateProductProfile',
-        data: data,
-        headers: {
-          'Content-Type': `multipart/form-data;`,
-        },
-        crossDomain: true
-
-      }
-
-      axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data))
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    })
 
     function parseDurations (planList) {
       var dur = []
