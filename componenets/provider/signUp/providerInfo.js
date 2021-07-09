@@ -49,7 +49,7 @@ export default function ProviderInfo(props) {
           <input
             type="text"
             required
-            minLength={6}
+            minLength={3}
             name="ProviderUserName"
             placeholder="Username"
             value={info.ProviderUsername}
