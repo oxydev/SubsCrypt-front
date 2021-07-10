@@ -4,7 +4,8 @@ import TagInput from "../../gadjets/tagInput";
 
 export default function NewPlanCreation(props) {
   const { planList, setPlanList, index } = props;
-  const [refundValue, setRefundValue] = useState(0);
+  const plan = planList[index];
+  const [refundValue, setRefundValue] = useState(plan.refund);
 
   function handlePlanListUpdate(key, value) {
     planList[index][key] = value;
@@ -26,7 +27,7 @@ export default function NewPlanCreation(props) {
   }
 
   function toggleVisibility() {
-    const status = planList[index].visibility;
+    const status = plan.visibility;
     if (status == "visible") {
       handlePlanListUpdate("visibility", "hidden");
     } else {
@@ -35,22 +36,39 @@ export default function NewPlanCreation(props) {
   }
   console.log(planList);
 
+  function removeThisPlan() {
+    const list = planList;
+    console.log(index);
+    list.splice(index, 1);
+    setPlanList([...list]);
+  }
+
   return (
     <section
-      className={
-        planList[index].visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"
-      }
+      className={plan.visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
     >
       <h1 onClick={toggleVisibility}>
         Create a Subscryption Plan #{index + 1}
         <span></span>
+        {planList.length > 1 && (
+          <button
+            className="RemovePlanBtn"
+            onClick={(e) => {
+              e.stopPropagation();
+              removeThisPlan();
+            }}
+          ></button>
+        )}
       </h1>
-      <form className="PlanForm">
+      <div className="PlanForm">
         <div className="PlanForm-info">
           <label htmlFor="PlanTitle">Plan Title</label>
           <input
             type="text"
             name="PlanTitle"
+            required
+            minLength={3}
+            value={plan.title}
             placeholder="e.g. One Month of Premium Membership"
             onChange={(e) => {
               handlePlanListUpdate("title", e.target.value);
@@ -61,6 +79,9 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanDescription"
+            required
+            minLength={3}
+            value={plan.description}
             placeholder="Information about the plan"
             onChange={(e) => {
               handlePlanListUpdate("description", e.target.value);
@@ -72,13 +93,14 @@ export default function NewPlanCreation(props) {
             type="text"
             name="PlanDuration"
             placeholder="Select Duration of Plan"
+            value={plan.duration}
             onChange={(e) => {
               handlePlanListUpdate("duration", e.target.value);
             }}
           >
-            <option value="1">1 Month</option>
-            <option vlaue="3">3 months</option>
-            <option value="6">6 months</option>
+            <option value="1 m">1 Month</option>
+            <option value="3 m">3 Months</option>
+            <option value="6 m">6 Months</option>
           </select>
           <p>Select from the list</p>
           <label>Refund Policy</label>
@@ -94,7 +116,7 @@ export default function NewPlanCreation(props) {
           </p>
           <label>Special Charactristics of the plan</label>
           <div className="PlansForm-tag">
-            <TagInput handleChange={handlePlanListUpdate} />
+            <TagInput initailTags={plan.characteristics} handleChange={handlePlanListUpdate} />
           </div>
           <p>Some characteristics your plan may have e.g. Country, Region and etc.</p>
         </div>
@@ -122,14 +144,16 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanPrice"
-            placeholder="$ xx.xx"
+            required
+            value={plan.price}
+            placeholder="DOT xx.xx"
             onChange={(e) => {
               handlePlanListUpdate("price", e.target.value);
             }}
           />
           <p>This field only accept numbers with two decimals</p>
         </div>
-      </form>
+      </div>
     </section>
   );
 }
