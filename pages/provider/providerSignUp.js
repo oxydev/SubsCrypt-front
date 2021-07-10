@@ -115,6 +115,7 @@ export default function ProviderSignUp(props) {
     });
     await Promise.all(promiseList).then((results) => {
       console.log("redirect here");
+      dispatch({ type: "REGISTERED", payload: true });
       router.push("/provider");
       console.log(results);
     });
@@ -122,7 +123,6 @@ export default function ProviderSignUp(props) {
 
   function handleRegister() {
     console.log("New provider has been registered!");
-    router.push("/provider");
 
     var wallet = globalState.user.userWallet;
     function parseDurations(planList) {
@@ -169,7 +169,6 @@ export default function ProviderSignUp(props) {
     var prices = parsePrices(planList);
     var refundPolicies = parsePolicies(planList);
     var plansChars = parseChars(planList);
-
 
     providerRegisterHandler(
       wallet,
