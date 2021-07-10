@@ -110,10 +110,10 @@
   "resolved" "https://registry.npmjs.org/@opentelemetry/context-base/-/context-base-0.14.0.tgz"
   "version" "0.14.0"
 
-"@oxydev/subscrypt@0.1.2":
-  "integrity" "sha512-M1SoeHoqU6pQSMuGfHD5o+8pTCyLZWT/yG053uzdITBnunglbvavk4ucNEurt4CGOqEW2Mt4Fslb/xSykRaaKQ=="
-  "resolved" "https://registry.npmjs.org/@oxydev/subscrypt/-/subscrypt-0.1.2.tgz"
-  "version" "0.1.2"
+"@oxydev/subscrypt@0.1.3":
+  "integrity" "sha512-v0W8PjhPAH10GHpM/uaiLJ6BokZPrIjOPWt7AL5sPf66yV8wgqYYrT2aVXD41DiMTu7HMn98aH7Rj+6TPYryPA=="
+  "resolved" "https://registry.npmjs.org/@oxydev/subscrypt/-/subscrypt-0.1.3.tgz"
+  "version" "0.1.3"
   dependencies:
     "@polkadot/api" "^4.12.1"
     "@polkadot/api-contract" "^4.12.1"
