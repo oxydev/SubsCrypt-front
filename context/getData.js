@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { loadingContext, authContext } from "../pages/_app";
+import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
 import WalletSelectionModal from "../componenets/wallet/walletSelectionModal";
@@ -20,15 +20,17 @@ export const DataFunctions = (props) => {
 
   //Function for getting the user plan data after loging in
   const loadUserDataByWallet = async (address) => {
-    await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
-      if (result.status == "Fetched") {
-        let plans = result.result;
-        //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
-        plans.map((item) => {
-          getCharacs(item.provider, item.plan_index, item);
-        });
-      }
-    });
+    await (await subscrypt)
+      .retrieveWholeDataWithWallet(address)
+      .then((result) => {
+        if (result.status == "Fetched") {
+          let plans = result.result;
+          //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
+          plans.map((item) => {
+            getCharacs(item.provider, item.plan_index, item);
+          });
+        }
+      });
 
     async function getCharacs(provider, index, plan) {
       await (await subscrypt)
@@ -102,11 +104,11 @@ export const DataFunctions = (props) => {
           payload: { type: type, userWallet: result[index] },
         });
         setAuth(true);
+        usernameGetter(result[index].address);
+
         if (type == "user") {
           loadUserDataByWallet(result[index].address);
-          usernameGetter(result[index].address);
         } else {
-          setLoading(false);
           checkIfSignedUp(result[index].address);
         }
       }
@@ -123,48 +125,53 @@ export const DataFunctions = (props) => {
             type: "LOAD_USER_USERNAME",
             payload: result.result,
           });
-          Cookies.set("subscrypt", result.result);
         }
+        Cookies.set("subscrypt", result.result);
       });
     }
 
     async function checkIfSignedUp(walletAddress) {
       await (await subscrypt).getPlanLength(walletAddress).then((result) => {
         console.log(result);
-        if (result.status == "Fetched") {
+        if (result.status === "Fetched") {
           const planLength = parseInt(result.result);
-          if (planLength == 0) {
+          if (planLength === 0) {
             dispatch({ type: "REGISTERED", payload: false });
           } else {
             dispatch({ type: "REGISTERED", payload: true });
           }
+          setLoading(false);
         }
+        router.push("/provider");
       });
     }
   };
 
   //Function for getting the user plan data after loging in
   const loadUserData = async (username, password) => {
-    await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
-      let plans = result.result;
-      //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
+    await (await subscrypt)
+      .retrieveWholeDataWithUsername(username, password)
+      .then((result) => {
+        let plans = result.result;
+        //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
 
-      plans.map((item) => {
-        getCharacs(item.provider, item.plan_index, item);
-      });
-
-    async function getCharacs(provider, index, plan) {
-      await (await subscrypt)
-        .getPlanCharacteristics(provider, index)
-        .then((result) => {
-          console.log(result);
-          if (result.status == "Fetched") {
-            const newPlan = { ...plan, characteristics: result.result };
-            setLoading(false);
-            dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
-          }
+        plans.map((item) => {
+          getCharacs(item.provider, item.plan_index, item);
         });
-    }
+
+        async function getCharacs(provider, index, plan) {
+          await (await subscrypt)
+            .getPlanCharacteristics(provider, index)
+            .then((result) => {
+              console.log(result);
+              if (result.status == "Fetched") {
+                const newPlan = { ...plan, characteristics: result.result };
+                setLoading(false);
+                dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
+              }
+            });
+        }
+      });
   };
 
   //Check user authentication by username and password
@@ -353,6 +360,45 @@ export const DataFunctions = (props) => {
         planIndex,
         res.result,
         user,
+        planChars
+      );
+    });
+  };
+
+  const providerRegisterHandler = async (
+    address,
+    callback,
+    durations,
+    prices,
+    refundPolicies,
+    moneyAddress,
+    username,
+    pass,
+    planChars
+  ) => {
+    var injector = getWalletInjector(address);
+    console.log(
+      prices,
+      refundPolicies,
+      moneyAddress,
+      username,
+      pass,
+      planChars
+    );
+    await (await subscrypt).getSha2(pass).then(async (res) => {
+      injector = await injector.then((res) => res);
+      await (
+        await subscrypt
+      ).providerRegister(
+        address.address,
+        injector,
+        callback,
+        durations,
+        prices,
+        refundPolicies,
+        moneyAddress,
+        username,
+        res.result,
         planChars
       );
     });
@@ -556,6 +602,7 @@ export const DataFunctions = (props) => {
     handleRenewPlan,
     handleRefundPlan,
     handleLogOut,
+    providerRegisterHandler,
   };
   return (
     <dataContext.Provider value={contextValue}>
