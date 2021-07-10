@@ -95,7 +95,6 @@ export default function ProviderSignUp(props) {
   async function allPlanPromise() {
     let promiseList = [];
     planList.forEach((plan, index) => {
-      console.log(index);
       var axios = require("axios");
       var config = {
         method: "patch",
@@ -123,9 +122,8 @@ export default function ProviderSignUp(props) {
 
   function handleRegister() {
     console.log("New provider has been registered!");
-    console.log(info);
-    console.log(planList);
-    console.log(globalState);
+    router.push("/provider");
+
     var wallet = globalState.user.userWallet;
     function parseDurations(planList) {
       var dur = [];
@@ -172,11 +170,6 @@ export default function ProviderSignUp(props) {
     var refundPolicies = parsePolicies(planList);
     var plansChars = parseChars(planList);
 
-    console.log(plansChars);
-    console.log(durations);
-
-    console.log(prices);
-    console.log(refundPolicies);
 
     providerRegisterHandler(
       wallet,
@@ -228,7 +221,6 @@ export default function ProviderSignUp(props) {
                 className="RegisterBtn"
                 onClick={() => {
                   makeFieldsVisible();
-                  console.log("hamid");
                 }}
                 value="Register"
               ></input>
