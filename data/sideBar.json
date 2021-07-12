@@ -22,17 +22,17 @@
     "menuItem": [
       {
         "name": "Dashboard",
-        "url": "/user/",
+        "url": "/provider/",
         "icon": "/dashbord.png"
       },
       {
         "name": "Add plan",
-        "url": "/user/newOffers",
+        "url": "/provider/",
         "icon": "/dashbord.png"
       },
       {
-        "name": "New Offers",
-        "url": "/user/newOffers",
+        "name": "Profile Setting",
+        "url": "/provider/profilesetting",
         "icon": "/dashbord.png"
       },
       {

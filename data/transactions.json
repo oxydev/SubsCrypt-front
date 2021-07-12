@@ -5,28 +5,28 @@
       "plan": "Ethereum Trader Bot on multiple platforms to trade on Binance and BitMex",
       "duration": "1 Month",
       "time": "21 Jan 2020",
-      "ammount": { "coin": "polkadat", "ammount": "1.09" }
+      "ammount": { "coin": "/icons/png/networks/PolkadotLogo.png", "ammount": "1.09" }
     },
     {
       "type": "refund",
       "plan": "Ethereum Trader Bot on multiple platforms to trade on Binance and BitMex",
       "duration": "-7 days",
       "time": "21 Jan 2020",
-      "ammount": { "coin": "polkadat", "ammount": "-0.78" }
+      "ammount": { "coin": "/icons/png/networks/PolkadotLogo.png", "ammount": "-0.78" }
     },
     {
       "type": "renew",
       "plan": "Ethereum Trader Bot on multiple platforms to trade on Binance and BitMex",
       "duration": "-7 days",
       "time": "21 Jan 2020",
-      "ammount": { "coin": "polkadat", "ammount": "-0.78" }
+      "ammount": { "coin": "/icons/png/networks/PolkadotLogo.png", "ammount": "-0.78" }
     },
     {
       "type": "buy",
       "plan": "Ethereum Trader Bot on multiple platforms to trade on Binance and BitMex",
       "duration": "1 Month",
       "time": "21 Jan 2020",
-      "ammount": { "coin": "polkadat", "ammount": "1.09" }
+      "ammount": { "coin": "/icons/png/networks/PolkadotLogo.png", "ammount": "1.09" }
     }
   ]
 }

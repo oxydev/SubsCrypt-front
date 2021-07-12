@@ -23,6 +23,7 @@ export const DataFunctions = (props) => {
     await (await subscrypt)
       .retrieveWholeDataWithWallet(address)
       .then((result) => {
+        setLoading(false);
         if (result.status == "Fetched") {
           let plans = result.result;
           //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
@@ -95,9 +96,10 @@ export const DataFunctions = (props) => {
 
     function handleConfirm(result, index) {
       dispatch({ type: "LOAD_WALLETS", payload: result });
-      Cookies.set("subscryptWallet", result[index].address);
+      // Cookies.set("subscryptWallet", result[index].address);
       if (auth) {
         dispatch({ type: "LOAD_USER_WALLET", payload: result[index] });
+        Cookies.set("subscryptWallet", result[index].address);
       } else {
         dispatch({
           type: "LOAD_USER",
@@ -105,8 +107,8 @@ export const DataFunctions = (props) => {
         });
         setAuth(true);
         usernameGetter(result[index].address);
-
         if (type == "user") {
+          Cookies.set("subscryptWallet", result[index].address);
           loadUserDataByWallet(result[index].address);
         } else {
           checkIfSignedUp(result[index].address);
@@ -138,11 +140,13 @@ export const DataFunctions = (props) => {
           if (planLength === 0) {
             dispatch({ type: "REGISTERED", payload: false });
           } else {
+            Cookies.set("subscryptWallet", walletAddress);
             dispatch({ type: "REGISTERED", payload: true });
           }
-          setLoading(false);
+          router.push("/provider/");
         }
-        router.push("/provider");
+        setLoading(false);
+
       });
     }
   };
@@ -213,7 +217,7 @@ export const DataFunctions = (props) => {
     )
       .providerCheckAuthWithUsername(username, password)
       .then((result) => {
-        setLoading(false);
+        console.log(result);
         if (result.result == true) {
           dispatch({
             type: "LOAD_USER",
@@ -223,13 +227,17 @@ export const DataFunctions = (props) => {
               type: "provider",
             },
           });
+          dispatch({ type: "REGISTERED", payload: true });
           setAuth(true);
+          setLoading(false);
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
           Cookies.set("subscryptType", "provider");
+          //todo: get the provider plans
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           setAuth(false);
+          setLoading(false);
         }
       })
       .catch((error) => {
@@ -261,7 +269,7 @@ export const DataFunctions = (props) => {
           type: "LOAD_USER",
           payload: { username: userName, password: password, type: "provider" },
         });
-        loadUserData(userName, password);
+        dispatch({ type: "REGISTERED", payload: true });
         console.log("A provider has been logged in");
       }
     } else if (userWallet) {
