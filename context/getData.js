@@ -143,6 +143,8 @@ export const DataFunctions = (props) => {
             Cookies.set("subscryptWallet", walletAddress);
             dispatch({ type: "REGISTERED", payload: true });
           }
+          router.push("/provider/");
+          setLoading(false);
         }
       });
     }
