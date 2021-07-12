@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 
-export default function ImageUploader() {
+export default function ImageUploader(props) {
+  const { info, setInfo } = props;
   const inputRF = useRef(null);
   const [file, setFile] = useState();
   const [url, setUrl] = useState("/icons/png/uploadButton.png");
@@ -12,11 +13,12 @@ export default function ImageUploader() {
   }
 
   function uploadHandler(file) {
-    console.log(file.name);
+    console.log(file);
     const newUrl = URL.createObjectURL(file);
     setUrl(newUrl);
     console.log(newUrl);
     setFile(file);
+    setInfo({ ...info, image: file });
   }
 
   function handleUploadClick() {
@@ -28,6 +30,7 @@ export default function ImageUploader() {
 
     if (e.dataTransfer.items) {
       if (e.dataTransfer.items[0].kind === "file") {
+        console.log(e.dataTransfer.items[0])
         let file = e.dataTransfer.items[0].getAsFile();
         uploadHandler(file);
       }
@@ -35,7 +38,7 @@ export default function ImageUploader() {
       // Use DataTransfer interface to access the file(s)
       for (var i = 0; i < e.dataTransfer.files.length; i++) {
         let file = e.dataTransfer.files[0].name;
-        uploadHandler(flie);
+        uploadHandler(file);
       }
     }
   }
@@ -44,11 +47,7 @@ export default function ImageUploader() {
   }
   return (
     <div className="ImageUploader">
-      <div
-        className="UploadZone"
-        onDrop={dropHandler}
-        onDragOver={dragOverHandler}
-      >
+      <div className="UploadZone" onDrop={dropHandler} onDragOver={dragOverHandler}>
         <a
           href="javascript:;"
           style={{ backgroundImage: `url(${url})` }}
@@ -56,13 +55,7 @@ export default function ImageUploader() {
             handleUploadClick();
           }}
         ></a>
-        <input
-          ref={inputRF}
-          type="file"
-          id="upload"
-          name="upload"
-          onChange={inputChangeHandler}
-        />
+        <input ref={inputRF} type="file" id="upload" name="upload" onChange={inputChangeHandler} />
       </div>
       <p className="FileName">{file ? file.name : ""}</p>
     </div>

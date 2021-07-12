@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 
 export default function TagInput(props) {
-  const [tags, setTags] = useState([]);
-  const { handleChange } = props;
+  const { initailTags, handleChange } = props;
+  console.log(initailTags);
+  const [tags, setTags] = useState([...initailTags]);
   const KeyCodes = {
     comma: 188,
     enter: 13,
@@ -29,10 +30,12 @@ export default function TagInput(props) {
     handleChange("characteristics", tags);
   }, [tags]);
 
+  console.log(tags);
+
   return (
     <div className="TagInput">
       <ReactTags
-        tags={tags}
+        tags={initailTags}
         handleDelete={handleDelete}
         placeholder="Add new characteristic"
         handleAddition={handleAddition}

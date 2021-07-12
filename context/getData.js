@@ -25,6 +25,7 @@ export const DataFunctions = (props) => {
       .then((result) => {
         setLoading(false);
         if (result.status == "Fetched") {
+          let plans = result.result;
           //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
           plans.map((item) => {
             getCharacs(item.provider, item.plan_index, item);
@@ -126,17 +127,17 @@ export const DataFunctions = (props) => {
             type: "LOAD_USER_USERNAME",
             payload: result.result,
           });
-          Cookies.set("subscrypt", result.result);
         }
+        Cookies.set("subscrypt", result.result);
       });
     }
 
     async function checkIfSignedUp(walletAddress) {
       await (await subscrypt).getPlanLength(walletAddress).then((result) => {
         console.log(result);
-        if (result.status == "Fetched") {
+        if (result.status === "Fetched") {
           const planLength = parseInt(result.result);
-          if (planLength == 0) {
+          if (planLength === 0) {
             dispatch({ type: "REGISTERED", payload: false });
           } else {
             Cookies.set("subscryptWallet", walletAddress);
@@ -145,6 +146,7 @@ export const DataFunctions = (props) => {
           router.push("/provider/");
         }
         setLoading(false);
+
       });
     }
   };
@@ -371,6 +373,45 @@ export const DataFunctions = (props) => {
     });
   };
 
+  const providerRegisterHandler = async (
+    address,
+    callback,
+    durations,
+    prices,
+    refundPolicies,
+    moneyAddress,
+    username,
+    pass,
+    planChars
+  ) => {
+    var injector = getWalletInjector(address);
+    console.log(
+      prices,
+      refundPolicies,
+      moneyAddress,
+      username,
+      pass,
+      planChars
+    );
+    await (await subscrypt).getSha2(pass).then(async (res) => {
+      injector = await injector.then((res) => res);
+      await (
+        await subscrypt
+      ).providerRegister(
+        address.address,
+        injector,
+        callback,
+        durations,
+        prices,
+        refundPolicies,
+        moneyAddress,
+        username,
+        res.result,
+        planChars
+      );
+    });
+  };
+
   //Get Injector
   const getWalletInjector = async (address) => {
     let injector;
@@ -569,6 +610,7 @@ export const DataFunctions = (props) => {
     handleRenewPlan,
     handleRefundPlan,
     handleLogOut,
+    providerRegisterHandler,
   };
   return (
     <dataContext.Provider value={contextValue}>
