@@ -105,10 +105,10 @@ export const DataFunctions = (props) => {
           payload: { type: type, userWallet: result[index] },
         });
         setAuth(true);
+        usernameGetter(result[index].address);
         if (type == "user") {
           Cookies.set("subscryptWallet", result[index].address);
           loadUserDataByWallet(result[index].address);
-          usernameGetter(result[index].address);
         } else {
           checkIfSignedUp(result[index].address);
         }
