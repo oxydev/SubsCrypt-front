@@ -110,7 +110,6 @@ export const DataFunctions = (props) => {
           loadUserDataByWallet(result[index].address);
           usernameGetter(result[index].address);
         } else {
-          setLoading(false);
           checkIfSignedUp(result[index].address);
         }
       }
@@ -144,8 +143,8 @@ export const DataFunctions = (props) => {
             dispatch({ type: "REGISTERED", payload: true });
           }
           router.push("/provider/");
-          setLoading(false);
         }
+        setLoading(false);
       });
     }
   };
