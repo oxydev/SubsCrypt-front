@@ -6,6 +6,7 @@ import WalletSelectionModal from "../componenets/wallet/walletSelectionModal";
 import SubscriptionModal from "../componenets/user/userSubscryption/subscriptionModal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { serverDataContext } from "./getServerData";
 
 const subscrypt = import("@oxydev/subscrypt");
 
@@ -17,8 +18,9 @@ export const DataFunctions = (props) => {
   const { loading, setLoading } = useContext(loadingContext);
   const { modal, setModal, setCallBack } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
+  const serverFunctions = useContext(serverDataContext);
 
-  //Function for getting the user plan data after loging in
+  //Function for getting the user plan data after logging in
   const loadUserDataByWallet = async (address) => {
     await (await subscrypt)
       .retrieveWholeDataWithWallet(address)
@@ -146,7 +148,6 @@ export const DataFunctions = (props) => {
           router.push("/provider/");
         }
         setLoading(false);
-
       });
     }
   };

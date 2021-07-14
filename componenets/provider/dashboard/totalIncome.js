@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../../context/store";
 
 export default function TotalIncome(props) {
+  const { globalState, dspatch } = useContext(UserContext);
+  const user = globalState.user;
   return (
     <section className="TotalIncome">
       <h1>Total Income</h1>
       <div>
         <div className="TotalIncome-incomePart">
-          <p className="TotalIncome-income">$10,936.78</p>
+          <p className="TotalIncome-income">{user.income}</p>
           <p className="TotalIncome-announce">
             Net income converted to todays conversation rate
             <br /> via Coinmarketcap.com{" "}

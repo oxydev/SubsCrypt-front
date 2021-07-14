@@ -34,6 +34,32 @@ const reducer = (state, action) => {
         ...state,
         user: { ...state.user, registered: action.payload },
       };
+    //provider server data action type
+    case "USER_INCOME":
+      return {
+        ...state,
+        user: { ...state.user, income: action.payload },
+      };
+    case "USER_NAME":
+      return {
+        ...state,
+        user: { ...state.user, name: action.payload },
+      };
+    case "USER_DESCRIPTION":
+      return {
+        ...state,
+        user: { ...state.user, description: action.payload },
+      };
+    case "USER_IMAGE":
+      return {
+        ...state,
+        user: { ...state.user, image: action.payload },
+      };
+    case "USER_TOTALUSERS":
+      return {
+        ...state,
+        user: { ...state.user, totalUsers: action.payload },
+      };
     case "LOG_OUT":
       return initialState;
     default:
