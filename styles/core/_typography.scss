@@ -18,6 +18,10 @@ html {
   @include font($fontSize-heading3, $fontWeight-bold);
 }
 
+@mixin text-title--large--bold {
+  @include font($fontSize-title--large, $fontWeight-bold);
+}
+
 @mixin text-footNote {
   @include font($fontSize-footNote, $fontWeight-light);
 }
@@ -36,6 +40,10 @@ html {
 
 @mixin text-body--verySmall--regular {
   @include font($fontSize-body--verySmall, $fontWeight-regular);
+}
+
+@mixin text-body--small--medium {
+  @include font($fontSize-body--small, $fontWeight-medium);
 }
 
 @mixin text-body--small--regular {

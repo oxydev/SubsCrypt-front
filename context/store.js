@@ -55,10 +55,10 @@ const reducer = (state, action) => {
         ...state,
         user: { ...state.user, image: action.payload },
       };
-    case "USER_TOTALUSERS":
+    case "USER_USERCOUNT":
       return {
         ...state,
-        user: { ...state.user, totalUsers: action.payload },
+        user: { ...state.user, userCount: action.payload },
       };
     case "LOG_OUT":
       return initialState;
@@ -88,8 +88,6 @@ export const Store = (props) => {
   console.log(globalState);
 
   return (
-    <UserContext.Provider value={{ globalState, dispatch }}>
-      {props.children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
   );
 };

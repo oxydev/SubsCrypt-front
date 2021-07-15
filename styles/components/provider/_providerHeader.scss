@@ -1,0 +1,68 @@
+.ProviderHeader {
+  margin-bottom: 56px;
+  & > h1 {
+    @include text-body--large--medium;
+    margin-bottom: 19px;
+  }
+
+  & > div {
+    padding: 17px 0 34px;
+    display: flex;
+  }
+}
+
+.ProviderHeader-identity {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-right: $border-main;
+  padding-right: 40px;
+  h2 {
+    @include text-body--large--medium;
+    margin-bottom: 11px;
+  }
+  p {
+    @include text-body--standard--regular;
+  }
+}
+
+.ProviderHeader-profileImage {
+  @include circle(128px);
+  display: block;
+  overflow: hidden;
+  margin-bottom: 19px;
+  background-color: $gray-4;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.ProviderHeader-trade {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  padding-left: 40px;
+}
+
+.PlanPart-featureBox {
+  h2 {
+    @include text-body--standard--regular;
+    font-weight: 600;
+  }
+  p {
+    @include text-title--large--bold;
+  }
+  span {
+    @include text-footNote;
+  }
+
+  .ProviderHeader-income {
+    @include text--heading3;
+    span {
+      @include text-body--small--light;
+      color: $gray-3;
+    }
+  }
+}

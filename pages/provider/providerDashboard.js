@@ -1,6 +1,6 @@
 import React from "react";
 import ProviderPlansList from "../../componenets/provider/dashboard/providerPlansList";
-import TotalIncome from "../../componenets/provider/dashboard/totalIncome";
+import ProviderHeader from "../../componenets/provider/dashboard/providerHeader";
 import TransactionsList from "../../componenets/provider/dashboard/transactionsList";
 
 export default function ProviderDashboard(props) {
@@ -9,7 +9,7 @@ export default function ProviderDashboard(props) {
       <h1>Provider Dashboard</h1>
       <div className="row">
         <div className="Container--medium">
-          <TotalIncome />
+          <ProviderHeader />
           <ProviderPlansList />
           <TransactionsList />
         </div>
