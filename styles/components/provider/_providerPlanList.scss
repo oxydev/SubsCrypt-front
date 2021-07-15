@@ -1,9 +1,20 @@
 .ProviderPlansList {
-  position: relative;
   margin-bottom: 44px;
-  & > h1 {
-    @include text-body--large--medium;
+  & > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 26px;
+
+    h1 {
+      @include text-body--large--medium;
+    }
+    p {
+      @include text-body--standard--regular;
+      color: #8a8f99;
+      margin-left: auto;
+      margin-right: 17px;
+    }
   }
 
   & > div {
@@ -11,9 +22,6 @@
   }
 }
 .ProviderPlansList-addPlanBtn {
-  position: absolute;
-  right: 0;
-  top: 0;
   @include text-body--standard--regular;
   color: #8a8f99;
   background-color: transparent;

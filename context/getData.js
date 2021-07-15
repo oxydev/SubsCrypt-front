@@ -7,6 +7,7 @@ import SubscriptionModal from "../componenets/user/userSubscryption/subscription
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
+import { Suspense } from "react";
 
 const subscrypt = import("@oxydev/subscrypt");
 
@@ -141,11 +142,19 @@ export const DataFunctions = (props) => {
             Cookies.set("subscryptWallet", walletAddress);
             dispatch({ type: "REGISTERED", payload: true });
             serverFunctions.getProviderHeaderInfo(walletAddress);
+            getProvidePlanList(walletAddress, planLength);
           }
           router.push("/provider/");
         }
         setLoading(false);
       });
+    }
+  };
+
+  const getProvidePlanList = async (address, planNumber) => {
+    console.log(planNumber);
+    for (let i = 0; i < planNumber; i++) {
+      loadPlan(address, i);
     }
   };
 

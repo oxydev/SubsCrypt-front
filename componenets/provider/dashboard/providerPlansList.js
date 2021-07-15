@@ -6,8 +6,8 @@ export default function ProviderPlansList(props) {
   const { globalState, dispatch } = useContext(UserContext);
 
   let plans = [];
-  if (globalState.plans) {
-    plans.push(...globalState.plans);
+  if (globalState.providerPlans) {
+    plans.push(...globalState.providerPlans);
   }
 
   const plansCard = plans.map((item, index) => (
@@ -15,8 +15,11 @@ export default function ProviderPlansList(props) {
   ));
   return (
     <section className="ProviderPlansList">
-      <h1>Your Plans</h1>
-      <button className="ProviderPlansList-addPlanBtn">Add a Plan</button>
+      <header>
+        <h1>Your Plans</h1>
+        <p>Total Plans: {plans.length}</p>
+        <button className="ProviderPlansList-addPlanBtn">Add a Plan</button>
+      </header>
       <div>{plansCard}</div>
     </section>
   );
