@@ -39,14 +39,16 @@ export default function OfferCard(props) {
     <section className="OfferCard" onClick={handleSubscribe}>
       <header>
         <img className="OfferLogo" src={localPlans.logoURL} />
-        <h1>{localPlans.name}</h1>
+        <h1>{plan.name ? plan.name : "loading..."}</h1>
       </header>
       <main>
         <div>
           <p className="OfferCard-Provider">{localPlans.provider}</p>
           <p className="OfferCard-Rate">{localPlans.rate}</p>
         </div>
-        <p className="OfferCard-description">{localPlans.description}</p>
+        <p className="OfferCard-description">
+          {plan.description ? plan.description : "loading..."}
+        </p>
         <div>
           <h6>Duration</h6>
           <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>

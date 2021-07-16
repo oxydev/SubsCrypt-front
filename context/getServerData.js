@@ -64,6 +64,8 @@ export const ServerFunctions = (props) => {
       "http://206.189.154.160:3000/profile/getProductDescription/" + address + "/" + index;
     axios.get(url).then((result) => {
       console.log(result);
+      const data = result.data;
+      dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, value: data } });
     });
   };
 

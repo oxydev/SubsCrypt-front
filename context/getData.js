@@ -296,6 +296,8 @@ export const DataFunctions = (props) => {
         if (result.status == "Fetched") {
           plans.characteristics = result.result;
           dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plans });
+
+          serverFunctions.getProductDescription(providerAddress, planIndex);
         }
       });
     }

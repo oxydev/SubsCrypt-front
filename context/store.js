@@ -60,6 +60,17 @@ const reducer = (state, action) => {
         ...state,
         user: { ...state.user, userCount: action.payload },
       };
+    case "PLAN_SERVERINFO":
+      let providerPlans = [...state.providerPlans];
+      const index = action.payload.index;
+      providerPlans[index] = {
+        ...providerPlans[index],
+        ...action.payload.value,
+      };
+      return {
+        ...state,
+        providerPlans: [...providerPlans],
+      };
     case "LOG_OUT":
       return initialState;
     default:
