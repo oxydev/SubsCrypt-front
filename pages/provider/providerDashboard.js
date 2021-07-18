@@ -1,7 +1,7 @@
 import React from "react";
 import ProviderPlansList from "../../componenets/provider/dashboard/providerPlansList";
 import ProviderHeader from "../../componenets/provider/dashboard/providerHeader";
-import TransactionsList from "../../componenets/provider/dashboard/transactionsList";
+import ProviderAllUsers from "../../componenets/provider/dashboard/providerAllUsers";
 
 export default function ProviderDashboard(props) {
   return (
@@ -11,7 +11,7 @@ export default function ProviderDashboard(props) {
         <div className="Container--medium">
           <ProviderHeader />
           <ProviderPlansList />
-          <TransactionsList />
+          <ProviderAllUsers />
         </div>
         <div className="Container--small"></div>
       </div>

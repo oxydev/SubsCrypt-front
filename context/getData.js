@@ -143,6 +143,7 @@ export const DataFunctions = (props) => {
             dispatch({ type: "REGISTERED", payload: true });
             serverFunctions.getProviderHeaderInfo(walletAddress);
             getProvidePlanList(walletAddress, planLength);
+            serverFunctions.getProviderAllUsers(walletAddress);
           }
           router.push("/provider/");
         }

@@ -71,6 +71,12 @@ const reducer = (state, action) => {
         ...state,
         providerPlans: [...providerPlans],
       };
+    case "PROVIDER_ALLUSERS":
+      console.log(action.payload);
+      return {
+        ...state,
+        subscriptedUsers: [...action.payload],
+      };
     case "LOG_OUT":
       return initialState;
     default:
