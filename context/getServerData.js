@@ -33,8 +33,18 @@ export const ServerFunctions = (props) => {
     });
   };
 
+  const getProductDescription = async (address, index) => {
+    const url =
+      "http://206.189.154.160:3000/profile/getProductDescription/" + address + "/" + index;
+    axios.get(url).then((result) => {
+      console.log(result);
+      const data = result.data;
+      dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, value: data } });
+    });
+  };
+
   const getProviderAllUsers = async (address) => {
-    const url = "http://206.189.154.160:3000/subscrypt/getUsers/" + address;
+    const url = "http://206.189.154.160:3000/subscriptions/getUsers/" + address;
     axios.get(url).then((result) => {
       console.log(result.data);
       const data = result.data;
@@ -43,7 +53,7 @@ export const ServerFunctions = (props) => {
   };
 
   const getProviderIncome = async (address) => {
-    const url = "http://206.189.154.160:3000/subsCrypt/getProviderData/" + address;
+    const url = "http://206.189.154.160:3000/subscriptions/getProviderData/" + address;
     axios.get(url).then((result) => {
       console.log(result.data);
       const data = result.data;
@@ -58,18 +68,8 @@ export const ServerFunctions = (props) => {
     getProviderPic(address);
   };
 
-  const getProductDescription = async (address, index) => {
-    const url =
-      "http://206.189.154.160:3000/profile/getProductDescription/" + address + "/" + index;
-    axios.get(url).then((result) => {
-      console.log(result);
-      const data = result.data;
-      dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, value: data } });
-    });
-  };
-
   const getUsersOfPlan = async (address, index) => {
-    const url = "http://206.189.154.160:3000/subscrypt/getUsersOfPlan/" + address + "/" + index;
+    const url = "http://206.189.154.160:3000/subscriptions/getUsersOfPlan/" + address + "/" + index;
     axios.get(url).then((result) => {
       console.log(result);
     });
