@@ -10,10 +10,10 @@ export default function ProviderEachUser(props) {
   const planIndex = userInfo.plan_index;
   const plan = globalState.providerPlans[planIndex];
   const planName = plan.name;
-  const startTime = utils.timeStamptoDate(parseInt(subscryptionInfo.start_time.replace(/,/g, "")));
+  const startTime = utils.timeStamptoDate(parseInt(userInfo.start_time.replace(/,/g, "")));
   const duration = utils.duration(parseInt(plan.duration.replace(/,/g, "")));
   const amount = plan.amount;
-  const characteristicsValue = subscryptionInfo.characteristics;
+  const characteristicsValue = userInfo.characteristics;
   const characteristics = plan.characteristics.map((item, index) => (
     <div className="userCharacteristics">
       <h4>{item}</h4>
