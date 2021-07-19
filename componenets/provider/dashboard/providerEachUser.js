@@ -5,6 +5,8 @@ import * as utils from "../../../utilities/utilityFunctions";
 export default function ProviderEachUser(props) {
   const { userInfo, userIndex } = props;
   const { globalState } = useContext(UserContext);
+  console.log(userInfo);
+  console.log(plan);
   const planIndex = userInfo.pan_index;
   const plan = globalState.providerPlans[planIndex];
   const planName = plan.name;
