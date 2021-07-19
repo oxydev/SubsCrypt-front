@@ -6,13 +6,14 @@ export default function ProviderEachUser(props) {
   const { userInfo, userIndex } = props;
   const { globalState } = useContext(UserContext);
   console.log(userInfo);
-  console.log(plan);
   const planIndex = userInfo.plan_index;
   const plan = globalState.providerPlans[planIndex];
+
+  console.log(plan);
   const planName = plan.name;
-  const startTime = utils.timeStamptoDate(parseInt(userInfo.start_time.replace(/,/g, "")));
+  const startTime = utils.timeStamptoDate(userInfo.start_time);
   const duration = utils.duration(parseInt(plan.duration.replace(/,/g, "")));
-  const amount = plan.amount;
+  const amount = parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12);
   const characteristicsValue = userInfo.characteristics;
   const characteristics = plan.characteristics.map((item, index) => (
     <div className="userCharacteristics">

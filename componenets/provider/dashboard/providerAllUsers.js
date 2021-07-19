@@ -22,7 +22,7 @@ export default function ProviderAllUsers(props) {
             <th>Plan</th>
             <th>Subscryption Time</th>
             <th>Duration</th>
-            <th>Ammount</th>
+            <th>Amount</th>
             <th>characteristics</th>
           </tr>
         </thead>
