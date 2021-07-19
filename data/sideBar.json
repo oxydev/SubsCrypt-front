@@ -27,7 +27,7 @@
       },
       {
         "name": "Add plan",
-        "url": "/provider/",
+        "url": "/provider/addnewplan",
         "icon": "/dashbord.png"
       },
       {

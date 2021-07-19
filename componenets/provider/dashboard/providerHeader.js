@@ -13,9 +13,9 @@ export default function ProviderHeader(props) {
           <div className="ProviderHeader-profileImage">
             <img src={user.image} />
           </div>
-          <h2 className="ProviderHeader-name">{user.name ? user.name : "Your Name"}</h2>
+          <h2 className="ProviderHeader-name">{user.name ? user.name : "Loading..."}</h2>
           <p className="ProviderHeader-Description">
-            {user.description ? user.description : "Your Description will comes here."}
+            {user.description ? user.description : "Loading..."}
           </p>
         </div>
         <div className="ProviderHeader-trade">
