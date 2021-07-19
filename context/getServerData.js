@@ -65,7 +65,7 @@ export const ServerFunctions = (props) => {
       .then((result) => {
         console.log(result.data);
         const data = result.data;
-        dispatch({ type: "PROVIDER_ALLUSERS", payload: data.data });
+        dispatch({ type: "PROVIDER_ALLUSERS", payload: data });
       })
       .catch((error) => {
         console.log(error);
