@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useReducer } from "react";
 
 //Initialize the global state
-const initialState = { providerPlans: [], user: {}, plans: [], wallets: [] };
+const initialState = { providerPlans: [], user: {}, plans: [], wallets: [], subscriptedUsers: [] };
 
 //Craeting the context to pass to the components in the app tree
 export const UserContext = React.createContext(initialState);
