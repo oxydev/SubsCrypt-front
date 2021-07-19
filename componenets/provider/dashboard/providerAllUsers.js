@@ -7,7 +7,7 @@ export default function ProviderAllUsers(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const allUsers = globalState.subscriptedUsers;
   let userList;
-  if (allUsers.length > 0) {
+  if (allUsers.length > 0 && globalState.providerPlans.length > 0) {
     userList = allUsers.map((item, index) => (
       <ProviderEachUser userInfo={item} userIndex={index} />
     ));
