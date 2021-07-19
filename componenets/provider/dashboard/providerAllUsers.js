@@ -6,7 +6,9 @@ import ProviderEachUser from "./providerEachUser";
 export default function ProviderAllUsers(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const allUsers = globalState.subscriptedUsers;
-  const userList = allUsers.map((item) => <ProviderEachUser userInfo={item} userIndex={index} />);
+  const userList = allUsers.map((item, index) => (
+    <ProviderEachUser userInfo={item} userIndex={index} />
+  ));
   return (
     <section className="ProviderAllUsers">
       <h1>All Transactions</h1>
