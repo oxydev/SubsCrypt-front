@@ -7,7 +7,7 @@ export default function ProviderEachUser(props) {
   const { globalState } = useContext(UserContext);
   console.log(userInfo);
   console.log(plan);
-  const planIndex = userInfo.pan_index;
+  const planIndex = userInfo.plan_index;
   const plan = globalState.providerPlans[planIndex];
   const planName = plan.name;
   const startTime = utils.timeStamptoDate(parseInt(subscryptionInfo.start_time.replace(/,/g, "")));
