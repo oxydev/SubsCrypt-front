@@ -1,10 +1,14 @@
-import React, { useContext, useState } from 'react'
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
 import { dataContext } from "../../context/getData";
+import { UserContext } from "../../context/store";
 
 export default function ChangePassword(props) {
   const { type } = props;
   const [data, setData] = useState({});
-  const { changePassword } = useContext(dataContext);
+  const { changePassword, connectToWallet } = useContext(dataContext);
+  const { globalState, dispatch } = useContext(UserContext);
+  const router = useRouter();
   function callback({ events = [], status }) {
     console.log("Transaction status:", status.type);
 
@@ -12,17 +16,17 @@ export default function ChangePassword(props) {
       console.log("Included at block hash", status.asInBlock.toHex());
       console.log("Events:");
       console.log(events);
-      var txStatus=false
+      var txStatus = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
         console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
-          console.log("success")
-          txStatus = true
+          console.log("success");
+          txStatus = true;
           //todo please show that it changed successfully
         }
       });
-      if(!txStatus){
-        console.log("failed")
+      if (!txStatus) {
+        console.log("failed");
 
         //todo error
       }
@@ -31,13 +35,24 @@ export default function ChangePassword(props) {
     }
   }
   function handleSubmit(e) {
-    if(data.newPassword!==data.currentPasswordConfirm)
-      return
+    if (data.newPassword !== data.currentPasswordConfirm) return;
     e.preventDefault();
     console.log(data);
-    changePassword(type,data.newPassword)
-
+    changePassword(type, data.newPassword);
   }
+
+  useEffect(() => {
+    if (!globalState.user.userWallet) {
+      connectToWallet(
+        [],
+        type,
+        () => {},
+        () => {
+          router.push("/" + type + "/");
+        }
+      );
+    }
+  }, []);
   return (
     <div className="ResetPassword">
       <h2>Change Password</h2>

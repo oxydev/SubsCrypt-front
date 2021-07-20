@@ -56,7 +56,9 @@ export default function Header() {
             <li>
               <Link
                 href={
-                  globalState.type == "user" ? "/user/profilesetting" : "/provider/profilesetting"
+                  globalState.user.type == "user"
+                    ? "/user/profilesetting"
+                    : "/provider/profilesetting"
                 }
               >
                 <a>Profile Setting</a>
