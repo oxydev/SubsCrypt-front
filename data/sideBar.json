@@ -12,6 +12,11 @@
         "icon": "/dashbord.png"
       },
       {
+        "name": "Profile Setting",
+        "url": "/user/profilesetting",
+        "icon": "/dashbord.png"
+      },
+      {
         "name": "Log Out",
         "url": "/",
         "icon": "/dashbord.png"
@@ -46,7 +51,7 @@
   "PublicSideBar": {
     "menuItem": [
       {
-        "name": "Dashboard",
+        "name": "Login page",
         "id": "PublicDashboard",
         "icon": "/dashbord.png"
       },
