@@ -14,7 +14,7 @@ export default function ProviderPlansList(props) {
   }
 
   const plansCard = plans.map((item, index) => (
-    <OfferCard key={"providerPlan" + index} offer={item} index={index} />
+    <OfferCard key={"providerPlan" + index} plan={item} index={index} type="provider" />
   ));
   return (
     <section className="ProviderPlansList">

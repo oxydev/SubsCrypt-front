@@ -6,8 +6,7 @@ import { dataContext } from "../../../context/getData";
 import data from "../../../data/testData/providerAddress.json";
 
 export default function OfferCard(props) {
-  const plan = props.offer;
-  const index = props.index;
+  const { plan, index, type } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
   const { globalState, dispatch } = useContext(UserContext);
@@ -36,7 +35,7 @@ export default function OfferCard(props) {
   }
 
   return (
-    <section className="OfferCard" onClick={handleSubscribe}>
+    <section className="OfferCard" onClick={type == "user" ? handleSubscribe : () => {}}>
       <header>
         <img className="OfferLogo" src={localPlans.logoURL} />
         <h1>{plan.name ? plan.name : "loading..."}</h1>
@@ -67,7 +66,9 @@ export default function OfferCard(props) {
           </select>
         </div>
         <button className="OfferCard-payBtn" onClick={() => {}}>
-          {plan.price}
+          {type == "provider"
+            ? parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)
+            : plan.price}
           <span>USSD</span>
         </button>
       </footer>

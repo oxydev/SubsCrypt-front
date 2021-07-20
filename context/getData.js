@@ -7,7 +7,6 @@ import SubscriptionModal from "../componenets/user/userSubscryption/subscription
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
-import { Suspense } from "react";
 
 const subscrypt = import("@oxydev/subscrypt");
 
