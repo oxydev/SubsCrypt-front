@@ -22,12 +22,12 @@ export default function ProviderHeader(props) {
           <div className="PlanPart-featureBox">
             <h2>Total Income:</h2>
             <p className="ProviderHeader-income">
-              {user.income ? user.income : "0000"} <span>DOT</span>
+              {user.income ? user.income / Math.pow(10, 12) : "Loading..."} <span>DOT</span>
             </p>
           </div>
           <div className="PlanPart-featureBox">
             <h2>Total Users:</h2>
-            <p className="TotalUsers">{user.userCount ? user.userCount : "00"}</p>
+            <p className="TotalUsers">{user.userCount ? user.userCount : "Loading..."}</p>
           </div>
           <div className="PlanPart-featureBox">
             <span>Net income converted to todays conversation rate via Coinmarketcap.com </span>
