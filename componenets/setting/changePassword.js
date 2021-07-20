@@ -1,17 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from 'react'
+import { dataContext } from "../../context/getData";
 
 export default function ChangePassword(props) {
   const { type } = props;
   const [data, setData] = useState({});
+  const { changePassword } = useContext(dataContext);
+  function callback({ events = [], status }) {
+    console.log("Transaction status:", status.type);
 
+    if (status.isInBlock) {
+      console.log("Included at block hash", status.asInBlock.toHex());
+      console.log("Events:");
+      console.log(events);
+      var txStatus=false
+      events.forEach(({ event: { data, method, section }, phase }) => {
+        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        if (method === "ExtrinsicSuccess") {
+          console.log("success")
+          txStatus = true
+          //todo please show that it changed successfully
+        }
+      });
+      if(!txStatus){
+        console.log("failed")
+
+        //todo error
+      }
+    } else if (status.isFinalized) {
+      console.log("Finalized block hash", status.asFinalized.toHex());
+    }
+  }
   function handleSubmit(e) {
+    if(data.newPassword!==data.currentPasswordConfirm)
+      return
     e.preventDefault();
     console.log(data);
-    if ((type = "provider")) {
-      //codes for changing the provider password
-    } else if ((type = "user")) {
-      //codes for changing the user password
-    }
+    changePassword(type,data.newPassword)
+
   }
   return (
     <div className="ResetPassword">
