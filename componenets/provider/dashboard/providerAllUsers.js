@@ -14,7 +14,7 @@ export default function ProviderAllUsers(props) {
   }
   return (
     <section className="ProviderAllUsers">
-      <h1>All Transactions</h1>
+      <h1>All subscripted Users</h1>
       <table>
         <thead>
           <tr>
