@@ -30,6 +30,13 @@ export default function AddNewPlan() {
     }
     setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
   }
+  function makeFieldsVisible() {
+    const list = planList;
+    for (const item of list) {
+      item.visibility = "visible";
+    }
+    setPlanList([...list]);
+  }
 
   console.log(planList);
 
