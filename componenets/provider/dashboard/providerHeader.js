@@ -27,7 +27,7 @@ export default function ProviderHeader(props) {
           </div>
           <div className="PlanPart-featureBox">
             <h2>Total Users:</h2>
-            <p className="TotalUsers">{user.userCount ? user.userCount : "Loading..."}</p>
+            <p className="TotalUsers">{user.usersCount ? user.usersCount : "Loading..."}</p>
           </div>
           <div className="PlanPart-featureBox">
             <span>Net income converted to todays conversation rate via Coinmarketcap.com </span>

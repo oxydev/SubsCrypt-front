@@ -55,10 +55,10 @@ const reducer = (state, action) => {
         ...state,
         user: { ...state.user, image: action.payload },
       };
-    case "USER_USERCOUNT":
+    case "USER_USERSCOUNT":
       return {
         ...state,
-        user: { ...state.user, userCount: action.payload },
+        user: { ...state.user, usersCount: action.payload },
       };
     case "PLAN_SERVERINFO":
       let providerPlans = [...state.providerPlans];

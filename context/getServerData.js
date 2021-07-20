@@ -79,7 +79,7 @@ export const ServerFunctions = (props) => {
       .then((result) => {
         console.log(result.data);
         const data = result.data;
-        dispatch({ type: "USER_USERCOUNT", payload: data.userCount });
+        dispatch({ type: "USER_USERSCOUNT", payload: data.usersCount });
         dispatch({ type: "USER_INCOME", payload: data.income });
       })
       .catch((error) => {
