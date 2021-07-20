@@ -31,6 +31,8 @@ export default function AddNewPlan() {
     setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
   }
 
+  console.log(planList);
+
   return (
     <section className="ProviderSignUp AddPlanPage">
       <h1>Create a Subscription Plan #{planNumber + 1}</h1>

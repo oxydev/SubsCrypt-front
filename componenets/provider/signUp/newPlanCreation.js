@@ -34,7 +34,6 @@ export default function NewPlanCreation(props) {
       handlePlanListUpdate("visibility", "visible");
     }
   }
-  console.log(planList);
 
   function removeThisPlan() {
     const list = planList;
