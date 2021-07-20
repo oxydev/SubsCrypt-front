@@ -509,7 +509,7 @@ export const DataFunctions = (props) => {
     var injector = getWalletInjector(walletAddress);
     await (await subscrypt).retrieveWholeDataWithWallet(walletAddress.address).then(async (res) => {
       console.log(res);
-      if (res.status !== "Failed") {
+      if (res.status !== "Failed" || type === "provider") {
         await (await subscrypt).getSha2(newPassword).then(async (res) => {
           console.log(res.result);
           injector = await injector.then((res) => res);
