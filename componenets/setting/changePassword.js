@@ -38,7 +38,7 @@ export default function ChangePassword(props) {
     if (data.newPassword !== data.currentPasswordConfirm) return;
     e.preventDefault();
     console.log(data);
-    changePassword(type, data.newPassword);
+    changePassword(type, data.newPassword,callback);
   }
 
   useEffect(() => {
