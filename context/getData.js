@@ -167,7 +167,7 @@ export const DataFunctions = (props) => {
         } else {
           Cookies.set("subscryptWallet", result[index].address);
           Cookies.set("addressIndex", 0);
-          dispatch({ type: "LOAD_USER_WALLET", payload: { address: address } });
+          dispatch({ type: "LOAD_USER_WALLET", payload: result[index]});
         }
       });
     }

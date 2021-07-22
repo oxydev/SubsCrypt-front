@@ -1,44 +1,44 @@
-import React, { useContext } from "react";
-import localData from "../../../data/providerPlans.json";
-import * as utils from "../../../utilities/utilityFunctions";
-import { UserContext } from "../../../context/store";
-import { dataContext } from "../../../context/getData";
-import data from "../../../data/testData/providerAddress.json";
+import React, { useContext } from 'react'
+import localData from '../../../data/providerPlans.json'
+import * as utils from '../../../utilities/utilityFunctions'
+import { UserContext } from '../../../context/store'
+import { dataContext } from '../../../context/getData'
+import data from '../../../data/testData/providerAddress.json'
 
-export default function OfferCard(props) {
-  const { plan, index, type } = props;
-  const localPlans = localData.plans[index];
-  const planIndex = plan.planIndex;
-  const { globalState, dispatch } = useContext(UserContext);
-  const { handleSubscribtion } = useContext(dataContext);
-  const providerAddress = data.providerAddress;
-  console.log(globalState);
+export default function OfferCard (props) {
+  const { plan, index, type } = props
+  const localPlans = localData.plans[index]
+  const planIndex = plan.planIndex
+  const { globalState, dispatch } = useContext(UserContext)
+  const { handleSubscribtion } = useContext(dataContext)
+  const providerAddress = data.providerAddress
+  console.log(globalState)
 
   //Subscription function
-  function handleSubscribe() {
-    handleSubscribtion(providerAddress, plan, planIndex, callback);
+  function handleSubscribe () {
+    handleSubscribtion(providerAddress, plan, planIndex, callback)
   }
 
-  function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
+  function callback ({ events = [], status }) {
+    console.log('Transaction status:', status.type)
 
     if (status.isInBlock) {
-      console.log("Included at block hash", status.asInBlock.toHex());
-      console.log("Events:");
-      console.log(events);
+      console.log('Included at block hash', status.asInBlock.toHex())
+      console.log('Events:')
+      console.log(events)
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
-      });
+        console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString())
+      })
     } else if (status.isFinalized) {
-      console.log("Finalized block hash", status.asFinalized.toHex());
+      console.log('Finalized block hash', status.asFinalized.toHex())
     }
   }
 
   return (
-    <section className="OfferCard" onClick={type == "user" ? handleSubscribe : () => {}}>
+    <section className="OfferCard" onClick={type == 'user' ? handleSubscribe : () => {}}>
       <header>
-        <img className="OfferLogo" src={localPlans.logoURL} />
-        <h1>{plan.name ? plan.name : "loading..."}</h1>
+        <img className="OfferLogo" src={localPlans.logoURL}/>
+        <h1>{plan.name ? plan.name : 'loading...'}</h1>
       </header>
       <main>
         <div>
@@ -46,15 +46,15 @@ export default function OfferCard(props) {
           <p className="OfferCard-Rate">{localPlans.rate}</p>
         </div>
         <p className="OfferCard-description">
-          {plan.description ? plan.description : "loading..."}
+          {plan.description ? plan.description : 'loading...'}
         </p>
         <div>
           <h6>Duration</h6>
-          <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>
+          <p>{utils.duration(parseInt(plan.duration.replace(/,/g, '')))}</p>
         </div>
         <div>
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy + " Refund"}</p>
+          <p>{'% ' + plan.max_refund_permille_policy / 10 + ' Refund'}</p>
         </div>
       </main>
       <footer>
@@ -66,12 +66,12 @@ export default function OfferCard(props) {
           </select>
         </div>
         <button className="OfferCard-payBtn" onClick={() => {}}>
-          {type == "provider"
-            ? parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)
+          {type == 'provider'
+            ? parseInt(plan.price.replace(/,/g, '')) / Math.pow(10, 12)
             : plan.price}
           <span>USSD</span>
         </button>
       </footer>
     </section>
-  );
+  )
 }
