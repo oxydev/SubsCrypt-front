@@ -54,7 +54,13 @@ export default function Header() {
         <div className={showMenu ? "UserMenu-menu" : "UserMenu-menu hidden"}>
           <ul>
             <li>
-              <Link href="/profile">
+              <Link
+                href={
+                  globalState.user.type == "user"
+                    ? "/user/profilesetting"
+                    : "/provider/profilesetting"
+                }
+              >
                 <a>Profile Setting</a>
               </Link>
             </li>

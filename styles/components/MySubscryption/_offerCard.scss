@@ -16,11 +16,10 @@
   header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 7px;
     flex-shrink: 0;
     & > h1 {
-      @include text-body--verySmall--light;
+      @include text-body--small--medium;
     }
   }
   main {

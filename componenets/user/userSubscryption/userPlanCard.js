@@ -66,7 +66,7 @@ export default function UserPlanCard(props) {
 
   //Renew function
   function handleRenew() {
-    console.log(props.plan)
+    console.log(props.plan);
     handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback);
   }
 

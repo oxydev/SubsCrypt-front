@@ -6,7 +6,7 @@ export default function ProfileSetting() {
       <h1>Profile Setting</h1>
       <div className="row">
         <div className="Container--medium">
-          <ChangePassword type="provider" />;
+          <ChangePassword type="user" />;
         </div>
         <div className="Container--small"></div>
       </div>

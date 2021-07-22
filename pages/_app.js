@@ -11,6 +11,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
+import { ServerFunctions } from "../context/getServerData";
 
 export const authContext = React.createContext();
 export const loadingContext = React.createContext();
@@ -37,29 +38,38 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <loadingContext.Provider value={{ loading, setLoading }}>
         <authContext.Provider value={{ auth, setAuth }}>
           <Store>
             <Modal>
-              <DataFunctions>
-                <div className="WholePageWrapper">
-                  <SideBar />
-                  <Main>
-                    {loading ? (
-                      <Loading />
-                    ) : (
-                      <>
-                        {auth && <Header />}
-                        {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
-                        {/* <Component {...pageProps} /> */}
-                      </>
-                    )}
-                  </Main>
-                  <div></div>
-                </div>
-              </DataFunctions>
+              <ServerFunctions>
+                <DataFunctions>
+                  <div className="WholePageWrapper">
+                    <SideBar />
+                    <Main>
+                      {loading ? (
+                        <Loading />
+                      ) : (
+                        <>
+                          {auth && <Header />}
+                          {auth ? (
+                            <Component {...pageProps} />
+                          ) : (
+                            <Login {...pageProps} />
+                          )}
+                          {/* <Component {...pageProps} /> */}
+                        </>
+                      )}
+                    </Main>
+                    <div></div>
+                  </div>
+                </DataFunctions>
+              </ServerFunctions>
             </Modal>
           </Store>
         </authContext.Provider>

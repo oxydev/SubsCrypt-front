@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useReducer } from "react";
 
 //Initialize the global state
-const initialState = { providerPlans: [], user: {}, plans: [], wallets: [] };
+const initialState = { providerPlans: [], user: {}, plans: [], wallets: [], subscriptedUsers: [] };
 
 //Craeting the context to pass to the components in the app tree
 export const UserContext = React.createContext(initialState);
@@ -34,6 +34,49 @@ const reducer = (state, action) => {
         ...state,
         user: { ...state.user, registered: action.payload },
       };
+    //provider server data action type
+    case "USER_INCOME":
+      return {
+        ...state,
+        user: { ...state.user, income: action.payload },
+      };
+    case "USER_NAME":
+      return {
+        ...state,
+        user: { ...state.user, name: action.payload },
+      };
+    case "USER_DESCRIPTION":
+      return {
+        ...state,
+        user: { ...state.user, description: action.payload },
+      };
+    case "USER_IMAGE":
+      return {
+        ...state,
+        user: { ...state.user, image: action.payload },
+      };
+    case "USER_USERSCOUNT":
+      return {
+        ...state,
+        user: { ...state.user, usersCount: action.payload },
+      };
+    case "PLAN_SERVERINFO":
+      let providerPlans = [...state.providerPlans];
+      const index = action.payload.index;
+      providerPlans[index] = {
+        ...providerPlans[index],
+        ...action.payload.value,
+      };
+      return {
+        ...state,
+        providerPlans: [...providerPlans],
+      };
+    case "PROVIDER_ALLUSERS":
+      console.log(action.payload);
+      return {
+        ...state,
+        subscriptedUsers: [...action.payload],
+      };
     case "LOG_OUT":
       return initialState;
     default:
@@ -62,8 +105,6 @@ export const Store = (props) => {
   console.log(globalState);
 
   return (
-    <UserContext.Provider value={{ globalState, dispatch }}>
-      {props.children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
   );
 };

@@ -6,6 +6,7 @@ export const Modal = (props) => {
   const [modal, setModal] = useState(null);
   const [callBack, setCallBack] = useState(() => () => {
     console.log("close");
+    console.log(callBack);
   });
   return (
     <modalContext.Provider value={{ modal, setModal, setCallBack }}>
