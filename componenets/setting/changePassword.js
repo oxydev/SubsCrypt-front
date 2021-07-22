@@ -6,7 +6,7 @@ import { UserContext } from "../../context/store";
 export default function ChangePassword(props) {
   const { type } = props;
   const [data, setData] = useState({});
-  const { changePassword, connectToWallet } = useContext(dataContext);
+  const { changePassword, CheckWallet } = useContext(dataContext);
   const { globalState, dispatch } = useContext(UserContext);
   const router = useRouter();
   function callback({ events = [], status }) {
@@ -43,14 +43,7 @@ export default function ChangePassword(props) {
 
   useEffect(() => {
     if (!globalState.user.userWallet) {
-      connectToWallet(
-        [],
-        type,
-        () => {},
-        () => {
-          router.push("/" + type + "/");
-        }
-      );
+      CheckWallet(globalState.user.username);
     }
   }, []);
   return (

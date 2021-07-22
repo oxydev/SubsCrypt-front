@@ -148,6 +148,31 @@ export const DataFunctions = (props) => {
     }
   };
 
+  const CheckWallet = async (username) => {
+    await (await subscrypt).getAddressByUsername(username).then((result) => {
+      console.log(result);
+      checkWalletList(result.result);
+    });
+    async function checkWalletList(address) {
+      await (await subscrypt).getWalletAccess();
+      await (await subscrypt).getWalletAccounts().then((result) => {
+        let addressList = [];
+        for (const item of result) {
+          addressList.push(item.address);
+        }
+        console.log(addressList);
+        const index = addressList.indexOf(address);
+        if (index < 0) {
+          router.push("/");
+        } else {
+          Cookies.set("subscryptWallet", result[index].address);
+          Cookies.set("addressIndex", 0);
+          dispatch({ type: "LOAD_USER_WALLET", payload: { address: address } });
+        }
+      });
+    }
+  };
+
   const getProvidePlanList = async (address, planNumber) => {
     console.log(planNumber);
     for (let i = 0; i < planNumber; i++) {
@@ -573,6 +598,7 @@ export const DataFunctions = (props) => {
 
   const contextValue = {
     connectToWallet,
+    CheckWallet,
     loadUserData,
     checkUserAuthWithUserName,
     checkProviderAuthWithUserName,

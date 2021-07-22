@@ -1,80 +1,75 @@
-import { useContext, useState } from 'react'
-import { UserContext } from '../../context/store'
-import NewPlanCreation from '../../componenets/provider/signUp/newPlanCreation'
-import { dataContext } from '../../context/getData'
-import { useRouter } from 'next/router'
+import { useContext, useState, useEffect } from "react";
+import { UserContext } from "../../context/store";
+import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
+import { dataContext } from "../../context/getData";
+import { useRouter } from "next/router";
 
-export default function AddNewPlan () {
-  const { globalState, dispatch } = useContext(UserContext)
+export default function AddNewPlan() {
+  const { globalState, dispatch } = useContext(UserContext);
   const router = useRouter();
 
-  const planNumber = globalState.providerPlans.length
-  const { addNewPlans } = useContext(dataContext)
+  const planNumber = globalState.providerPlans.length;
+  const { addNewPlans, CheckWallet } = useContext(dataContext);
 
   const [planList, setPlanList] = useState([
     {
-      visibility: 'visible',
+      visibility: "visible",
       coins: [],
       characteristics: [],
-      duration: '1 m',
+      duration: "1 m",
       refund: 20,
     },
-  ])
+  ]);
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation
-      key={'PlanForm' + index}
+      key={"PlanForm" + index}
       planList={planList}
       setPlanList={setPlanList}
       index={index}
     />
-  ))
+  ));
 
-  function addAnotherPlan () {
-    const list = planList
+  function addAnotherPlan() {
+    const list = planList;
     for (const item of list) {
-      item.visibility = 'hidden'
+      item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: 'visible', coins: [], characteristics: [] }])
+    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
   }
 
-  function makeFieldsVisible () {
-    const list = planList
+  function makeFieldsVisible() {
+    const list = planList;
     for (const item of list) {
-      item.visibility = 'visible'
+      item.visibility = "visible";
     }
-    setPlanList([...list])
+    setPlanList([...list]);
   }
 
-  function callback ({ events = [], status }) {
-    console.log('Transaction status:', status.type)
-    console.log(status)
+  function callback({ events = [], status }) {
+    console.log("Transaction status:", status.type);
+    console.log(status);
     if (status.isInBlock) {
-      console.log('Included at block hash', status.asInBlock.toHex())
-      console.log('Events:')
-      console.log(events)
+      console.log("Included at block hash", status.asInBlock.toHex());
+      console.log("Events:");
+      console.log(events);
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log(
-          '\t',
-          phase.toString(),
-          `: ${section}.${method}`,
-          data.toString()
-        )
-        if (method === 'ExtrinsicSuccess') {
-          allPlanPromise()
+        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        if (method === "ExtrinsicSuccess") {
+          allPlanPromise();
         }
-      })
+      });
     } else if (status.isFinalized) {
-      console.log('Finalized block hash', status.asFinalized.toHex())
+      console.log("Finalized block hash", status.asFinalized.toHex());
     }
   }
 
-  async function allPlanPromise () {
-    let promiseList = []
+  async function allPlanPromise() {
+    let promiseList = [];
     planList.forEach((plan, index) => {
-      var axios = require('axios')
+      var axios = require("axios");
       var config = {
-        method: 'patch',
-        url: 'http://206.189.154.160:3000/profile/updateProductProfile',
+        method: "patch",
+        url: "http://206.189.154.160:3000/profile/updateProductProfile",
         data: {
           providerAddress: globalState.user.userWallet.address,
           planName: plan.title,
@@ -82,79 +77,77 @@ export default function AddNewPlan () {
           description: plan.description,
         },
         headers: {
-          'Content-Type': `application/json`,
+          "Content-Type": `application/json`,
         },
         crossDomain: true,
-      }
+      };
 
-      promiseList.push(axios(config))
-    })
+      promiseList.push(axios(config));
+    });
     await Promise.all(promiseList).then((results) => {
-      console.log('redirect here')
-      router.push('/provider')
-      console.log(results)
-    })
+      console.log("redirect here");
+      router.push("/provider");
+      console.log(results);
+    });
   }
 
-  function handleRegister (e) {
-    e.preventDefault()
-    var wallet = globalState.user.userWallet
+  function handleRegister(e) {
+    e.preventDefault();
+    var wallet = globalState.user.userWallet;
 
-    function parseDurations (planList) {
-      var dur = []
+    function parseDurations(planList) {
+      var dur = [];
       planList.forEach((plan) => {
-        if (plan.duration === '1 m') dur.push(30 * 24 * 60 * 60 * 1000)
-        else if (plan.duration === '3 m')
-          dur.push(3 * 30 * 24 * 60 * 60 * 1000)
-        else if (plan.duration === '6 m')
-          dur.push(6 * 30 * 24 * 60 * 60 * 1000)
-      })
-      return dur
+        if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
+      });
+      return dur;
     }
 
-    function parsePrices (planList) {
-      var prices = []
+    function parsePrices(planList) {
+      var prices = [];
       planList.forEach((plan) => {
-        prices.push(Number(plan.price) * 10 ** 12)
-      })
-      return prices
+        prices.push(Number(plan.price) * 10 ** 12);
+      });
+      return prices;
     }
 
-    function parsePolicies (planList) {
-      var policies = []
+    function parsePolicies(planList) {
+      var policies = [];
       planList.forEach((plan) => {
-        policies.push(plan.refund * 10)
-      })
-      return policies
+        policies.push(plan.refund * 10);
+      });
+      return policies;
     }
 
-    function parseChars (planList) {
-      const plansChars = []
+    function parseChars(planList) {
+      const plansChars = [];
       planList.forEach((plan) => {
-        const chars = []
+        const chars = [];
         plan.characteristics.forEach((char) => {
-          chars.push(char.text)
-        })
-        plansChars.push(chars)
-      })
-      return plansChars
+          chars.push(char.text);
+        });
+        plansChars.push(chars);
+      });
+      return plansChars;
     }
 
-    var durations = parseDurations(planList)
-    var prices = parsePrices(planList)
-    var refundPolicies = parsePolicies(planList)
-    var plansChars = parseChars(planList)
+    var durations = parseDurations(planList);
+    var prices = parsePrices(planList);
+    var refundPolicies = parsePolicies(planList);
+    var plansChars = parseChars(planList);
 
-    addNewPlans(
-      wallet,
-      callback,
-      durations,
-      prices,
-      refundPolicies,
-      plansChars
-    )
-
+    addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars);
   }
+
+  useEffect(() => {
+    console.log("wallet check");
+    if (!globalState.user.userWallet) {
+      console.log("wallet check");
+      CheckWallet(globalState.user.username);
+    }
+  }, []);
 
   return (
     <section className="ProviderSignUp AddPlanPage">
@@ -165,8 +158,8 @@ export default function AddNewPlan () {
             method="POST"
             encType="multipart/form-data"
             onSubmit={(e) => {
-              e.preventDefault()
-              handleRegister(e)
+              e.preventDefault();
+              handleRegister(e);
             }}
           >
             {planFormList}
@@ -182,7 +175,7 @@ export default function AddNewPlan () {
                 type="submit"
                 className="RegisterBtn"
                 onClick={() => {
-                  makeFieldsVisible()
+                  makeFieldsVisible();
                 }}
                 value="Register"
               ></input>
@@ -192,5 +185,5 @@ export default function AddNewPlan () {
         <div className="Container--small"></div>
       </div>
     </section>
-  )
+  );
 }
