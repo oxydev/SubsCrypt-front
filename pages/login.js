@@ -5,7 +5,7 @@ import ProviderSignUp from "./provider/providerSignUp";
 import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
-import WalletConnection from "../componenets/wallet/walletConnection";
+import WalletConnection from "../componenets/login/walletConnection";
 
 export default function Login() {
   const [role, setRole] = useState("none");

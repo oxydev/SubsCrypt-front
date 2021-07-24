@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
-import WalletSelectionModal from "../componenets/wallet/walletSelectionModal";
+import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import SubscriptionModal from "../componenets/user/subscriptionModal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
