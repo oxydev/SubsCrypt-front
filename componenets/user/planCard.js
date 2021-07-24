@@ -5,7 +5,7 @@ import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import data from "../../data/testData/providerAddress.json";
 
-export default function OfferCard(props) {
+export default function PlanCard(props) {
   const plan = props.offer;
   const index = props.index;
   const localPlans = localData.plans[index];
@@ -36,17 +36,17 @@ export default function OfferCard(props) {
   }
 
   return (
-    <section className="OfferCard" onClick={handleSubscribe}>
+    <section className="PlanCard" onClick={handleSubscribe}>
       <header>
         <img className="OfferLogo" src={localPlans.logoURL} />
         <h1>{localPlans.name}</h1>
       </header>
       <main>
         <div>
-          <p className="OfferCard-Provider">{localPlans.provider}</p>
-          <p className="OfferCard-Rate">{localPlans.rate}</p>
+          <p className="PlanCard-Provider">{localPlans.provider}</p>
+          <p className="PlanCard-Rate">{localPlans.rate}</p>
         </div>
-        <p className="OfferCard-description">{localPlans.description}</p>
+        <p className="PlanCard-description">{localPlans.description}</p>
         <div>
           <h6>Duration</h6>
           <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>
@@ -57,14 +57,14 @@ export default function OfferCard(props) {
         </div>
       </main>
       <footer>
-        <div className="OfferCard-payMethod">
+        <div className="PlanCard-payMethod">
           <label>Pay with</label>
-          <select className="OfferCard-coinSelect">
+          <select className="PlanCard-coinSelect">
             <option value="coin1">coin1</option>
             <option value="coin2">coin2</option>
           </select>
         </div>
-        <button className="OfferCard-payBtn" onClick={() => {}}>
+        <button className="PlanCard-payBtn" onClick={() => {}}>
           {plan.price}
           <span>USSD</span>
         </button>

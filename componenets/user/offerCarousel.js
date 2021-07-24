@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import OfferCard from "./offerCard";
+import PlanCard from "./planCard";
 import { UserContext } from "../../context/store";
 
 export default function OfferCarousel() {
@@ -10,7 +10,7 @@ export default function OfferCarousel() {
   }
 
   const offerCards = plans.map((item, index) => (
-    <OfferCard key={"providerPlan" + index} offer={item} index={index} />
+    <PlanCard key={"providerPlan" + index} offer={item} index={index} />
   ));
   return (
     <div className="OfferCarousel">
