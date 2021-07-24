@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import PlanCard from "./planCard";
+import PlanCard from "../common/planCard";
 import { UserContext } from "../../context/store";
 
 export default function OfferCarousel() {
