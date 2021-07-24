@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import UserPlanCard from "./userPlanCard";
-import { UserContext } from "../../../context/store";
-import * as utils from "../../../utilities/utilityFunctions";
+import { UserContext } from "../../context/store";
+import * as utils from "../../utilities/utilityFunctions";
 
 export default function UserPlansList(props) {
   const { globalState } = useContext(UserContext);

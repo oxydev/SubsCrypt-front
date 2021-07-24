@@ -1,5 +1,5 @@
 import React from "react";
-import SubscryptionOffers from "../../componenets/user/userSubscryption/subscryptionOffers";
+import SubscryptionOffers from "../../componenets/user/subscryptionOffers";
 
 export default function NewOffers(props) {
   return (

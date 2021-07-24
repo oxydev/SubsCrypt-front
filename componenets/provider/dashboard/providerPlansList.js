@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import OfferCard from "../../user/userSubscryption/offerCard";
+import OfferCard from "../../user/offerCard";
 import { UserContext } from "../../../context/store";
 
 export default function ProviderPlansList(props) {

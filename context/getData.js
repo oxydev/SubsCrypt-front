@@ -3,7 +3,7 @@ import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
 import WalletSelectionModal from "../componenets/wallet/walletSelectionModal";
-import SubscriptionModal from "../componenets/user/userSubscryption/subscriptionModal";
+import SubscriptionModal from "../componenets/user/subscriptionModal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
@@ -20,30 +20,26 @@ export const DataFunctions = (props) => {
 
   //Function for getting the user plan data after loging in
   const loadUserDataByWallet = async (address) => {
-    await (await subscrypt)
-      .retrieveWholeDataWithWallet(address)
-      .then((result) => {
-        setLoading(false);
-        if (result.status == "Fetched") {
-          let plans = result.result;
-          //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
-          plans.map((item) => {
-            getCharacs(item.provider, item.plan_index, item);
-          });
-        }
-      });
+    await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
+      setLoading(false);
+      if (result.status == "Fetched") {
+        let plans = result.result;
+        //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
+        plans.map((item) => {
+          getCharacs(item.provider, item.plan_index, item);
+        });
+      }
+    });
 
     async function getCharacs(provider, index, plan) {
-      await (await subscrypt)
-        .getPlanCharacteristics(provider, index)
-        .then((result) => {
-          console.log(result);
-          if (result.status == "Fetched") {
-            const newPlan = { ...plan, characteristics: result.result };
-            setLoading(false);
-            dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
-          }
-        });
+      await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
+        console.log(result);
+        if (result.status == "Fetched") {
+          const newPlan = { ...plan, characteristics: result.result };
+          setLoading(false);
+          dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
+        }
+      });
     }
   };
 
@@ -146,36 +142,31 @@ export const DataFunctions = (props) => {
           router.push("/provider/");
         }
         setLoading(false);
-
       });
     }
   };
 
   //Function for getting the user plan data after loging in
   const loadUserData = async (username, password) => {
-    await (await subscrypt)
-      .retrieveWholeDataWithUsername(username, password)
-      .then((result) => {
-        let plans = result.result;
-        //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
+    await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
+      let plans = result.result;
+      //todo plans need a pre process to avoid duplicate plans(renewed or refunded orr expired)
 
-        plans.map((item) => {
-          getCharacs(item.provider, item.plan_index, item);
-        });
-
-        async function getCharacs(provider, index, plan) {
-          await (await subscrypt)
-            .getPlanCharacteristics(provider, index)
-            .then((result) => {
-              console.log(result);
-              if (result.status == "Fetched") {
-                const newPlan = { ...plan, characteristics: result.result };
-                setLoading(false);
-                dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
-              }
-            });
-        }
+      plans.map((item) => {
+        getCharacs(item.provider, item.plan_index, item);
       });
+
+      async function getCharacs(provider, index, plan) {
+        await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
+          console.log(result);
+          if (result.status == "Fetched") {
+            const newPlan = { ...plan, characteristics: result.result };
+            setLoading(false);
+            dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
+          }
+        });
+      }
+    });
   };
 
   //Check user authentication by username and password
@@ -280,40 +271,28 @@ export const DataFunctions = (props) => {
 
   //Get plans data of a provider
   const loadPlan = async (providerAddress, planIndex) => {
-    await (await subscrypt)
-      .getPlanData(providerAddress, planIndex)
-      .then((result) => {
-        console.log(result);
-        result.result.planIndex = planIndex;
-        // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
-        getCharacs(providerAddress, planIndex, result.result);
-      });
+    await (await subscrypt).getPlanData(providerAddress, planIndex).then((result) => {
+      console.log(result);
+      result.result.planIndex = planIndex;
+      // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
+      getCharacs(providerAddress, planIndex, result.result);
+    });
 
     async function getCharacs(address, index, plans) {
-      await (await subscrypt)
-        .getPlanCharacteristics(address, index)
-        .then((result) => {
-          console.log(result);
-          if (result.status == "Fetched") {
-            plans.characteristics = result.result;
-            dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plans });
-          }
-        });
+      await (await subscrypt).getPlanCharacteristics(address, index).then((result) => {
+        console.log(result);
+        if (result.status == "Fetched") {
+          plans.characteristics = result.result;
+          dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plans });
+        }
+      });
     }
   };
 
   //Refund a plan
-  const refundPlan = async (
-    address,
-    injector,
-    callback,
-    providerAddress,
-    planIndex
-  ) => {
+  const refundPlan = async (address, injector, callback, providerAddress, planIndex) => {
     injector = await injector.then((res) => res);
-    await (
-      await subscrypt
-    ).refund(address, injector, callback, providerAddress, planIndex);
+    await (await subscrypt).refund(address, injector, callback, providerAddress, planIndex);
   };
 
   //Refund a plan
@@ -328,14 +307,7 @@ export const DataFunctions = (props) => {
     injector = await injector.then((res) => res);
     await (
       await subscrypt
-    ).renew(
-      address,
-      injector,
-      callback,
-      providerAddress,
-      planIndex,
-      charcteristicValue
-    );
+    ).renew(address, injector, callback, providerAddress, planIndex, charcteristicValue);
   };
 
   const subscribePlan = async (
@@ -349,14 +321,7 @@ export const DataFunctions = (props) => {
     planChars
   ) => {
     await (await subscrypt).getSha2(pass).then(async (res) => {
-      console.log(
-        address,
-        providerAddress,
-        planIndex,
-        res.result,
-        user,
-        planChars
-      );
+      console.log(address, providerAddress, planIndex, res.result, user, planChars);
       injector = await injector.then((res) => res);
       await (
         await subscrypt
@@ -385,14 +350,7 @@ export const DataFunctions = (props) => {
     planChars
   ) => {
     var injector = getWalletInjector(address);
-    console.log(
-      prices,
-      refundPolicies,
-      moneyAddress,
-      username,
-      pass,
-      planChars
-    );
+    console.log(prices, refundPolicies, moneyAddress, username, pass, planChars);
     await (await subscrypt).getSha2(pass).then(async (res) => {
       injector = await injector.then((res) => res);
       await (
@@ -422,21 +380,13 @@ export const DataFunctions = (props) => {
   };
 
   //function for handle the subscription flow
-  const handleSubscribtion = (
-    providerAddress,
-    plan,
-    planIndex,
-    callback,
-    manualAddress
-  ) => {
+  const handleSubscribtion = (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.userWallet;
     if (!walletAddress) {
       walletAddress = manualAddress;
     }
 
-    const modalElement = (
-      <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />
-    );
+    const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
 
     function handelModalSubmit(e, formData) {
       e.preventDefault();
@@ -446,8 +396,7 @@ export const DataFunctions = (props) => {
       function getPlanCharsFromData(formData) {
         var planChar = [];
         Object.keys(formData).forEach((key) => {
-          if (key !== "username" && key !== "password")
-            planChar.push(formData[key]);
+          if (key !== "username" && key !== "password") planChar.push(formData[key]);
         });
         return planChar;
       }
@@ -469,13 +418,7 @@ export const DataFunctions = (props) => {
     if (!walletAddress) {
       connectToWallet([], "user", (confirmAddress) => {
         console.log(walletAddress);
-        handleSubscribtion(
-          providerAddress,
-          plan,
-          planIndex,
-          callback,
-          confirmAddress
-        );
+        handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
       setModal(modalElement);
@@ -483,24 +426,14 @@ export const DataFunctions = (props) => {
   };
 
   //Function for handling the Renew flow
-  const handleRenewPlan = (
-    providerAddress,
-    plan,
-    planIndex,
-    callback,
-    manualAddress
-  ) => {
+  const handleRenewPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.userWallet;
     if (!walletAddress) {
       walletAddress = manualAddress;
     }
 
     const modalElement = (
-      <SubscriptionModal
-        plan={plan}
-        handleSubmit={handelModalSubmit}
-        renew={true}
-      />
+      <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} renew={true} />
     );
 
     function handelModalSubmit(e, formData) {
@@ -511,8 +444,7 @@ export const DataFunctions = (props) => {
       function getPlanCharsFromData(formData) {
         var planChar = [];
         Object.keys(formData).forEach((key) => {
-          if (key !== "username" && key !== "password")
-            planChar.push(formData[key]);
+          if (key !== "username" && key !== "password") planChar.push(formData[key]);
         });
         return planChar;
       }
@@ -532,13 +464,7 @@ export const DataFunctions = (props) => {
     if (!walletAddress) {
       connectToWallet([], "user", (confirmAddress) => {
         console.log(walletAddress);
-        handleRenewPlan(
-          providerAddress,
-          plan,
-          planIndex,
-          callback,
-          confirmAddress
-        );
+        handleRenewPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
       setModal(modalElement);
@@ -546,13 +472,7 @@ export const DataFunctions = (props) => {
   };
 
   //Function for handling the Refund flow
-  const handleRefundPlan = (
-    providerAddress,
-    plan,
-    planIndex,
-    callback,
-    manualAddress
-  ) => {
+  const handleRefundPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.userWallet;
     if (!walletAddress) {
       walletAddress = manualAddress;
@@ -561,13 +481,7 @@ export const DataFunctions = (props) => {
     if (!walletAddress) {
       connectToWallet([], "user", (confirmAddress) => {
         console.log(walletAddress);
-        handleRefundPlan(
-          providerAddress,
-          plan,
-          planIndex,
-          callback,
-          confirmAddress
-        );
+        handleRefundPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
       refundPlan(
@@ -612,9 +526,5 @@ export const DataFunctions = (props) => {
     handleLogOut,
     providerRegisterHandler,
   };
-  return (
-    <dataContext.Provider value={contextValue}>
-      {props.children}
-    </dataContext.Provider>
-  );
+  return <dataContext.Provider value={contextValue}>{props.children}</dataContext.Provider>;
 };

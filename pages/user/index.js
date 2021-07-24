@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import { UserContext } from "../../context/store";
 import { loadingContext } from "../_app";
-import SubscryptionOffers from "../../componenets/user/userSubscryption/subscryptionOffers";
-import UserPlansList from "../../componenets/user/userSubscryption/userPlansList";
+import SubscryptionOffers from "../../componenets/user/subscryptionOffers";
+import UserPlansList from "../../componenets/user/userPlansList";
 const subscrypt = import("@oxydev/subscrypt");
 
 export default function UserHome() {

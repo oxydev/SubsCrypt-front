@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import OfferCard from "./offerCard";
-import data from "../../../data/offers.json";
-import { UserContext } from "../../../context/store";
+import { UserContext } from "../../context/store";
 
 export default function OfferCarousel() {
   const { globalState, dispatch } = useContext(UserContext);
