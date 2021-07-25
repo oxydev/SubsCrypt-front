@@ -1,4 +1,4 @@
-.OfferCard {
+.PlanCard {
   border: 1px solid $gray-6;
   border-radius: $borderRadius--regular;
   margin: 0 12px;
@@ -45,16 +45,16 @@
   @include circle(24px);
   margin-right: 15px;
 }
-.OfferCard-Provider {
+.PlanCard-Provider {
   @include text-footNote;
   color: $gray-4;
 }
-.OfferCard-description {
+.PlanCard-description {
   color: $gray-3;
   margin-bottom: auto;
   line-height: 1.4;
 }
-.OfferCard-payMethod {
+.PlanCard-payMethod {
   display: flex;
 
   label {
@@ -63,10 +63,10 @@
   }
 }
 
-.OfferCard-coinSelect {
+.PlanCard-coinSelect {
   display: none;
 }
-.OfferCard-payBtn {
+.PlanCard-payBtn {
   @include primaryButtons(619x, 12px);
   span {
     @include text-footNote;

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import OfferCard from "../../user/userSubscryption/offerCard";
+import PlanCard from "../../user/userSubscryption/planCard";
 import { UserContext } from "../../../context/store";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,7 +14,7 @@ export default function ProviderPlansList(props) {
   }
 
   const plansCard = plans.map((item, index) => (
-    <OfferCard key={"providerPlan" + index} plan={item} index={index} type="provider" />
+    <PlanCard key={"providerPlan" + index} plan={item} index={index} type="provider" />
   ));
   return (
     <section className="ProviderPlansList">
