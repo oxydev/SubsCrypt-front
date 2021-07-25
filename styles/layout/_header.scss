@@ -14,7 +14,7 @@
   border: 1px solid $green;
   border-radius: $borderRadius--regular;
   padding: 0 46px 0 23px;
-  max-width: 255px;
+  max-width: 355px;
   overflow: hidden;
 
   &.Green {
@@ -36,7 +36,7 @@
   margin-left: 20px;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 140px;
+  max-width: 50%px;
 
   @include text-body--large--medium;
   color: $green;
