@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import PlanCard from "../../user/userSubscryption/planCard";
+import PlanCard from "../../common/planCard";
 import { UserContext } from "../../../context/store";
 import { useRouter } from "next/router";
 
