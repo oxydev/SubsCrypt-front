@@ -3,7 +3,7 @@ import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
 import WalletSelectionModal from "../componenets/wallet/walletSelectionModal";
-import SubscriptionModal from "../componenets/user/userSubscryption/subscriptionModal";
+import SubscriptionModal from "../componenets/user/subscriptionModal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
@@ -167,7 +167,7 @@ export const DataFunctions = (props) => {
         } else {
           Cookies.set("subscryptWallet", result[index].address);
           Cookies.set("addressIndex", 0);
-          dispatch({ type: "LOAD_USER_WALLET", payload: result[index]});
+          dispatch({ type: "LOAD_USER_WALLET", payload: result[index] });
         }
       });
     }
@@ -556,30 +556,15 @@ export const DataFunctions = (props) => {
 
     console.log(globalState, type, newPassword);
   };
-  const addNewPlans = async (
-    address,
-    callback,
-    durations,
-    prices,
-    refundPolicies,
-    planChars) => {
+  const addNewPlans = async (address, callback, durations, prices, refundPolicies, planChars) => {
     let walletAddress = globalState.user.userWallet;
     console.log(walletAddress);
     var injector = getWalletInjector(walletAddress);
     injector = await injector.then((res) => res);
     await (
       await subscrypt
-    ).addPlan(
-      address.address,
-      injector,
-      callback,
-      durations,
-      prices,
-      refundPolicies,
-      planChars
-    );
-  }
-
+    ).addPlan(address.address, injector, callback, durations, prices, refundPolicies, planChars);
+  };
 
   //Log out function
   const handleLogOut = () => {
@@ -614,7 +599,7 @@ export const DataFunctions = (props) => {
     handleLogOut,
     providerRegisterHandler,
     changePassword,
-    addNewPlans
+    addNewPlans,
   };
   return <dataContext.Provider value={contextValue}>{props.children}</dataContext.Provider>;
 };

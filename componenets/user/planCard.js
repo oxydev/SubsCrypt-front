@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import localData from "../../../data/providerPlans.json";
-import * as utils from "../../../utilities/utilityFunctions";
-import { UserContext } from "../../../context/store";
-import { dataContext } from "../../../context/getData";
-import data from "../../../data/testData/providerAddress.json";
+import localData from "../../data/providerPlans.json";
+import * as utils from "../../utilities/utilityFunctions";
+import { UserContext } from "../../context/store";
+import { dataContext } from "../../context/getData";
+import data from "../../data/testData/providerAddress.json";
 
 export default function PlanCard(props) {
   const { plan, index, type } = props;

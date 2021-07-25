@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
-import localData from "../../../data/sunscryptionPlans.json";
-import * as utils from "../../../utilities/utilityFunctions";
-import { UserContext } from "../../../context/store";
-import { authContext } from "../../../pages/_app";
-import { modalContext } from "../../../context/modal";
-import { dataContext } from "../../../context/getData";
-import data from "../../../data/testData/providerAddress.json";
-import SubscriptionModal from "./subscriptionModal";
-import PercentageBar from "../../gadjets/percentageBar";
+import localData from "../../data/sunscryptionPlans.json";
+import * as utils from "../../utilities/utilityFunctions";
+import { UserContext } from "../../context/store";
+import { authContext } from "../../pages/_app";
+import { modalContext } from "../../context/modal";
+import { dataContext } from "../../context/getData";
+import data from "../../data/testData/providerAddress.json";
+import PercentageBar from "../gadjets/percentageBar";
 
 const subscrypt = import("@oxydev/subscrypt");
 
