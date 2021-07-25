@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
-import ProviderSignUp from "./provider/providerSignUp";
 import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
-import WalletConnection from "../componenets/wallet/walletConnection";
+import WalletConnection from "../componenets/login/walletConnection";
 
 export default function Login() {
   const [role, setRole] = useState("none");

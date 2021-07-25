@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import PlanCard from "../../user/userSubscryption/planCard";
 import { UserContext } from "../../../context/store";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function ProviderPlansList(props) {
