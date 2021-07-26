@@ -18,8 +18,9 @@ export default function Header() {
     <div className="Header">
       <div className={userName || userWallet ? "LoginBox" : "LoginBox Green"}>
         {/* <img className="Avatar" src={user.avatar} /> */}
-        <p className="UserName">{userName ? "@ " + userName : "Connect Wallet"}</p>
-        {userWallet && <p className="UserName">|</p>}
+        {userName && <p className="UserName">{userName}</p>}
+        {userName && userWallet && <p className="UserName">|</p>}
+
         {userWallet && <p className="UserName">{middleDots(userWallet.address)}</p>}
       </div>
       <div
