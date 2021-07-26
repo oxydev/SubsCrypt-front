@@ -64,9 +64,10 @@ export default function PlanCard(props) {
           </select>
         </div>
         <button className="PlanCard-payBtn" onClick={() => {}}>
-          {type == "provider"
+          {/* {type == "provider"
             ? parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)
-            : plan.price}
+            : plan.price} */}
+          {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
           <span>USSD</span>
         </button>
       </footer>
