@@ -149,6 +149,7 @@ export const DataFunctions = (props) => {
   };
 
   const CheckWallet = async (username) => {
+    setLoading(true);
     await (await subscrypt).getAddressByUsername(username).then((result) => {
       console.log(result);
       checkWalletList(result.result);
@@ -168,6 +169,7 @@ export const DataFunctions = (props) => {
           Cookies.set("subscryptWallet", result[index].address);
           Cookies.set("addressIndex", 0);
           dispatch({ type: "LOAD_USER_WALLET", payload: result[index] });
+          setLoading(false);
         }
       });
     }
