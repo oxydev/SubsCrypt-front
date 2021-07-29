@@ -67,7 +67,7 @@ export default function PlanCard(props) {
             ? parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)
             : plan.price} */}
           {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
-          <span>USSD</span>
+          <span>DOT</span>
         </button>
       </footer>
     </section>
