@@ -175,6 +175,7 @@ export const DataFunctions = (props) => {
         const index = addressList.indexOf(address);
         if (index < 0) {
           router.push("/");
+          window.alert("You are not allowed to do this operation!");
         } else {
           Cookies.set("subscryptWallet", result[index].address);
           Cookies.set("addressIndex", 0);
