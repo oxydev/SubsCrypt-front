@@ -6,14 +6,10 @@ import { dataContext } from "../../context/getData";
 export default function UserLogin() {
   const { checkUserAuthWithUserName } = useContext(dataContext);
 
-  function handleUserLogin(userName, password) {
-    checkUserAuthWithUserName(userName, password);
-  }
-
   return (
     <div className="LoginPage">
       <WalletConnection type="user" />
-      <LoginPart handler={handleUserLogin} />
+      <LoginPart handler={checkUserAuthWithUserName} />
     </div>
   );
 }

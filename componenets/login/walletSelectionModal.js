@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
-import { modalContext } from "../../context/modal";
+import React, { useState } from "react";
 
+//The component for generating the content of address selection modal
 export default function WalletSelectionModal(props) {
-  const { addressList, handleSubmit, callBack } = props;
+  const { addressList, handleSubmit } = props;
   const [value, setValue] = useState(0);
   const addresses = addressList.map((item, index) => (
     <li key={index}>
@@ -26,7 +26,7 @@ export default function WalletSelectionModal(props) {
           className="WalletModal-input"
           type="text"
           onChange={(e) => {
-            console.log(e.target.value);
+            // console.log(e.target.value);
             setValue(parseInt(e.target.value));
           }}
         />

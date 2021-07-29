@@ -2,30 +2,34 @@ import React, { useState } from "react";
 import PercentSlider from "../../gadjets/percetageSlider";
 import TagInput from "../../gadjets/tagInput";
 
+//The component for handling new plan creation for provider user
 export default function NewPlanCreation(props) {
   const { planList, setPlanList, index } = props;
   const plan = planList[index];
   const [refundValue, setRefundValue] = useState(plan.refund);
 
+  //Function for handle plan form update
   function handlePlanListUpdate(key, value) {
     planList[index][key] = value;
     setPlanList([...planList]);
   }
 
+  //function for handling checkbox status
   function handleCoinCheckBox(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const status = e.target.checked;
     if (status) {
       planList[index].coins.push(e.target.value);
       setPlanList([...planList]);
     } else {
       let coinsIndex = planList[index].coins.indexOf(e.target.value);
-      console.log(coinsIndex);
+      // console.log(coinsIndex);
       planList[index].coins.splice(coinsIndex, 1);
       setPlanList([...planList]);
     }
   }
 
+  //function for handle minimizing or maximazing he forms
   function toggleVisibility() {
     const status = plan.visibility;
     if (status == "visible") {
@@ -35,9 +39,10 @@ export default function NewPlanCreation(props) {
     }
   }
 
+  //function for removing the added plan form
   function removeThisPlan() {
     const list = planList;
-    console.log(index);
+    // console.log(index);
     list.splice(index, 1);
     setPlanList([...list]);
   }

@@ -1,5 +1,6 @@
 import React from "react";
 
+//The component for showing the precentage of plan usage
 export default function PercentageBar(props) {
   const percentage = props.percentage;
   return (

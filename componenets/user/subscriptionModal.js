@@ -7,7 +7,6 @@ export default function SubscriptionModal(props) {
   const username = globalState.user.username;
 
   const { plan, handleSubmit, renew } = props;
-  console.log(plan);
 
   const characteristics = plan.characteristics;
   const characsInputs = characteristics.map((item) => (
@@ -21,10 +20,10 @@ export default function SubscriptionModal(props) {
       />
     </div>
   ));
-  console.log(username);
-  console.log(renew);
+  // console.log(username);
+  // console.log(renew);
   if (username && !formData.username) {
-    console.log("heey");
+    // console.log("heey");
     setFormData({ ...formData, username: username });
   }
   return (

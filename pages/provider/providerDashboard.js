@@ -3,7 +3,7 @@ import ProviderPlansList from "../../componenets/provider/dashboard/providerPlan
 import ProviderHeader from "../../componenets/provider/dashboard/providerHeader";
 import ProviderAllUsers from "../../componenets/provider/dashboard/providerAllUsers";
 
-export default function ProviderDashboard(props) {
+export default function ProviderDashboard() {
   return (
     <section className="ProviderDashboard">
       <h1>Provider Dashboard</h1>

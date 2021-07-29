@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../../context/store";
 
-export default function ProviderHeader(props) {
-  const { globalState, dspatch } = useContext(UserContext);
+//The component for generating provider dashboard header where the provider main info is shown
+export default function ProviderHeader() {
+  const { globalState } = useContext(UserContext);
   const user = globalState.user;
-  const plans = globalState.plans;
-  console.log(user);
+  // console.log(user);
   return (
     <section className="ProviderHeader">
       <div>

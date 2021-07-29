@@ -5,9 +5,10 @@ import UserPlansList from "../../componenets/user/userPlansList";
 const subscrypt = import("@oxydev/subscrypt");
 
 export default function UserHome() {
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
   const plans = globalState.plans;
 
+  // show the user plan list. If there is no plans, it will switch to the offers
   return (
     <div className="userDashboard">
       <h1>My Subscryption</h1>

@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import PlanCard from "../common/planCard";
 import { UserContext } from "../../context/store";
 
+//The  component for generating offer plan carousel
 export default function OfferCarousel() {
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
   let plans = [];
   if (globalState.providerPlans.length > 0) {
     plans.push(...globalState.providerPlans);

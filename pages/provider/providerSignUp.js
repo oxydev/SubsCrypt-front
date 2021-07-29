@@ -5,7 +5,7 @@ import { dataContext } from "../../context/getData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 
-export default function ProviderSignUp(props) {
+export default function ProviderSignUp() {
   const router = useRouter();
   const { providerRegisterHandler } = useContext(dataContext);
   const { globalState, dispatch } = useContext(UserContext);
@@ -13,6 +13,8 @@ export default function ProviderSignUp(props) {
   const [info, setInfo] = useState({
     ProviderMoneyAddress: globalState.user.userWallet.address,
   });
+
+  //
   const [planList, setPlanList] = useState([
     {
       visibility: "visible",
@@ -36,10 +38,7 @@ export default function ProviderSignUp(props) {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([
-      ...list,
-      { visibility: "visible", coins: [], characteristics: [] },
-    ]);
+    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
   }
 
   function callback({ events = [], status }) {
@@ -50,12 +49,7 @@ export default function ProviderSignUp(props) {
       console.log("Events:");
       console.log(events);
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log(
-          "\t",
-          phase.toString(),
-          `: ${section}.${method}`,
-          data.toString()
-        );
+        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           console.log("doneee");
           var axios = require("axios");
@@ -129,10 +123,8 @@ export default function ProviderSignUp(props) {
       var dur = [];
       planList.forEach((plan) => {
         if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "3 m")
-          dur.push(3 * 30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "6 m")
-          dur.push(6 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
       });
       return dur;
     }
@@ -211,9 +203,8 @@ export default function ProviderSignUp(props) {
             </button>
             <div className="ProviderRegisteration">
               <p>
-                For signing up you need to send a transaction on chain to put
-                the data in smart contract on blockchain. Normal gas fee
-                applies.
+                For signing up you need to send a transaction on chain to put the data in smart
+                contract on blockchain. Normal gas fee applies.
               </p>
               <input
                 type="submit"

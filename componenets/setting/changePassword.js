@@ -1,16 +1,15 @@
-import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { dataContext } from "../../context/getData";
 import { UserContext } from "../../context/store";
 
+//The component for handling changing password part in profile setting
 export default function ChangePassword(props) {
   const { type } = props;
   const [data, setData] = useState({});
   const { changePassword, CheckWallet } = useContext(dataContext);
-  const { globalState, dispatch } = useContext(UserContext);
-  const router = useRouter();
+  const { globalState } = useContext(UserContext);
   function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
+    // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
       console.log("Included at block hash", status.asInBlock.toHex());
@@ -37,10 +36,11 @@ export default function ChangePassword(props) {
   function handleSubmit(e) {
     if (data.newPassword !== data.currentPasswordConfirm) return;
     e.preventDefault();
-    console.log(data);
-    changePassword(type, data.newPassword,callback);
+    // console.log(data);
+    changePassword(type, data.newPassword, callback);
   }
 
+  //Check if the user address is available in his wallet address list
   useEffect(() => {
     if (!globalState.user.userWallet) {
       CheckWallet(globalState.user.username);

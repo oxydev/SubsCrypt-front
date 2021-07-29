@@ -3,9 +3,10 @@ import PlanCard from "../../common/planCard";
 import { UserContext } from "../../../context/store";
 import { useRouter } from "next/router";
 
-export default function ProviderPlansList(props) {
+//The component for generating the provider plan lists
+export default function ProviderPlansList() {
   const router = useRouter();
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
 
   let plans = [];
   if (globalState.providerPlans) {

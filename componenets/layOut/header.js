@@ -5,8 +5,8 @@ import { dataContext } from "../../context/getData";
 import { middleDots } from "../../utilities/utilityFunctions";
 import Link from "next/link";
 
+//The component for genrating page header
 export default function Header() {
-  const user = userData.none;
   const { globalState } = useContext(UserContext);
   const { handleLogOut } = useContext(dataContext);
   const [showMenu, setShownMenu] = useState(false);
@@ -18,9 +18,9 @@ export default function Header() {
     <div className="Header">
       <div className={userName || userWallet ? "LoginBox" : "LoginBox Green"}>
         {/* <img className="Avatar" src={user.avatar} /> */}
+        {/* show each of user name or wallet address or both of them */}
         {userName && <p className="UserName">{userName}</p>}
         {userName && userWallet && <p className="UserName">|</p>}
-
         {userWallet && <p className="UserName">{middleDots(userWallet.address)}</p>}
       </div>
       <div

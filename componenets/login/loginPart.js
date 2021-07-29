@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 
+//The component for generating login form
 export default function LoginPart(props) {
-  const router = useRouter();
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const handleLogin = props.handler;
 
@@ -10,10 +9,7 @@ export default function LoginPart(props) {
     <section className="Login">
       <h6>or</h6>
       <h1>Log in</h1>
-      <p>
-        If you have interacted with the contract and have an account you can log
-        in here.
-      </p>
+      <p>If you have interacted with the contract and have an account you can log in here.</p>
       <form
         onSubmit={(e) => {
           e.preventDefault();

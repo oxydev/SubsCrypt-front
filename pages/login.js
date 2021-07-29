@@ -6,6 +6,7 @@ import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
 
+//This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Login() {
   const [role, setRole] = useState("none");
   const { checkAuthByCookie } = useContext(dataContext);
@@ -27,12 +28,12 @@ export default function Login() {
     setRole("providerSignUp");
   }
 
-  //Check the cookies and auth if cokkies are set
+  //Check the cookies and authentication if cokkies are set
   if (!auth && (password || userWallet)) {
     checkAuthByCookie();
   }
 
-  //Set change the status by clicking on sidebar links
+  //change the status by clicking on sidebar links
   useEffect(() => {
     const mainLoginLink = document.getElementById("PublicDashboard");
     const userLoginLink = document.getElementById("PublicUser");
@@ -56,11 +57,10 @@ export default function Login() {
     };
   });
 
+  //change the login menu according to selecting each type
   if (role == "none") {
     return (
       <section className="MainLoginPage">
-        {/* <WalletConnection />
-        <LoginPart /> */}
         <h1>Choose your role to login</h1>
         <div>
           <button onClick={handleUserLogin}>Login as a User</button>

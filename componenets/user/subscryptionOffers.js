@@ -4,8 +4,9 @@ import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 
+//The component for managing subscription offer part
 export default function SubscryptionOffers() {
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
   const { loadPlan } = useContext(dataContext);
   const providerAddress = data.providerAddress;
   useEffect(() => {

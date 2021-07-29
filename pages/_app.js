@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 import { ServerFunctions } from "../context/getServerData";
 
+//Creating context for authentication and loading.
 export const authContext = React.createContext();
 export const loadingContext = React.createContext();
 
@@ -21,6 +22,7 @@ export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  //Turn on and off the loading when the page url has been changed
   useEffect(() => {
     router.events.on("routeChangeStart", (url) => {
       setLoading(true);
@@ -39,6 +41,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <link
+          //import the rubik google font to the project
           href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
           rel="stylesheet"
         />
@@ -51,18 +54,15 @@ export default function App({ Component, pageProps }) {
                 <DataFunctions>
                   <div className="WholePageWrapper">
                     <SideBar />
+                    {/* Main componenet is for the main part of the app where each page content is shown */}
+                    {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
                     <Main>
                       {loading ? (
                         <Loading />
                       ) : (
                         <>
                           {auth && <Header />}
-                          {auth ? (
-                            <Component {...pageProps} />
-                          ) : (
-                            <Login {...pageProps} />
-                          )}
-                          {/* <Component {...pageProps} /> */}
+                          {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
                         </>
                       )}
                     </Main>

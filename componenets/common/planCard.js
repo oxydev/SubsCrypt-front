@@ -1,24 +1,23 @@
 import React, { useContext } from "react";
 import localData from "../../data/providerPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
-import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import data from "../../data/testData/providerAddress.json";
 
+//this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
   const { plan, index, type } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
-  const { globalState, dispatch } = useContext(UserContext);
   const { handleSubscribtion } = useContext(dataContext);
   const providerAddress = data.providerAddress;
-  console.log(globalState);
 
   //Subscription function
   function handleSubscribe() {
     handleSubscribtion(providerAddress, plan, planIndex, callback);
   }
 
+  //callback function after handling subscription
   function callback({ events = [], status }) {
     console.log("Transaction status:", status.type);
 

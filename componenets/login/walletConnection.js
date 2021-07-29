@@ -2,6 +2,7 @@ import React from "react";
 import data from "../../data/wallets&networks.json";
 import WalletButton from "./walletButton";
 
+//The component for generating the login by wallet part
 export default function WalletConnection(props) {
   const wallets = data.wallets.map((item) => (
     <WalletButton key={item.name} type={props.type} wallet={item} />

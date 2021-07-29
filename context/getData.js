@@ -8,19 +8,21 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 
+//constant for using in dynamicly importing the subscrypt library
 const subscrypt = import("@oxydev/subscrypt");
 
+//creating a context for all getting and managin data functions to be available in all the components in the project
 export const dataContext = React.createContext({});
 
 export const DataFunctions = (props) => {
   const router = useRouter();
   const { auth, setAuth } = useContext(authContext);
-  const { loading, setLoading } = useContext(loadingContext);
-  const { modal, setModal, setCallBack } = useContext(modalContext);
+  const { setLoading } = useContext(loadingContext);
+  const { setModal, setCallBack } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
   const serverFunctions = useContext(serverDataContext);
 
-  //Function for getting the user plan data after logging in
+  //Function for getting the user plans data after login by wallet
   const loadUserDataByWallet = async (address) => {
     await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
       setLoading(false);
@@ -32,9 +34,10 @@ export const DataFunctions = (props) => {
       }
     });
 
+    //loading each plan characteristics after getting user data
     async function getCharacs(provider, index, plan) {
       await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.status == "Fetched") {
           const newPlan = { ...plan, characteristics: result.result };
           setLoading(false);
@@ -44,9 +47,9 @@ export const DataFunctions = (props) => {
     }
   };
 
-  //Wallet connection
+  //handling wallet connection for login or after login
   const connectToWallet = async (wallets, type, callback, cancelCallback = () => {}) => {
-    console.log("wallet");
+    // console.log("wallet"); log the word wallet to be sure the function has been called.
     if (!auth) {
       setLoading(true);
     }
@@ -55,8 +58,9 @@ export const DataFunctions = (props) => {
       if (!(JSON.stringify(wallets) === JSON.stringify(result))) {
         Cookies.set("subscryptType", type);
         const addressList = result.map((item) => item.address);
-        console.log(addressList);
+        // console.log(addressList);
         const indexCookie = Cookies.get("addressIndex");
+        // check if the prefered wallet address is stored as cookies
         if (indexCookie) {
           handleConfirm(result, indexCookie);
         } else {
@@ -64,13 +68,15 @@ export const DataFunctions = (props) => {
             Cookies.set("addressIndex", 0);
             handleConfirm(result, 0);
           } else {
+            //show a modal for selecting the prefered wallet address from the address lists
             const modalElement = (
               <WalletSelectionModal
                 addressList={addressList}
                 handleSubmit={(value) => {
-                  console.log(value);
+                  // console.log(value);
                   Cookies.set("addressIndex", value);
                   setModal(null);
+                  //cal back function is used in situations when you want to call another function after selecting the wallet address
                   setCallBack(() => () => {
                     cancelCallback();
                   });
@@ -89,9 +95,9 @@ export const DataFunctions = (props) => {
       }
     });
 
+    //function for setting the selected wallet address
     function handleConfirm(result, index) {
       dispatch({ type: "LOAD_WALLETS", payload: result });
-      // Cookies.set("subscryptWallet", result[index].address);
       if (auth) {
         dispatch({ type: "LOAD_USER_WALLET", payload: result[index] });
         Cookies.set("subscryptWallet", result[index].address);
@@ -114,6 +120,7 @@ export const DataFunctions = (props) => {
       }
     }
 
+    //function for getting and setting the username of a loged in user if is available
     async function usernameGetter(address) {
       await (await subscrypt).getUsername(address).then((result) => {
         console.log(result);
@@ -127,9 +134,10 @@ export const DataFunctions = (props) => {
       });
     }
 
+    //function for checking if a provider who is logged in by wallet has already signed up as a provider or not
     async function checkIfSignedUp(walletAddress) {
       await (await subscrypt).getPlanLength(walletAddress).then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.status === "Fetched") {
           const planLength = parseInt(result.result);
           if (planLength === 0) {
@@ -137,6 +145,7 @@ export const DataFunctions = (props) => {
           } else {
             Cookies.set("subscryptWallet", walletAddress);
             dispatch({ type: "REGISTERED", payload: true });
+            //getting the necessary info of a provider form server
             serverFunctions.getProviderHeaderInfo(walletAddress);
             getProvidePlanList(walletAddress, planLength);
             serverFunctions.getProviderAllUsers(walletAddress);
@@ -148,10 +157,11 @@ export const DataFunctions = (props) => {
     }
   };
 
+  //function for checking if the user wallet address is availabe in his wallet address list in his device
   const CheckWallet = async (username) => {
     setLoading(true);
     await (await subscrypt).getAddressByUsername(username).then((result) => {
-      console.log(result);
+      // console.log(result);
       checkWalletList(result.result);
     });
     async function checkWalletList(address) {
@@ -161,7 +171,7 @@ export const DataFunctions = (props) => {
         for (const item of result) {
           addressList.push(item.address);
         }
-        console.log(addressList);
+        // console.log(addressList);
         const index = addressList.indexOf(address);
         if (index < 0) {
           router.push("/");
@@ -175,20 +185,22 @@ export const DataFunctions = (props) => {
     }
   };
 
+  //function for getting the provider planList
   const getProvidePlanList = async (address, planNumber) => {
-    console.log(planNumber);
+    // console.log(planNumber);
     for (let i = 0; i < planNumber; i++) {
+      //load every plan data
       loadPlan(address, i);
     }
   };
 
-  //Function for getting the user plan data after loging in
+  //Function for getting the user plan data after login by username and password
   const loadUserData = async (username, password) => {
     await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
       let plans = result.result;
-      console.log(plans);
-
+      // console.log(plans);
       plans.map((item) => {
+        //get chractersitics of each plan
         getCharacs(item.provider, item.plan_index, item);
       });
 
@@ -223,7 +235,7 @@ export const DataFunctions = (props) => {
           Cookies.set("subscryptPass", password);
           Cookies.set("subscryptType", "user");
 
-          //fetchinn the user plans after login
+          //getting the user plans after login
           loadUserData(username, password);
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
@@ -232,7 +244,7 @@ export const DataFunctions = (props) => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -244,7 +256,7 @@ export const DataFunctions = (props) => {
     )
       .providerCheckAuthWithUsername(username, password)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.result == true) {
           dispatch({
             type: "LOAD_USER",
@@ -296,7 +308,7 @@ export const DataFunctions = (props) => {
           payload: { username: userName, password: password, type: "provider" },
         });
         dispatch({ type: "REGISTERED", payload: true });
-        console.log("A provider has been logged in");
+        // console.log("A provider has been logged in");
       }
     } else if (userWallet) {
       setAuth(true);
@@ -304,18 +316,19 @@ export const DataFunctions = (props) => {
     }
   };
 
-  //Get plans data of a provider
+  //Getting a specific plans data form blockchain
   const loadPlan = async (providerAddress, planIndex) => {
     await (await subscrypt).getPlanData(providerAddress, planIndex).then((result) => {
-      console.log(result);
+      // console.log(result);
       result.result.planIndex = planIndex;
       // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
       getCharacs(providerAddress, planIndex, result.result);
     });
 
+    //getting the characteristics of a plan
     async function getCharacs(address, index, plans) {
       await (await subscrypt).getPlanCharacteristics(address, index).then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.status == "Fetched") {
           plans.characteristics = result.result;
           dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plans });
@@ -332,7 +345,6 @@ export const DataFunctions = (props) => {
     await (await subscrypt).refund(address, injector, callback, providerAddress, planIndex);
   };
 
-  //Refund a plan
   const renewPlan = async (
     address,
     injector,
@@ -358,7 +370,7 @@ export const DataFunctions = (props) => {
     planChars
   ) => {
     await (await subscrypt).getSha2(pass).then(async (res) => {
-      console.log(address, providerAddress, planIndex, res.result, user, planChars);
+      // console.log(address, providerAddress, planIndex, res.result, user, planChars);
       injector = await injector.then((res) => res);
       await (
         await subscrypt
@@ -387,7 +399,7 @@ export const DataFunctions = (props) => {
     planChars
   ) => {
     var injector = getWalletInjector(address);
-    console.log(prices, refundPolicies, moneyAddress, username, pass, planChars);
+    // console.log(prices, refundPolicies, moneyAddress, username, pass, planChars);
     await (await subscrypt).getSha2(pass).then(async (res) => {
       injector = await injector.then((res) => res);
       await (
@@ -428,7 +440,7 @@ export const DataFunctions = (props) => {
     function handelModalSubmit(e, formData) {
       e.preventDefault();
       setModal(null);
-      console.log(formData);
+      // console.log(formData);
 
       function getPlanCharsFromData(formData) {
         var planChar = [];
@@ -439,7 +451,7 @@ export const DataFunctions = (props) => {
       }
 
       var planChar = getPlanCharsFromData(formData);
-      console.log(planChar);
+      // console.log(planChar);
       subscribePlan(
         walletAddress.address,
         getWalletInjector(walletAddress),
@@ -452,9 +464,10 @@ export const DataFunctions = (props) => {
       );
     }
 
+    //check if the user has connected to his wallet or not. If not connect to t now.
     if (!walletAddress) {
       connectToWallet([], "user", (confirmAddress) => {
-        console.log(walletAddress);
+        // console.log(walletAddress);
         handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
@@ -476,7 +489,7 @@ export const DataFunctions = (props) => {
     function handelModalSubmit(e, formData) {
       e.preventDefault();
       setModal(null);
-      console.log(formData);
+      // console.log(formData);
 
       function getPlanCharsFromData(formData) {
         var planChar = [];
@@ -487,7 +500,7 @@ export const DataFunctions = (props) => {
       }
 
       var planChar = getPlanCharsFromData(formData);
-      console.log(planChar);
+      // console.log(planChar);
       renewPlan(
         walletAddress.address,
         getWalletInjector(walletAddress),
@@ -498,9 +511,10 @@ export const DataFunctions = (props) => {
       );
     }
 
+    //check if the user has connected to his wallet or not. If not connect to t now.
     if (!walletAddress) {
       connectToWallet([], "user", (confirmAddress) => {
-        console.log(walletAddress);
+        // console.log(walletAddress);
         handleRenewPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
@@ -517,7 +531,7 @@ export const DataFunctions = (props) => {
 
     if (!walletAddress) {
       connectToWallet([], "user", (confirmAddress) => {
-        console.log(walletAddress);
+        // console.log(walletAddress);
         handleRefundPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
@@ -530,15 +544,17 @@ export const DataFunctions = (props) => {
       );
     }
   };
+
+  //function for changing the user password
   const changePassword = async (type, newPassword, callback) => {
     let walletAddress = globalState.user.userWallet;
-    console.log(walletAddress);
+    // console.log(walletAddress);
     var injector = getWalletInjector(walletAddress);
     await (await subscrypt).retrieveWholeDataWithWallet(walletAddress.address).then(async (res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status !== "Failed" || type === "provider") {
         await (await subscrypt).getSha2(newPassword).then(async (res) => {
-          console.log(res.result);
+          // console.log(res.result);
           injector = await injector.then((res) => res);
 
           if (type === "user") {
@@ -558,9 +574,11 @@ export const DataFunctions = (props) => {
 
     console.log(globalState, type, newPassword);
   };
+
+  //function for adding new plan as a provider
   const addNewPlans = async (address, callback, durations, prices, refundPolicies, planChars) => {
     let walletAddress = globalState.user.userWallet;
-    console.log(walletAddress);
+    // console.log(walletAddress);
     var injector = getWalletInjector(walletAddress);
     injector = await injector.then((res) => res);
     await (

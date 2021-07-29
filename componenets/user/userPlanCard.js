@@ -10,25 +10,15 @@ import PercentageBar from "../gadjets/percentageBar";
 
 const subscrypt = import("@oxydev/subscrypt");
 
+//The component for generating a plan card which user has
 export default function UserPlanCard(props) {
   let plan = props.plan.plan;
   const index = props.index;
   const localPlans = localData.userPlans[index];
-  const { globalState, dispatch } = useContext(UserContext);
-  const { setAuth } = useContext(authContext);
-  const { modal, setModal } = useContext(modalContext);
-  const {
-    getWalletInjector,
-    refundPlan,
-    renewPlan,
-    connectToWallet,
-    handleSubscribtion,
-    handleRenewPlan,
-    handleRefundPlan,
-  } = useContext(dataContext);
+  const { globalState } = useContext(UserContext);
+  const { handleSubscribtion, handleRenewPlan, handleRefundPlan } = useContext(dataContext);
   const status = props.plan.status;
   const walletAddress = globalState.user.userWallet;
-  const providerAddress = data.providerAddress;
   const [localLoading, setLocalLoading] = useState(false);
 
   //plan amounts
