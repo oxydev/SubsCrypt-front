@@ -25,9 +25,17 @@ export default function PlanCard(props) {
       console.log("Included at block hash", status.asInBlock.toHex());
       console.log("Events:");
       console.log(events);
+      let check = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
         console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        if (method === "ExtrinsicSuccess") {
+          check = true;
+          window.alert("The operation has been done successfully");
+        }
       });
+      if (check == false) {
+        window.alert("The operation failed!");
+      }
     } else if (status.isFinalized) {
       console.log("Finalized block hash", status.asFinalized.toHex());
     }

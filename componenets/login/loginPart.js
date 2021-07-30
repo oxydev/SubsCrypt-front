@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../../context/store";
 
 //The component for generating login form
 export default function LoginPart(props) {
+  const { globalState } = useContext(UserContext);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const handleLogin = props.handler;
 
@@ -30,6 +32,9 @@ export default function LoginPart(props) {
             setLoginData({ ...loginData, password: e.target.value });
           }}
         />
+        {globalState.user.username == "Invalid" && (
+          <p className="LoginError">Invalid user name or password</p>
+        )}
         <input type="submit" value="Log in" />
       </form>
     </section>

@@ -74,6 +74,10 @@ export default function Login() {
   } else if (role == "provider") {
     return <ProviderLogin />;
   } else if (role == "providerSignUp") {
-    return <WalletConnection type="provider" />;
+    return (
+      <div className="SignUp-walletConnection">
+        <WalletConnection type="provider" />
+      </div>
+    );
   }
 }
