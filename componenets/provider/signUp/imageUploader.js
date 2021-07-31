@@ -54,7 +54,8 @@ export default function ImageUploader(props) {
       <div className="UploadZone" onDrop={dropHandler} onDragOver={dragOverHandler}>
         <button
           style={{ backgroundImage: `url(${url})` }}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             handleUploadClick();
           }}
         ></button>
