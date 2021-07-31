@@ -123,7 +123,7 @@ export const DataFunctions = (props) => {
     //function for getting and setting the username of a loged in user if is available
     async function usernameGetter(address) {
       await (await subscrypt).getUsername(address).then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.status == "Fetched") {
           dispatch({
             type: "LOAD_USER_USERNAME",
@@ -207,7 +207,7 @@ export const DataFunctions = (props) => {
 
       async function getCharacs(provider, index, plan) {
         await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
-          console.log(result);
+          // console.log(result);
           if (result.status == "Fetched") {
             const newPlan = { ...plan, characteristics: result.result };
             setLoading(false);
@@ -295,18 +295,9 @@ export const DataFunctions = (props) => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
+        // console.log(error);
       });
   };
-
-  // //get wallet address by username
-  // const getProviderWalletAddressByUsername = async (username) => {
-  //   await (await subscrypt).getAddressByUsername(username).then((result) => {
-  //     // console.log(result.result);
-  //     dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
-  //     checkIfSignedUp(result.result);
-  //   });
-  // };
 
   //check authentication by cookies
   const checkAuthByCookie = async () => {
@@ -604,11 +595,11 @@ export const DataFunctions = (props) => {
           }
         });
       } else {
-        console.log("you have not any subscription so you can not change a password");
+        // console.log("you have not any subscription so you can not change a password");
       }
     });
 
-    console.log(globalState, type, newPassword);
+    // console.log(globalState, type, newPassword);
   };
 
   //function for adding new plan as a provider
