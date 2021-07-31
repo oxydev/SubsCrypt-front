@@ -41,7 +41,7 @@ export default function UserPlanCard(props) {
   //Subscription function
   function handleSubscribe() {
     setLocalLoading(true);
-    console.log(walletAddress);
+    // console.log(walletAddress);
     getCharacs();
   }
 

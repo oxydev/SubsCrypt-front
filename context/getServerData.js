@@ -127,7 +127,7 @@ export const ServerFunctions = (props) => {
     axios
       .get(nameUrl)
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         const data = result.data;
         dispatch({
           type: "PLAN_SERVERINFO",
