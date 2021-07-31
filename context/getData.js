@@ -133,29 +133,29 @@ export const DataFunctions = (props) => {
         Cookies.set("subscrypt", result.result);
       });
     }
-
-    //function for checking if a provider who is logged in by wallet has already signed up as a provider or not
-    async function checkIfSignedUp(walletAddress) {
-      await (await subscrypt).getPlanLength(walletAddress).then((result) => {
-        // console.log(result);
-        if (result.status === "Fetched") {
-          const planLength = parseInt(result.result);
-          if (planLength === 0) {
-            dispatch({ type: "REGISTERED", payload: false });
-          } else {
-            Cookies.set("subscryptWallet", walletAddress);
-            dispatch({ type: "REGISTERED", payload: true });
-            //getting the necessary info of a provider form server
-            serverFunctions.getProviderHeaderInfo(walletAddress);
-            getProvidePlanList(walletAddress, planLength);
-            serverFunctions.getProviderAllUsers(walletAddress);
-          }
-          router.push("/provider/");
-        }
-        setLoading(false);
-      });
-    }
   };
+
+  //function for checking if a provider who is logged in by wallet has already signed up as a provider or not
+  async function checkIfSignedUp(walletAddress) {
+    await (await subscrypt).getPlanLength(walletAddress).then((result) => {
+      // console.log(result);
+      if (result.status === "Fetched") {
+        const planLength = parseInt(result.result);
+        if (planLength === 0) {
+          dispatch({ type: "REGISTERED", payload: false });
+        } else {
+          Cookies.set("subscryptWallet", walletAddress);
+          dispatch({ type: "REGISTERED", payload: true });
+          //getting the necessary info of a provider form server
+          serverFunctions.getProviderHeaderInfo(walletAddress);
+          getProvidePlanList(walletAddress, planLength);
+          serverFunctions.getProviderAllUsers(walletAddress);
+        }
+        router.push("/provider/");
+      }
+      setLoading(false);
+    });
+  }
 
   //function for checking if the user wallet address is availabe in his wallet address list in his device
   const CheckWallet = async (username) => {
@@ -255,7 +255,7 @@ export const DataFunctions = (props) => {
       await subscrypt
     )
       .providerCheckAuthWithUsername(username, password)
-      .then((result) => {
+      .then(async (result) => {
         // console.log(result);
         if (result.result == true) {
           dispatch({
@@ -268,10 +268,25 @@ export const DataFunctions = (props) => {
           });
           dispatch({ type: "REGISTERED", payload: true });
           setAuth(true);
-          setLoading(false);
+          // setLoading(false);
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
           Cookies.set("subscryptType", "provider");
+          await (await subscrypt).getAddressByUsername(username).then(async (result) => {
+            const walletAddress = result.result;
+            dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
+            await (await subscrypt).getPlanLength(walletAddress).then((result) => {
+              // console.log(result);
+              if (result.status === "Fetched") {
+                const planLength = parseInt(result.result);
+                Cookies.set("subscryptWallet", walletAddress);
+                serverFunctions.getProviderHeaderInfo(walletAddress);
+                getProvidePlanList(walletAddress, planLength);
+                serverFunctions.getProviderAllUsers(walletAddress);
+              }
+              setLoading(false);
+            });
+          });
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           setAuth(false);
@@ -284,8 +299,17 @@ export const DataFunctions = (props) => {
       });
   };
 
+  // //get wallet address by username
+  // const getProviderWalletAddressByUsername = async (username) => {
+  //   await (await subscrypt).getAddressByUsername(username).then((result) => {
+  //     // console.log(result.result);
+  //     dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
+  //     checkIfSignedUp(result.result);
+  //   });
+  // };
+
   //check authentication by cookies
-  const checkAuthByCookie = () => {
+  const checkAuthByCookie = async () => {
     setLoading(true);
     const userName = Cookies.get("subscrypt");
     const password = Cookies.get("subscryptPass");
@@ -309,6 +333,18 @@ export const DataFunctions = (props) => {
         });
         dispatch({ type: "REGISTERED", payload: true });
         // console.log("A provider has been logged in");
+        const walletAddress = userWallet;
+        dispatch({ type: "LOAD_USER_ADDRESS", payload: walletAddress });
+        await (await subscrypt).getPlanLength(walletAddress).then((result) => {
+          // console.log(result);
+          if (result.status === "Fetched") {
+            const planLength = parseInt(result.result);
+            serverFunctions.getProviderHeaderInfo(walletAddress);
+            getProvidePlanList(walletAddress, planLength);
+            serverFunctions.getProviderAllUsers(walletAddress);
+          }
+          setLoading(false);
+        });
       }
     } else if (userWallet) {
       setAuth(true);

@@ -19,6 +19,9 @@ const reducer = (state, action) => {
     //load user wallet
     case "LOAD_USER_WALLET":
       return { ...state, user: { ...state.user, userWallet: action.payload } };
+    //load user address
+    case "LOAD_USER_ADDRESS":
+      return { ...state, user: { ...state.user, userWallet: { address: action.payload } } };
     //load user plans
     case "LOAD_USER_PLANS":
       return { ...state, plans: action.payload };
