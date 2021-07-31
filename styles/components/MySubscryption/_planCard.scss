@@ -41,9 +41,10 @@
     flex-shrink: 0;
   }
 }
-.OfferLogo {
+.PlanLogo {
   @include circle(24px);
   margin-right: 15px;
+  background-color: #bdbdbd;
 }
 .PlanCard-Provider {
   @include text-footNote;

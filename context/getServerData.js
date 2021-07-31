@@ -32,7 +32,7 @@ export const ServerFunctions = (props) => {
     axios
       .get(url)
       .then((result) => {
-        // console.log(result.data);
+        console.log(result.data);
         const data = result.data;
         dispatch({ type: "USER_NAME", payload: data.name });
         dispatch({ type: "USER_DESCRIPTION", payload: data.description });
@@ -109,6 +109,36 @@ export const ServerFunctions = (props) => {
       });
   };
 
+  //loading a specific plan server info
+  const getPlanServerInfo = async (address, index) => {
+    await getProductDescription(address, index);
+    const imageUrl = "http://206.189.154.160:3000/profile/getProviderPic/" + address;
+    axios
+      .get(imageUrl)
+      .then((result) => {
+        // console.log(result)
+        const data = result.data;
+        dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, value: { image: data } } });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    const nameUrl = "http://206.189.154.160:3000/profile/getProviderDescription/" + address;
+    axios
+      .get(nameUrl)
+      .then((result) => {
+        console.log(result.data);
+        const data = result.data;
+        dispatch({
+          type: "PLAN_SERVERINFO",
+          payload: { index: index, value: { providerName: data.name } },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   //variable for exporting the functions form the components
   const contextValue = {
     getProviderPic,
@@ -117,6 +147,7 @@ export const ServerFunctions = (props) => {
     getUsersOfPlan,
     getProductDescription,
     getProviderHeaderInfo,
+    getPlanServerInfo,
   };
 
   return (

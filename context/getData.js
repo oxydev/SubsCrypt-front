@@ -354,14 +354,13 @@ export const DataFunctions = (props) => {
     });
 
     //getting the characteristics of a plan
-    async function getCharacs(address, index, plans) {
+    async function getCharacs(address, index, plan) {
       await (await subscrypt).getPlanCharacteristics(address, index).then((result) => {
         // console.log(result);
         if (result.status == "Fetched") {
-          plans.characteristics = result.result;
-          dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plans });
-
-          serverFunctions.getProductDescription(address, index);
+          plan.characteristics = result.result;
+          dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plan });
+          serverFunctions.getPlanServerInfo(address, index);
         }
       });
     }
