@@ -114,7 +114,6 @@ export default function ProviderSignUp() {
       promiseList.push(axios(config));
     });
     await Promise.all(promiseList).then((results) => {
-      console.log("redirect here");
       dispatch({ type: "REGISTERED", payload: true });
       router.push("/provider");
       console.log(results);
@@ -122,8 +121,6 @@ export default function ProviderSignUp() {
   }
 
   function handleRegister() {
-    console.log("New provider has been registered!");
-
     var wallet = globalState.user.userWallet;
     function parseDurations(planList) {
       var dur = [];

@@ -9,7 +9,7 @@ export default function ProviderAllUsers() {
   let userList;
   if (globalState.providerPlans.length > 0) {
     userList = allUsers.map((item, index) => (
-      <ProviderEachUser userInfo={item} userIndex={index} />
+      <ProviderEachUser key={"subscriptedUser" + index} userInfo={item} userIndex={index} />
     ));
   }
   return (

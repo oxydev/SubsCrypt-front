@@ -29,7 +29,7 @@ export default function UserPlanCard(props) {
     await (await subscrypt)
       .getPlanCharacteristics(props.plan.provider, props.plan.plan_index)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
           handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback);

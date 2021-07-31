@@ -29,9 +29,11 @@ export default function Login() {
   }
 
   //Check the cookies and authentication if cokkies are set
-  if (!auth && (password || userWallet)) {
-    checkAuthByCookie();
-  }
+  useEffect(() => {
+    if (!auth && (password || userWallet)) {
+      checkAuthByCookie();
+    }
+  });
 
   //change the status by clicking on sidebar links
   useEffect(() => {

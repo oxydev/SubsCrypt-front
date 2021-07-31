@@ -93,7 +93,7 @@ const reducer = (state, action) => {
       };
     //load the list of subscripted users of a provider with their info
     case "PROVIDER_ALLUSERS":
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         subscriptedUsers: [...action.payload],

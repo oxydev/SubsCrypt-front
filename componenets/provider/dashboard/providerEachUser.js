@@ -17,7 +17,7 @@ export default function ProviderEachUser(props) {
   const amount = parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12);
   const characteristicsValue = userInfo.characteristics;
   const characteristics = plan.characteristics.map((item, index) => (
-    <div className="userCharacteristics">
+    <div key={"userCharacteristics" + index} className="userCharacteristics">
       <h4>{item}</h4>
       <p>{characteristicsValue[index]}</p>
     </div>

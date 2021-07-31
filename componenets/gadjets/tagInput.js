@@ -4,7 +4,6 @@ import { WithContext as ReactTags } from "react-tag-input";
 //ُThe component for generating the input field for plan characteristics
 export default function TagInput(props) {
   const { initailTags, handleChange } = props;
-  console.log(initailTags);
   const [tags, setTags] = useState([...initailTags]);
   const KeyCodes = {
     comma: 188,

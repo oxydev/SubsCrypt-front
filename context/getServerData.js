@@ -19,7 +19,6 @@ export const ServerFunctions = (props) => {
       .get(url)
       .then((result) => {
         // console.log(result)
-        const data = result.data;
         dispatch({ type: "USER_IMAGE", payload: url });
       })
       .catch((error) => {
