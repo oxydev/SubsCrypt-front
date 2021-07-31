@@ -91,6 +91,7 @@
   form {
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   input {
     width: 100%;
@@ -114,5 +115,7 @@
   }
   .LoginError {
     color: red;
+    position: absolute;
+    top: 130px;
   }
 }

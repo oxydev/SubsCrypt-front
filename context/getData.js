@@ -240,6 +240,7 @@ export const DataFunctions = (props) => {
           loadUserData(username, password);
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
+          window.alert("Invalid username of password!");
         }
       })
       .catch((error) => {
@@ -250,7 +251,6 @@ export const DataFunctions = (props) => {
 
   //Check user authentication by username and password
   const checkProviderAuthWithUserName = async (username, password) => {
-    setLoading(true);
     await (
       await subscrypt
     )
@@ -289,6 +289,7 @@ export const DataFunctions = (props) => {
           });
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
+          window.alert("Invalid username of password!");
           setAuth(false);
           setLoading(false);
         }
