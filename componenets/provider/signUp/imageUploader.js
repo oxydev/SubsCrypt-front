@@ -52,13 +52,12 @@ export default function ImageUploader(props) {
   return (
     <div className="ImageUploader">
       <div className="UploadZone" onDrop={dropHandler} onDragOver={dragOverHandler}>
-        <a
-          href="javascript:;"
+        <button
           style={{ backgroundImage: `url(${url})` }}
           onClick={() => {
             handleUploadClick();
           }}
-        ></a>
+        ></button>
         <input ref={inputRF} type="file" id="upload" name="upload" onChange={inputChangeHandler} />
       </div>
       <p className="FileName">{file ? file.name : ""}</p>

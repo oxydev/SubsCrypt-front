@@ -121,61 +121,66 @@ export default function ProviderSignUp() {
   }
 
   function handleRegister() {
-    var wallet = globalState.user.userWallet;
-    function parseDurations(planList) {
-      var dur = [];
-      planList.forEach((plan) => {
-        if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
-      });
-      return dur;
-    }
-
-    function parsePrices(planList) {
-      var prices = [];
-      planList.forEach((plan) => {
-        prices.push(Number(plan.price) * 10 ** 12);
-      });
-      return prices;
-    }
-
-    function parsePolicies(planList) {
-      var policies = [];
-      planList.forEach((plan) => {
-        policies.push(plan.refund * 10);
-      });
-      return policies;
-    }
-
-    function parseChars(planList) {
-      const plansChars = [];
-      planList.forEach((plan) => {
-        const chars = [];
-        plan.characteristics.forEach((char) => {
-          chars.push(char.text);
+    const image = info.image;
+    if (!image) {
+      window.alert("You should upload a photo!");
+    } else {
+      var wallet = globalState.user.userWallet;
+      function parseDurations(planList) {
+        var dur = [];
+        planList.forEach((plan) => {
+          if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
+          else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+          else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
         });
-        plansChars.push(chars);
-      });
-      return plansChars;
+        return dur;
+      }
+
+      function parsePrices(planList) {
+        var prices = [];
+        planList.forEach((plan) => {
+          prices.push(Number(plan.price) * 10 ** 12);
+        });
+        return prices;
+      }
+
+      function parsePolicies(planList) {
+        var policies = [];
+        planList.forEach((plan) => {
+          policies.push(plan.refund * 10);
+        });
+        return policies;
+      }
+
+      function parseChars(planList) {
+        const plansChars = [];
+        planList.forEach((plan) => {
+          const chars = [];
+          plan.characteristics.forEach((char) => {
+            chars.push(char.text);
+          });
+          plansChars.push(chars);
+        });
+        return plansChars;
+      }
+
+      var durations = parseDurations(planList);
+      var prices = parsePrices(planList);
+      var refundPolicies = parsePolicies(planList);
+      var plansChars = parseChars(planList);
+
+      providerRegisterHandler(
+        wallet,
+        callback,
+        durations,
+        prices,
+        refundPolicies,
+        info.ProviderMoneyAddress,
+        info.ProviderUsername,
+        info.ProviderPassword,
+        plansChars
+      );
     }
-
-    var durations = parseDurations(planList);
-    var prices = parsePrices(planList);
-    var refundPolicies = parsePolicies(planList);
-    var plansChars = parseChars(planList);
-
-    providerRegisterHandler(
-      wallet,
-      callback,
-      durations,
-      prices,
-      refundPolicies,
-      info.ProviderMoneyAddress,
-      info.ProviderUsername,
-      info.ProviderPassword,
-      plansChars
-    );
   }
 
   function makeFieldsVisible() {
