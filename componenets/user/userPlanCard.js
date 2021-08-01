@@ -90,10 +90,12 @@ export default function UserPlanCard(props) {
           : "UserPlanCard"
       }
     >
-      <img className="UserPlan-logo" src={localPlans.logoURL} />
+      <img className="UserPlan-logo" src={props.plan.image} />
       <div className="UserPlan-specs">
-        <p className="UserPlan-name">{localPlans.name}</p>
-        <p className="UserPlan-Provider">{localPlans.provider}</p>
+        <p className="UserPlan-name">{props.plan.name ? props.plan.name : "Loading..."}</p>
+        <p className="UserPlan-Provider">
+          {props.plan.providerName ? props.plan.providerName : "Loading..."}
+        </p>
         <div className="UserPlan-featurBox">
           <h6>Duration</h6>
           <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>
@@ -104,7 +106,7 @@ export default function UserPlanCard(props) {
         </div>
       </div>
       <div className="UserPlan-specs">
-        <p className="UserPlan-desc">{localPlans.description}</p>
+        <p className="UserPlan-desc">{props.plan.description}</p>
         <div className="UserPlan-featurBox">
           <h6>Activation date</h6>
           <p>{utils.timeStamptoDate(parseInt(props.plan.subscription_time.replace(/,/g, "")))}</p>

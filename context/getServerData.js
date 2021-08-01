@@ -19,7 +19,8 @@ export const ServerFunctions = (props) => {
       .get(url)
       .then((result) => {
         // console.log(result)
-        dispatch({ type: "USER_IMAGE", payload: url });
+        // dispatch({ type: "USER_IMAGE", payload: url });
+        return;
       })
       .catch((error) => {
         console.log(error);
@@ -43,7 +44,7 @@ export const ServerFunctions = (props) => {
   };
 
   //load a plan description from server
-  const getProductDescription = async (address, index) => {
+  const getProductDescription = async (address, index, type) => {
     const url =
       "http://206.189.154.160:3000/profile/getProductDescription/" + address + "/" + index;
     axios
@@ -51,7 +52,7 @@ export const ServerFunctions = (props) => {
       .then((result) => {
         // console.log(result);
         const data = result.data;
-        dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, value: data } });
+        dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, type: type, value: data } });
       })
       .catch((error) => {
         console.log(error);
@@ -110,15 +111,18 @@ export const ServerFunctions = (props) => {
   };
 
   //loading a specific plan server info
-  const getPlanServerInfo = async (address, index) => {
-    await getProductDescription(address, index);
+  const getPlanServerInfo = async (address, index, type) => {
+    await getProductDescription(address, index, type);
     const imageUrl = "http://206.189.154.160:3000/profile/getProviderPic/" + address;
     axios
       .get(imageUrl)
       .then((result) => {
         // console.log(result)
         const data = result.data;
-        dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, value: { image: data } } });
+        dispatch({
+          type: "PLAN_SERVERINFO",
+          payload: { index: index, type: type, value: { image: data } },
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -131,7 +135,7 @@ export const ServerFunctions = (props) => {
         const data = result.data;
         dispatch({
           type: "PLAN_SERVERINFO",
-          payload: { index: index, value: { providerName: data.name } },
+          payload: { index: index, type: type, value: { providerName: data.name } },
         });
       })
       .catch((error) => {

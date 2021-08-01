@@ -45,14 +45,14 @@ export default function PlanCard(props) {
     <section className="PlanCard" onClick={type == "user" ? handleSubscribe : () => {}}>
       <header>
         <img className="PlanLogo" src={plan.image} />
-        <h1>{plan.name ? plan.name : "loading..."}</h1>
+        <h1>{plan.name ? plan.name : "Loading..."}</h1>
       </header>
       <main>
         <div>
           <p className="PlanCard-Provider">{plan.providerName}</p>
           <p className="PlanCard-Rate">{localPlans.rate}</p>
         </div>
-        <p className="PlanCard-description">{plan.description ? plan.description : "loading..."}</p>
+        <p className="PlanCard-description">{plan.description ? plan.description : "Loading..."}</p>
         <div>
           <h6>Duration</h6>
           <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>

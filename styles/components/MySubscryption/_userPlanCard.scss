@@ -20,6 +20,8 @@
   @include circle(64px);
   object-fit: auto;
   margin-right: 24px;
+  flex-shrink: 0;
+  background-color: #bdbdbd;
 }
 .UserPlan-specs {
   margin-right: 32px;

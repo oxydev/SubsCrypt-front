@@ -81,16 +81,31 @@ const reducer = (state, action) => {
       };
     //load the information of a specific plan of a povider
     case "PLAN_SERVERINFO":
-      let providerPlans = [...state.providerPlans];
       const index = action.payload.index;
-      providerPlans[index] = {
-        ...providerPlans[index],
-        ...action.payload.value,
-      };
-      return {
-        ...state,
-        providerPlans: [...providerPlans],
-      };
+      const type = action.payload.type;
+      if (type == "provider") {
+        console.log("action type:" + type);
+        let providerPlans = [...state.providerPlans];
+        providerPlans[index] = {
+          ...providerPlans[index],
+          ...action.payload.value,
+        };
+        return {
+          ...state,
+          providerPlans: [...providerPlans],
+        };
+      } else if (type == "user") {
+        console.log("action type:" + type);
+        let plans = [...state.plans];
+        plans[index] = {
+          ...plans[index],
+          ...action.payload.value,
+        };
+        return {
+          ...state,
+          plans: [...plans],
+        };
+      }
     //load the list of subscripted users of a provider with their info
     case "PROVIDER_ALLUSERS":
       // console.log(action.payload);

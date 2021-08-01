@@ -42,6 +42,7 @@ export const DataFunctions = (props) => {
           const newPlan = { ...plan, characteristics: result.result };
           setLoading(false);
           dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
+          serverFunctions.getPlanServerInfo(provider, index, "user");
         }
       });
     }
@@ -212,6 +213,7 @@ export const DataFunctions = (props) => {
             const newPlan = { ...plan, characteristics: result.result };
             setLoading(false);
             dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
+            serverFunctions.getPlanServerInfo(provider, index, "user");
           }
         });
       }
@@ -360,7 +362,7 @@ export const DataFunctions = (props) => {
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
           dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plan });
-          serverFunctions.getPlanServerInfo(address, index);
+          serverFunctions.getPlanServerInfo(address, index, "provider");
         }
       });
     }
