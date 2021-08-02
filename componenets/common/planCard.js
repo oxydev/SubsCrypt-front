@@ -6,7 +6,7 @@ import data from "../../data/testData/providerAddress.json";
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
-  const { plan, index, type } = props;
+  const { plan, index, type,address } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
   const { handleSubscribtion } = useContext(dataContext);
@@ -44,7 +44,7 @@ export default function PlanCard(props) {
   return (
     <section className="PlanCard" onClick={type == "user" ? handleSubscribe : () => {}}>
       <header>
-        <img className="PlanLogo" src={plan.image} />
+        <img className="PlanLogo" src={"http://206.189.154.160:3000/profile/getProviderPic/"+address} />
         <h1>{plan.name ? plan.name : "Loading..."}</h1>
       </header>
       <main>

@@ -11,7 +11,7 @@ export default function ProviderHeader() {
       <div>
         <div className="ProviderHeader-identity">
           <div className="ProviderHeader-profileImage">
-            <img src={user.image} />
+            <img src={"http://206.189.154.160:3000/profile/getProviderPic/"+user.userWallet.address} />
           </div>
           <h2 className="ProviderHeader-name">{user.name ? user.name : "Loading..."}</h2>
           <p className="ProviderHeader-Description">

@@ -14,7 +14,7 @@ export default function ProviderPlansList() {
   }
 
   const plansCard = plans.map((item, index) => (
-    <PlanCard key={"providerPlan" + index} plan={item} index={index} type="provider" />
+    <PlanCard key={"providerPlan" + index} plan={item} index={index} type="provider" address={globalState.user.userWallet.address} />
   ));
   return (
     <section className="ProviderPlansList">
