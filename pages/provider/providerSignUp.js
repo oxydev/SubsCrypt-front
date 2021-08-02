@@ -115,6 +115,7 @@ export default function ProviderSignUp() {
     });
     await Promise.all(promiseList).then((results) => {
       dispatch({ type: "REGISTERED", payload: true });
+      debugger;
       router.push("/provider");
       console.log(results);
     });

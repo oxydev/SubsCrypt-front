@@ -37,8 +37,9 @@
   margin-left: 20px;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 50%px;
-
+  max-width: 50%;
+  flex-shrink: 0;
+  white-space: nowrap;
   @include text-body--large--medium;
   color: $green;
 }
