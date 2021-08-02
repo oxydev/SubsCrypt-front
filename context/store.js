@@ -26,8 +26,11 @@ const reducer = (state, action) => {
     case "LOAD_USER_PLANS":
       return { ...state, plans: action.payload };
     //load only one plan
-    case "LOAD_ONE_USER_PLANS":
+    case "LOAD_ONE_USER_PLANS": {
+      console.log(state)
+      console.log(state.plans)
       return { ...state, plans: [...state.plans, action.payload] };
+    }
     //announce that the username is invalid
     case "INVALID_LOGIN":
       return { ...state, user: action.payload };
@@ -35,11 +38,13 @@ const reducer = (state, action) => {
     case "LOAD_WALLETS":
       return { ...state, wallets: action.payload };
     //load providers plans. Means the plans that are not belong to the current user
-    case "LOAD_PROVIDER_PLANS":
+    case "LOAD_PROVIDER_PLANS": {
+      console.log(action.payload)
       return {
         ...state,
         providerPlans: [...state.providerPlans, action.payload],
       };
+    }
     //set the provider as a signed up provider
     case "REGISTERED":
       return {

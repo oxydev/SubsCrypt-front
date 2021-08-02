@@ -11,7 +11,7 @@ export default function OfferCarousel() {
   }
 
   const offerCards = plans.map((item, index) => (
-    <PlanCard key={"providerPlan" + index} plan={item} index={index} type="user" address={globalState.user.userWallet.address} />
+    <PlanCard key={"providerPlan" + index} plan={item} index={index} type="user" address={item.providerAddress} />
   ));
   return (
     <div className="OfferCarousel">

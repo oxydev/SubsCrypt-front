@@ -1,21 +1,22 @@
-import React, { useContext } from "react";
-import PlanCard from "../../common/planCard";
-import { UserContext } from "../../../context/store";
-import { useRouter } from "next/router";
+import React, { useContext } from 'react'
+import PlanCard from '../../common/planCard'
+import { UserContext } from '../../../context/store'
+import { useRouter } from 'next/router'
 
 //The component for generating the provider plan lists
-export default function ProviderPlansList() {
-  const router = useRouter();
-  const { globalState } = useContext(UserContext);
+export default function ProviderPlansList () {
+  const router = useRouter()
+  const { globalState } = useContext(UserContext)
 
-  let plans = [];
+  let plans = []
   if (globalState.providerPlans) {
-    plans.push(...globalState.providerPlans);
+    plans.push(...globalState.providerPlans)
   }
-
+  console.log(plans)
   const plansCard = plans.map((item, index) => (
-    <PlanCard key={"providerPlan" + index} plan={item} index={index} type="provider" address={globalState.user.userWallet.address} />
-  ));
+    <PlanCard key={'providerPlan' + index} plan={item} index={index} type="provider"
+              address={globalState.user.userWallet.address}/>
+  ))
   return (
     <section className="ProviderPlansList">
       <header>
@@ -23,8 +24,8 @@ export default function ProviderPlansList() {
         <p>Total Plans: {plans.length}</p>
         <button
           onClick={(e) => {
-            e.preventDefault();
-            router.push("/provider/addnewplan");
+            e.preventDefault()
+            router.push('/provider/addnewplan')
           }}
           className="ProviderPlansList-addPlanBtn"
         >
@@ -33,5 +34,5 @@ export default function ProviderPlansList() {
       </header>
       <div>{plansCard}</div>
     </section>
-  );
+  )
 }

@@ -29,6 +29,7 @@ export const DataFunctions = (props) => {
       if (result.status == "Fetched") {
         let plans = result.result;
         plans.map((item) => {
+
           getCharacs(item.provider, item.plan_index, item);
         });
       }
@@ -361,6 +362,7 @@ export const DataFunctions = (props) => {
         // console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
+          plan.providerAddress = address
           dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plan });
           serverFunctions.getPlanServerInfo(address, index, "provider");
         }

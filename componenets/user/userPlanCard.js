@@ -10,6 +10,7 @@ const subscrypt = import("@oxydev/subscrypt");
 //The component for generating a plan card which user has
 export default function UserPlanCard(props) {
   let plan = props.plan.plan;
+  console.log(props.plan)
   const index = props.index;
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
@@ -90,7 +91,7 @@ export default function UserPlanCard(props) {
           : "UserPlanCard"
       }
     >
-      <img className="UserPlan-logo" src={props.plan.image} />
+      <img className="UserPlan-logo" src={"http://206.189.154.160:3000/profile/getProviderPic/" + props.plan.provider} />
       <div className="UserPlan-specs">
         <p className="UserPlan-name">{props.plan.name ? props.plan.name : "Loading..."}</p>
         <p className="UserPlan-Provider">
