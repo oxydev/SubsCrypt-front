@@ -12,20 +12,7 @@ export const serverDataContext = React.createContext({});
 export const ServerFunctions = (props) => {
   const { dispatch } = useContext(UserContext);
 
-  //load the provider image url from server
-  const getProviderPic = async (address) => {
-    const url = "http://206.189.154.160:3000/profile/getProviderPic/" + address;
-    axios
-      .get(url)
-      .then((result) => {
-        // console.log(result)
-        // dispatch({ type: "USER_IMAGE", payload: url });
-        return;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
 
   //load the provider description from server
   const getProviderDescription = async (address) => {
@@ -94,7 +81,6 @@ export const ServerFunctions = (props) => {
   const getProviderHeaderInfo = (address) => {
     getProviderDescription(address);
     getProviderIncome(address);
-    getProviderPic(address);
   };
 
   //loading the list of users whoe are subscripted to a specific plan
@@ -113,20 +99,10 @@ export const ServerFunctions = (props) => {
   //loading a specific plan server info
   const getPlanServerInfo = async (address, index, type) => {
     await getProductDescription(address, index, type);
-    const imageUrl = "http://206.189.154.160:3000/profile/getProviderPic/" + address;
-    axios
-      .get(imageUrl)
-      .then((result) => {
-        // console.log(result)
-        const data = result.data;
-        dispatch({
-          type: "PLAN_SERVERINFO",
-          payload: { index: index, type: type, value: { image: data } },
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch({
+      type: "PLAN_SERVERINFO",
+      payload: { index: index, type: type },
+    });
     const nameUrl = "http://206.189.154.160:3000/profile/getProviderDescription/" + address;
     axios
       .get(nameUrl)
@@ -145,7 +121,6 @@ export const ServerFunctions = (props) => {
 
   //variable for exporting the functions form the components
   const contextValue = {
-    getProviderPic,
     getProviderDescription,
     getProviderAllUsers,
     getUsersOfPlan,
