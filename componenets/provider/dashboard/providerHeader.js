@@ -11,7 +11,9 @@ export default function ProviderHeader() {
       <div>
         <div className="ProviderHeader-identity">
           <div className="ProviderHeader-profileImage">
-            <img src={"http://206.189.154.160:3000/profile/getProviderPic/"+user.userWallet.address} />
+            <img
+              src={"http://206.189.154.160:3000/profile/getProviderPic/" + user.userWallet.address}
+            />
           </div>
           <h2 className="ProviderHeader-name">{user.name ? user.name : "Loading..."}</h2>
           <p className="ProviderHeader-Description">
@@ -22,12 +24,15 @@ export default function ProviderHeader() {
           <div className="PlanPart-featureBox">
             <h2>Total Income:</h2>
             <p className="ProviderHeader-income">
-              {user.income ? user.income / Math.pow(10, 12) : "Loading..."} <span>DOT</span>
+              {user.income || user.incom == 0 ? user.income / Math.pow(10, 12) : "Loading..."}{" "}
+              <span>DOT</span>
             </p>
           </div>
           <div className="PlanPart-featureBox">
             <h2>Total Users:</h2>
-            <p className="TotalUsers">{user.usersCount ? user.usersCount : "Loading..."}</p>
+            <p className="TotalUsers">
+              {user.usersCount || user.userCount == 0 ? user.usersCount : "Loading..."}
+            </p>
           </div>
           <div className="PlanPart-featureBox">
             <span>Net income converted to todays conversation rate via Coinmarketcap.com </span>
