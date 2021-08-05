@@ -4,6 +4,7 @@ import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { dataContext } from "../../context/getData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 export default function ProviderSignUp() {
   const router = useRouter();
@@ -115,7 +116,6 @@ export default function ProviderSignUp() {
     });
     await Promise.all(promiseList).then((results) => {
       dispatch({ type: "REGISTERED", payload: true });
-      debugger;
       router.push("/provider");
       console.log(results);
     });

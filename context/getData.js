@@ -29,7 +29,6 @@ export const DataFunctions = (props) => {
       if (result.status == "Fetched") {
         let plans = result.result;
         plans.map((item) => {
-
           getCharacs(item.provider, item.plan_index, item);
         });
       }
@@ -125,7 +124,7 @@ export const DataFunctions = (props) => {
     //function for getting and setting the username of a loged in user if is available
     async function usernameGetter(address) {
       await (await subscrypt).getUsername(address).then((result) => {
-        // console.log(result);
+        console.log(result);
         if (result.status == "Fetched") {
           dispatch({
             type: "LOAD_USER_USERNAME",
@@ -143,10 +142,10 @@ export const DataFunctions = (props) => {
       // console.log(result);
       if (result.status === "Fetched") {
         const planLength = parseInt(result.result);
+        Cookies.set("subscryptWallet", walletAddress);
         if (planLength === 0) {
           dispatch({ type: "REGISTERED", payload: false });
         } else {
-          Cookies.set("subscryptWallet", walletAddress);
           dispatch({ type: "REGISTERED", payload: true });
           //getting the necessary info of a provider form server
           serverFunctions.getProviderHeaderInfo(walletAddress);
@@ -362,7 +361,7 @@ export const DataFunctions = (props) => {
         // console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
-          plan.providerAddress = address
+          plan.providerAddress = address;
           dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plan });
           serverFunctions.getPlanServerInfo(address, index, "provider");
         }

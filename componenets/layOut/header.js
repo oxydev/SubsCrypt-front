@@ -21,7 +21,7 @@ export default function Header() {
         {/* show each of user name or wallet address or both of them */}
         {userName && <p className="UserName">{userName}</p>}
         {userName && userWallet && <p className="UserName">|</p>}
-        {userWallet && <p className="UserName">{middleDots(userWallet.address)}</p>}
+        {userWallet && <p className="UserWallet">{middleDots(userWallet.address)}</p>}
       </div>
       <div
         className="UserMenu"
