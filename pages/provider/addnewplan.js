@@ -89,7 +89,7 @@ export default function AddNewPlan() {
         data: {
           providerAddress: globalState.user.userWallet.address,
           planName: plan.title,
-          planIndex: index,
+          planIndex: index + planNumber,
           description: plan.description,
         },
         headers: {

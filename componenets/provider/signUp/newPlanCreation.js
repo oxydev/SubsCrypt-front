@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PercentSlider from "../../gadjets/percetageSlider";
 import TagInput from "../../gadjets/tagInput";
+import { UserContext } from "../../../context/store";
 
 //The component for handling new plan creation for provider user
 export default function NewPlanCreation(props) {
   const { planList, setPlanList, index } = props;
   const plan = planList[index];
   const [refundValue, setRefundValue] = useState(plan.refund);
+  const { globalState } = useContext(UserContext);
+  const planNumber = globalState.providerPlans.length;
 
   //Function for handle plan form update
   function handlePlanListUpdate(key, value) {
@@ -52,7 +55,7 @@ export default function NewPlanCreation(props) {
       className={plan.visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
     >
       <h1 onClick={toggleVisibility}>
-        Create a Subscryption Plan #{index + 1}
+        Create a Subscryption Plan #{index + planNumber + 1}
         <span></span>
         {planList.length > 1 && (
           <button

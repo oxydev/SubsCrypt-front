@@ -90,6 +90,7 @@ export default function ProviderSignUp() {
       }
     } else if (status.isFinalized) {
       console.log("Finalized block hash", status.asFinalized.toHex());
+      getProviderAllInfo(globalState.user.userWallet.address);
     }
   }
 
