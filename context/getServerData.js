@@ -12,8 +12,6 @@ export const serverDataContext = React.createContext({});
 export const ServerFunctions = (props) => {
   const { dispatch } = useContext(UserContext);
 
-
-
   //load the provider description from server
   const getProviderDescription = async (address) => {
     const url = "http://206.189.154.160:3000/profile/getProviderDescription/" + address;
@@ -37,7 +35,7 @@ export const ServerFunctions = (props) => {
     axios
       .get(url)
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         const data = result.data;
         dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, type: type, value: data } });
       })
@@ -98,6 +96,7 @@ export const ServerFunctions = (props) => {
 
   //loading a specific plan server info
   const getPlanServerInfo = async (address, index, type) => {
+    console.log(address, index, type);
     await getProductDescription(address, index, type);
     dispatch({
       type: "PLAN_SERVERINFO",

@@ -190,9 +190,21 @@ export const DataFunctions = (props) => {
   //function for getting the provider planList
   const getProvidePlanList = async (address, planNumber) => {
     // console.log(planNumber);
-    for (let i = 0; i < planNumber; i++) {
-      //load every plan data
-      loadPlan(address, i);
+    if (!planNumber) {
+      await (await subscrypt).getPlanLength(address).then((result) => {
+        // console.log(result);
+        if (result.status === "Fetched") {
+          const planLength = parseInt(result.result);
+          if (planLength != 0) {
+            getProvidePlanList(address, planLength);
+          }
+        }
+      });
+    } else {
+      for (let i = 0; i < planNumber; i++) {
+        // load every plan data
+        loadPlan(address, i);
+      }
     }
   };
 
@@ -302,14 +314,38 @@ export const DataFunctions = (props) => {
       });
   };
 
+  //Check the provider all info
+  const getProviderAllInfo = async (walletAddress) => {
+    await (await subscrypt).getPlanLength(walletAddress).then((result) => {
+      // console.log(result);
+      if (result.status === "Fetched") {
+        const planLength = parseInt(result.result);
+        Cookies.set("subscryptWallet", walletAddress);
+        if (planLength === 0) {
+          dispatch({ type: "REGISTERED", payload: false });
+        } else {
+          dispatch({ type: "REGISTERED", payload: true });
+          //getting the necessary info of a provider form server
+          serverFunctions.getProviderHeaderInfo(walletAddress);
+          getProvidePlanList(walletAddress, planLength);
+          serverFunctions.getProviderAllUsers(walletAddress);
+        }
+        router.push("/provider/");
+      }
+      setLoading(false);
+    });
+  };
+
   //check authentication by cookies
   const checkAuthByCookie = async () => {
+    console.log("checkAuthbyCookie");
     setLoading(true);
     const userName = Cookies.get("subscrypt");
     const password = Cookies.get("subscryptPass");
     const userType = Cookies.get("subscryptType");
     const userWallet = Cookies.get("subscryptWallet");
     if (password) {
+      console.log("Password");
       if (userType == "user") {
         setAuth(true);
         dispatch({
@@ -341,6 +377,7 @@ export const DataFunctions = (props) => {
         });
       }
     } else if (userWallet) {
+      console.log("wallet");
       setAuth(true);
       connectToWallet([], userType);
     }
@@ -637,12 +674,14 @@ export const DataFunctions = (props) => {
     loadUserData,
     checkUserAuthWithUserName,
     checkProviderAuthWithUserName,
+    getProviderAllInfo,
     checkAuthByCookie,
     loadPlan,
     refundPlan,
     renewPlan,
     subscribePlan,
     getWalletInjector,
+    getProvidePlanList,
     handleSubscribtion,
     handleRenewPlan,
     handleRefundPlan,

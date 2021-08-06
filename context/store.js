@@ -27,8 +27,8 @@ const reducer = (state, action) => {
       return { ...state, plans: action.payload };
     //load only one plan
     case "LOAD_ONE_USER_PLANS": {
-      console.log(state)
-      console.log(state.plans)
+      console.log(state);
+      console.log(state.plans);
       return { ...state, plans: [...state.plans, action.payload] };
     }
     //announce that the username is invalid
@@ -39,10 +39,12 @@ const reducer = (state, action) => {
       return { ...state, wallets: action.payload };
     //load providers plans. Means the plans that are not belong to the current user
     case "LOAD_PROVIDER_PLANS": {
-      console.log(action.payload)
+      console.log(action.payload);
+      const newPlanList = [...state.providerPlans];
+      newPlanList[action.payload.planIndex] = action.payload;
       return {
         ...state,
-        providerPlans: [...state.providerPlans, action.payload],
+        providerPlans: [...newPlanList],
       };
     }
     //set the provider as a signed up provider

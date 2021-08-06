@@ -11,7 +11,7 @@ export default function AddNewPlan() {
   const planNumber = globalState.providerPlans.length;
 
   //importing necessary data functions from the data context
-  const { addNewPlans, CheckWallet } = useContext(dataContext);
+  const { addNewPlans, CheckWallet, getProviderAllInfo } = useContext(dataContext);
 
   //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([
@@ -74,6 +74,7 @@ export default function AddNewPlan() {
       }
     } else if (status.isFinalized) {
       console.log("Finalized block hash", status.asFinalized.toHex());
+      getProviderAllInfo(globalState.user.userWallet.address);
     }
   }
 
