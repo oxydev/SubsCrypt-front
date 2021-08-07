@@ -28,15 +28,13 @@ export default function Login() {
     setRole("providerSignUp");
   }
 
-  //Check the cookies and authentication if cokkies are set
   useEffect(() => {
+    //Check the cookies and authentication if cokkies are set
     if (!auth && (password || userWallet)) {
       checkAuthByCookie();
     }
-  });
 
-  //change the status by clicking on sidebar links
-  useEffect(() => {
+    //change the status by clicking on sidebar links
     const mainLoginLink = document.getElementById("PublicDashboard");
     const userLoginLink = document.getElementById("PublicUser");
     const providerLoginLink = document.getElementById("PublicProvider");

@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 
 export default function ProviderSignUp() {
   const router = useRouter();
-  const { providerRegisterHandler } = useContext(dataContext);
+  const { providerRegisterHandler, getProviderAllInfo } = useContext(dataContext);
   const { globalState, dispatch } = useContext(UserContext);
 
   const [info, setInfo] = useState({

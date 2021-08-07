@@ -30,8 +30,7 @@ export const ServerFunctions = (props) => {
 
   //load a plan description from server
   const getProductDescription = async (address, index, type) => {
-    const url =
-      "http://206.189.154.160:3000/profile/getProductDescription/" + address + "/" + index;
+    const url = "https://api.subscrypt.io/profile/getProductDescription/" + address + "/" + index;
     axios
       .get(url)
       .then((result) => {
@@ -46,7 +45,7 @@ export const ServerFunctions = (props) => {
 
   //load the list of users who are subscripted to a provider's plans
   const getProviderAllUsers = async (address) => {
-    const url = "http://206.189.154.160:3000/subscriptions/getUsers/" + address;
+    const url = "https://api.subscrypt.io/subscriptions/getUsers/" + address;
     axios
       .get(url)
       .then((result) => {
@@ -61,7 +60,7 @@ export const ServerFunctions = (props) => {
 
   //load the provider income and his users count
   const getProviderIncome = async (address) => {
-    const url = "http://206.189.154.160:3000/subscriptions/getProviderData/" + address;
+    const url = "https://api.subscrypt.io/subscriptions/getProviderData/" + address;
     axios
       .get(url)
       .then((result) => {
@@ -83,7 +82,7 @@ export const ServerFunctions = (props) => {
 
   //loading the list of users whoe are subscripted to a specific plan
   const getUsersOfPlan = async (address, index) => {
-    const url = "http://206.189.154.160:3000/subscriptions/getUsersOfPlan/" + address + "/" + index;
+    const url = "https://api.subscrypt.io/subscriptions/getUsersOfPlan/" + address + "/" + index;
     axios
       .get(url)
       .then((result) => {
@@ -102,7 +101,7 @@ export const ServerFunctions = (props) => {
       type: "PLAN_SERVERINFO",
       payload: { index: index, type: type },
     });
-    const nameUrl = "http://206.189.154.160:3000/profile/getProviderDescription/" + address;
+    const nameUrl = "https://api.subscrypt.io/profile/getProviderDescription/" + address;
     axios
       .get(nameUrl)
       .then((result) => {

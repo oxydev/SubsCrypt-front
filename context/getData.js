@@ -272,6 +272,7 @@ export const DataFunctions = (props) => {
       .then(async (result) => {
         // console.log(result);
         if (result.result == true) {
+          setLoading(true);
           dispatch({
             type: "LOAD_USER",
             payload: {
