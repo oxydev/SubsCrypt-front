@@ -13,7 +13,7 @@
   align-items: center;
   border: 1px solid $green;
   border-radius: $borderRadius--regular;
-  padding: 0 46px 0 23px;
+  padding: 0 23px;
   max-width: 355px;
   overflow: hidden;
   cursor: pointer;
@@ -34,19 +34,24 @@
 }
 .UserName {
   line-height: 2.4rem;
-  margin-left: 20px;
+  margin: 0 10px;
   text-overflow: ellipsis;
   overflow: hidden;
-  min-width: 50%;
   flex-shrink: 0;
   white-space: nowrap;
+  @include text-body--large--medium;
+  color: $green;
+}
+.Separator {
+  line-height: 2.4rem;
+  margin: 0 10px;
+  flex-shrink: 0;
   @include text-body--large--medium;
   color: $green;
 }
 .UserWallet {
   line-height: 2.4rem;
   margin-left: 20px;
-  max-width: 50%;
   flex-shrink: 0;
   white-space: nowrap;
   @include text-body--large--medium;

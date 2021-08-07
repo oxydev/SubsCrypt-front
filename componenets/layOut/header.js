@@ -20,7 +20,7 @@ export default function Header() {
         {/* <img className="Avatar" src={user.avatar} /> */}
         {/* show each of user name or wallet address or both of them */}
         {userName && <p className="UserName">{userName}</p>}
-        {userName && userWallet && <p className="UserName">|</p>}
+        {userName && userWallet && <p className="Separator">|</p>}
         {userWallet && <p className="UserWallet">{middleDots(userWallet.address)}</p>}
       </div>
       <div
