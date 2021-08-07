@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
@@ -20,7 +20,36 @@ export const DataFunctions = (props) => {
   const { setLoading } = useContext(loadingContext);
   const { setModal, setCallBack } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
+  const [address, setAddress] = useState("");
   const serverFunctions = useContext(serverDataContext);
+
+  //Function for getting the user address for charging money
+  const sendMoneyToAddress = () => {
+    console.log("send money ");
+    const modalElement = (
+      <div>
+        <form onSubmit={handleSendMoney}>
+          <label>Please input your wallet address</label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
+          />
+          <input type="submit" value="submit" />
+        </form>
+      </div>
+    );
+    setModal(modalElement);
+
+    async function handleSendMoney() {
+      setModal(null);
+      console.log(await subscrypt);
+      await (await subscrypt).transferToken(address).then((result) => {
+        console.log(result);
+      });
+    }
+  };
 
   //Function for getting the user plans data after login by wallet
   const loadUserDataByWallet = async (address) => {
@@ -670,6 +699,7 @@ export const DataFunctions = (props) => {
   };
 
   const contextValue = {
+    sendMoneyToAddress,
     connectToWallet,
     CheckWallet,
     loadUserData,

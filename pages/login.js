@@ -9,7 +9,7 @@ import WalletConnection from "../componenets/login/walletConnection";
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Login() {
   const [role, setRole] = useState("none");
-  const { checkAuthByCookie } = useContext(dataContext);
+  const { checkAuthByCookie, sendMoneyToAddress } = useContext(dataContext);
   const { auth } = useContext(authContext);
 
   //get coockies
@@ -26,6 +26,10 @@ export default function Login() {
 
   function handleProviderSignUp() {
     setRole("providerSignUp");
+  }
+
+  function hanadleGetToken() {
+    sendMoneyToAddress();
   }
 
   useEffect(() => {
@@ -66,6 +70,7 @@ export default function Login() {
           <button onClick={handleUserLogin}>Login as a User</button>
           <button onClick={handleProviderLogin}>Login as a Provider</button>
           <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
+          <button onClick={hanadleGetToken}>Give me some token</button>
         </div>
       </section>
     );
