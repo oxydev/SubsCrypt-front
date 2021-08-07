@@ -20,7 +20,6 @@ export const DataFunctions = (props) => {
   const { setLoading } = useContext(loadingContext);
   const { setModal, setCallBack } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
-  const [address, setAddress] = useState("");
   const serverFunctions = useContext(serverDataContext);
 
   //Function for getting the user address for charging money
@@ -31,9 +30,10 @@ export const DataFunctions = (props) => {
         <form onSubmit={handleSendMoney}>
           <label>Please input your wallet address</label>
           <input
+            id="modalAddressInput"
             type="text"
             onChange={(e) => {
-              setAddress(e.target.value);
+              setdata(e.target.value);
             }}
           />
           <input type="submit" value="submit" />
@@ -44,10 +44,18 @@ export const DataFunctions = (props) => {
 
     async function handleSendMoney() {
       setModal(null);
-      console.log(await subscrypt);
-      await (await subscrypt).transferToken(address).then((result) => {
-        console.log(result);
-      });
+      const address = document.getElementById("modalAddressInput").value;
+      await (
+        await subscrypt
+      )
+        .transferToken(address)
+        .then((result) => {
+          console.log(result.toHex());
+          window.alert("Operation has been done successful!");
+        })
+        .catch((error) => {
+          window.alert("Operation failed!");
+        });
     }
   };
 

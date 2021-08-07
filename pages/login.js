@@ -43,6 +43,7 @@ export default function Login() {
     const userLoginLink = document.getElementById("PublicUser");
     const providerLoginLink = document.getElementById("PublicProvider");
     const signUpLink = document.getElementById("publicSignUp");
+    const giveTokenLink = document.getElementById("giveSomeToken");
 
     mainLoginLink.onclick = () => {
       setRole("none");
@@ -59,6 +60,8 @@ export default function Login() {
     signUpLink.onclick = () => {
       setRole("providerSignUp");
     };
+
+    giveTokenLink.onclick = hanadleGetToken;
   });
 
   //change the login menu according to selecting each type
