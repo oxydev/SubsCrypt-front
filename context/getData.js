@@ -157,21 +157,21 @@ export const DataFunctions = (props) => {
         callback(result[index]);
       }
     }
-
-    //function for getting and setting the username of a loged in user if is available
-    async function usernameGetter(address) {
-      await (await subscrypt).getUsername(address).then((result) => {
-        console.log(result);
-        if (result.status == "Fetched") {
-          dispatch({
-            type: "LOAD_USER_USERNAME",
-            payload: result.result,
-          });
-        }
-        Cookies.set("subscrypt", result.result);
-      });
-    }
   };
+
+  //function for getting and setting the username of a loged in user if is available
+  async function usernameGetter(address) {
+    await (await subscrypt).getUsername(address).then((result) => {
+      console.log(result);
+      if (result.status == "Fetched") {
+        dispatch({
+          type: "LOAD_USER_USERNAME",
+          payload: result.result,
+        });
+      }
+      Cookies.set("subscrypt", result.result);
+    });
+  }
 
   //function for checking if a provider who is logged in by wallet has already signed up as a provider or not
   async function checkIfSignedUp(walletAddress) {
@@ -372,6 +372,8 @@ export const DataFunctions = (props) => {
       }
       setLoading(false);
     });
+
+    await usernameGetter(walletAddress);
   };
 
   //check authentication by cookies

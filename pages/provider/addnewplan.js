@@ -101,8 +101,8 @@ export default function AddNewPlan() {
       promiseList.push(axios(config));
     });
     await Promise.all(promiseList).then((results) => {
-      console.log("redirect here");
-      router.push("/provider");
+      // console.log("redirect here");
+      // router.push("/provider");
       console.log(results);
     });
   }
