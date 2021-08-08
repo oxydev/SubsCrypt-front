@@ -1,4 +1,7 @@
 # SubsCrypt-front
+<img src="https://oxydev.github.io/SubsCrypt-docs/images/logo.jpg" width="500">
+
+[![Docker Image CI](https://github.com/oxydev/SubsCrypt-front/actions/workflows/docker-hub-test.yml/badge.svg)](https://github.com/oxydev/SubsCrypt-front/actions/workflows/docker-hub-test.yml)
 
 This is an open source project for generating the front end part of a big project called Subscrypt. The main project is for creating subscription plans and subscribe to them by the use of crypto currency.Front end codes generates completely client side, and the neccessary informations are received from the blockchain and the server.
 
