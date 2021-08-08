@@ -27,15 +27,9 @@ export const DataFunctions = (props) => {
     // console.log("send money ");
     const modalElement = (
       <div>
-        <form onSubmit={handleSendMoney}>
+        <form className="GiveTokenForm" onSubmit={handleSendMoney}>
           <label>Please input your wallet address</label>
-          <input
-            id="modalAddressInput"
-            type="text"
-            onChange={(e) => {
-              setdata(e.target.value);
-            }}
-          />
+          <input id="modalAddressInput" type="text" />
           <input type="submit" value="submit" />
         </form>
       </div>
