@@ -3,7 +3,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY . .
-RUN npm install --legacy-peer-deps
+RUN npm install --force
 RUN npm run build
 
 EXPOSE 5555
