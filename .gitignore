@@ -3,5 +3,4 @@ node_modules
 .DS_Store
 .idea
 hardCode.txt
-package-lock.json
 .vscode
