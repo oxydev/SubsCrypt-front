@@ -108,7 +108,7 @@ export default function UserPlanCard(props) {
         </div>
         <div className="UserPlan-featurBox">
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy / 10 + " Refund"}</p>
+          <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
         </div>
       </div>
       <div className="UserPlan-specs">

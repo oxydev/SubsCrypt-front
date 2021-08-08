@@ -68,7 +68,7 @@ export default function PlanCard(props) {
         </div>
         <div>
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy / 10 + " Refund"}</p>
+          <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
         </div>
       </main>
       <footer>
