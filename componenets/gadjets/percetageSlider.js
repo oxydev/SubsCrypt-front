@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "react-rangeslider";
+import Slider, { Range } from "rc-slider";
 
 //The component for setting the amount of a posible refundation of a plan by through a range slider
 export default function PercentSlider(props) {
