@@ -52,7 +52,7 @@ export default function PlanCard(props) {
       <header>
         <img
           className="PlanLogo"
-          src={"http://206.189.154.160:3000/profile/getProviderPic/" + address}
+          src={"https://api.subscrypt.io/profile/getProviderPic/" + address}
         />
         <h1>{plan.name ? plan.name : "Loading..."}</h1>
       </header>

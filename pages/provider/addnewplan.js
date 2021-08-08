@@ -85,7 +85,7 @@ export default function AddNewPlan() {
       var axios = require("axios");
       var config = {
         method: "patch",
-        url: "http://206.189.154.160:3000/profile/updateProductProfile",
+        url: "https://api.subscrypt.io/profile/updateProductProfile",
         data: {
           providerAddress: globalState.user.userWallet.address,
           planName: plan.title,

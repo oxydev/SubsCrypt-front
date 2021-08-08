@@ -14,7 +14,7 @@ export const ServerFunctions = (props) => {
 
   //load the provider description from server
   const getProviderDescription = async (address) => {
-    const url = "http://206.189.154.160:3000/profile/getProviderDescription/" + address;
+    const url = "https://api.subscrypt.io/profile/getProviderDescription/" + address;
     axios
       .get(url)
       .then((result) => {

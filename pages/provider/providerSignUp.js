@@ -65,7 +65,7 @@ export default function ProviderSignUp() {
           data.append("providerName", info.ProviderName);
           var config = {
             method: "post",
-            url: "http://206.189.154.160:3000/profile/newProviderRegister",
+            url: "https://api.subscrypt.io/profile/newProviderRegister",
             data: data,
             headers: {
               "Content-Type": `multipart/form-data;`,
@@ -99,7 +99,7 @@ export default function ProviderSignUp() {
       var axios = require("axios");
       var config = {
         method: "patch",
-        url: "http://206.189.154.160:3000/profile/updateProductProfile",
+        url: "https://api.subscrypt.io/profile/updateProductProfile",
         data: {
           providerAddress: globalState.user.userWallet.address,
           planName: plan.title,

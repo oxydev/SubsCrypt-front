@@ -95,7 +95,7 @@ export default function UserPlanCard(props) {
     >
       <img
         className="UserPlan-logo"
-        src={"http://206.189.154.160:3000/profile/getProviderPic/" + props.plan.provider}
+        src={"https://api.subscrypt.io/profile/getProviderPic/" + props.plan.provider}
       />
       <div className="UserPlan-specs">
         <p className="UserPlan-name">{props.plan.name ? props.plan.name : "Loading..."}</p>
