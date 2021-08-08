@@ -4,3 +4,4 @@ node_modules
 .idea
 hardCode.txt
 .vscode
+package-lock.json
