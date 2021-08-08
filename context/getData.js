@@ -65,21 +65,23 @@ export const DataFunctions = (props) => {
       setLoading(false);
       if (result.status == "Fetched") {
         let plans = result.result;
-        plans.map((item) => {
-          getCharacs(item.provider, item.plan_index, item);
+        console.log(plans);
+        plans.map((item, index) => {
+          getCharacs(item.provider, item.plan_index, item, index);
         });
       }
     });
 
     //loading each plan characteristics after getting user data
-    async function getCharacs(provider, index, plan) {
-      await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
+    async function getCharacs(provider, planIndex, plan, index) {
+      console.log(planIndex);
+      await (await subscrypt).getPlanCharacteristics(provider, planIndex).then((result) => {
         // console.log(result);
         if (result.status == "Fetched") {
           const newPlan = { ...plan, characteristics: result.result };
           setLoading(false);
-          dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
-          serverFunctions.getPlanServerInfo(provider, index, "user");
+          dispatch({ type: "LOAD_ONE_USER_PLANS", payload: { plan: newPlan, index: index } });
+          serverFunctions.getPlanServerInfo(provider, planIndex, "user", index);
         }
       });
     }
@@ -179,6 +181,8 @@ export const DataFunctions = (props) => {
       // console.log(result);
       if (result.status === "Fetched") {
         const planLength = parseInt(result.result);
+        console.log(planLength);
+        dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
         Cookies.set("subscryptWallet", walletAddress);
         if (planLength === 0) {
           dispatch({ type: "REGISTERED", payload: false });
@@ -249,20 +253,21 @@ export const DataFunctions = (props) => {
   const loadUserData = async (username, password) => {
     await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
       let plans = result.result;
-      // console.log(plans);
-      plans.map((item) => {
+      console.log(plans);
+      plans.map((item, index) => {
         //get chractersitics of each plan
-        getCharacs(item.provider, item.plan_index, item);
+        getCharacs(item.provider, item.plan_index, item, index);
       });
 
-      async function getCharacs(provider, index, plan) {
-        await (await subscrypt).getPlanCharacteristics(provider, index).then((result) => {
-          // console.log(result);
+      async function getCharacs(provider, planIndex, plan, index) {
+        console.log(provider, planIndex, plan, index);
+        await (await subscrypt).getPlanCharacteristics(provider, planIndex).then((result) => {
+          console.log(result);
           if (result.status == "Fetched") {
             const newPlan = { ...plan, characteristics: result.result };
             setLoading(false);
-            dispatch({ type: "LOAD_ONE_USER_PLANS", payload: newPlan });
-            serverFunctions.getPlanServerInfo(provider, index, "user");
+            dispatch({ type: "LOAD_ONE_USER_PLANS", payload: { plan: newPlan, index: index } });
+            serverFunctions.getPlanServerInfo(provider, planIndex, "user", index);
           }
         });
       }
@@ -358,6 +363,7 @@ export const DataFunctions = (props) => {
       // console.log(result);
       if (result.status === "Fetched") {
         const planLength = parseInt(result.result);
+        dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
         Cookies.set("subscryptWallet", walletAddress);
         if (planLength === 0) {
           dispatch({ type: "REGISTERED", payload: false });
@@ -440,7 +446,7 @@ export const DataFunctions = (props) => {
           plan.characteristics = result.result;
           plan.providerAddress = address;
           dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plan });
-          serverFunctions.getPlanServerInfo(address, index, "provider");
+          serverFunctions.getPlanServerInfo(address, index, "provider", index);
         }
       });
     }
@@ -713,6 +719,7 @@ export const DataFunctions = (props) => {
     connectToWallet,
     CheckWallet,
     loadUserData,
+    loadUserDataByWallet,
     checkUserAuthWithUserName,
     checkProviderAuthWithUserName,
     getProviderAllInfo,

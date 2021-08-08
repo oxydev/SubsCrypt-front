@@ -29,8 +29,9 @@ export const ServerFunctions = (props) => {
   };
 
   //load a plan description from server
-  const getProductDescription = async (address, index, type) => {
-    const url = "https://api.subscrypt.io/profile/getProductDescription/" + address + "/" + index;
+  const getProductDescription = async (address, planIndex, type, index) => {
+    const url =
+      "https://api.subscrypt.io/profile/getProductDescription/" + address + "/" + planIndex;
     axios
       .get(url)
       .then((result) => {
@@ -94,9 +95,9 @@ export const ServerFunctions = (props) => {
   };
 
   //loading a specific plan server info
-  const getPlanServerInfo = async (address, index, type) => {
+  const getPlanServerInfo = async (address, planIndex, type, index) => {
     console.log(address, index, type);
-    await getProductDescription(address, index, type);
+    await getProductDescription(address, planIndex, type, index);
     dispatch({
       type: "PLAN_SERVERINFO",
       payload: { index: index, type: type },

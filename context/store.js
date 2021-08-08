@@ -28,8 +28,14 @@ const reducer = (state, action) => {
     //load only one plan
     case "LOAD_ONE_USER_PLANS": {
       console.log(state);
-      console.log(state.plans);
-      return { ...state, plans: [...state.plans, action.payload] };
+      console.log(action.payload.index);
+      const newPlanList = [...state.plans];
+      newPlanList[action.payload.index] = action.payload.plan;
+      return { ...state, plans: [...newPlanList] };
+    }
+    //load provider plans count
+    case "LOAD_PROVIDER_PLANS_COUNT": {
+      return { ...state, user: { ...state.user, plansCount: action.payload } };
     }
     //announce that the username is invalid
     case "INVALID_LOGIN":

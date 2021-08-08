@@ -10,11 +10,12 @@ const subscrypt = import("@oxydev/subscrypt");
 //The component for generating a plan card which user has
 export default function UserPlanCard(props) {
   let plan = props.plan.plan;
-  console.log(props.plan)
+  console.log(props.plan);
   const index = props.index;
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
-  const { handleSubscribtion, handleRenewPlan, handleRefundPlan } = useContext(dataContext);
+  const { handleSubscribtion, handleRenewPlan, handleRefundPlan, loadUserDataByWallet } =
+    useContext(dataContext);
   const status = props.plan.status;
   const walletAddress = globalState.user.userWallet;
   const [localLoading, setLocalLoading] = useState(false);
@@ -78,6 +79,7 @@ export default function UserPlanCard(props) {
       }
     } else if (status.isFinalized) {
       console.log("Finalized block hash", status.asFinalized.toHex());
+      loadUserDataByWallet(globalState.user.userWallet.address);
     }
   }
 
@@ -91,7 +93,10 @@ export default function UserPlanCard(props) {
           : "UserPlanCard"
       }
     >
-      <img className="UserPlan-logo" src={"http://206.189.154.160:3000/profile/getProviderPic/" + props.plan.provider} />
+      <img
+        className="UserPlan-logo"
+        src={"http://206.189.154.160:3000/profile/getProviderPic/" + props.plan.provider}
+      />
       <div className="UserPlan-specs">
         <p className="UserPlan-name">{props.plan.name ? props.plan.name : "Loading..."}</p>
         <p className="UserPlan-Provider">
