@@ -27,8 +27,6 @@ const reducer = (state, action) => {
       return { ...state, plans: action.payload };
     //load only one plan
     case "LOAD_ONE_USER_PLANS": {
-      console.log(state);
-      console.log(action.payload.index);
       const newPlanList = [...state.plans];
       newPlanList[action.payload.index] = action.payload.plan;
       return { ...state, plans: [...newPlanList] };
@@ -45,7 +43,6 @@ const reducer = (state, action) => {
       return { ...state, wallets: action.payload };
     //load providers plans. Means the plans that are not belong to the current user
     case "LOAD_PROVIDER_PLANS": {
-      console.log(action.payload);
       const newPlanList = [...state.providerPlans];
       newPlanList[action.payload.planIndex] = action.payload;
       return {
@@ -97,7 +94,6 @@ const reducer = (state, action) => {
       const index = action.payload.index;
       const type = action.payload.type;
       if (type == "provider") {
-        console.log("action type:" + type);
         let providerPlans = [...state.providerPlans];
         providerPlans[index] = {
           ...providerPlans[index],
@@ -108,7 +104,6 @@ const reducer = (state, action) => {
           providerPlans: [...providerPlans],
         };
       } else if (type == "user") {
-        console.log("action type:" + type);
         let plans = [...state.plans];
         plans[index] = {
           ...plans[index],
@@ -121,7 +116,6 @@ const reducer = (state, action) => {
       }
     //load the list of subscripted users of a provider with their info
     case "PROVIDER_ALLUSERS":
-      // console.log(action.payload);
       return {
         ...state,
         subscriptedUsers: [...action.payload],
@@ -154,7 +148,7 @@ export const Store = (props) => {
     }
   });
 
-  console.log(globalState); //for checking the value of global state when debugging
+  // console.log(globalState); //for checking the value of global state when debugging
 
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>

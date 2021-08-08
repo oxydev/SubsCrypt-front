@@ -18,13 +18,13 @@ export const ServerFunctions = (props) => {
     axios
       .get(url)
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         const data = result.data;
         dispatch({ type: "USER_NAME", payload: data.name });
         dispatch({ type: "USER_DESCRIPTION", payload: data.description });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -35,12 +35,12 @@ export const ServerFunctions = (props) => {
     axios
       .get(url)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         const data = result.data;
         dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, type: type, value: data } });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -55,7 +55,7 @@ export const ServerFunctions = (props) => {
         dispatch({ type: "PROVIDER_ALLUSERS", payload: data.subscriptions });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -71,7 +71,7 @@ export const ServerFunctions = (props) => {
         dispatch({ type: "USER_INCOME", payload: data.income });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -96,7 +96,7 @@ export const ServerFunctions = (props) => {
 
   //loading a specific plan server info
   const getPlanServerInfo = async (address, planIndex, type, index) => {
-    console.log(address, index, type);
+    // console.log(address, index, type);
     await getProductDescription(address, planIndex, type, index);
     dispatch({
       type: "PLAN_SERVERINFO",
@@ -114,7 +114,7 @@ export const ServerFunctions = (props) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

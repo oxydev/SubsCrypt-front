@@ -43,19 +43,19 @@ export default function ProviderSignUp() {
   }
 
   function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
-    console.log(status);
+    // console.log("Transaction status:", status.type);
+    // console.log(status);
     if (status.isInBlock) {
-      console.log("Included at block hash", status.asInBlock.toHex());
-      console.log("Events:");
-      console.log(events);
+      // console.log("Included at block hash", status.asInBlock.toHex());
+      // console.log("Events:");
+      // console.log(events);
       let check = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
           window.alert("The operation has been done successfully");
-          console.log("doneee");
+          // console.log("doneee");
           var axios = require("axios");
           var FormData = require("form-data");
           var data = new FormData();
@@ -75,13 +75,12 @@ export default function ProviderSignUp() {
           axios(config)
             .then(function (response) {
               if (response.status === 200) {
-                console.log("shit");
                 allPlanPromise();
               }
             })
             .catch(function (error) {
               alert("error");
-              console.log(error);
+              // console.log(error);
             });
         }
       });
@@ -89,7 +88,7 @@ export default function ProviderSignUp() {
         window.alert("The operation failed!");
       }
     } else if (status.isFinalized) {
-      console.log("Finalized block hash", status.asFinalized.toHex());
+      // console.log("Finalized block hash", status.asFinalized.toHex());
       getProviderAllInfo(globalState.user.userWallet.address);
     }
   }
@@ -118,7 +117,7 @@ export default function ProviderSignUp() {
     await Promise.all(promiseList).then((results) => {
       dispatch({ type: "REGISTERED", payload: true });
       router.push("/provider");
-      console.log(results);
+      // console.log(results);
     });
   }
 

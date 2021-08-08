@@ -37,8 +37,6 @@ export default function App({ Component, pageProps }) {
     }, 200);
   }, []);
 
-  console.log(auth);
-
   return (
     <>
       <Head>

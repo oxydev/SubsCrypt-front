@@ -54,21 +54,21 @@ export default function UserPlanCard(props) {
 
   //Renew function
   function handleRenew() {
-    console.log(props.plan);
+    // console.log(props.plan);
     handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback);
   }
 
   //callback function
   function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
+    // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
-      console.log("Included at block hash", status.asInBlock.toHex());
-      console.log("Events:");
-      console.log(events);
+      // console.log("Included at block hash", status.asInBlock.toHex());
+      // console.log("Events:");
+      // console.log(events);
       let check = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
           window.alert("The operation has been done successfully");
@@ -78,7 +78,7 @@ export default function UserPlanCard(props) {
         window.alert("The operation failed!");
       }
     } else if (status.isFinalized) {
-      console.log("Finalized block hash", status.asFinalized.toHex());
+      // console.log("Finalized block hash", status.asFinalized.toHex());
       loadUserDataByWallet(globalState.user.userWallet.address);
     }
   }

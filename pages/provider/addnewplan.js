@@ -54,15 +54,15 @@ export default function AddNewPlan() {
 
   //function for calling after registeration result has been received
   function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
-    console.log(status);
+    // console.log("Transaction status:", status.type);
+    // console.log(status);
     if (status.isInBlock) {
-      console.log("Included at block hash", status.asInBlock.toHex());
-      console.log("Events:");
-      console.log(events);
+      // console.log("Included at block hash", status.asInBlock.toHex());
+      // console.log("Events:");
+      // console.log(events);
       let check = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
           allPlanPromise();
@@ -73,7 +73,7 @@ export default function AddNewPlan() {
         window.alert("The operation failed!");
       }
     } else if (status.isFinalized) {
-      console.log("Finalized block hash", status.asFinalized.toHex());
+      // console.log("Finalized block hash", status.asFinalized.toHex());
       getProviderAllInfo(globalState.user.userWallet.address);
     }
   }
@@ -103,7 +103,7 @@ export default function AddNewPlan() {
     await Promise.all(promiseList).then((results) => {
       // console.log("redirect here");
       // router.push("/provider");
-      console.log(results);
+      // console.log(results);
     });
   }
 

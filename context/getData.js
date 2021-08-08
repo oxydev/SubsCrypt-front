@@ -24,7 +24,7 @@ export const DataFunctions = (props) => {
 
   //Function for getting the user address for charging money
   const sendMoneyToAddress = () => {
-    console.log("send money ");
+    // console.log("send money ");
     const modalElement = (
       <div>
         <form onSubmit={handleSendMoney}>
@@ -50,7 +50,7 @@ export const DataFunctions = (props) => {
       )
         .transferToken(address)
         .then((result) => {
-          console.log(result.toHex());
+          // console.log(result.toHex());
           window.alert("Operation has been done successful!");
         })
         .catch((error) => {
@@ -62,11 +62,9 @@ export const DataFunctions = (props) => {
   //Function for getting the user plans data after login by wallet
   const loadUserDataByWallet = async (address) => {
     await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
-      console.log("wallet2");
-      console.log(result);
       if (result.status == "Fetched") {
         let plans = result.result;
-        console.log(plans);
+        // console.log(plans);
         if (plans.length == 0) {
           setLoading(false);
         }
@@ -80,7 +78,7 @@ export const DataFunctions = (props) => {
 
     //loading each plan characteristics after getting user data
     async function getCharacs(provider, planIndex, plan, index) {
-      console.log(planIndex);
+      // console.log(planIndex);
       await (await subscrypt).getPlanCharacteristics(provider, planIndex).then((result) => {
         // console.log(result);
         if (result.status == "Fetched") {
@@ -170,7 +168,7 @@ export const DataFunctions = (props) => {
   //function for getting and setting the username of a loged in user if is available
   async function usernameGetter(address) {
     await (await subscrypt).getUsername(address).then((result) => {
-      console.log(result);
+      // console.log(result);
       if (result.status == "Fetched") {
         dispatch({
           type: "LOAD_USER_USERNAME",
@@ -187,7 +185,7 @@ export const DataFunctions = (props) => {
       // console.log(result);
       if (result.status === "Fetched") {
         const planLength = parseInt(result.result);
-        console.log(planLength);
+        // console.log(planLength);
         dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
         Cookies.set("subscryptWallet", walletAddress);
         if (planLength === 0) {
@@ -259,16 +257,16 @@ export const DataFunctions = (props) => {
   const loadUserData = async (username, password) => {
     await (await subscrypt).retrieveWholeDataWithUsername(username, password).then((result) => {
       let plans = result.result;
-      console.log(plans);
+      // console.log(plans);
       plans.map((item, index) => {
         //get chractersitics of each plan
         getCharacs(item.provider, item.plan_index, item, index);
       });
 
       async function getCharacs(provider, planIndex, plan, index) {
-        console.log(provider, planIndex, plan, index);
+        // console.log(provider, planIndex, plan, index);
         await (await subscrypt).getPlanCharacteristics(provider, planIndex).then((result) => {
-          console.log(result);
+          // console.log(result);
           if (result.status == "Fetched") {
             const newPlan = { ...plan, characteristics: result.result };
             setLoading(false);
@@ -390,14 +388,14 @@ export const DataFunctions = (props) => {
 
   //check authentication by cookies
   const checkAuthByCookie = async () => {
-    console.log("checkAuthbyCookie");
+    // console.log("checkAuthbyCookie");
     setLoading(true);
     const userName = Cookies.get("subscrypt");
     const password = Cookies.get("subscryptPass");
     const userType = Cookies.get("subscryptType");
     const userWallet = Cookies.get("subscryptWallet");
     if (password) {
-      console.log("Password");
+      // console.log("Password");
       if (userType == "user") {
         setAuth(true);
         dispatch({
@@ -429,7 +427,7 @@ export const DataFunctions = (props) => {
         });
       }
     } else if (userWallet) {
-      console.log("wallet");
+      // console.log("wallet");
       setAuth(true);
       connectToWallet([], userType);
     }
