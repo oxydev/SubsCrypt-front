@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
-import ProviderSignUp from "./provider/providerSignUp";
 import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
-import WalletConnection from "../componenets/wallet/walletConnection";
+import WalletConnection from "../componenets/login/walletConnection";
 
+//This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Login() {
   const [role, setRole] = useState("none");
-  const { checkAuthByCookie } = useContext(dataContext);
+  const { checkAuthByCookie, sendMoneyToAddress } = useContext(dataContext);
   const { auth } = useContext(authContext);
 
   //get coockies
@@ -28,17 +28,22 @@ export default function Login() {
     setRole("providerSignUp");
   }
 
-  //Check the cookies and auth if cokkies are set
-  if (!auth && (password || userWallet)) {
-    checkAuthByCookie();
+  function hanadleGetToken() {
+    sendMoneyToAddress();
   }
 
-  //Set change the status by clicking on sidebar links
   useEffect(() => {
+    //Check the cookies and authentication if cokkies are set
+    if (!auth && (password || userWallet)) {
+      checkAuthByCookie();
+    }
+
+    //change the status by clicking on sidebar links
     const mainLoginLink = document.getElementById("PublicDashboard");
     const userLoginLink = document.getElementById("PublicUser");
     const providerLoginLink = document.getElementById("PublicProvider");
     const signUpLink = document.getElementById("publicSignUp");
+    const giveTokenLink = document.getElementById("giveSomeToken");
 
     mainLoginLink.onclick = () => {
       setRole("none");
@@ -55,18 +60,20 @@ export default function Login() {
     signUpLink.onclick = () => {
       setRole("providerSignUp");
     };
+
+    giveTokenLink.onclick = hanadleGetToken;
   });
 
+  //change the login menu according to selecting each type
   if (role == "none") {
     return (
       <section className="MainLoginPage">
-        {/* <WalletConnection />
-        <LoginPart /> */}
         <h1>Choose your role to login</h1>
         <div>
           <button onClick={handleUserLogin}>Login as a User</button>
           <button onClick={handleProviderLogin}>Login as a Provider</button>
           <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
+          <button onClick={hanadleGetToken}>Give me some token</button>
         </div>
       </section>
     );
@@ -75,6 +82,10 @@ export default function Login() {
   } else if (role == "provider") {
     return <ProviderLogin />;
   } else if (role == "providerSignUp") {
-    return <WalletConnection type="provider" />;
+    return (
+      <div className="SignUp-walletConnection">
+        <WalletConnection type="provider" />
+      </div>
+    );
   }
 }

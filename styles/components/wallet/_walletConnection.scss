@@ -4,6 +4,7 @@
   h1 {
     @include text--heading2;
     margin-bottom: 80px;
+    text-align: center;
   }
   h2 {
     @include text-body--small--regular;
@@ -66,6 +67,10 @@
   }
 }
 
+.SignUp-walletConnection {
+  padding-top: 50px;
+}
+
 //Login part
 .Login {
   margin: 24px auto 50px;
@@ -86,6 +91,7 @@
   form {
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   input {
     width: 100%;
@@ -106,5 +112,10 @@
     @include text-body--large--medium;
     color: #fff;
     margin: 28px 0 0;
+  }
+  .LoginError {
+    color: red;
+    position: absolute;
+    top: 130px;
   }
 }

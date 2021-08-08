@@ -5,12 +5,15 @@ import { dataContext } from "../../context/getData";
 import { useRouter } from "next/router";
 
 export default function AddNewPlan() {
-  const { globalState, dispatch } = useContext(UserContext);
   const router = useRouter();
+  const { globalState } = useContext(UserContext);
 
   const planNumber = globalState.providerPlans.length;
-  const { addNewPlans, CheckWallet } = useContext(dataContext);
 
+  //importing necessary data functions from the data context
+  const { addNewPlans, CheckWallet, getProviderAllInfo } = useContext(dataContext);
+
+  //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([
     {
       visibility: "visible",
@@ -20,6 +23,8 @@ export default function AddNewPlan() {
       refund: 20,
     },
   ]);
+
+  //set s variable for storing the form elements according to the list of plans
   let planFormList = planList.map((item, index) => (
     <NewPlanCreation
       key={"PlanForm" + index}
@@ -29,6 +34,7 @@ export default function AddNewPlan() {
     />
   ));
 
+  //function for adding another plan form to register another plan
   function addAnotherPlan() {
     const list = planList;
     for (const item of list) {
@@ -37,6 +43,7 @@ export default function AddNewPlan() {
     setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
   }
 
+  //function for making all the form visible before registering. This is useful for visiting the input amounts and their validation results
   function makeFieldsVisible() {
     const list = planList;
     for (const item of list) {
@@ -45,24 +52,33 @@ export default function AddNewPlan() {
     setPlanList([...list]);
   }
 
+  //function for calling after registeration result has been received
   function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
-    console.log(status);
+    // console.log("Transaction status:", status.type);
+    // console.log(status);
     if (status.isInBlock) {
-      console.log("Included at block hash", status.asInBlock.toHex());
-      console.log("Events:");
-      console.log(events);
+      // console.log("Included at block hash", status.asInBlock.toHex());
+      // console.log("Events:");
+      // console.log(events);
+      let check = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
+          check = true;
           allPlanPromise();
+          window.alert("The operation has been done successfully");
         }
       });
+      if (check == false) {
+        window.alert("The operation failed!");
+      }
     } else if (status.isFinalized) {
-      console.log("Finalized block hash", status.asFinalized.toHex());
+      // console.log("Finalized block hash", status.asFinalized.toHex());
+      getProviderAllInfo(globalState.user.userWallet.address);
     }
   }
 
+  //function to make all promises in one promise and calling a callback after all of them has been fulfilled
   async function allPlanPromise() {
     let promiseList = [];
     planList.forEach((plan, index) => {
@@ -73,7 +89,7 @@ export default function AddNewPlan() {
         data: {
           providerAddress: globalState.user.userWallet.address,
           planName: plan.title,
-          planIndex: index,
+          planIndex: index + planNumber,
           description: plan.description,
         },
         headers: {
@@ -85,12 +101,13 @@ export default function AddNewPlan() {
       promiseList.push(axios(config));
     });
     await Promise.all(promiseList).then((results) => {
-      console.log("redirect here");
-      router.push("/provider");
-      console.log(results);
+      // console.log("redirect here");
+      // router.push("/provider");
+      // console.log(results);
     });
   }
 
+  //plan regiteration function
   function handleRegister(e) {
     e.preventDefault();
     var wallet = globalState.user.userWallet;
@@ -141,10 +158,9 @@ export default function AddNewPlan() {
     addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars);
   }
 
+  //Check if the user wallet address is available in the wallet address list of the user
   useEffect(() => {
-    console.log("wallet check");
     if (!globalState.user.userWallet) {
-      console.log("wallet check");
       CheckWallet(globalState.user.username);
     }
   }, []);

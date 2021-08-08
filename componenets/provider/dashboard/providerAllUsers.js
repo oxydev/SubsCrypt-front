@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
-import data from "../../../data/transactions.json";
 import { UserContext } from "../../../context/store";
 import ProviderEachUser from "./providerEachUser";
 
-export default function ProviderAllUsers(props) {
-  const { globalState, dispatch } = useContext(UserContext);
+//The component for generating the users list who are subscripted to the provider
+export default function ProviderAllUsers() {
+  const { globalState } = useContext(UserContext);
   const allUsers = globalState.subscriptedUsers;
   let userList;
-  if (globalState.providerPlans.length > 0) {
+  if (
+    globalState.providerPlans.length > 0 &&
+    globalState.providerPlans.length == globalState.user.plansCount
+  ) {
     userList = allUsers.map((item, index) => (
-      <ProviderEachUser userInfo={item} userIndex={index} />
+      <ProviderEachUser key={"subscriptedUser" + index} userInfo={item} userIndex={index} />
     ));
   }
   return (

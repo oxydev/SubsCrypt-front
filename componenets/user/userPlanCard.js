@@ -1,35 +1,23 @@
 import React, { useState, useContext } from "react";
-import localData from "../../../data/sunscryptionPlans.json";
-import * as utils from "../../../utilities/utilityFunctions";
-import { UserContext } from "../../../context/store";
-import { authContext } from "../../../pages/_app";
-import { modalContext } from "../../../context/modal";
-import { dataContext } from "../../../context/getData";
-import data from "../../../data/testData/providerAddress.json";
-import SubscriptionModal from "./subscriptionModal";
-import PercentageBar from "../../gadjets/percentageBar";
+import localData from "../../data/sunscryptionPlans.json";
+import * as utils from "../../utilities/utilityFunctions";
+import { UserContext } from "../../context/store";
+import { dataContext } from "../../context/getData";
+import PercentageBar from "../gadjets/percentageBar";
 
 const subscrypt = import("@oxydev/subscrypt");
 
+//The component for generating a plan card which user has
 export default function UserPlanCard(props) {
   let plan = props.plan.plan;
+  console.log(props.plan);
   const index = props.index;
   const localPlans = localData.userPlans[index];
-  const { globalState, dispatch } = useContext(UserContext);
-  const { setAuth } = useContext(authContext);
-  const { modal, setModal } = useContext(modalContext);
-  const {
-    getWalletInjector,
-    refundPlan,
-    renewPlan,
-    connectToWallet,
-    handleSubscribtion,
-    handleRenewPlan,
-    handleRefundPlan,
-  } = useContext(dataContext);
+  const { globalState } = useContext(UserContext);
+  const { handleSubscribtion, handleRenewPlan, handleRefundPlan, loadUserDataByWallet } =
+    useContext(dataContext);
   const status = props.plan.status;
   const walletAddress = globalState.user.userWallet;
-  const providerAddress = data.providerAddress;
   const [localLoading, setLocalLoading] = useState(false);
 
   //plan amounts
@@ -43,7 +31,7 @@ export default function UserPlanCard(props) {
     await (await subscrypt)
       .getPlanCharacteristics(props.plan.provider, props.plan.plan_index)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
           handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback);
@@ -55,7 +43,7 @@ export default function UserPlanCard(props) {
   //Subscription function
   function handleSubscribe() {
     setLocalLoading(true);
-    console.log(walletAddress);
+    // console.log(walletAddress);
     getCharacs();
   }
 
@@ -66,23 +54,32 @@ export default function UserPlanCard(props) {
 
   //Renew function
   function handleRenew() {
-    console.log(props.plan);
+    // console.log(props.plan);
     handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback);
   }
 
   //callback function
   function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
+    // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
-      console.log("Included at block hash", status.asInBlock.toHex());
-      console.log("Events:");
-      console.log(events);
+      // console.log("Included at block hash", status.asInBlock.toHex());
+      // console.log("Events:");
+      // console.log(events);
+      let check = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        if (method === "ExtrinsicSuccess") {
+          check = true;
+          window.alert("The operation has been done successfully");
+        }
       });
+      if (check == false) {
+        window.alert("The operation failed!");
+      }
     } else if (status.isFinalized) {
-      console.log("Finalized block hash", status.asFinalized.toHex());
+      // console.log("Finalized block hash", status.asFinalized.toHex());
+      loadUserDataByWallet(globalState.user.userWallet.address);
     }
   }
 
@@ -96,10 +93,15 @@ export default function UserPlanCard(props) {
           : "UserPlanCard"
       }
     >
-      <img className="UserPlan-logo" src={localPlans.logoURL} />
+      <img
+        className="UserPlan-logo"
+        src={"http://206.189.154.160:3000/profile/getProviderPic/" + props.plan.provider}
+      />
       <div className="UserPlan-specs">
-        <p className="UserPlan-name">{localPlans.name}</p>
-        <p className="UserPlan-Provider">{localPlans.provider}</p>
+        <p className="UserPlan-name">{props.plan.name ? props.plan.name : "Loading..."}</p>
+        <p className="UserPlan-Provider">
+          {props.plan.providerName ? props.plan.providerName : "Loading..."}
+        </p>
         <div className="UserPlan-featurBox">
           <h6>Duration</h6>
           <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>
@@ -110,7 +112,7 @@ export default function UserPlanCard(props) {
         </div>
       </div>
       <div className="UserPlan-specs">
-        <p className="UserPlan-desc">{localPlans.description}</p>
+        <p className="UserPlan-desc">{props.plan.description}</p>
         <div className="UserPlan-featurBox">
           <h6>Activation date</h6>
           <p>{utils.timeStamptoDate(parseInt(props.plan.subscription_time.replace(/,/g, "")))}</p>

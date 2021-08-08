@@ -1,6 +1,6 @@
 .ImageUploader {
   margin: 30px 0;
-  a {
+  button {
     display: block;
     @include circle(128px);
     border: 2px dashed $gray-4;

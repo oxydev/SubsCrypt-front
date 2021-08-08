@@ -1,20 +1,25 @@
 import React, { useContext } from "react";
-import OfferCard from "../../user/userSubscryption/offerCard";
+import PlanCard from "../../common/planCard";
 import { UserContext } from "../../../context/store";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function ProviderPlansList(props) {
+//The component for generating the provider plan lists
+export default function ProviderPlansList() {
   const router = useRouter();
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
 
   let plans = [];
   if (globalState.providerPlans) {
     plans.push(...globalState.providerPlans);
   }
-
   const plansCard = plans.map((item, index) => (
-    <OfferCard key={"providerPlan" + index} plan={item} index={index} type="provider" />
+    <PlanCard
+      key={"providerPlan" + index}
+      plan={item}
+      index={index}
+      type="provider"
+      address={globalState.user.userWallet.address}
+    />
   ));
   return (
     <section className="ProviderPlansList">

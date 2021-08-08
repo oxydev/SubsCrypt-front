@@ -1,7 +1,7 @@
 import React from "react";
-import SubscryptionOffers from "../../componenets/user/userSubscryption/subscryptionOffers";
+import SubscryptionOffers from "../../componenets/user/subscryptionOffers";
 
-export default function NewOffers(props) {
+export default function NewOffers() {
   return (
     <div className="userDashboard">
       <h1>We have new plans for offering to you</h1>

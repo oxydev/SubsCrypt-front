@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import Slider from "react-rangeslider";
+import React from "react";
+import Slider, { Range } from "rc-slider";
 
+//The component for setting the amount of a posible refundation of a plan by through a range slider
 export default function PercentSlider(props) {
   const { callBack, value, handleChange } = props;
 
-  function handleChangeStart() {
-    console.log("slider change start");
-  }
+  // function handleChangeStart() {
+  //   console.log("slider change start");
+  // }
 
   function handleChangeDo(value) {
     handleChange(value);
   }
 
   function handleChangeComplete() {
-    console.log("Slider change has been completed");
+    // console.log("Slider change has been completed");
     callBack("refund", value);
   }
   return (
@@ -22,7 +23,7 @@ export default function PercentSlider(props) {
         min={0}
         max={100}
         value={value}
-        onChangeStart={handleChangeStart}
+        // onChangeStart={handleChangeStart}
         onChange={handleChangeDo}
         onChangeComplete={handleChangeComplete}
       />

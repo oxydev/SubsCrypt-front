@@ -1,46 +1,45 @@
-import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { dataContext } from "../../context/getData";
 import { UserContext } from "../../context/store";
 
+//The component for handling changing password part in profile setting
 export default function ChangePassword(props) {
   const { type } = props;
   const [data, setData] = useState({});
   const { changePassword, CheckWallet } = useContext(dataContext);
-  const { globalState, dispatch } = useContext(UserContext);
-  const router = useRouter();
+  const { globalState } = useContext(UserContext);
   function callback({ events = [], status }) {
-    console.log("Transaction status:", status.type);
+    // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
-      console.log("Included at block hash", status.asInBlock.toHex());
-      console.log("Events:");
-      console.log(events);
+      // console.log("Included at block hash", status.asInBlock.toHex());
+      // console.log("Events:");
+      // console.log(events);
       var txStatus = false;
       events.forEach(({ event: { data, method, section }, phase }) => {
-        console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
+        // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
-          console.log("success");
+          // console.log("success");
           txStatus = true;
           //todo please show that it changed successfully
         }
       });
       if (!txStatus) {
-        console.log("failed");
-
+        // console.log("failed");
         //todo error
       }
     } else if (status.isFinalized) {
-      console.log("Finalized block hash", status.asFinalized.toHex());
+      // console.log("Finalized block hash", status.asFinalized.toHex());
     }
   }
   function handleSubmit(e) {
     if (data.newPassword !== data.currentPasswordConfirm) return;
     e.preventDefault();
-    console.log(data);
-    changePassword(type, data.newPassword,callback);
+    // console.log(data);
+    changePassword(type, data.newPassword, callback);
   }
 
+  //Check if the user address is available in his wallet address list
   useEffect(() => {
     if (!globalState.user.userWallet) {
       CheckWallet(globalState.user.username);

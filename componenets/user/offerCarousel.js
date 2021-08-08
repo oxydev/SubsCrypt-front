@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
-import OfferCard from "./offerCard";
-import data from "../../../data/offers.json";
-import { UserContext } from "../../../context/store";
+import PlanCard from "../common/planCard";
+import { UserContext } from "../../context/store";
 
+//The  component for generating offer plan carousel
 export default function OfferCarousel() {
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
   let plans = [];
   if (globalState.providerPlans.length > 0) {
     plans.push(...globalState.providerPlans);
   }
 
   const offerCards = plans.map((item, index) => (
-    <OfferCard key={"providerPlan" + index} plan={item} index={index} type="user" />
+    <PlanCard key={"providerPlan" + index} plan={item} index={index} type="user" address={item.providerAddress} />
   ));
   return (
     <div className="OfferCarousel">

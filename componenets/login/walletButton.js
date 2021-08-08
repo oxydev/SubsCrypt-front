@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { dataContext } from "../../context/getData";
 
+//The component for generating the wallet connection button
 export default function WalletButton(props) {
   const { wallet, status } = props;
   const { connectToWallet } = useContext(dataContext);

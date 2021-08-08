@@ -3,11 +3,12 @@ import ImageUploader from "./imageUploader";
 import { UserContext } from "../../../context/store";
 
 export default function ProviderInfo(props) {
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
   const { info, setInfo } = props;
-  console.log(info);
+  // console.log(info);
   const defaultUsername = globalState.user.username;
 
+  //Prefill the username input field
   useEffect(() => {
     if (defaultUsername) {
       setInfo({ ...info, ProviderUsername: defaultUsername });

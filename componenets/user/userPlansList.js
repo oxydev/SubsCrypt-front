@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import UserPlanCard from "./userPlanCard";
-import { UserContext } from "../../../context/store";
-import * as utils from "../../../utilities/utilityFunctions";
+import { UserContext } from "../../context/store";
+import * as utils from "../../utilities/utilityFunctions";
 
+//The component for generating the all plans list that a user has been subscripted to
 export default function UserPlansList(props) {
   const { globalState } = useContext(UserContext);
   let plans = [];

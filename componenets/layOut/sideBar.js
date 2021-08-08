@@ -4,6 +4,7 @@ import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 
+//The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut } = useContext(dataContext);

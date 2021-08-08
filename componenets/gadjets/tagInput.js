@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 
+//ُThe component for generating the input field for plan characteristics
 export default function TagInput(props) {
   const { initailTags, handleChange } = props;
-  console.log(initailTags);
   const [tags, setTags] = useState([...initailTags]);
   const KeyCodes = {
     comma: 188,
     enter: 13,
   };
-  const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-  // const tagstate = {
-  //     tags: [
-  //         { id: "Thailand", text: "Thailand" },
-  //         { id: "India", text: "India" }
-  //      ],
+  const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
   function handleDelete(i) {
     const tagsList = tags;
@@ -30,7 +25,7 @@ export default function TagInput(props) {
     handleChange("characteristics", tags);
   }, [tags]);
 
-  console.log(tags);
+  // console.log(tags);
 
   return (
     <div className="TagInput">
