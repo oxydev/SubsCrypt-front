@@ -62,13 +62,19 @@ export const DataFunctions = (props) => {
   //Function for getting the user plans data after login by wallet
   const loadUserDataByWallet = async (address) => {
     await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
-      setLoading(false);
+      console.log("wallet2");
+      console.log(result);
       if (result.status == "Fetched") {
         let plans = result.result;
         console.log(plans);
+        if (plans.length == 0) {
+          setLoading(false);
+        }
         plans.map((item, index) => {
           getCharacs(item.provider, item.plan_index, item, index);
         });
+      } else {
+        setLoading(false);
       }
     });
 
@@ -79,9 +85,9 @@ export const DataFunctions = (props) => {
         // console.log(result);
         if (result.status == "Fetched") {
           const newPlan = { ...plan, characteristics: result.result };
-          setLoading(false);
           dispatch({ type: "LOAD_ONE_USER_PLANS", payload: { plan: newPlan, index: index } });
           serverFunctions.getPlanServerInfo(provider, planIndex, "user", index);
+          setLoading(false);
         }
       });
     }
