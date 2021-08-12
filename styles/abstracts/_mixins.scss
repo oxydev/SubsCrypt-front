@@ -58,7 +58,7 @@
   // @include box($width, $height);
   padding: 5px 10px;
   display: inline-block;
-  border-radius: $height / 2;
+  border-radius: math.div($height, 2);
   background: $purple-BG--linear;
   border: none;
   outline: none;
@@ -72,7 +72,7 @@
   // @include box($width, $height);
   padding: 5px 10px;
   display: inline-block;
-  border-radius: $height / 2;
+  border-radius: math.div($height, 2);
   background: transparent;
   border: $border-main;
   outline: none;
