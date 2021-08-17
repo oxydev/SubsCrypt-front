@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import localData from "../../data/sunscryptionPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import PercentageBar from "../gadjets/percentageBar";
 
-const subscrypt = import("@oxydev/subscrypt");
+let subscrypt;
 
 //The component for generating a plan card which user has
 export default function UserPlanCard(props) {
@@ -25,6 +25,10 @@ export default function UserPlanCard(props) {
     parseInt(props.plan.subscription_time.replace(/,/g, "")),
     parseInt(plan.duration.replace(/,/g, ""))
   );
+
+  useEffect(() => {
+    subscrypt = import("@oxydev/subscrypt");
+  });
 
   //Get plan charactrisics
   async function getCharacs() {

@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { UserContext } from "../../context/store";
 import SubscryptionOffers from "../../componenets/user/subscryptionOffers";
 import UserPlansList from "../../componenets/user/userPlansList";
-const subscrypt = import("@oxydev/subscrypt");
 
 export default function UserHome() {
   const { globalState } = useContext(UserContext);
