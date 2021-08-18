@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
@@ -8,8 +8,8 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 
-//constant for using in dynamicly importing the subscrypt library
-const subscrypt = import("@oxydev/subscrypt");
+//Variable for using in dynamicly importing the subscrypt library
+let subscrypt;
 
 //creating a context for all getting and managin data functions to be available in all the components in the project
 export const dataContext = React.createContext({});
@@ -21,6 +21,10 @@ export const DataFunctions = (props) => {
   const { setModal, setCallBack } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
   const serverFunctions = useContext(serverDataContext);
+
+  useEffect(() => {
+    subscrypt = import("@oxydev/subscrypt");
+  });
 
   //Function for getting the user address for charging money
   const sendMoneyToAddress = () => {
