@@ -21,12 +21,12 @@ export default function ChangePassword(props) {
         if (method === "ExtrinsicSuccess") {
           // console.log("success");
           txStatus = true;
-          //todo please show that it changed successfully
+          window.alert("The operation has been done successfully");
         }
       });
       if (!txStatus) {
+        window.alert("The operation failed!");
         // console.log("failed");
-        //todo error
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
