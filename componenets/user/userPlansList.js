@@ -15,7 +15,7 @@ export default function UserPlansList(props) {
         parseInt(item.subscription_time.replace(/,/g, "")),
         parseInt(item.plan.duration.replace(/,/g, ""))
       );
-      if (use == 100) {
+      if (use == 100 || item.refunded == true) {
         item.status = -1;
         expiredPlans.push(item);
       } else {

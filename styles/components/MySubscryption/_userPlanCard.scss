@@ -109,6 +109,11 @@
 }
 .UserPlan-refundBtn {
   @include secondaryButtons(42px, 21px);
+  &:disabled {
+    box-shadow: none;
+    cursor: default;
+    opacity: 0.4;
+  }
 }
 .UserPlan-renewBtn {
   @include primaryButtons(75px, 21px);

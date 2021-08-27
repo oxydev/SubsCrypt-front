@@ -16,7 +16,7 @@ export default function UserPlanCard(props) {
   const { globalState } = useContext(UserContext);
   const { handleSubscribtion, handleRenewPlan, handleRefundPlan, loadUserDataByWallet } =
     useContext(dataContext);
-  const status = props.plan.status;
+  const planStatus = props.plan.status;
   const walletAddress = globalState.user.userWallet;
   const [localLoading, setLocalLoading] = useState(false);
 
@@ -90,9 +90,9 @@ export default function UserPlanCard(props) {
   return (
     <section
       className={
-        status == -1
+        planStatus == -1
           ? "UserPlanCard expired"
-          : status > 90
+          : planStatus > 90
           ? "UserPlanCard warning"
           : "UserPlanCard"
       }
@@ -163,7 +163,11 @@ export default function UserPlanCard(props) {
             </>
           ) : (
             <>
-              <button className="UserPlan-refundBtn" onClick={handleRefund}>
+              <button
+                className="UserPlan-refundBtn"
+                disabled={planStatus == -1 ? true : false}
+                onClick={handleRefund}
+              >
                 Refund
               </button>
               <button className="UserPlan-renewBtn" onClick={handleRenew}>
