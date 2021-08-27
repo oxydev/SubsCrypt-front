@@ -152,7 +152,7 @@ export default function UserPlanCard(props) {
               <option value="coin2">coin2</option>
             </select>
           </div>
-          {status == -1 ? (
+          {planStatus == -1 ? (
             <>
               <button
                 className={localLoading ? "UserPlan-subscribeBtn loading" : "UserPlan-subscribeBtn"}
@@ -163,11 +163,7 @@ export default function UserPlanCard(props) {
             </>
           ) : (
             <>
-              <button
-                className="UserPlan-refundBtn"
-                disabled={planStatus == -1 ? true : false}
-                onClick={handleRefund}
-              >
+              <button className="UserPlan-refundBtn" onClick={handleRefund}>
                 Refund
               </button>
               <button className="UserPlan-renewBtn" onClick={handleRenew}>
