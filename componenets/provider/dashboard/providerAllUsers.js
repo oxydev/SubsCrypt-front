@@ -7,6 +7,7 @@ export default function ProviderAllUsers() {
   const { globalState } = useContext(UserContext);
   const allUsers = globalState.subscriptedUsers;
   let userList;
+  console.log(allUsers);
   if (
     globalState.providerPlans.length > 0 &&
     globalState.providerPlans.length == globalState.user.plansCount

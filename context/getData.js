@@ -238,6 +238,7 @@ export const DataFunctions = (props) => {
         // console.log(result);
         if (result.status === "Fetched") {
           const planLength = parseInt(result.result);
+          dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
           if (planLength != 0) {
             getProvidePlanList(address, planLength);
           }
@@ -338,6 +339,7 @@ export const DataFunctions = (props) => {
               // console.log(result);
               if (result.status === "Fetched") {
                 const planLength = parseInt(result.result);
+                dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
                 Cookies.set("subscryptWallet", walletAddress);
                 serverFunctions.getProviderHeaderInfo(walletAddress);
                 getProvidePlanList(walletAddress, planLength);
@@ -417,6 +419,7 @@ export const DataFunctions = (props) => {
           // console.log(result);
           if (result.status === "Fetched") {
             const planLength = parseInt(result.result);
+            dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
             serverFunctions.getProviderHeaderInfo(walletAddress);
             getProvidePlanList(walletAddress, planLength);
             serverFunctions.getProviderAllUsers(walletAddress);
