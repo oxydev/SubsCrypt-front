@@ -12,6 +12,13 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 import { ServerFunctions } from "../context/getServerData";
+import styled from "styled-components";
+
+const PageWrapper=styled.div`
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+`
 
 //Creating context for authentication and loading.
 export const authContext = React.createContext();
@@ -52,7 +59,7 @@ export default function App({ Component, pageProps }) {
             <Modal>
               <ServerFunctions>
                 <DataFunctions>
-                  <div className="WholePageWrapper">
+                  <PageWrapper className="WholePageWrapper">
                     <SideBar />
                     {/* Main componenet is for the main part of the app where each page content is shown */}
                     {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
@@ -67,7 +74,7 @@ export default function App({ Component, pageProps }) {
                       )}
                     </Main>
                     <div></div>
-                  </div>
+                  </PageWrapper>
                 </DataFunctions>
               </ServerFunctions>
             </Modal>
