@@ -148,7 +148,7 @@ export const Store = (props) => {
     }
   });
 
-  // console.log(globalState); //for checking the value of global state when debugging
+  console.log(globalState); //for checking the value of global state when debugging
 
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
