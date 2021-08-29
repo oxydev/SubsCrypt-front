@@ -26,6 +26,15 @@ export default function UserPlanCard(props) {
     parseInt(plan.duration.replace(/,/g, ""))
   );
 
+  const refundPolicy = plan.max_refund_permille_policy.replace(/,/g, "") / 10;
+
+  const price = parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12);
+  const remianPercentage = 100 - usedPercentage;
+
+  const possibleRefund = Math.min(refundPolicy, remianPercentage);
+  const refundAmount = (price * possibleRefund) / 100;
+  // console.log(refundAmount);
+
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
   });
@@ -112,7 +121,7 @@ export default function UserPlanCard(props) {
         </div>
         <div className="UserPlan-featurBox">
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
+          <p>{"% " + refundPolicy + " Refund"}</p>
         </div>
       </div>
       <div className="UserPlan-specs">
@@ -140,10 +149,12 @@ export default function UserPlanCard(props) {
         <div className="UsePlanPercentage">
           <PercentageBar percentage={usedPercentage} />
         </div>
-        <p className="UsePlan-useAnnounce">
-          You have used {"%" + usedPercentage} of the service Refundable amount:{" "}
-          {plan.refundAmmount}
-        </p>
+
+        <p className="UsePlan-useAnnounce">You have used {"%" + usedPercentage} of the service</p>
+        {planStatus != -1 && (
+          <p className="UsePlan-useAnnounce">Refundable amount: {refundAmount} Dot</p>
+        )}
+
         <div className="UserPlan-PayPart">
           <div className="UserPlan-payMethod">
             <label>Pay with</label>
