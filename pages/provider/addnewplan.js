@@ -40,7 +40,10 @@ export default function AddNewPlan() {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
+    setPlanList([
+      ...list,
+      { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 },
+    ]);
   }
 
   //function for making all the form visible before registering. This is useful for visiting the input amounts and their validation results
