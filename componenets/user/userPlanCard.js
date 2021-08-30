@@ -17,7 +17,7 @@ export default function UserPlanCard(props) {
   const { handleSubscribtion, handleRenewPlan, handleRefundPlan, loadUserDataByWallet } =
     useContext(dataContext);
   const planStatus = props.plan.status;
-  const walletAddress = globalState.user.userWallet;
+  const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
 
   //plan amounts
@@ -92,7 +92,7 @@ export default function UserPlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      loadUserDataByWallet(globalState.user.userWallet.address);
+      loadUserDataByWallet(globalState.user.address);
     }
   }
 

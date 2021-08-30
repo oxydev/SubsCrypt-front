@@ -18,7 +18,7 @@ export default function ProviderPlansList() {
       plan={item}
       index={index}
       type="provider"
-      address={globalState.user.userWallet.address}
+      address={globalState.user.address}
     />
   ));
   return (

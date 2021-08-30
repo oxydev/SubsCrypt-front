@@ -6,7 +6,7 @@ import { UserContext } from "../../context/store";
 export default function ChangePassword(props) {
   const { type } = props;
   const [data, setData] = useState({});
-  const { changePassword, CheckWallet } = useContext(dataContext);
+  const { changePassword, connectToWalleByAddress } = useContext(dataContext);
   const { globalState } = useContext(UserContext);
   function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
@@ -39,10 +39,9 @@ export default function ChangePassword(props) {
     changePassword(type, data.newPassword, callback);
   }
 
-  //Check if the user address is available in his wallet address list
   useEffect(() => {
-    if (!globalState.user.userWallet) {
-      CheckWallet(globalState.user.username);
+    if (!globalState.user.wallet) {
+      connectToWalleByAddress(globalState.user.address);
     }
   }, []);
   return (

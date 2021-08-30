@@ -77,7 +77,7 @@ export default function AddNewPlan() {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      getProviderAllInfo(globalState.user.userWallet.address);
+      getProviderAllInfo(globalState.user.address);
     }
   }
 
@@ -90,7 +90,7 @@ export default function AddNewPlan() {
         method: "patch",
         url: "https://api.subscrypt.io/profile/updateProductProfile",
         data: {
-          providerAddress: globalState.user.userWallet.address,
+          providerAddress: globalState.user.address,
           planName: plan.title,
           planIndex: index + planNumber,
           description: plan.description,
@@ -113,7 +113,7 @@ export default function AddNewPlan() {
   //plan regiteration function
   function handleRegister(e) {
     e.preventDefault();
-    var wallet = globalState.user.userWallet;
+    var wallet = globalState.user.wallet;
 
     function parseDurations(planList) {
       var dur = [];
@@ -163,8 +163,8 @@ export default function AddNewPlan() {
 
   //Check if the user wallet address is available in the wallet address list of the user
   useEffect(() => {
-    if (!globalState.user.userWallet) {
-      CheckWallet(globalState.user.username);
+    if (!globalState.user.wallet) {
+      CheckWallet();
     }
   }, []);
 
