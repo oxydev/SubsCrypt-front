@@ -161,13 +161,6 @@ export default function AddNewPlan() {
     addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars);
   }
 
-  //Check if the user wallet address is available in the wallet address list of the user
-  useEffect(() => {
-    if (!globalState.user.wallet) {
-      CheckWallet();
-    }
-  }, []);
-
   return (
     <section className="ProviderSignUp AddPlanPage">
       <h1>Create a Subscription Plan #{planNumber + 1}</h1>
