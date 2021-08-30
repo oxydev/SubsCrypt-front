@@ -202,7 +202,7 @@ export const DataFunctions = (props) => {
   }
 
   //connect to the user wallet according to the address that is matched with the username
-  const connectToWalleByAddress = async (address) => {
+  const connectToWalleByAddress = async (address, callback) => {
     await (await subscrypt).getWalletAccess();
     await (await subscrypt).getWalletAccounts().then((result) => {
       let addressList = [];
@@ -218,6 +218,9 @@ export const DataFunctions = (props) => {
         Cookies.set("subscryptWallet", result[index].address);
         Cookies.set("addressIndex", index);
         dispatch({ type: "LOAD_USER_WALLET", payload: result[index] });
+        if (callback) {
+          callback(result[index]);
+        }
       }
     });
   };
@@ -598,9 +601,9 @@ export const DataFunctions = (props) => {
   //function for handle the subscription flow
   const handleSubscribtion = (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
-    // if (!walletAddress) {
-    //   walletAddress = manualAddress;
-    // }
+    if (!walletAddress) {
+      walletAddress = manualAddress;
+    }
 
     const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
 
@@ -637,13 +640,8 @@ export const DataFunctions = (props) => {
       //   // console.log(walletAddress);
       //   handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
       // });
-      connectToWalleByAddress(globalState.user.address).then((res) => {
-        console.log(res);
-        if (globalState.user.wallet) {
-          handleSubscribtion(providerAddress, plan, planIndex, callback);
-        } else {
-          router.push("/");
-        }
+      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+        handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
       setModal(modalElement);
