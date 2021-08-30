@@ -651,9 +651,9 @@ export const DataFunctions = (props) => {
   //Function for handling the Renew flow
   const handleRenewPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
-    // if (!walletAddress) {
-    //   walletAddress = manualAddress;
-    // }
+    if (!walletAddress) {
+      walletAddress = manualAddress;
+    }
 
     const modalElement = (
       <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} renew={true} />
@@ -690,13 +690,8 @@ export const DataFunctions = (props) => {
       //   // console.log(walletAddress);
       //   handleRenewPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       // });
-      connectToWalleByAddress(globalState.user.address).then((res) => {
-        console.log(res);
-        if (globalState.user.wallet) {
-          handleRenewPlan(providerAddress, plan, planIndex, callback);
-        } else {
-          router.push("/");
-        }
+      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+        handleRenewPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
       setModal(modalElement);
@@ -706,22 +701,17 @@ export const DataFunctions = (props) => {
   //Function for handling the Refund flow
   const handleRefundPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
-    // if (!walletAddress) {
-    //   walletAddress = manualAddress;
-    // }
+    if (!walletAddress) {
+      walletAddress = manualAddress;
+    }
 
     if (!walletAddress) {
       // connectToWallet([], "user", (confirmAddress) => {
       //   // console.log(walletAddress);
       //   handleRefundPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       // });
-      connectToWalleByAddress(globalState.user.address).then((res) => {
-        console.log(res);
-        if (globalState.user.wallet) {
-          handleRefundPlan(providerAddress, plan, planIndex, callback);
-        } else {
-          router.push("/");
-        }
+      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+        handleRefundPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
       refundPlan(
@@ -765,17 +755,23 @@ export const DataFunctions = (props) => {
   };
 
   //function for adding new plan as a provider
-  const addNewPlans = async (address, callback, durations, prices, refundPolicies, planChars) => {
+  const addNewPlans = async (
+    address,
+    callback,
+    durations,
+    prices,
+    refundPolicies,
+    planChars,
+    manualAddress
+  ) => {
     let walletAddress = globalState.user.wallet;
+    if (!walletAddress) {
+      walletAddress = manualAddress;
+    }
     // console.log(walletAddress);
     if (!walletAddress) {
-      connectToWalleByAddress(globalState.user.address).then((res) => {
-        console.log(res);
-        if (globalState.user.wallet) {
-          addNewPlans(address, callback, durations, prices, refundPolicies, planChars);
-        } else {
-          router.push("/");
-        }
+      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+        addNewPlans(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     }
     var injector = getWalletInjector(walletAddress);
