@@ -20,7 +20,7 @@ export default function SubscryptionOffers() {
     // }
 
     loadOffers(providerAddress);
-  }, providerAddress);
+  }, [providerAddress]);
 
   return (
     <section className="SubscryptionOffers">

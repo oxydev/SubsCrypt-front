@@ -250,16 +250,23 @@ export const DataFunctions = (props) => {
   const getProvidePlanList = async (address, planNumber) => {
     // console.log(planNumber);
     if (!planNumber) {
-      await (await subscrypt).getPlanLength(address).then((result) => {
-        // console.log(result);
-        if (result.status === "Fetched") {
-          const planLength = parseInt(result.result);
-          dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
-          if (planLength != 0) {
-            getProvidePlanList(address, planLength);
+      await (
+        await subscrypt
+      )
+        .getPlanLength(address)
+        .then((result) => {
+          console.log(result);
+          if (result.status === "Fetched") {
+            const planLength = parseInt(result.result);
+            dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
+            if (planLength != 0) {
+              getProvidePlanList(address, planLength);
+            }
           }
-        }
-      });
+        })
+        .catch((err) => {
+          window.alert("The address you have entered is wrong!");
+        });
     } else {
       for (let i = 0; i < planNumber; i++) {
         // load every plan data
