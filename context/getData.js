@@ -258,7 +258,7 @@ export const DataFunctions = (props) => {
       )
         .getPlanLength(address)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           if (result.status === "Fetched") {
             const planLength = parseInt(result.result);
             dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });

@@ -10,7 +10,7 @@ let subscrypt;
 //The component for generating a plan card which user has
 export default function UserPlanCard(props) {
   let plan = props.plan.plan;
-  console.log(props.plan);
+  // console.log(props.plan);
   const index = props.index;
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);

@@ -10,7 +10,7 @@ export default function ProviderEachUser(props) {
   const planIndex = userInfo.plan_index;
   const plan = globalState.providerPlans[planIndex];
 
-  console.log(plan);
+  // console.log(plan);
   const planName = plan.name;
   const startTime = utils.timeStamptoDate(userInfo.start_time);
   const duration = utils.duration(parseInt(plan.duration.replace(/,/g, "")));
