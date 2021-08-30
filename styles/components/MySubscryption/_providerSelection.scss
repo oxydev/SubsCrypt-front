@@ -1,0 +1,42 @@
+.ProviderSelection {
+  margin: 20px 0;
+  form {
+    label {
+      @include text-body--lightSmall--light;
+      color: $gray-3;
+      display: block;
+      margin-bottom: 10px;
+    }
+    & > div {
+      display: flex;
+    }
+    input[type="text"] {
+      width: 70%;
+      height: 48px;
+      line-height: 4.8rem;
+      border: 1px solid #c4c7cc;
+      border-radius: $borderRadius--regular;
+      margin-bottom: 23px;
+      padding: 0 26px;
+      @include text-body--small--regular;
+      &::placeholder {
+        color: $gray-5;
+      }
+    }
+    input[type="submit"] {
+      width: 100px;
+      height: 48px;
+      line-height: 4.8rem;
+      border-radius: $borderRadius--regular;
+      margin-bottom: 23px;
+      padding: 0 26px;
+      background: $purple-BG--linear;
+      border: none;
+      outline: none;
+      @include text-body--small--regular;
+      color: $white;
+      flex-shrink: 0;
+      margin-left: 10px;
+    }
+  }
+}

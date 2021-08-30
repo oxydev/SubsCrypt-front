@@ -2,7 +2,14 @@ import { useRouter } from "next/router";
 import React, { useEffect, useReducer } from "react";
 
 //Initialize the global state
-const initialState = { providerPlans: [], user: {}, plans: [], wallets: [], subscriptedUsers: [] };
+const initialState = {
+  providerPlans: [],
+  user: {},
+  plans: [],
+  wallets: [],
+  subscriptedUsers: [],
+  offerProvider: "5HWLj7XsXETx85nHsSHPbAaQdCdDmT5aJT73pSUGsM28pyfk",
+};
 
 //Craeting the context to pass to the components in the app tree
 export const UserContext = React.createContext(initialState);
@@ -53,6 +60,18 @@ const reducer = (state, action) => {
         providerPlans: [...newPlanList],
       };
     }
+    case "RESET_PROVIDER_PLAN": {
+      return {
+        ...state,
+        providerPlans: [...action.payload],
+      };
+    }
+    //Load the provider address for new offers
+    case "LOAD_OFFER_ADDRESS":
+      return {
+        ...state,
+        offerProvider: action.payload,
+      };
     //set the provider as a signed up provider
     case "REGISTERED":
       return {

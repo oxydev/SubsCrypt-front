@@ -479,6 +479,26 @@ export const DataFunctions = (props) => {
     }
   };
 
+  //Load the offer plans of a provider
+  const loadOffers = async (providerAddress) => {
+    if (providerAddress.length < 20) {
+      await (
+        await subscrypt
+      )
+        .getAddressByUsername(providerAddress)
+        .then((result) => {
+          dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
+          loadOffers(result.result);
+        })
+        .catch((error) => {
+          window.alert("The username you have entered is invalid!!");
+        });
+    } else {
+      getProvidePlanList(providerAddress);
+      dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
+    }
+  };
+
   //Refund a plan
   const refundPlan = async (address, injector, callback, providerAddress, planIndex) => {
     injector = await injector.then((res) => res);
@@ -786,6 +806,7 @@ export const DataFunctions = (props) => {
     getProviderAllInfo,
     checkAuthByCookie,
     loadPlan,
+    loadOffers,
     refundPlan,
     renewPlan,
     subscribePlan,
