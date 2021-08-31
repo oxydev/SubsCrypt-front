@@ -202,7 +202,7 @@ export const DataFunctions = (props) => {
   }
 
   //connect to the user wallet according to the address that is matched with the username
-  const connectToWalleByAddress = async (address, callback) => {
+  const connectToWalletByAddress = async (address, callback) => {
     await (await subscrypt).getWalletAccess();
     await (await subscrypt).getWalletAccounts().then((result) => {
       let addressList = [];
@@ -213,7 +213,7 @@ export const DataFunctions = (props) => {
       const index = addressList.indexOf(address);
       if (index < 0) {
         router.push("/");
-        window.alert("You are not allowed to do this operation!");
+        window.alert("Please come with a wallet that has access to " + address +" to use on chain functionalities of your account!");
       } else {
         Cookies.set("subscryptWallet", result[index].address);
         Cookies.set("addressIndex", index);
@@ -225,29 +225,6 @@ export const DataFunctions = (props) => {
     });
   };
 
-  //function for checking if the user wallet address is availabe in his wallet address list in his device
-  const CheckWallet = async () => {
-    setLoading(true);
-    const address = globalState.user.address;
-    await (await subscrypt).getWalletAccess();
-    await (await subscrypt).getWalletAccounts().then((result) => {
-      let addressList = [];
-      for (const item of result) {
-        addressList.push(item.address);
-      }
-      // console.log(addressList);
-      const index = addressList.indexOf(address);
-      if (index < 0) {
-        router.push("/");
-        window.alert("You are not allowed to do this operation!");
-      } else {
-        Cookies.set("subscryptWallet", result[index].address);
-        Cookies.set("addressIndex", index);
-        dispatch({ type: "LOAD_USER_WALLET", payload: result[index] });
-        setLoading(false);
-      }
-    });
-  };
 
   //function for getting the provider planList
   const getProvidePlanList = async (address, planNumber) => {
@@ -640,7 +617,7 @@ export const DataFunctions = (props) => {
       //   // console.log(walletAddress);
       //   handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
       // });
-      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+      connectToWalletByAddress(globalState.user.address, (confirmAddress) => {
         handleSubscribtion(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
@@ -686,11 +663,7 @@ export const DataFunctions = (props) => {
 
     //check if the user has connected to his wallet or not. If not connect to t now.
     if (!walletAddress) {
-      // connectToWallet([], "user", (confirmAddress) => {
-      //   // console.log(walletAddress);
-      //   handleRenewPlan(providerAddress, plan, planIndex, callback, confirmAddress);
-      // });
-      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+      connectToWalletByAddress(globalState.user.address, (confirmAddress) => {
         handleRenewPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
@@ -706,11 +679,7 @@ export const DataFunctions = (props) => {
     }
 
     if (!walletAddress) {
-      // connectToWallet([], "user", (confirmAddress) => {
-      //   // console.log(walletAddress);
-      //   handleRefundPlan(providerAddress, plan, planIndex, callback, confirmAddress);
-      // });
-      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+      connectToWalletByAddress(globalState.user.address, (confirmAddress) => {
         handleRefundPlan(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     } else {
@@ -770,7 +739,7 @@ export const DataFunctions = (props) => {
     }
     // console.log(walletAddress);
     if (!walletAddress) {
-      connectToWalleByAddress(globalState.user.address, (confirmAddress) => {
+      connectToWalletByAddress(globalState.user.address, (confirmAddress) => {
         addNewPlans(providerAddress, plan, planIndex, callback, confirmAddress);
       });
     }
@@ -799,7 +768,7 @@ export const DataFunctions = (props) => {
   const contextValue = {
     sendMoneyToAddress,
     connectToWallet,
-    CheckWallet,
+    connectToWalletByAddress,
     loadUserData,
     loadUserDataByWallet,
     checkUserAuthWithUserName,

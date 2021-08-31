@@ -11,7 +11,7 @@ export default function AddNewPlan() {
   const planNumber = globalState.providerPlans.length;
 
   //importing necessary data functions from the data context
-  const { addNewPlans, CheckWallet, getProviderAllInfo } = useContext(dataContext);
+  const { addNewPlans, getProviderAllInfo } = useContext(dataContext);
 
   //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([
