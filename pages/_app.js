@@ -1,4 +1,4 @@
-import "../styles/app.scss";
+//import "../styles/app.scss";
 import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
@@ -13,12 +13,13 @@ import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 import { ServerFunctions } from "../context/getServerData";
 import styled from "styled-components";
+import { GlobalStyle } from "../styles/globalStyle";
 
-const PageWrapper=styled.div`
+const PageWrapper = styled.div`
   display: flex;
   height: 100vh;
   overflow: hidden;
-`
+`;
 
 //Creating context for authentication and loading.
 export const authContext = React.createContext();
@@ -69,7 +70,11 @@ export default function App({ Component, pageProps }) {
                       ) : (
                         <>
                           {auth && <Header />}
-                          {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                          {auth ? (
+                            <Component {...pageProps} />
+                          ) : (
+                            <Login {...pageProps} />
+                          )}
                         </>
                       )}
                     </Main>
@@ -81,6 +86,7 @@ export default function App({ Component, pageProps }) {
           </Store>
         </authContext.Provider>
       </loadingContext.Provider>
+      <GlobalStyle />
     </>
   );
 }

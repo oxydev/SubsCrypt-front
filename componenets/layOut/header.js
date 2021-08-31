@@ -5,140 +5,144 @@ import { dataContext } from "../../context/getData";
 import { middleDots } from "../../utilities/utilityFunctions";
 import Link from "next/link";
 import styled from "styled-components";
-import {Gray,Color,BorderRadius,FontSize,Weight,Background,Shadows} from "../../styles/variables";
-import btn from "../../public/icons/png/userMenuBtn.png"
+import {
+  Gray,
+  Color,
+  BorderRadius,
+  FontSize,
+  Weight,
+  Background,
+  Shadows,
+} from "../../styles/variables";
 
-const HeaderRoot =styled.div`
+const HeaderRoot = styled.div`
   display: flex;
   justify-content: flex-end;
   border-bottom: 1px solid ${Gray.grayNotInKit1};
   width: 100%;
   padding: 24px 47px;
-   .LoginBox {
-  display: flex;
-  align-items: center;
-  border: 1px solid ${Color.green};
-  border-radius: ${BorderRadius.borderRadiusRegular};
-  padding: 0 23px;
-  max-width: 355px;
-  overflow: hidden;
-  cursor: pointer;
-  .Green {
-    background-color: ${Color.green};
-  .UserName {
-      color: #fff;
+  .LoginBox {
+    display: flex;
+    align-items: center;
+    border: 1px solid ${Color.green};
+    border-radius: ${BorderRadius.borderRadiusRegular};
+    padding: 0 23px;
+    max-width: 355px;
+    overflow: hidden;
+    cursor: pointer;
+    .Green {
+      background-color: ${Color.green};
+      .UserName {
+        color: #fff;
+      }
+      img {
+        display: none;
+      }
     }
-    img {
-      display: none;
+    .Avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: contain;
+    }
+    .UserName {
+      line-height: 2.4rem;
+      margin: 0 10px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-size: ${FontSize.fontSizeBodyLarge};
+      font-weight: ${Weight.fontWeightMedium};
+      color: ${Color.green};
+    }
+    .Separator {
+      line-height: 2.4rem;
+      margin: 0 10px;
+      flex-shrink: 0;
+      font-size: ${FontSize.fontSizeBodyLarge};
+      font-weight: ${Weight.fontWeightMedium};
+      color: ${Color.green};
+    }
+    .UserWallet {
+      line-height: 2.4rem;
+      margin: 0 10px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-size: ${FontSize.fontSizeBodyLarge};
+      font-weight: ${Weight.fontWeightMedium};
+      color: ${Color.green};
     }
   }
-  .Avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-position: center;
-  background-size: contain;
-}
-  .UserName {
-  line-height: 2.4rem;
-  margin: 0 10px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  flex-shrink: 0;
-  white-space: nowrap;
-  font-size: ${FontSize.fontSizeBodyLarge};
-  font-weight: ${Weight.fontWeightMedium};
-  color: ${Color.green};
-}
-  .Separator {
-    line-height: 2.4rem;
-    margin: 0 10px;
-    flex-shrink: 0;
-    font-size: ${FontSize.fontSizeBodyLarge};
-    font-weight: ${Weight.fontWeightMedium};
-    color: ${Color.green};
-}
-  .UserWallet {
-    line-height: 2.4rem;
-    margin: 0 10px;
-    flex-shrink: 0;
-    white-space: nowrap;
-    font-size: ${FontSize.fontSizeBodyLarge};
-    font-weight: ${Weight.fontWeightMedium};
-    color: ${Color.green};
- 
-}
-}
-   .UserMenu {
-     margin-left: 12px;
-     position: relative;
-     .UserMenu-button {
-        border-radius: ${BorderRadius.borderRadiusRegular};
-        background: ${Background.lightBG};
-        border: 1px solid ${Gray.grayNotInKit1};
-        position: relative;
-        width:54px ;
-        height:40px ;
-        cursor: pointer;
+  .UserMenu {
+    margin-left: 12px;
+    position: relative;
+    .UserMenu-button {
+      border-radius: ${BorderRadius.borderRadiusRegular};
+      background: ${Background.lightBG};
+      border: 1px solid ${Gray.grayNotInKit1};
+      position: relative;
+      width: 54px;
+      height: 40px;
+      cursor: pointer;
 
-        &::after {
-         background-image: url(${btn});
-         content: "";
-         display: block;
-         position: absolute;
-         background-position: center;
-         background-size: contain;
-         width: 100%;
-         height: 100%;
+      ::after {
+        background-image: url("icons/png/userMenuBtn.png");
+        content: "";
+        display: block;
+        position: absolute;
+        background-position: center;
+        background-size: 20px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .UserMenu-menu {
+      display: block;
+      background-color: ${Color.white};
+      box-shadow: ${Shadows.boxShadowCard};
+      border-radius: ${BorderRadius.borderRadiusRegular};
+      padding: 14px;
+      position: absolute;
+      right: 0;
+      top: 53px;
+      width: 214px;
+
+      ::after {
+        @include pseudo();
+        content: "";
+        display: block;
+        width: 214px;
+        height: 20px;
+        position: absolute;
+        top: -20px;
+        right: 0;
+      }
+
+      ul {
+        padding: 0;
+        list-style: none;
+
+        li {
+          padding: 9px 35px;
+          font-size: ${FontSize.fontSizeBodyVerySmall};
+          font-weight: ${Weight.fontWeightLight};
+          line-height: 1.4rem;
+          color: ${Gray.gray4};
+          border-bottom: 1px solid ${Gray.gray5};
+        }
+        li:last-child {
+          border-bottom: none;
         }
       }
-     .UserMenu-menu {
-       display: block;
-       background-color: ${Color.white};
-       box-shadow: ${Shadows.boxShadowCard};
-       border-radius: ${BorderRadius.borderRadiusRegular};
-       padding: 14px;
-       position: absolute;
-       right: 0;
-       top: 53px;
-       width: 214px;
 
-         &::after {
-           @include pseudo();
-           content: "";
-           display: block;
-           width: 214px;
-           height: 20px;
-           position: absolute;
-           top: -20px;
-           right: 0;
-         }
-
-       &>ul {
-          padding: 0;
-          list-style: none;
-
-          &>li {
-            padding: 9px 35px;
-            font-size: ${FontSize.fontSizeBodyVerySmall};
-            font-weight: ${Weight.fontWeightLight};
-            line-height: 1.4rem;
-            color: ${Gray.gray4};
-            border-bottom: 1px solid ${Gray.gray5};
-          &>li:last-child {
-             border-bottom: none;
-              }
-          }
-       }
-
-     &>.hidden {
-          display: none;
-        }
-     }
+      &.hidden {
+        display: none;
+      }
     }
-`
-
-
+  }
+`;
 
 //The component for genrating page header
 export default function Header() {
@@ -156,7 +160,9 @@ export default function Header() {
         {/* show each of user name or wallet address or both of them */}
         {userName && <p className="UserName">{userName}</p>}
         {userName && userWallet && <p className="Separator">|</p>}
-        {userWallet && <p className="UserWallet">{middleDots(userWallet.address)}</p>}
+        {userWallet && (
+          <p className="UserWallet">{middleDots(userWallet.address)}</p>
+        )}
       </div>
       <div
         className="UserMenu"

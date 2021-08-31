@@ -5,6 +5,51 @@ import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
+import styled from "styled-components";
+import {
+  FontSize,
+  Weight,
+  Primary,
+  BorderRadius,
+  Gray,
+} from "../styles/variables";
+
+const MainLoginPage = styled.section`
+   // width: 441px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  & >h1 {
+    font-size: ${FontSize.fontSizeHeading3};
+    font-weight: ${Weight.fontWeightBold};
+    color: ${Primary.primary};
+    line-height: 1.4rem;
+    margin-bottom: 40px;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    outline: none;
+    border: 1px solid ${Gray.gray5};
+    border-radius: ${BorderRadius.borderRadiusRegular};
+    background-color: transparent;
+    padding: 7px 20px 9px;
+    margin-bottom: 10px;
+    font-size: ${FontSize.fontSizeBodySmall};
+    font-weight: ${Weight.fontWeightRegular};
+    line-height: 1.4rem;
+    color: #8a8f99;
+  }
+}
+`;
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Login() {
@@ -67,7 +112,7 @@ export default function Login() {
   //change the login menu according to selecting each type
   if (role == "none") {
     return (
-      <section className="MainLoginPage">
+      <MainLoginPage className="MainLoginPage">
         <h1>Choose your role to login</h1>
         <div>
           <button onClick={handleUserLogin}>Login as a User</button>
@@ -75,7 +120,7 @@ export default function Login() {
           <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
           <button onClick={hanadleGetToken}>Give me some token</button>
         </div>
-      </section>
+      </MainLoginPage>
     );
   } else if (role == "user") {
     return <UserLogin />;
