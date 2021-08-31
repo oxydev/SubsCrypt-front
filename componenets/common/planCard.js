@@ -42,7 +42,7 @@ export default function PlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      loadUserDataByWallet(globalState.user.userWallet.address);
+      loadUserDataByWallet(globalState.user.address);
       router.push("/user");
     }
   }

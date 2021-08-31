@@ -4,7 +4,6 @@ import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { dataContext } from "../../context/getData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 
 export default function ProviderSignUp() {
   const router = useRouter();
@@ -12,7 +11,7 @@ export default function ProviderSignUp() {
   const { globalState, dispatch } = useContext(UserContext);
 
   const [info, setInfo] = useState({
-    ProviderMoneyAddress: globalState.user.userWallet.address,
+    ProviderMoneyAddress: globalState.user.address,
   });
 
   //
@@ -60,7 +59,7 @@ export default function ProviderSignUp() {
           var FormData = require("form-data");
           var data = new FormData();
           data.append("profile", info.image);
-          data.append("providerAddress", globalState.user.userWallet.address);
+          data.append("providerAddress", globalState.user.address);
           data.append("description", info.ProviderDescription);
           data.append("providerName", info.ProviderName);
           var config = {
@@ -89,7 +88,7 @@ export default function ProviderSignUp() {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      getProviderAllInfo(globalState.user.userWallet.address);
+      getProviderAllInfo(globalState.user.address);
     }
   }
 
@@ -101,7 +100,7 @@ export default function ProviderSignUp() {
         method: "patch",
         url: "https://api.subscrypt.io/profile/updateProductProfile",
         data: {
-          providerAddress: globalState.user.userWallet.address,
+          providerAddress: globalState.user.address,
           planName: plan.title,
           planIndex: index,
           description: plan.description,
@@ -129,7 +128,7 @@ export default function ProviderSignUp() {
       if (info.ProviderPassword != info.ProviderConfirmedPasswords) {
         window.alert("Password has not been comfirmed correctly!!");
       } else {
-        var wallet = globalState.user.userWallet;
+        var wallet = globalState.user.wallet;
         function parseDurations(planList) {
           var dur = [];
           planList.forEach((plan) => {

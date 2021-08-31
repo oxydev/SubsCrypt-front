@@ -13,6 +13,7 @@ export default function NewPlanCreation(props) {
 
   //Function for handle plan form update
   function handlePlanListUpdate(key, value) {
+    // console.log(key, value);
     planList[index][key] = value;
     setPlanList([...planList]);
   }

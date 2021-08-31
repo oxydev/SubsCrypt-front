@@ -11,7 +11,7 @@ export default function AddNewPlan() {
   const planNumber = globalState.providerPlans.length;
 
   //importing necessary data functions from the data context
-  const { addNewPlans, CheckWallet, getProviderAllInfo } = useContext(dataContext);
+  const { addNewPlans, getProviderAllInfo } = useContext(dataContext);
 
   //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([
@@ -40,7 +40,10 @@ export default function AddNewPlan() {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
+    setPlanList([
+      ...list,
+      { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 },
+    ]);
   }
 
   //function for making all the form visible before registering. This is useful for visiting the input amounts and their validation results
@@ -74,7 +77,7 @@ export default function AddNewPlan() {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      getProviderAllInfo(globalState.user.userWallet.address);
+      getProviderAllInfo(globalState.user.address);
     }
   }
 
@@ -87,7 +90,7 @@ export default function AddNewPlan() {
         method: "patch",
         url: "https://api.subscrypt.io/profile/updateProductProfile",
         data: {
-          providerAddress: globalState.user.userWallet.address,
+          providerAddress: globalState.user.address,
           planName: plan.title,
           planIndex: index + planNumber,
           description: plan.description,
@@ -110,7 +113,7 @@ export default function AddNewPlan() {
   //plan regiteration function
   function handleRegister(e) {
     e.preventDefault();
-    var wallet = globalState.user.userWallet;
+    var wallet = globalState.user.wallet;
 
     function parseDurations(planList) {
       var dur = [];
@@ -157,13 +160,6 @@ export default function AddNewPlan() {
 
     addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars);
   }
-
-  //Check if the user wallet address is available in the wallet address list of the user
-  useEffect(() => {
-    if (!globalState.user.userWallet) {
-      CheckWallet(globalState.user.username);
-    }
-  }, []);
 
   return (
     <section className="ProviderSignUp AddPlanPage">

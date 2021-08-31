@@ -17,6 +17,7 @@
 @import "components/MySubscryption/planCard";
 @import "components/MySubscryption/offerCarousel";
 @import "components/MySubscryption/userPlanCard";
+@import "components/MySubscryption/providerSelection";
 @import "components/provider/providerForm";
 @import "components/provider/providerHeader";
 @import "components/provider/providerPlanList";
@@ -45,5 +46,6 @@
 @import "sections/wallet";
 
 // Vendor Files
+@import "vendors/reactMultiCarousel";
 @import "vendors/rangeSlider";
 @import "vendors/reactTags";

@@ -10,14 +10,14 @@ let subscrypt;
 //The component for generating a plan card which user has
 export default function UserPlanCard(props) {
   let plan = props.plan.plan;
-  console.log(props.plan);
+  // console.log(props.plan);
   const index = props.index;
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
   const { handleSubscribtion, handleRenewPlan, handleRefundPlan, loadUserDataByWallet } =
     useContext(dataContext);
   const planStatus = props.plan.status;
-  const walletAddress = globalState.user.userWallet;
+  const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
 
   //plan amounts
@@ -25,6 +25,15 @@ export default function UserPlanCard(props) {
     parseInt(props.plan.subscription_time.replace(/,/g, "")),
     parseInt(plan.duration.replace(/,/g, ""))
   );
+
+  const refundPolicy = plan.max_refund_permille_policy.replace(/,/g, "") / 10;
+
+  const price = parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12);
+  const remianPercentage = 100 - usedPercentage;
+
+  const possibleRefund = Math.min(refundPolicy, remianPercentage);
+  const refundAmount = (price * possibleRefund) / 100;
+  // console.log(refundAmount);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
@@ -83,7 +92,7 @@ export default function UserPlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      loadUserDataByWallet(globalState.user.userWallet.address);
+      loadUserDataByWallet(globalState.user.address);
     }
   }
 
@@ -112,7 +121,7 @@ export default function UserPlanCard(props) {
         </div>
         <div className="UserPlan-featurBox">
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
+          <p>{"% " + refundPolicy + " Refund"}</p>
         </div>
       </div>
       <div className="UserPlan-specs">
@@ -140,10 +149,12 @@ export default function UserPlanCard(props) {
         <div className="UsePlanPercentage">
           <PercentageBar percentage={usedPercentage} />
         </div>
-        <p className="UsePlan-useAnnounce">
-          You have used {"%" + usedPercentage} of the service Refundable amount:{" "}
-          {plan.refundAmmount}
-        </p>
+
+        <p className="UsePlan-useAnnounce">You have used {"%" + usedPercentage} of the service</p>
+        {planStatus != -1 && (
+          <p className="UsePlan-useAnnounce">Refundable amount: {refundAmount} Dot</p>
+        )}
+
         <div className="UserPlan-PayPart">
           <div className="UserPlan-payMethod">
             <label>Pay with</label>

@@ -11,9 +11,7 @@ export default function ProviderHeader() {
       <div>
         <div className="ProviderHeader-identity">
           <div className="ProviderHeader-profileImage">
-            <img
-              src={"https://api.subscrypt.io/profile/getProviderPic/" + user.userWallet.address}
-            />
+            <img src={"https://api.subscrypt.io/profile/getProviderPic/" + user.address} />
           </div>
           <h2 className="ProviderHeader-name">{user.name ? user.name : "Loading..."}</h2>
           <p className="ProviderHeader-Description">
