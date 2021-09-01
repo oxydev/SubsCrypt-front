@@ -1,9 +1,11 @@
 import React from "react";
 import SubscryptionOffers from "../../componenets/user/subscryptionOffers";
+import {UDashboard} from "../../styles/pageStyle"
+
 
 export default function NewOffers() {
   return (
-    <div className="userDashboard">
+    <UDashboard className="userDashboard">
       <h1>We have new plans for offering to you</h1>
       <div className="row">
         <div className="Container--medium">
@@ -11,6 +13,6 @@ export default function NewOffers() {
         </div>
         <div className="Container--small"></div>
       </div>
-    </div>
+    </UDashboard>
   );
 }

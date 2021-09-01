@@ -88,7 +88,7 @@ const HeaderRoot = styled.div`
       cursor: pointer;
 
       ::after {
-        background-image: url("icons/png/userMenuBtn.png");
+        background-image: url("/icons/png/userMenuBtn.png");
         content: "";
         display: block;
         position: absolute;

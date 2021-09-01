@@ -3,6 +3,7 @@ import { UserContext } from "../../context/store";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import { dataContext } from "../../context/getData";
 import { useRouter } from "next/router";
+import { Providerstyled } from "../../styles/pageStyle";
 
 export default function AddNewPlan() {
   const router = useRouter();
@@ -11,7 +12,8 @@ export default function AddNewPlan() {
   const planNumber = globalState.providerPlans.length;
 
   //importing necessary data functions from the data context
-  const { addNewPlans, CheckWallet, getProviderAllInfo } = useContext(dataContext);
+  const { addNewPlans, CheckWallet, getProviderAllInfo } =
+    useContext(dataContext);
 
   //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([
@@ -40,7 +42,10 @@ export default function AddNewPlan() {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
+    setPlanList([
+      ...list,
+      { visibility: "visible", coins: [], characteristics: [] },
+    ]);
   }
 
   //function for making all the form visible before registering. This is useful for visiting the input amounts and their validation results
@@ -116,8 +121,10 @@ export default function AddNewPlan() {
       var dur = [];
       planList.forEach((plan) => {
         if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "3 m")
+          dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "6 m")
+          dur.push(6 * 30 * 24 * 60 * 60 * 1000);
       });
       return dur;
     }
@@ -155,7 +162,14 @@ export default function AddNewPlan() {
     var refundPolicies = parsePolicies(planList);
     var plansChars = parseChars(planList);
 
-    addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars);
+    addNewPlans(
+      wallet,
+      callback,
+      durations,
+      prices,
+      refundPolicies,
+      plansChars
+    );
   }
 
   //Check if the user wallet address is available in the wallet address list of the user
@@ -166,7 +180,7 @@ export default function AddNewPlan() {
   }, []);
 
   return (
-    <section className="ProviderSignUp AddPlanPage">
+    <Providerstyled className="ProviderSignUp AddPlanPage">
       <h1>Create a Subscription Plan #{planNumber + 1}</h1>
       <div className="row">
         <div className="Container--medium">
@@ -184,8 +198,9 @@ export default function AddNewPlan() {
             </button>
             <div className="ProviderRegisteration">
               <p>
-                For signing up you need to send a transaction on chain to put the data in smart
-                contract on blockchain. Normal gas fee applies.
+                For signing up you need to send a transaction on chain to put
+                the data in smart contract on blockchain. Normal gas fee
+                applies.
               </p>
               <input
                 type="submit"
@@ -200,6 +215,6 @@ export default function AddNewPlan() {
         </div>
         <div className="Container--small"></div>
       </div>
-    </section>
+    </Providerstyled>
   );
 }

@@ -4,6 +4,7 @@ import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { dataContext } from "../../context/getData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
+import {Providerstyled} from '../../styles/pageStyle'
 import Cookies from "js-cookie";
 
 export default function ProviderSignUp() {
@@ -197,7 +198,7 @@ export default function ProviderSignUp() {
   }
 
   return (
-    <section className="ProviderSignUp">
+    <Providerstyled className="ProviderSignUp">
       <h1>Sign up as a Service Provider</h1>
       <div className="row">
         <div className="Container--medium">
@@ -232,6 +233,6 @@ export default function ProviderSignUp() {
         </div>
         <div className="Container--small"></div>
       </div>
-    </section>
+    </Providerstyled>
   );
 }
