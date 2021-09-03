@@ -7,6 +7,7 @@ import SubscriptionModal from "../componenets/user/subscriptionModal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
+import {TokenForm} from "../styles/modal"
 
 //Variable for using in dynamicly importing the subscrypt library
 let subscrypt;
@@ -31,11 +32,11 @@ export const DataFunctions = (props) => {
     // console.log("send money ");
     const modalElement = (
       <div>
-        <form className="GiveTokenForm" onSubmit={handleSendMoney}>
+        <TokenForm className="GiveTokenForm" onSubmit={handleSendMoney}>
           <label>Please input your wallet address</label>
           <input id="modalAddressInput" type="text" />
           <input type="submit" value="submit" />
-        </form>
+        </TokenForm>
       </div>
     );
     setModal(modalElement);

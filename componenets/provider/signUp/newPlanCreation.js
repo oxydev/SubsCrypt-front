@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import PercentSlider from "../../gadjets/percetageSlider";
 import TagInput from "../../gadjets/tagInput";
 import { UserContext } from "../../../context/store";
+import {ProviderForm} from "../../../styles/providerForm"
 
 //The component for handling new plan creation for provider user
 export default function NewPlanCreation(props) {
@@ -51,7 +52,7 @@ export default function NewPlanCreation(props) {
   }
 
   return (
-    <section
+    <ProviderForm
       className={plan.visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
     >
       <h1 onClick={toggleVisibility}>
@@ -161,6 +162,6 @@ export default function NewPlanCreation(props) {
           <p>This field only accept numbers with two decimals</p>
         </div>
       </div>
-    </section>
+    </ProviderForm>
   );
 }

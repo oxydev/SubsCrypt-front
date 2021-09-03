@@ -1,6 +1,7 @@
 import React from "react";
 import data from "../../data/wallets&networks.json";
 import WalletButton from "./walletButton";
+import {ConnectionPart} from "../../styles/wallet"
 
 //The component for generating the login by wallet part
 export default function WalletConnection(props) {
@@ -11,7 +12,7 @@ export default function WalletConnection(props) {
     <WalletButton key={item.name} type={props.type} wallet={item} />
   ));
   return (
-    <section className="WalletConnection">
+    <ConnectionPart className="WalletConnection">
       <h1>
         Connect your Wallet <br /> as {props.type == "user" ? "an ordinary" : "a"} {props.type}
       </h1>
@@ -19,6 +20,6 @@ export default function WalletConnection(props) {
       <div className="Networks">{networks}</div>
       <h2>Choose Wallet</h2>
       <div className="Wallets">{wallets}</div>
-    </section>
+    </ConnectionPart>
   );
 }

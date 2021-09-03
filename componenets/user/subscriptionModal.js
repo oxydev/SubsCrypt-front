@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/store";
+import {Subscription} from "../../styles/modal"
 
 export default function SubscriptionModal(props) {
   const [formData, setFormData] = useState({});
@@ -27,7 +28,7 @@ export default function SubscriptionModal(props) {
     setFormData({ ...formData, username: username });
   }
   return (
-    <section className="SubscriptionModal">
+    <Subscription className="SubscriptionModal">
       <h1>Complete the subscription form</h1>
       <form
         onSubmit={(e) => {
@@ -62,6 +63,6 @@ export default function SubscriptionModal(props) {
 
         <input className="Modal-SubmitBtn" type="submit" value="Subscribe" />
       </form>
-    </section>
+    </Subscription>
   );
 }

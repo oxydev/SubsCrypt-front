@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import ImageUploader from "./imageUploader";
 import { UserContext } from "../../../context/store";
+import {ProviderForm} from "../../../styles/providerForm"
 
 export default function ProviderInfo(props) {
   const { globalState } = useContext(UserContext);
@@ -16,7 +17,7 @@ export default function ProviderInfo(props) {
   }, [globalState]);
 
   return (
-    <section className="ProviderInfo">
+    <ProviderForm className="ProviderInfo">
       <h1>Service Provider Information</h1>
       <div className="ProviderForm">
         <div className="ProviderForm-info">
@@ -110,6 +111,6 @@ export default function ProviderInfo(props) {
           </p>
         </div>
       </div>
-    </section>
+    </ProviderForm>
   );
 }

@@ -5,6 +5,127 @@ import { dataContext } from "../../context/getData";
 import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+import {
+  FontSize,
+  Weight,
+  Primary,
+  Gray,
+  Color,
+  BorderRadius,
+  Shadows,
+  Background,
+} from "../../styles/variables";
+
+const Card = styled.section`
+  &.PlanCard {
+    border: 1px solid ${Gray.gray6};
+    border-radius: ${BorderRadius.borderRadiusRegular};
+    margin: 0 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    width: 200px;
+    height: 240px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    transition: 0.3s;
+    &:hover {
+      box-shadow: ${Shadows.boxShadowCard};
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 7px;
+      flex-shrink: 0;
+      & > h1 {
+        font-size: ${FontSize.fontSizeBodySmall};
+        font-weight: ${Weight.fontWeightMedium};
+        color: ${Primary.primary};
+        line-height: 1.4;
+      }
+    }
+    main {
+      font-size: ${FontSize.fontSizeFootNote};
+      font-weight: ${Weight.fontWeightLight};
+      line-height: 1.4;
+      color: ${Gray.gray4};
+      margin-bottom: 16px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      & > div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+  }
+  &.PlanLogo {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 15px;
+    background-color: #bdbdbd;
+    object-fit: cover;
+  }
+  &.PlanCard-Provider {
+    font-size: ${FontSize.fontSizeFootNote};
+    font-weight: ${Weight.fontWeightLight};
+    line-height: 1.4;
+    color: ${Gray.gray4};
+  }
+  &.PlanCard-description {
+    color: ${Gray.gray3};
+    margin-bottom: auto;
+    line-height: 1.4;
+  }
+  &.PlanCard-payMethod {
+    display: flex;
+
+    label {
+      font-size: ${FontSize.fontSizeFootNote};
+      font-weight: ${Weight.fontWeightLight};
+      line-height: 1.4;
+      color: ${Gray.gray4};
+    }
+  }
+
+  &.PlanCard-coinSelect {
+    display: none;
+  }
+  &.PlanCard-payBtn {
+    width: 61px;
+    height: 12px;
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 6px;
+    background: ${Background.purpleBGLinear};
+    border: none;
+    outline: none;
+    font-size: ${FontSize.fontSizeBodyVerySmall};
+    font-weight: ${Weight.fontWeightRegular};
+    line-height: 1.4;
+    color: ${Color.white};
+    &:hover {
+      box-shadow: ${Shadows.boxShadowCard};
+    }
+    span {
+      font-size: ${FontSize.fontSizeFootNote};
+      font-weight: ${Weight.fontWeightLight};
+      line-height: 1.4;
+      color: inherit;
+      margin-left: 2px;
+      cursor: pointer;
+    }
+  }
+`;
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
@@ -48,7 +169,10 @@ export default function PlanCard(props) {
   }
 
   return (
-    <section className="PlanCard" onClick={type == "user" ? handleSubscribe : () => {}}>
+    <Card
+      className="PlanCard"
+      onClick={type == "user" ? handleSubscribe : () => {}}
+    >
       <header>
         <img
           className="PlanLogo"
@@ -61,14 +185,20 @@ export default function PlanCard(props) {
           <p className="PlanCard-Provider">{plan.providerName}</p>
           <p className="PlanCard-Rate">{localPlans.rate}</p>
         </div>
-        <p className="PlanCard-description">{plan.description ? plan.description : "Loading..."}</p>
+        <p className="PlanCard-description">
+          {plan.description ? plan.description : "Loading..."}
+        </p>
         <div>
           <h6>Duration</h6>
           <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>
         </div>
         <div>
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
+          <p>
+            {"% " +
+              plan.max_refund_permille_policy.replace(/,/g, "") / 10 +
+              " Refund"}
+          </p>
         </div>
       </main>
       <footer>
@@ -87,6 +217,6 @@ export default function PlanCard(props) {
           <span>DOT</span>
         </button>
       </footer>
-    </section>
+    </Card>
   );
 }

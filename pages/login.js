@@ -5,6 +5,7 @@ import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
+import {SignWallet} from "../styles/wallet"
 import styled from "styled-components";
 import {
   FontSize,
@@ -128,9 +129,9 @@ export default function Login() {
     return <ProviderLogin />;
   } else if (role == "providerSignUp") {
     return (
-      <div className="SignUp-walletConnection">
+      <SignWallet className="SignUp-walletConnection">
         <WalletConnection type="provider" />
-      </div>
+      </SignWallet>
     );
   }
 }

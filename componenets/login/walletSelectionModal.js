@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import {SelectionModal} from "../../styles/modal"
 
 //The component for generating the content of address selection modal
 export default function WalletSelectionModal(props) {
@@ -15,7 +16,7 @@ export default function WalletSelectionModal(props) {
   });
 
   return (
-    <section className="WalletSelectionModal">
+    <SelectionModal className="WalletSelectionModal">
       <h1>Select an address to continue</h1>
       <div className="AddressList">
         <ol>{addresses}</ol>
@@ -37,6 +38,6 @@ export default function WalletSelectionModal(props) {
         />
         <input className="WalletModal-Submit" type="submit" value="submit" />
       </form>
-    </section>
+    </SelectionModal>
   );
 }

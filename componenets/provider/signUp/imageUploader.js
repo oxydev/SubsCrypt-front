@@ -1,4 +1,33 @@
 import React, { useRef, useState } from "react";
+import styled from "styled-components";
+import { Gray } from "../../../styles/variables";
+
+const Image = styled.div`
+  &.ImageUploader {
+    margin: 30px 0;
+    button {
+      display: block;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      border: 2px dashed ${Gray.gray4};
+      margin: auto;
+      background-color: transparent;
+      background-image: url("/icons/png/uploadButton.png");
+      background-position: center;
+      background-size: 128px;
+    }
+
+    input {
+      display: none;
+    }
+
+    .FileName {
+      margin: 20px 0 10px;
+      text-align: center;
+    }
+  }
+`;
 
 //The component for generating the image uploader part in provider sign up form
 export default function ImageUploader(props) {
@@ -50,8 +79,12 @@ export default function ImageUploader(props) {
     e.preventDefault();
   }
   return (
-    <div className="ImageUploader">
-      <div className="UploadZone" onDrop={dropHandler} onDragOver={dragOverHandler}>
+    <Image className="ImageUploader">
+      <div
+        className="UploadZone"
+        onDrop={dropHandler}
+        onDragOver={dragOverHandler}
+      >
         <button
           style={{ backgroundImage: `url(${url})` }}
           onClick={(e) => {
@@ -59,9 +92,15 @@ export default function ImageUploader(props) {
             handleUploadClick();
           }}
         ></button>
-        <input ref={inputRF} type="file" id="upload" name="upload" onChange={inputChangeHandler} />
+        <input
+          ref={inputRF}
+          type="file"
+          id="upload"
+          name="upload"
+          onChange={inputChangeHandler}
+        />
       </div>
       <p className="FileName">{file ? file.name : ""}</p>
-    </div>
+    </Image>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { dataContext } from "../../context/getData";
+import {Button} from "../../styles/wallet"
 
 //The component for generating the wallet connection button
 export default function WalletButton(props) {
@@ -12,7 +13,7 @@ export default function WalletButton(props) {
   }
 
   return (
-    <div
+    <Button
       className={status == "active" ? "WalletButton active" : "WalletButton"}
       onClick={handleWalletConnection}
     >
@@ -20,6 +21,6 @@ export default function WalletButton(props) {
         <img src={wallet.imageURL} />
       </div>
       <p>{wallet.name}</p>
-    </div>
+    </Button>
   );
 }

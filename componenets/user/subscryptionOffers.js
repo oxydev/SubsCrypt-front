@@ -3,6 +3,67 @@ import OfferCarousel from "./offerCarousel";
 import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
+import styled from "styled-components";
+import { BorderRadius, Gray, FontSize, Weight } from "../../styles/variables";
+
+const SubscriptionRoot = styled.section`
+  &.SubscryptionOffers {
+    border: 1px solid #e6e7eb;
+    border-radius: ${BorderRadius.$borderRadiusSmall};
+    padding: 78px 47px 64px;
+    position: relative;
+    width: 100%;
+    //
+    // display: none;
+
+    & > h1 {
+      font-size: ${FontSize.fontSizeBodyLarge};
+      font-weight: ${Weight.fontWeightRegular};
+      line-height: 1.5;
+      color: ${Gray.gray3};
+      margin-bottom: 67px;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 19px;
+        height: 17px;
+        background-image: url("/icons/png/sunscryption/Wallet.png");
+        background-position: center;
+        background-size: contain;
+        left: -30px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+  }
+  &.SubscryptionOffers::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 139px;
+    height: 126px;
+    background-image: url("/icons/png/sunscryption/OffersIcon.png");
+    background-position: center;
+    background-size: contain;
+    top: 10%;
+    right: 15%;
+  }
+  .OfferPart {
+    & > h2 {
+      @include text-body--lightSmall--light;
+      font-size: ${FontSize.fontSizeBodyLightSmall};
+      font-weight: ${Weight.fontWeightLight};
+      line-height: 1.4;
+      color: ${Gray.gray3};
+      margin-bottom: 24px;
+      max-width: 379px;
+    }
+  }
+`;
 
 //The component for managing subscription offer part
 export default function SubscryptionOffers() {
@@ -18,15 +79,15 @@ export default function SubscryptionOffers() {
   }, []);
 
   return (
-    <section className="SubscryptionOffers">
+    <SubscriptionRoot className="SubscryptionOffers">
       <h1>Currently you dont have any active plans</h1>
       <div className="OfferPart">
         <h2>
-          You can view all the available plans to purchase in this link or pick among suggested
-          plans for you 👾
+          You can view all the available plans to purchase in this link or pick
+          among suggested plans for you 👾
         </h2>
         <OfferCarousel />
       </div>
-    </section>
+    </SubscriptionRoot>
   );
 }

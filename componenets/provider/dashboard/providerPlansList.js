@@ -2,6 +2,64 @@ import React, { useContext } from "react";
 import PlanCard from "../../common/planCard";
 import { UserContext } from "../../../context/store";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+import { FontSize, Weight, Gray, Primary } from "../../../styles/variables";
+
+const PlanRoot = styled.section`
+  &.ProviderPlansList {
+    margin-bottom: 44px;
+    & > header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px;
+
+      h1 {
+        font-size: ${FontSize.fontSizeBodyLarge};
+        font-weight: ${Weight.fontWeightMedium};
+        color: ${Primary.primary};
+        line-height: 1.4;
+      }
+      p {
+        font-size: ${FontSize.fontSizeBodyStandard};
+        font-weight: ${Weight.fontWeightRegular};
+        line-height: 1.5;
+        color: #8a8f99;
+        margin-left: auto;
+        margin-right: 17px;
+      }
+    }
+
+    & > div {
+      display: flex;
+    }
+  }
+  &.ProviderPlansList-addPlanBtn {
+    font-size: ${FontSize.fontSizeBodyStandard};
+    font-weight: ${Weight.fontWeightRegular};
+    line-height: 1.5;
+    color: #8a8f99;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: "";
+      display: block;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      background-position: center;
+      background-image: url("/icons/png/uploadBtn.png");
+      background-size: 16px;
+      position: static;
+      margin-right: 24px;
+      background-color: ${Gray.gray6};
+    }
+  }
+`;
 
 //The component for generating the provider plan lists
 export default function ProviderPlansList() {
@@ -22,7 +80,7 @@ export default function ProviderPlansList() {
     />
   ));
   return (
-    <section className="ProviderPlansList">
+    <PlanRoot className="ProviderPlansList">
       <header>
         <h1>Your Plans</h1>
         <p>Total Plans: {plans.length}</p>
@@ -37,6 +95,6 @@ export default function ProviderPlansList() {
         </button>
       </header>
       <div>{plansCard}</div>
-    </section>
+    </PlanRoot>
   );
 }

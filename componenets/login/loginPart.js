@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/store";
+import {LogIn} from "../../styles/wallet"
 
 //The component for generating login form
 export default function LoginPart(props) {
@@ -7,7 +8,7 @@ export default function LoginPart(props) {
   const handleLogin = props.handler;
 
   return (
-    <section className="Login">
+    <LogIn className="Login">
       <h6>or</h6>
       <h1>Log in</h1>
       <p>If you have interacted with the contract and have an account you can log in here.</p>
@@ -33,6 +34,6 @@ export default function LoginPart(props) {
         />
         <input type="submit" value="Log in" />
       </form>
-    </section>
+    </LogIn>
   );
 }
