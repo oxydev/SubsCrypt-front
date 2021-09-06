@@ -153,7 +153,7 @@ export const TestDataFunctions = (props) => {
           setLoading(true);
           dispatch({
             type: "LOAD_USER",
-            payload: { username: username, password: password, type: "user" },
+            payload: { username: username, password: password, type: "provider" },
           });
           setAuth(true);
           Cookies.set("subscrypt", username);
@@ -172,12 +172,25 @@ export const TestDataFunctions = (props) => {
         }
       })
       .then(async (res) => {
+        console.log("hamid1");
         if (res == username) {
-          await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
-            console.log("hamid2", res);
-            setLoading(false);
-            if (res) dispatch({ type: "LOAD_USER_PLANS", payload: res });
-          });
+          dispatch({ type: "REGISTERED", payload: true });
+          await (
+            await subscrypt
+          )
+            .getAddressByUsername(username)
+            .then(async (result) => {
+              const walletAddress = result.result;
+              dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
+              Cookies.set("subscryptAddress", walletAddress);
+              return walletAddress;
+            })
+            .then(async (res) => {
+              console.log(res);
+              await getProviderAllInfo(res).then(() => {
+                setLoading(false);
+              });
+            });
         }
       })
       .catch(() => {
@@ -187,17 +200,19 @@ export const TestDataFunctions = (props) => {
   };
   //Function for getting all provider plans info
   const getProviderAllInfo = async (address, count) => {
-    let plansCount;
-    if (count) {
-      plansCount = count;
+    console.log(count);
+    if (!count) {
+      await (await subscrypt).getPlanLength(address).then(async (res) => {
+        dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.result });
+        await getProviderAllInfo(address, parseInt(res.result));
+      });
     } else {
-      plansCount = globalState.user.plansCount;
+      serverFunctions.getProviderHeaderInfo(address);
+      await blockChainFuncs.getProviderPlanslist(address, count).then((res) => {
+        dispatch({ type: "LOAD_PROVIDER_PLANS", payload: res });
+      });
+      serverFunctions.getProviderAllUsers(address);
     }
-    serverFunctions.getProviderHeaderInfo(address);
-    await blockChainFuncs.getProviderPlanslist(address, plansCount).then((res) => {
-      dispatch({ type: "LOAD_PROVIDER_PLANS", payload: res });
-    });
-    serverFunctions.getProviderAllUsers(address);
   };
 
   //Function for loading provider offer
@@ -216,7 +231,6 @@ export const TestDataFunctions = (props) => {
         });
     } else {
       await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
-        console.log("finalres:", res);
         dispatch({ type: "RESET_PROVIDER_PLAN", payload: res });
       });
     }
