@@ -101,11 +101,13 @@ export const BlockChainFuncs = (props) => {
 
   //Functions for checking provider registration and return the planLength if registered.
   const checkProviderRegistration = async (address) => {
+    console.log("hamid1");
     return await (
       await subscrypt
     )
       .getPlanLength(address)
       .then((res) => {
+        console.log(res);
         if (res.status == "Fetched") {
           const planLength = parseInt(res.result);
           if (planLength == 0) {
@@ -235,7 +237,6 @@ export const BlockChainFuncs = (props) => {
     connectToWallet,
     checkProviderRegistration,
     getProviderPlanslist,
-    checkProviderRegistration,
     loadSubscriberPlansbyWallet,
     loadSubscriberPlansbyUsername,
   };

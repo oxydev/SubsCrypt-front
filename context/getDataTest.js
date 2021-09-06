@@ -64,16 +64,35 @@ export const TestDataFunctions = (props) => {
 
   //Function for handling the user wallet connection as a subscriber
   const handleProviderLogingByWallet = async (address) => {
+    setLoading(true);
     blockChainFuncs
       .connectToWallet(address)
       .then((res) => {
+        setAuth(true);
         Cookies.set("subscryptType", "provider");
         Cookies.set("subscryptAddress", res.address);
         dispatch({
           type: "LOAD_USER",
           payload: { type: "provider", wallet: res, address: res.address },
         });
-        setAuth(true);
+        return res.address;
+      })
+      .then(async (res) => {
+        return await blockChainFuncs.checkProviderRegistration(res).then((response) => {
+          return { address: res, planNum: response };
+        });
+      })
+      .then(async (res) => {
+        if (res.planNum == "NotRegistered") {
+          dispatch({ type: "REGISTERED", payload: false });
+          setLoading(false);
+        } else {
+          dispatch({ type: "REGISTERED", payload: true });
+          dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.planNum });
+          await getProviderAllInfo(res.address, res.planNum).then(() => {
+            setLoading(false);
+          });
+        }
       })
       .catch(() => {
         throw new Error("Wallet connection has been canceled");
@@ -175,7 +194,10 @@ export const TestDataFunctions = (props) => {
       plansCount = globalState.user.plansCount;
     }
     serverFunctions.getProviderHeaderInfo(address);
-    getProviderPlanList(address, plansCount);
+    await blockChainFuncs.getProviderPlanslist(address, plansCount).then((res) => {
+      dispatch({ type: "LOAD_PROVIDER_PLANS", payload: res });
+    });
+    serverFunctions.getProviderAllUsers(address);
   };
 
   //Function for loading provider offer
