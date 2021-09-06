@@ -34,14 +34,14 @@ export const TestDataFunctions = (props) => {
   };
 
   //Function for handling the user wallet connection as a subscriber
-  const handleSubscriberLoginByWallet = async () => {
+  const handleSubscriberLoginByWallet = async (address) => {
     setLoading(true);
     blockChainFuncs
-      .connectToWallet()
+      .connectToWallet(address)
       .then((res) => {
         setAuth(true);
         Cookies.set("subscryptType", "user");
-        Cookies.set("subscryptWallet", res.address);
+        Cookies.set("subscryptAddress", res.address);
         dispatch({
           type: "LOAD_USER",
           payload: { type: "user", wallet: res, address: res.address },
@@ -63,12 +63,12 @@ export const TestDataFunctions = (props) => {
   };
 
   //Function for handling the user wallet connection as a subscriber
-  const handleProviderLogingByWallet = async () => {
+  const handleProviderLogingByWallet = async (address) => {
     blockChainFuncs
-      .connectToWallet()
+      .connectToWallet(address)
       .then((res) => {
         Cookies.set("subscryptType", "provider");
-        Cookies.set("subscryptWallet", res.address);
+        Cookies.set("subscryptAddress", res.address);
         dispatch({
           type: "LOAD_USER",
           payload: { type: "provider", wallet: res, address: res.address },
@@ -116,18 +116,19 @@ export const TestDataFunctions = (props) => {
 
   //Function for check authentication by cookie
   const checkAuthByCookie = () => {
+    console.log("hamid1");
     const userName = Cookies.get("subscrypt");
     const password = Cookies.get("subscryptPass");
     const userType = Cookies.get("subscryptType");
-    const userWallet = Cookies.get("subscryptWallet");
+    const userAddress = Cookies.get("subscryptAddress");
     if (password) {
       //do the stuff for auth by username
-    } else if (userWallet) {
-      //do the stuff for wallet auth
+    } else if (userAddress) {
       if (userType == "user") {
-        handleSubscriberLoginByWallet();
+        console.log("hamid2");
+        handleSubscriberLoginByWallet(userAddress);
       } else if (userType == "provider") {
-        handleProviderLogingByWallet();
+        handleProviderLogingByWallet(userAddress);
       }
     }
   };

@@ -14,7 +14,7 @@ export const BlockChainFuncs = (props) => {
   });
 
   //Function for connecting to the wallet
-  const connectToWallet = async () => {
+  const connectToWallet = async (address) => {
     await (await subscrypt).getWalletAccess();
     return await (
       await subscrypt
@@ -22,17 +22,28 @@ export const BlockChainFuncs = (props) => {
       .getWalletAccounts()
       .then(async (result) => {
         const walletList = result.map((item) => item);
+
         const walletNumber = walletList.length;
         if (walletNumber == 1) {
           return walletList[0];
         } else {
-          return await selectwalletFromList(walletList)
-            .then((res) => {
-              return res;
-            })
-            .catch(() => {
-              throw new Error("Selection canceled!");
-            });
+          if (address) {
+            let targetWallet;
+            for (const item of walletList) {
+              if (address == item.address) {
+                targetWallet = item;
+              }
+            }
+            return targetWallet;
+          } else {
+            return await selectwalletFromList(walletList)
+              .then((res) => {
+                return res;
+              })
+              .catch(() => {
+                throw new Error("Selection canceled!");
+              });
+          }
         }
       })
       .then((res) => {
@@ -130,7 +141,6 @@ export const BlockChainFuncs = (props) => {
         );
       }
       return await Promise.all(promiseList).then((values) => {
-        console.log(values);
         return values;
       });
     }
@@ -138,8 +148,6 @@ export const BlockChainFuncs = (props) => {
 
   //Function for getting a provider plan according to it's index
   const loadPlan = async (address, index) => {
-    console.log("hamid1");
-
     return await (await subscrypt).getPlanData(address, index).then(async (result) => {
       // console.log(result);
       let plan = result.result;

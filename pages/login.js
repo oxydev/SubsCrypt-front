@@ -15,7 +15,7 @@ export default function Login() {
 
   //get coockies
   const password = Cookies.get("subscryptPass");
-  const userWallet = Cookies.get("subscryptWallet");
+  const userWallet = Cookies.get("subscryptAddress");
 
   function handleUserLogin() {
     setRole("user");
