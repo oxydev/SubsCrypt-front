@@ -1,14 +1,18 @@
 import React, { useContext } from "react";
-import { dataContext } from "../../context/getData";
+import { testDataContext } from "../../context/getDataTest";
 
 //The component for generating the wallet connection button
 export default function WalletButton(props) {
   const { wallet, status } = props;
-  const { connectToWallet } = useContext(dataContext);
+  const { connectToWalletAsSubscriber, connectToWalletAsProvider } = useContext(testDataContext);
   const type = props.type;
 
   function handleWalletConnection() {
-    connectToWallet([], type);
+    if (type == "user") {
+      connectToWalletAsSubscriber();
+    } else {
+      connectToWalletAsProvider();
+    }
   }
 
   return (
