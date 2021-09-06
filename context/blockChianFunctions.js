@@ -15,7 +15,6 @@ export const BlockChainFuncs = (props) => {
 
   //Function for connecting to the wallet
   const connectToWallet = async () => {
-    console.log("hamid1");
     await (await subscrypt).getWalletAccess();
     return await (
       await subscrypt
@@ -53,7 +52,7 @@ export const BlockChainFuncs = (props) => {
       <WalletSelectionModal
         addressList={addressList}
         handleSubmit={async (value) => {
-          await comfirmAddress(value);
+          comfirmAddress(value);
         }}
       />
     );
@@ -89,8 +88,113 @@ export const BlockChainFuncs = (props) => {
       });
   };
 
+  //Functions for checking provider registration and return the planLength if registered.
+  const checkProviderRegistration = async (address) => {
+    return await (
+      await subscrypt
+    )
+      .getPlanLength(address)
+      .then((res) => {
+        if (res.status == "Fetched") {
+          const planLength = parseInt(res.result);
+          if (planLength == 0) {
+            return "NotRegistered";
+          } else {
+            return planLength;
+          }
+        }
+      })
+      .catch(() => {
+        throw new Error("Getting plan length failed");
+      });
+  };
+
+  //Functions for getting the provider plans data
+  const getProviderPlanslist = async (address, count) => {
+    let planList = [];
+    let promiseList = [];
+    for (let i = 0; i < count; i++) {
+      promiseList.push(
+        loadPlan(address, i)
+          .then((res) => planList.push(res))
+          .catch(() => {
+            throw new Error("Plan no" + i + "Got a problem");
+          })
+      );
+    }
+    return await Promise.all(promiseList).then(() => {
+      return planList;
+    });
+  };
+
+  //Function for getting a provider plan according to it's index
+  const loadPlan = async (address, index) => {
+    return await (await subscrypt).getPlanData(address, index).then(async (result) => {
+      // console.log(result);
+      let plan = result.result;
+      plan.planIndex = index;
+      // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
+      await loadCharacs(address, index, plan).then((res) => {
+        return res;
+      });
+    });
+  };
+
+  //Function for getting plan Characteristic
+  const loadCharacs = async (address, index, plan) => {
+    return await (await subscrypt).getPlanCharacteristics(address, index).then((result) => {
+      // console.log(result);
+      if (result.status == "Fetched") {
+        plan.characteristics = result.result;
+        plan.providerAddress = address;
+        return plan;
+      }
+    });
+  };
+
+  //Function for getting subscriebr plans according to it's wallet address
+  const loadSubscriberPlansbyWallet = async (address) => {
+    let plans = [];
+    return await (
+      await subscrypt
+    )
+      .retrieveWholeDataWithWallet(address)
+      .then(async (result) => {
+        if (result.status == "Fetched") {
+          console.log(result);
+          plans = result.result;
+          // console.log(plans);
+          if (plans.length == 0) {
+            return 0;
+          }
+          let promiseList = [];
+
+          plans.map(async (item, index) => {
+            promiseList.push(
+              await loadCharacs(item.provider, item.plan_index, item).then((res) => {
+                plan[index] = res;
+              })
+            );
+          });
+          return await Promise.all(promiseList).then(() => {
+            return plans;
+          });
+        } else {
+          console.log("hamid2");
+          return plans;
+        }
+      })
+      .catch(() => {
+        throw new Error("Problem with loading subscriber plans!");
+      });
+  };
+
   const blockchainContextValue = {
     connectToWallet,
+    checkProviderRegistration,
+    getProviderPlanslist,
+    checkProviderRegistration,
+    loadSubscriberPlansbyWallet,
   };
 
   return (

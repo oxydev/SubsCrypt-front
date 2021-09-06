@@ -213,7 +213,11 @@ export const DataFunctions = (props) => {
       const index = addressList.indexOf(address);
       if (index < 0) {
         router.push("/");
-        window.alert("Please come with a wallet that has access to " + address +" to use on chain functionalities of your account!");
+        window.alert(
+          "Please come with a wallet that has access to " +
+            address +
+            " to use on chain functionalities of your account!"
+        );
       } else {
         Cookies.set("subscryptWallet", result[index].address);
         Cookies.set("addressIndex", index);
@@ -224,7 +228,6 @@ export const DataFunctions = (props) => {
       }
     });
   };
-
 
   //function for getting the provider planList
   const getProvidePlanList = async (address, planNumber) => {

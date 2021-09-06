@@ -55,24 +55,22 @@ export default function App({ Component, pageProps }) {
               <ServerFunctions>
                 <BlockChainFuncs>
                   <TestDataFunctions>
-                    <DataFunctions>
-                      <div className="WholePageWrapper">
-                        <SideBar />
-                        {/* Main componenet is for the main part of the app where each page content is shown */}
-                        {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
-                        <Main>
-                          {loading ? (
-                            <Loading />
-                          ) : (
-                            <>
-                              {auth && <Header />}
-                              {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
-                            </>
-                          )}
-                        </Main>
-                        <div></div>
-                      </div>
-                    </DataFunctions>
+                    <div className="WholePageWrapper">
+                      <SideBar />
+                      {/* Main componenet is for the main part of the app where each page content is shown */}
+                      {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
+                      <Main>
+                        {loading ? (
+                          <Loading />
+                        ) : (
+                          <>
+                            {auth && <Header />}
+                            {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                          </>
+                        )}
+                      </Main>
+                      <div></div>
+                    </div>
                   </TestDataFunctions>
                 </BlockChainFuncs>
               </ServerFunctions>

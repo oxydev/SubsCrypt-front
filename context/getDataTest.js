@@ -34,17 +34,28 @@ export const TestDataFunctions = (props) => {
   };
 
   //Function for handling the user wallet connection as a subscriber
-  const connectToWalletAsSubscriber = async () => {
+  const handleSubscriberLoginByWallet = async () => {
+    setLoading(true);
     blockChainFuncs
       .connectToWallet()
       .then((res) => {
+        setAuth(true);
         Cookies.set("subscryptType", "user");
         Cookies.set("subscryptWallet", res.address);
         dispatch({
           type: "LOAD_USER",
           payload: { type: "user", wallet: res, address: res.address },
         });
-        setAuth(true);
+        return res.address;
+      })
+      .then(async (res) => {
+        await blockChainFuncs.loadSubscriberPlansbyWallet(res).then((res) => {
+          console.log(res);
+          if (res.length > 0) {
+            dispatch({ type: "LOAD_USER_PLANS", payload: res });
+          }
+          setLoading(false);
+        });
       })
       .catch(() => {
         throw new Error("Wallet connection has been canceled");
@@ -52,7 +63,7 @@ export const TestDataFunctions = (props) => {
   };
 
   //Function for handling the user wallet connection as a subscriber
-  const connectToWalletAsProvider = async () => {
+  const handleProviderLogingByWallet = async () => {
     blockChainFuncs
       .connectToWallet()
       .then((res) => {
@@ -69,31 +80,6 @@ export const TestDataFunctions = (props) => {
       });
   };
 
-  //Function for checking if a provider is registered according to his wallet
-  const checkProviderRegistration = async (address) => {
-    return await (
-      await subscrypt
-    )
-      .getPlanLength(address)
-      .then((res) => {
-        if (res.status == "Fetched") {
-          const planLength = parseInt(res.result);
-          if (planLength == 0) {
-            dispatch({ type: "REGISTERED", payload: false });
-            return "NotRegistered";
-          } else {
-            dispatch({ type: "REGISTERED", payload: true });
-            dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: planLength });
-
-            return planLength;
-          }
-        }
-      })
-      .catch(() => {
-        throw new Error("Getting plan length failed");
-      });
-  };
-
   //Function for getting all provider plans info
   const getProviderAllInfo = async (address, count) => {
     let plansCount;
@@ -106,65 +92,62 @@ export const TestDataFunctions = (props) => {
     getProviderPlanList(address, plansCount);
   };
 
-  //Function for getting provider's all plans
-  const getProviderPlanList = async (address, count) => {
-    for (let i = 0; i < count; i++) {
-      loadPlan(address, i);
+  //function for check authentication by cookie
+  const checkAuthByCookie = () => {
+    const userName = Cookies.get("subscrypt");
+    const password = Cookies.get("subscryptPass");
+    const userType = Cookies.get("subscryptType");
+    const userWallet = Cookies.get("subscryptWallet");
+    if (password) {
+      //do the stuff for auth by username
+    } else if (userWallet) {
+      //do the stuff for wallet auth
+      if (userType == "user") {
+        handleSubscriberLoginByWallet();
+      } else if (userType == "provider") {
+        handleProviderLogingByWallet();
+      }
     }
   };
 
-  //Function for getting a provider plan according to it's index
-  const loadPlan = async (address, index) => {
-    await (await subscrypt).getPlanData(address, index).then(async (result) => {
-      // console.log(result);
-      result.result.planIndex = index;
-      // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
-      await (await subscrypt).getPlanCharacteristics(address, index).then((result) => {
-        // console.log(result);
-        if (result.status == "Fetched") {
-          plan.characteristics = result.result;
-          plan.providerAddress = address;
-          dispatch({ type: "LOAD_PROVIDER_PLANS", payload: plan });
-          serverFunctions.getPlanServerInfo(address, index, "provider", index);
-        }
-      });
-    });
-  };
+  //Function for getting the user address for charging money
+  const sendMoneyToAddress = () => {
+    // console.log("send money ");
+    const modalElement = (
+      <div>
+        <form className="GiveTokenForm" onSubmit={handleSendMoney}>
+          <label>Please input your wallet address</label>
+          <input id="modalAddressInput" type="text" />
+          <input type="submit" value="submit" />
+        </form>
+      </div>
+    );
+    setModal(modalElement);
 
-  //Function for getting subscriber plans
-  const loadSubscriberPlansbyWallet = async (address) => {
-    await (await subscrypt).retrieveWholeDataWithWallet(address).then((result) => {
-      if (result.status == "Fetched") {
-        let plans = result.result;
-        // console.log(plans);
-        if (plans.length == 0) {
-          setLoading(false);
-        }
-        plans.map(async (item, index) => {
-          await (await subscrypt)
-            .getPlanCharacteristics(item.provider, item.plan_index)
-            .then((result) => {
-              // console.log(result);
-              if (result.status == "Fetched") {
-                const newPlan = { ...item, characteristics: result.result };
-                dispatch({ type: "LOAD_ONE_USER_PLANS", payload: { plan: newPlan, index: index } });
-                serverFunctions.getPlanServerInfo(item.provider, item.plan_index, "user", index);
-                setLoading(false);
-              }
-            });
+    async function handleSendMoney() {
+      setModal(null);
+      const address = document.getElementById("modalAddressInput").value;
+      await (
+        await subscrypt
+      )
+        .transferToken(address)
+        .then((result) => {
+          // console.log(result.toHex());
+          window.alert("Operation has been done successful!");
+        })
+        .catch((error) => {
+          window.alert("Operation failed!");
         });
-      } else {
-        setLoading(false);
-      }
-    });
+    }
   };
 
   const testdataContextValue = {
     // sendMoneyToAddress,
-    connectToWalletAsSubscriber,
-    connectToWalletAsProvider,
+    handleSubscriberLoginByWallet,
+    handleProviderLogingByWallet,
+    checkAuthByCookie,
+    sendMoneyToAddress,
     // connectToWalltByAddress,
-    loadSubscriberPlansbyWallet,
     // loadSubscriberDataByWallet,
     // CheckSubscriberAuthByUsername,
     // CheckProviderAuthByUsername,
