@@ -4,11 +4,12 @@ import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import ProviderSelection from "./providerSelection";
+import { testDataContext } from "../../context/getDataTest";
 
 //The component for managing subscription offer part
 export default function SubscryptionOffers() {
   const { globalState } = useContext(UserContext);
-  const { loadOffers } = useContext(dataContext);
+  const { loadOffers } = useContext(testDataContext);
   // const providerAddress = data.providerAddress;
   const providerAddress = globalState.offerProvider;
 

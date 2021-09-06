@@ -111,30 +111,41 @@ export const BlockChainFuncs = (props) => {
 
   //Functions for getting the provider plans data
   const getProviderPlanslist = async (address, count) => {
-    let planList = [];
     let promiseList = [];
-    for (let i = 0; i < count; i++) {
-      promiseList.push(
-        loadPlan(address, i)
-          .then((res) => planList.push(res))
-          .catch(() => {
-            throw new Error("Plan no" + i + "Got a problem");
-          })
-      );
+    if (!count) {
+      return await (await subscrypt).getPlanLength(address).then(async (res) => {
+        return await getProviderPlanslist(address, parseInt(res.result));
+      });
+    } else {
+      for (let i = 0; i < count; i++) {
+        promiseList.push(
+          await loadPlan(address, i)
+            .then((res) => {
+              console.log(res);
+              return res;
+            })
+            .catch(() => {
+              throw new Error("Plan no" + i + "Got a problem");
+            })
+        );
+      }
+      return await Promise.all(promiseList).then((values) => {
+        console.log(values);
+        return values;
+      });
     }
-    return await Promise.all(promiseList).then(() => {
-      return planList;
-    });
   };
 
   //Function for getting a provider plan according to it's index
   const loadPlan = async (address, index) => {
+    console.log("hamid1");
+
     return await (await subscrypt).getPlanData(address, index).then(async (result) => {
       // console.log(result);
       let plan = result.result;
       plan.planIndex = index;
       // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
-      await loadCharacs(address, index, plan).then((res) => {
+      return await loadCharacs(address, index, plan).then((res) => {
         return res;
       });
     });
@@ -180,7 +191,6 @@ export const BlockChainFuncs = (props) => {
             return plans;
           });
         } else {
-          console.log("hamid2");
           return plans;
         }
       })

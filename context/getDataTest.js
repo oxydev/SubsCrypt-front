@@ -92,7 +92,29 @@ export const TestDataFunctions = (props) => {
     getProviderPlanList(address, plansCount);
   };
 
-  //function for check authentication by cookie
+  //Function for loading provider offer
+  const loadOffers = async (providerAddress) => {
+    if (providerAddress.length < 20) {
+      await (
+        await subscrypt
+      )
+        .getAddressByUsername(providerAddress)
+        .then((result) => {
+          dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
+          loadOffers(result.result);
+        })
+        .catch((error) => {
+          window.alert("The username you have entered is invalid!!");
+        });
+    } else {
+      await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
+        console.log("finalres:", res);
+        dispatch({ type: "RESET_PROVIDER_PLAN", payload: res });
+      });
+    }
+  };
+
+  //Function for check authentication by cookie
   const checkAuthByCookie = () => {
     const userName = Cookies.get("subscrypt");
     const password = Cookies.get("subscryptPass");
@@ -154,7 +176,7 @@ export const TestDataFunctions = (props) => {
     // LoadProviderAllInfo,
     // CheckAuthByCookie,
     // loadPlanByIndex,
-    // loadOffers,
+    loadOffers,
     // loadProviderPlanList,
     // handleSubscribtion,
     // handleRenewPlan,
