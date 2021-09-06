@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import LoginPart from "../../componenets/login/loginPart";
 import WalletConnection from "../../componenets/login/walletConnection";
-import { dataContext } from "../../context/getData";
-
+import { testDataContext } from "../../context/getDataTest";
 export default function UserLogin() {
-  const { checkUserAuthWithUserName } = useContext(dataContext);
+  const { handleSubscriberloginByUsername } = useContext(testDataContext);
 
   return (
     <div className="LoginPage">
       <WalletConnection type="user" />
-      <LoginPart handler={checkUserAuthWithUserName} />
+      <LoginPart handler={handleSubscriberloginByUsername} />
     </div>
   );
 }

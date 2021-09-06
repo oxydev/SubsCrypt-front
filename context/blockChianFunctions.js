@@ -191,7 +191,7 @@ export const BlockChainFuncs = (props) => {
           plans.map(async (item, index) => {
             promiseList.push(
               await loadCharacs(item.provider, item.plan_index, item).then((res) => {
-                plan[index] = res;
+                plans[index] = res;
               })
             );
           });
@@ -207,12 +207,37 @@ export const BlockChainFuncs = (props) => {
       });
   };
 
+  const loadSubscriberPlansbyUsername = async (username, password) => {
+    let promiseList = [];
+    return await (await subscrypt)
+      .retrieveWholeDataWithUsername(username, password)
+      .then(async (result) => {
+        console.log("hamid1");
+        console.log(result.result);
+        let plans = result.result;
+        // console.log(plans);
+        for (const item of plans) {
+          promiseList.push(
+            await loadCharacs(item.provider, item.plan_index, item).then((res) => {
+              return res;
+            })
+          );
+        }
+
+        console.log(promiseList);
+        return await Promise.all(promiseList).then((values) => {
+          return values;
+        });
+      });
+  };
+
   const blockchainContextValue = {
     connectToWallet,
     checkProviderRegistration,
     getProviderPlanslist,
     checkProviderRegistration,
     loadSubscriberPlansbyWallet,
+    loadSubscriberPlansbyUsername,
   };
 
   return (

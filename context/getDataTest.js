@@ -80,6 +80,50 @@ export const TestDataFunctions = (props) => {
       });
   };
 
+  //Function for handling subscriber login bu username
+  const handleSubscriberloginByUsername = async (username, password) => {
+    await (
+      await subscrypt
+    )
+      .userCheckAuthWithUsername(username, password)
+      .then(async (result) => {
+        if (result.result == true) {
+          setLoading(true);
+          dispatch({
+            type: "LOAD_USER",
+            payload: { username: username, password: password, type: "user" },
+          });
+          setAuth(true);
+          Cookies.set("subscrypt", username);
+          Cookies.set("subscryptPass", password);
+          Cookies.set("subscryptType", "user");
+          await (await subscrypt).getAddressByUsername(username).then(async (result) => {
+            const walletAddress = result.result;
+            dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
+            Cookies.set("subscryptAddress", walletAddress);
+          });
+          return username;
+          //getting the user plans after login
+        } else {
+          dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
+          window.alert("Invalid username of password!");
+        }
+      })
+      .then(async (res) => {
+        if (res == username) {
+          await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
+            console.log("hamid2", res);
+            setLoading(false);
+            if (res) dispatch({ type: "LOAD_USER_PLANS", payload: res });
+          });
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+        // console.log(error);
+      });
+  };
+
   //Function for getting all provider plans info
   const getProviderAllInfo = async (address, count) => {
     let plansCount;
@@ -116,7 +160,6 @@ export const TestDataFunctions = (props) => {
 
   //Function for check authentication by cookie
   const checkAuthByCookie = () => {
-    console.log("hamid1");
     const userName = Cookies.get("subscrypt");
     const password = Cookies.get("subscryptPass");
     const userType = Cookies.get("subscryptType");
@@ -125,7 +168,6 @@ export const TestDataFunctions = (props) => {
       //do the stuff for auth by username
     } else if (userAddress) {
       if (userType == "user") {
-        console.log("hamid2");
         handleSubscriberLoginByWallet(userAddress);
       } else if (userType == "provider") {
         handleProviderLogingByWallet(userAddress);
@@ -164,12 +206,27 @@ export const TestDataFunctions = (props) => {
     }
   };
 
+  //Function for handling logging out
+  const handleLogOut = () => {
+    Cookies.remove("subscrypt");
+    Cookies.remove("subscryptAddress");
+    Cookies.remove("subscryptPass");
+    Cookies.remove("subscryptType");
+    setAuth(false);
+    dispatch({
+      type: "LOG_OUT",
+      payload: {},
+    });
+    router.push("/");
+  };
+
   const testdataContextValue = {
     // sendMoneyToAddress,
     handleSubscriberLoginByWallet,
     handleProviderLogingByWallet,
     checkAuthByCookie,
     sendMoneyToAddress,
+    handleSubscriberloginByUsername,
     // connectToWalltByAddress,
     // loadSubscriberDataByWallet,
     // CheckSubscriberAuthByUsername,
@@ -182,7 +239,7 @@ export const TestDataFunctions = (props) => {
     // handleSubscribtion,
     // handleRenewPlan,
     // handleRefundPlan,
-    // handleLogout,
+    handleLogOut,
     // providerRegistrationHandler,
     // handleChangePassword,
     // addNewsPlan,
