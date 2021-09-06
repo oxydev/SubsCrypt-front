@@ -112,7 +112,6 @@ export const TestDataFunctions = (props) => {
       .then(async (res) => {
         if (res == username) {
           await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
-            console.log("hamid2", res);
             setLoading(false);
             if (res) dispatch({ type: "LOAD_USER_PLANS", payload: res });
           });
@@ -124,6 +123,49 @@ export const TestDataFunctions = (props) => {
       });
   };
 
+  //Function for handling subscriber login bu username
+  const handleProviderloginByUsername = async (username, password) => {
+    await (
+      await subscrypt
+    )
+      .providerCheckAuthWithUsername(username, password)
+      .then(async (result) => {
+        if (result.result == true) {
+          setLoading(true);
+          dispatch({
+            type: "LOAD_USER",
+            payload: { username: username, password: password, type: "user" },
+          });
+          setAuth(true);
+          Cookies.set("subscrypt", username);
+          Cookies.set("subscryptPass", password);
+          Cookies.set("subscryptType", "provider");
+          await (await subscrypt).getAddressByUsername(username).then(async (result) => {
+            const walletAddress = result.result;
+            dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
+            Cookies.set("subscryptAddress", walletAddress);
+          });
+          return username;
+          //getting the user plans after login
+        } else {
+          dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
+          window.alert("Invalid username of password!");
+        }
+      })
+      .then(async (res) => {
+        if (res == username) {
+          await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
+            console.log("hamid2", res);
+            setLoading(false);
+            if (res) dispatch({ type: "LOAD_USER_PLANS", payload: res });
+          });
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+        // console.log(error);
+      });
+  };
   //Function for getting all provider plans info
   const getProviderAllInfo = async (address, count) => {
     let plansCount;
@@ -165,7 +207,13 @@ export const TestDataFunctions = (props) => {
     const userType = Cookies.get("subscryptType");
     const userAddress = Cookies.get("subscryptAddress");
     if (password) {
+      setLoading(true);
       //do the stuff for auth by username
+      if (userType == "user") {
+        handleSubscriberloginByUsername(userName, password);
+      } else if (userType == "provider") {
+        handleProviderloginByUsername(userName, password);
+      }
     } else if (userAddress) {
       if (userType == "user") {
         handleSubscriberLoginByWallet(userAddress);
@@ -227,6 +275,7 @@ export const TestDataFunctions = (props) => {
     checkAuthByCookie,
     sendMoneyToAddress,
     handleSubscriberloginByUsername,
+    handleProviderloginByUsername,
     // connectToWalltByAddress,
     // loadSubscriberDataByWallet,
     // CheckSubscriberAuthByUsername,

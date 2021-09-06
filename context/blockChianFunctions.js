@@ -188,15 +188,15 @@ export const BlockChainFuncs = (props) => {
           }
           let promiseList = [];
 
-          plans.map(async (item, index) => {
+          for (const item of plans) {
             promiseList.push(
               await loadCharacs(item.provider, item.plan_index, item).then((res) => {
-                plans[index] = res;
+                return res;
               })
             );
-          });
-          return await Promise.all(promiseList).then(() => {
-            return plans;
+          }
+          return await Promise.all(promiseList).then((values) => {
+            return values;
           });
         } else {
           return plans;
