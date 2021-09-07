@@ -207,7 +207,13 @@ export const TestDataFunctions = (props) => {
         await getProviderAllInfo(address, parseInt(res.result));
       });
     } else {
-      serverFunctions.getProviderHeaderInfo(address);
+      await serverFunctions.getProviderHeaderInfo(address).then((res) => {
+        console.log(res, "server1");
+        dispatch({ type: "USER_NAME", payload: res.name });
+        dispatch({ type: "USER_DESCRIPTION", payload: res.description });
+        dispatch({ type: "USER_USERSCOUNT", payload: res.usersCount });
+        dispatch({ type: "USER_INCOME", payload: res.income });
+      });
       await blockChainFuncs.getProviderPlanslist(address, count).then((res) => {
         dispatch({ type: "LOAD_PROVIDER_PLANS", payload: res });
       });
