@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import localData from "../../data/providerPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
-import { dataContext } from "../../context/getData";
 import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
+import { setDataContext } from "../../context/setData";
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
@@ -13,7 +13,7 @@ export default function PlanCard(props) {
   const { plan, index, type, address } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
-  const { handleSubscribtion, loadUserDataByWallet } = useContext(dataContext);
+  const { handleSubscribtion } = useContext(setDataContext);
   const providerAddress = data.providerAddress;
 
   //Subscription function
@@ -42,7 +42,7 @@ export default function PlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      loadUserDataByWallet(globalState.user.address);
+      // loadUserDataByWallet(globalState.user.address);
       router.push("/user");
     }
   }
