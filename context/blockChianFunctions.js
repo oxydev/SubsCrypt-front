@@ -11,7 +11,7 @@ export const BlockChainFuncs = (props) => {
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
-  });
+  }, []);
 
   //Function for connecting to the wallet
   const connectToWallet = async (address) => {

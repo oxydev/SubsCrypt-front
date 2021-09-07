@@ -22,7 +22,7 @@ export const SetDataFunctions = (props) => {
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
-  });
+  }, []);
 
   //Refund a plan
   const refundPlan = async (address, injector, callback, providerAddress, planIndex) => {

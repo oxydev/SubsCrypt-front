@@ -25,7 +25,7 @@ export const TestDataFunctions = (props) => {
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
-  });
+  }, []);
 
   //Function for setting the wallet in the global state
   const setWallet = (wallet) => {
@@ -313,6 +313,7 @@ export const TestDataFunctions = (props) => {
     handleProviderloginByUsername,
     loadOffers,
     handleLogOut,
+    getProviderAllInfo,
   };
   return (
     <testDataContext.Provider value={testdataContextValue}>
