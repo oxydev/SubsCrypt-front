@@ -5,33 +5,24 @@ import { dataContext } from "../../context/getData";
 import { middleDots } from "../../utilities/utilityFunctions";
 import Link from "next/link";
 import styled from "styled-components";
-import {
-  Gray,
-  Color,
-  BorderRadius,
-  FontSize,
-  Weight,
-  Background,
-  Shadows,
-} from "../../styles/variables";
 
 const HeaderRoot = styled.div`
   display: flex;
   justify-content: flex-end;
-  border-bottom: 1px solid ${Gray.grayNotInKit1};
+  border-bottom: 1px solid ${({ theme }) => theme.Gray.grayNotInKit1};
   width: 100%;
   padding: 24px 47px;
   .LoginBox {
     display: flex;
     align-items: center;
-    border: 1px solid ${Color.green};
-    border-radius: ${BorderRadius.borderRadiusRegular};
+    border: 1px solid ${({ theme }) => theme.Color.green};
+    border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
     padding: 0 23px;
     max-width: 355px;
     overflow: hidden;
     cursor: pointer;
     .Green {
-      background-color: ${Color.green};
+      background-color: ${({ theme }) => theme.Color.green};
       .UserName {
         color: #fff;
       }
@@ -53,35 +44,35 @@ const HeaderRoot = styled.div`
       overflow: hidden;
       flex-shrink: 0;
       white-space: nowrap;
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
-      color: ${Color.green};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+      color: ${({ theme }) => theme.Color.green};
     }
     .Separator {
       line-height: 2.4rem;
       margin: 0 10px;
       flex-shrink: 0;
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
-      color: ${Color.green};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+      color: ${({ theme }) => theme.Color.green};
     }
     .UserWallet {
       line-height: 2.4rem;
       margin: 0 10px;
       flex-shrink: 0;
       white-space: nowrap;
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
-      color: ${Color.green};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+      color: ${({ theme }) => theme.Color.green};
     }
   }
   .UserMenu {
     margin-left: 12px;
     position: relative;
     .UserMenu-button {
-      border-radius: ${BorderRadius.borderRadiusRegular};
-      background: ${Background.lightBG};
-      border: 1px solid ${Gray.grayNotInKit1};
+      border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
+      background: ${({ theme }) => theme.Background.lightBG};
+      border: 1px solid ${({ theme }) => theme.Gray.grayNotInKit1};
       position: relative;
       width: 54px;
       height: 40px;
@@ -100,9 +91,9 @@ const HeaderRoot = styled.div`
     }
     .UserMenu-menu {
       display: block;
-      background-color: ${Color.white};
-      box-shadow: ${Shadows.boxShadowCard};
-      border-radius: ${BorderRadius.borderRadiusRegular};
+      background-color: ${({ theme }) => theme.Color.white};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
+      border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
       padding: 14px;
       position: absolute;
       right: 0;
@@ -126,11 +117,11 @@ const HeaderRoot = styled.div`
 
         li {
           padding: 9px 35px;
-          font-size: ${FontSize.fontSizeBodyVerySmall};
-          font-weight: ${Weight.fontWeightLight};
+          font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+          font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
           line-height: 1.4rem;
-          color: ${Gray.gray4};
-          border-bottom: 1px solid ${Gray.gray5};
+          color: ${({ theme }) => theme.Gray.gray4};
+          border-bottom: 1px solid ${({ theme }) => theme.Gray.gray5};
         }
         li:last-child {
           border-bottom: none;

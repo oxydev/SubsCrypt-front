@@ -1,31 +1,21 @@
 import styled from "styled-components";
-import {
-  Primary,
-  FontSize,
-  Weight,
-  Gray,
-  Color,
-  Background,
-  Shadows,
-  BorderRadius,
-} from "../styles/variables";
 
 export const Providerstyled = styled.section`
   &.ProviderSignUp {
     padding-top: 73px;
     & > h1 {
-      font-size: ${FontSize.fontSizeHeading2};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeHeading2};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5rem;
       margin-bottom: 51px;
       margin-top: 60px;
     }
   }
   .PlansForm-addBtn {
-    font-size: ${FontSize.fontSizeBodyStandard};
-    font-weight: ${Weight.fontWeightRegular};
-    color: ${Primary.primary};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyStandard};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+    color: ${({ theme }) => theme.Primary.primary};
     line-height: 1.5rem;
     background-color: transparent;
     border: none;
@@ -48,16 +38,16 @@ export const Providerstyled = styled.section`
     }
   }
   .ProviderRegisteration {
-    border-top: 1px solid ${Gray.gray5};
+    border-top: 1px solid ${({ theme }) => theme.Gray.gray5};
     padding-top: 32px;
     margin-bottom: 446px;
     display: flex;
     align-items: center;
     p {
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightRegular};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
       line-height: 1.4rem;
-      color: ${Gray.gray4};
+      color: ${({ theme }) => theme.Gray.gray4};
       margin-right: 48px;
     }
     .RegisterBtn {
@@ -66,19 +56,19 @@ export const Providerstyled = styled.section`
       padding: 5px 10px;
       display: inline-block;
       border-radius: 40 / 2;
-      background: ${Background.purpleBGLinear};
+      background: ${({ theme }) => theme.Background.purpleBGLinear};
       border: none;
       outline: none;
-      font-size: ${FontSize.fontSizeBodyVerySmall};
-      font-weight: ${Weight.fontWeightRegular};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
       line-height: 1.4rem;
-      color: ${Color.white};
+      color: ${({ theme }) => theme.Color.white};
       &:hover {
-        box-shadow: ${Shadows.boxShadowCard};
+        box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
       }
-      border-radius: ${BorderRadius.$borderRadiusSmall};
-      font-size: ${FontSize.fontSizeBodyStandard};
-      font-weight: ${Weight.fontWeightRegular};
+      border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyStandard};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
       cursor: pointer;
     }
   }
@@ -88,18 +78,18 @@ export const Setting = styled.section`
   &.ProfileSetting {
     padding-top: 73px;
     h1 {
-      font-size: ${FontSize.fontSizeHeading2};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeHeading2};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5rem;
       margin-bottom: 60px;
     }
   }
   .ResetPassword {
     h2 {
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightRegular};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5rem;
       margin-bottom: 30px;
     }
@@ -109,30 +99,30 @@ export const Setting = styled.section`
         height: 48px;
         line-height: 4.8rem;
         border: 1px solid #c4c7cc;
-        border-radius: ${BorderRadius.borderRadiusRegular};
+        border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
         margin-bottom: 23px;
         padding: 0 26px;
-        font-size: ${FontSize.fontSizeBodySmall};
-        font-weight: ${Weight.fontWeightRegular};
-        color: ${Primary.primary};
+        font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+        font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+        color: ${({ theme }) => theme.Primary.primary};
         &::placeholder {
-          color: ${Gray.gray5};
+          color: ${({ theme }) => theme.Gray.gray5};
         }
       }
       input[type="submit"] {
         width: 100%;
         height: 48px;
         line-height: 4.8rem;
-        border-radius: ${BorderRadius.borderRadiusRegular};
+        border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
         margin-bottom: 23px;
         padding: 0 26px;
-        font-size: ${FontSize.fontSizeBodySmall};
-        color: ${Primary.primary};
+        font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+        color: ${({ theme }) => theme.Primary.primary};
         &::placeholder {
-          color: ${Gray.gray5};
+          color: ${({ theme }) => theme.Gray.gray5};
         }
-        background-color: ${Color.green};
-        color: ${Color.white};
+        background-color: ${({ theme }) => theme.Color.green};
+        color: ${({ theme }) => theme.Color.white};
         font-weight: bold;
         border: none;
         cursor: pointer;
@@ -147,9 +137,9 @@ export const PDashboard = styled.section`
     padding-bottom: 454px;
 
     & > h1 {
-      font-size: ${FontSize.fontSizeHeading2};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeHeading2};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5rem;
       margin-bottom: 35px;
     }
@@ -160,9 +150,9 @@ export const UDashboard = styled.div`
   &.userDashboard {
     padding-top: 73px;
     & > h1 {
-      font-size: ${FontSize.fontSizeHeading2};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeHeading2};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5rem;
       margin-bottom: 48px;
     }

@@ -1,17 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  Background,
-  FontSize,
-  Weight,
-  Color,
-} from "../../styles/variables";
 
 const Percentage = styled.div`
-  .PercentageBar {
+  &.PercentageBar {
     width: 100%;
     height: 100%;
-    border: 1px solid ${Color.purple};
+    border: 1px solid ${({ theme }) => theme.Color.purple};
     border-radius: 5px;
     position: relative;
   }
@@ -20,15 +14,15 @@ const Percentage = styled.div`
     left: 0;
     top: 0;
     bottom: 0;
-    background-image: ${Background.purpleBGLinear};
+    background-image: ${({ theme }) => theme.Background.purpleBGLinear};
   }
   .PercentNum {
-    font-size: ${FontSize.fontSizeFootNote};
-    font-weight: ${Weight.fontWeightLight};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeFootNote};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
     width: 100%;
     text-align: center;
     position: absolute;
-    color: ${Color.white};
+    color: ${({ theme }) => theme.Color.white};
     z-index: 5;
     line-height: 11px;
   }

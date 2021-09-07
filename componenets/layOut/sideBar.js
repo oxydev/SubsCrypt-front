@@ -4,20 +4,19 @@ import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import styled from "styled-components";
-import { Gray, Primary, FontSize, Weight } from "../../styles/variables";
 
 const SideRoot = styled.div`
   width: 240px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  background-color: ${Primary.primary};
+  background-color: ${({ theme }) => theme.Primary.primary};
   height: 100vh;
   align-items: center;
   & .SideBarNav {
-    font-size: ${FontSize.fontSizeBodySmall};
-    font-weight: ${Weight.fontWeightRegular};
-    color: ${Gray.gray4};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+    color: ${({ theme }) => theme.Gray.gray4};
     line-height: 2.8rem;
     list-style: none;
     margin: 175px auto auto;

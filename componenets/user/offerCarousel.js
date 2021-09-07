@@ -7,10 +7,10 @@ const Carousel = styled.div`
   &.OfferCarousel {
     position: relative;
   }
-  &.OfferCarousel-itemList {
+  .OfferCarousel-itemList {
     display: flex;
   }
-  & > .OfferCarousel-prevBtn,
+  .OfferCarousel-prevBtn,
   .OfferCarousel-nextBtn {
     width: 13px;
     height: 26px;

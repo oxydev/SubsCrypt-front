@@ -5,15 +5,8 @@ import { authContext } from "./_app";
 import { dataContext } from "../context/getData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
-import {SignWallet} from "../styles/wallet"
+import { SignWallet } from "../styles/wallet";
 import styled from "styled-components";
-import {
-  FontSize,
-  Weight,
-  Primary,
-  BorderRadius,
-  Gray,
-} from "../styles/variables";
 
 const MainLoginPage = styled.section`
    // width: 441px;
@@ -25,9 +18,9 @@ const MainLoginPage = styled.section`
   width: 100%;
 
   & >h1 {
-    font-size: ${FontSize.fontSizeHeading3};
-    font-weight: ${Weight.fontWeightBold};
-    color: ${Primary.primary};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeHeading3};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+    color: ${({ theme }) => theme.Primary.primary};
     line-height: 1.4rem;
     margin-bottom: 40px;
   }
@@ -39,13 +32,13 @@ const MainLoginPage = styled.section`
 
   button {
     outline: none;
-    border: 1px solid ${Gray.gray5};
-    border-radius: ${BorderRadius.borderRadiusRegular};
+    border: 1px solid ${({ theme }) => theme.Gray.gray5};
+    border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
     background-color: transparent;
     padding: 7px 20px 9px;
     margin-bottom: 10px;
-    font-size: ${FontSize.fontSizeBodySmall};
-    font-weight: ${Weight.fontWeightRegular};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.4rem;
     color: #8a8f99;
   }

@@ -1,4 +1,3 @@
-//import "../styles/app.scss";
 import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
@@ -12,9 +11,9 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 import { ServerFunctions } from "../context/getServerData";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/globalStyle";
-
+import theme from "../styles/theme";
 const PageWrapper = styled.div`
   display: flex;
   height: 100vh;
@@ -57,32 +56,34 @@ export default function App({ Component, pageProps }) {
       <loadingContext.Provider value={{ loading, setLoading }}>
         <authContext.Provider value={{ auth, setAuth }}>
           <Store>
-            <Modal>
-              <ServerFunctions>
-                <DataFunctions>
-                  <PageWrapper className="WholePageWrapper">
-                    <SideBar />
-                    {/* Main componenet is for the main part of the app where each page content is shown */}
-                    {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
-                    <Main>
-                      {loading ? (
-                        <Loading />
-                      ) : (
-                        <>
-                          {auth && <Header />}
-                          {auth ? (
-                            <Component {...pageProps} />
-                          ) : (
-                            <Login {...pageProps} />
-                          )}
-                        </>
-                      )}
-                    </Main>
-                    <div></div>
-                  </PageWrapper>
-                </DataFunctions>
-              </ServerFunctions>
-            </Modal>
+            <ThemeProvider theme={theme}>
+              <Modal>
+                <ServerFunctions>
+                  <DataFunctions>
+                    <PageWrapper className="WholePageWrapper">
+                      <SideBar />
+                      {/* Main componenet is for the main part of the app where each page content is shown */}
+                      {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
+                      <Main>
+                        {loading ? (
+                          <Loading />
+                        ) : (
+                          <>
+                            {auth && <Header />}
+                            {auth ? (
+                              <Component {...pageProps} />
+                            ) : (
+                              <Login {...pageProps} />
+                            )}
+                          </>
+                        )}
+                      </Main>
+                      <div></div>
+                    </PageWrapper>
+                  </DataFunctions>
+                </ServerFunctions>
+              </Modal>
+            </ThemeProvider>
           </Store>
         </authContext.Provider>
       </loadingContext.Provider>

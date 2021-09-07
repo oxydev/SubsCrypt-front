@@ -1,21 +1,13 @@
 import styled from "styled-components";
-import {
-  FontSize,
-  Weight,
-  Color,
-  Gray,
-  Primary,
-  BorderRadius,
-} from "./variables";
 
 export const ProviderForm = styled.section`
   &.ProviderInfo,
   &.NewPlanCreation {
     // margin-bottom: 66px;
     & > h1 {
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       margin-bottom: 16px;
       position: relative;
@@ -50,7 +42,7 @@ export const ProviderForm = styled.section`
   }
 
   .RemovePlanBtn {
-    border: 1px solid ${Gray.gray4};
+    border: 1px solid ${({ theme }) => theme.Gray.gray4};
     display: block;
     width: 20px;
     height: 20px;
@@ -60,7 +52,7 @@ export const ProviderForm = styled.section`
     top: 0;
     bottom: 0;
     margin: auto;
-    background-color: ${Color.white};
+    background-color: ${({ theme }) => theme.Color.white};
     &::after,
     &::before {
       content: "";
@@ -73,7 +65,7 @@ export const ProviderForm = styled.section`
       margin: auto;
       width: 10px;
       height: 2px;
-      background-color: ${Gray.gray3};
+      background-color: ${({ theme }) => theme.Gray.gray3};
       transform-origin: center;
       transform: rotate(45deg);
     }
@@ -81,7 +73,7 @@ export const ProviderForm = styled.section`
       transform: rotate(-45deg);
     }
   }
-  &>.ProviderForm,
+  & > .ProviderForm,
   .PlanForm {
     padding-top: 16px;
     border-top: 1px solid #e6e7eb;
@@ -93,32 +85,32 @@ export const ProviderForm = styled.section`
       width: 100%;
     }
     label {
-      font-size: ${FontSize.fontSizeBodySmall};
-      font-weight: ${Weight.fontWeightRegular};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       margin-bottom: 6px;
     }
     input,
     select {
-      border: 1px solid ${Gray.gray5};
+      border: 1px solid ${({ theme }) => theme.Gray.gray5};
       outline: none;
-      border-radius: ${BorderRadius.$borderRadiusSmall};
+      border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
       padding: 12px 16px;
-      font-size: ${FontSize.fontSizeBodySmall};
-      font-weight: ${Weight.fontWeightRegular};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 2.8rem;
       &::placeholder {
-        color: ${Gray.gray4};
+        color: ${({ theme }) => theme.Gray.gray4};
       }
       margin-bottom: 6px;
     }
     p {
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray4};
+      color: ${({ theme }) => theme.Gray.gray4};
       margin-bottom: 32px;
     }
   }
@@ -141,7 +133,7 @@ export const ProviderForm = styled.section`
     }
   }
   .PhotoUploadBtn {
-    border: 1px dashed ${Gray.gray4};
+    border: 1px dashed ${({ theme }) => theme.Gray.gray4};
     border-radius: 50%;
     width: 128px;
     height: 128px;

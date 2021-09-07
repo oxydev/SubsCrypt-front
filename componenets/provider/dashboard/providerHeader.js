@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../../context/store";
 import styled from "styled-components";
-import { FontSize, Weight, Gray, Primary } from "../../../styles/variables";
 
 const Header = styled.section`
   &.ProviderHeader {
     margin-bottom: 56px;
     & > h1 {
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       margin-bottom: 19px;
     }
@@ -20,42 +19,42 @@ const Header = styled.section`
     }
   }
 
-  &.ProviderHeader-identity {
+  .ProviderHeader-identity {
     display: flex;
     flex-direction: column;
     width: 50%;
-    border-right: 1px solid ${Gray.gray5};
+    border-right: 1px solid ${({ theme }) => theme.Gray.gray5};
     padding-right: 40px;
     h2 {
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       margin-bottom: 11px;
     }
     p {
-      font-size: ${FontSize.fontSizeBodyStandard};
-      font-weight: ${Weight.fontWeightRegular};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyStandard};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5;
     }
   }
 
-  &.ProviderHeader-profileImage {
+  .ProviderHeader-profileImage {
     border-radius: 50%;
     width: 128px;
     height: 128px;
     display: block;
     overflow: hidden;
     margin-bottom: 19px;
-    background-color: ${Gray.gray4};
+    background-color: ${({ theme }) => theme.Gray.gray4};
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-  &.ProviderHeader-trade {
+  .ProviderHeader-trade {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -63,36 +62,36 @@ const Header = styled.section`
     padding-left: 40px;
   }
 
-  &.PlanPart-featureBox {
+  .PlanPart-featureBox {
     h2 {
-      font-size: ${FontSize.fontSizeBodyStandard};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyStandard};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5;
       font-weight: 600;
     }
     p {
-      font-size: ${FontSize.fontSizeTitleLarge};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeTitleLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
     }
     span {
-      font-size: ${FontSize.fontSizeFootNote};
-      font-weight: ${Weight.fontWeightLight};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeFootNote};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
     }
 
-    &.ProviderHeader-income {
-      font-size: ${FontSize.fontSizeHeading3};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+    .ProviderHeader-income {
+      font-size: ${({ theme }) => theme.FontSize.fontSizeHeading3};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       span {
-        font-size: ${FontSize.fontSizeBodyLightSmall};
-        font-weight: ${Weight.fontWeightLight};
+        font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+        font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
         line-height: 1.4;
-        color: ${Gray.gray3};
+        color: ${({ theme }) => theme.Gray.gray3};
       }
     }
   }

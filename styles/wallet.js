@@ -1,29 +1,20 @@
 import styled from "styled-components";
-import {
-  Primary,
-  FontSize,
-  Weight,
-  Gray,
-  BorderRadius,
-  Shadows,
-  Color,
-} from "./variables";
 
 export const ConnectionPart = styled.section`
   &.WalletConnection {
     width: 441px;
     h1 {
-      font-size: ${FontSize.fontSizeHeading2};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeHeading2};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.5;
       margin-bottom: 80px;
       text-align: center;
     }
     h2 {
       @include text-body--small--regular;
-      font-size: ${FontSize.fontSizeBodySmall};
-      font-weight: ${Weight.fontWeightRegular};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
       line-height: 28px;
       margin-bottom: 8px;
       color: #8a8f99;
@@ -43,8 +34,8 @@ export const ConnectionPart = styled.section`
 export const Button = styled.div`
   &.WalletButton {
     min-width: 207px;
-    border: 1px solid ${Gray.grayNotInKit1};
-    border-radius: ${BorderRadius.borderRadiusRegular};
+    border: 1px solid ${({ theme }) => theme.Gray.grayNotInKit1};
+    border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
     padding: 7px 20px 9px;
     display: flex;
     align-items: center;
@@ -54,8 +45,8 @@ export const Button = styled.div`
 
     p {
       @include text-body--small--regular;
-      font-size: ${FontSize.fontSizeBodySmall};
-      font-weight: ${Weight.fontWeightRegular};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
       line-height: 1.4;
       color: #8a8f99;
       margin-left: 16px;
@@ -63,7 +54,7 @@ export const Button = styled.div`
     }
 
     &.active {
-      box-shadow: ${Shadows.boxShadow};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadow};
     }
   }
   .WalletButton-ImageContainer {
@@ -106,22 +97,22 @@ export const LogIn = styled.section`
     margin: 24px auto 50px;
     width: 441px;
     h6 {
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
       color: #000;
     }
     h1 {
-      font-size: ${FontSize.fontSizeHeading2};
-      font-weight: ${Weight.fontWeightBold};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeHeading2};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightBold};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 69px;
     }
     p {
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray3};
+      color: ${({ theme }) => theme.Gray.gray3};
       margin-bottom: 21px;
     }
     form {
@@ -134,26 +125,26 @@ export const LogIn = styled.section`
       height: 48px;
       line-height: 4.8rem;
       border: 1px solid #c4c7cc;
-      border-radius: ${BorderRadius.borderRadiusRegular};
+      border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
       margin-bottom: 23px;
       padding: 0 26px;
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       &::placeholder {
-        color: ${Gray.gray5};
+        color: ${({ theme }) => theme.Gray.gray5};
       }
     }
     input[type="submit"] {
       border: none;
-      background-color: ${Color.green};
+      background-color: ${({ theme }) => theme.Color.green};
       @include text-body--large--medium;
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
       line-height: 1.4;
       color: #fff;
       margin: 28px 0 0;
     }
-    &>.LoginError {
+    & > .LoginError {
       color: red;
       position: absolute;
       top: 130px;

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { Gray } from "../../../styles/variables";
 
 const Image = styled.div`
   &.ImageUploader {
@@ -10,7 +9,7 @@ const Image = styled.div`
       width: 128px;
       height: 128px;
       border-radius: 50%;
-      border: 2px dashed ${Gray.gray4};
+      border: 2px dashed ${({ theme }) => theme.Gray.gray4};
       margin: auto;
       background-color: transparent;
       background-image: url("/icons/png/uploadButton.png");

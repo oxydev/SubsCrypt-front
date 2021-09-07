@@ -3,7 +3,6 @@ import PlanCard from "../../common/planCard";
 import { UserContext } from "../../../context/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { FontSize, Weight, Gray, Primary } from "../../../styles/variables";
 
 const PlanRoot = styled.section`
   &.ProviderPlansList {
@@ -15,14 +14,14 @@ const PlanRoot = styled.section`
       margin-bottom: 26px;
 
       h1 {
-        font-size: ${FontSize.fontSizeBodyLarge};
-        font-weight: ${Weight.fontWeightMedium};
-        color: ${Primary.primary};
+        font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+        font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+        color: ${({ theme }) => theme.Primary.primary};
         line-height: 1.4;
       }
       p {
-        font-size: ${FontSize.fontSizeBodyStandard};
-        font-weight: ${Weight.fontWeightRegular};
+        font-size: ${({ theme }) => theme.FontSize.fontSizeBodyStandard};
+        font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
         line-height: 1.5;
         color: #8a8f99;
         margin-left: auto;
@@ -34,9 +33,9 @@ const PlanRoot = styled.section`
       display: flex;
     }
   }
-  &.ProviderPlansList-addPlanBtn {
-    font-size: ${FontSize.fontSizeBodyStandard};
-    font-weight: ${Weight.fontWeightRegular};
+  .ProviderPlansList-addPlanBtn {
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyStandard};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.5;
     color: #8a8f99;
     background-color: transparent;
@@ -56,7 +55,7 @@ const PlanRoot = styled.section`
       background-size: 16px;
       position: static;
       margin-right: 24px;
-      background-color: ${Gray.gray6};
+      background-color: ${({ theme }) => theme.Gray.gray6};
     }
   }
 `;

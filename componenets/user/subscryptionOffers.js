@@ -4,12 +4,11 @@ import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import styled from "styled-components";
-import { BorderRadius, Gray, FontSize, Weight } from "../../styles/variables";
 
 const SubscriptionRoot = styled.section`
   &.SubscryptionOffers {
     border: 1px solid #e6e7eb;
-    border-radius: ${BorderRadius.$borderRadiusSmall};
+    border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
     padding: 78px 47px 64px;
     position: relative;
     width: 100%;
@@ -17,10 +16,10 @@ const SubscriptionRoot = styled.section`
     // display: none;
 
     & > h1 {
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightRegular};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
       line-height: 1.5;
-      color: ${Gray.gray3};
+      color: ${({ theme }) => theme.Gray.gray3};
       margin-bottom: 67px;
       position: relative;
 
@@ -55,10 +54,10 @@ const SubscriptionRoot = styled.section`
   .OfferPart {
     & > h2 {
       @include text-body--lightSmall--light;
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray3};
+      color: ${({ theme }) => theme.Gray.gray3};
       margin-bottom: 24px;
       max-width: 379px;
     }

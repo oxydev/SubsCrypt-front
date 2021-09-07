@@ -5,15 +5,6 @@ import { UserContext } from "../../context/store";
 import { dataContext } from "../../context/getData";
 import PercentageBar from "../gadjets/percentageBar";
 import styled from "styled-components";
-import {
-  FontSize,
-  Weight,
-  Primary,
-  Color,
-  Background,
-  Shadows,
-  Gray,
-} from "../../styles/variables";
 
 const PlanCard = styled.section`
   &.UserPlanCard {
@@ -27,14 +18,14 @@ const PlanCard = styled.section`
     }
 
     &.expired {
-      background-color: ${Gray.gray5};
+      background-color: ${({ theme }) => theme.Gray.gray5};
     }
 
     &.warning {
-      background-color: ${Color.warning};
+      background-color: ${({ theme }) => theme.Color.warning};
     }
   }
-  &.UserPlan-logo {
+  .UserPlan-logo {
     width: 64px;
     height: 64px;
     border-radius: 50%;
@@ -44,124 +35,122 @@ const PlanCard = styled.section`
     background-color: #bdbdbd;
     object-fit: cover;
   }
-  &.UserPlan-specs {
+  .UserPlan-specs {
     margin-right: 32px;
     display: flex;
     flex-direction: column;
     align-self: stretch;
   }
-  &.UserPlan-featurBox {
+  .UserPlan-featurBox {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
     margin-top: auto;
     padding-right: 15%;
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightLight};
-    color: ${Primary.primary};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
+    color: ${({ theme }) => theme.Primary.primary};
     line-height: 1.4;
 
     &:last-child {
       margin-top: 0;
     }
     h6 {
-      font-size: ${FontSize.fontSizeBodyVerySmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray3};
+      color: ${({ theme }) => theme.Gray.gray3};
     }
     p {
-      font-size: ${FontSize.fontSizeBodyVerySmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray4};
+      color: ${({ theme }) => theme.Gray.gray4};
       text-align: right;
     }
   }
-  &.UserPlan-name {
-    font-size: ${FontSize.fontSizeBodyLightSmall};
-    font-weight: ${Weight.fontWeightLight};
-    color: ${Primary.primary};
+  .UserPlan-name {
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
+    color: ${({ theme }) => theme.Primary.primary};
     line-height: 16px;
     margin: 7px 0;
     width: 150px;
   }
-  &.UserPlan-Provider {
-    font-size: ${FontSize.fontSizeBodyLightSmall};
-    font-weight: ${Weight.fontWeightLight};
+  .UserPlan-Provider {
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
     line-height: 1.4;
-    color: ${Gray.gray4};
+    color: ${({ theme }) => theme.Gray.gray4};
     margin-bottom: 14px;
   }
-  &.UserPlan-desc {
-    font-size: ${FontSize.fontSizeBodyLightSmall};
-    font-weight: ${Weight.fontWeightLight};
+  .UserPlan-desc {
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
     line-height: 1.4;
-    color: ${Gray.gray3};
+    color: ${({ theme }) => theme.Gray.gray3};
     width: 201px;
     margin: 7px 0;
   }
-  &.UserPlan-rate {
+  .UserPlan-rate {
     display: flex;
     margin-top: 7px;
     h6,
     p {
-      font-size: ${FontSize.fontSizeBodyVerySmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray4};
+      color: ${({ theme }) => theme.Gray.gray4};
     }
     h6 {
       margin-right: auto;
     }
   }
-  &.UsePlanPercentage {
+  .UsePlanPercentage {
     height: 11px;
     width: 198px;
     margin: 7px 0;
     background-size: contain;
   }
-  &.UsePlan-useAnnounce {
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightLight};
+  .UsePlan-useAnnounce {
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
     line-height: 1.4;
-    color: ${Gray.gray3};
+    color: ${({ theme }) => theme.Gray.gray3};
     margin-bottom: 15px;
     max-width: 128px;
   }
-  &.UserPlan-PayPart {
+  .UserPlan-PayPart {
     margin-top: auto;
     display: flex;
     align-items: center;
   }
-  &.UserPlan-payMethod {
+  .UserPlan-payMethod {
     margin-right: auto;
   }
-  &.UserPlan-payMethod {
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightLight};
+  .UserPlan-payMethod {
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
     line-height: 1.4;
-    color: ${Gray.gray4};
+    color: ${({ theme }) => theme.Gray.gray4};
   }
-  &.UserPlan-coinSelect {
+  .UserPlan-coinSelect {
     display: none;
   }
-  &.UserPlan-refundBtn {
-    width: 42px;
-    height: 21px;
+  .UserPlan-refundBtn {
     padding: 5px 10px;
     display: inline-block;
     border-radius: 10px;
     background: transparent;
-    border: 1px solid ${Gray.gray5};
+    border: 1px solid ${({ theme }) => theme.Gray.gray5};
     outline: none;
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightRegular};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.4;
-    color: ${Gray.gray3};
+    color: ${({ theme }) => theme.Gray.gray3};
 
     &:hover {
-      box-shadow: ${Shadows.boxShadowCard};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
     }
     &:disabled {
       box-shadow: none;
@@ -169,38 +158,36 @@ const PlanCard = styled.section`
       opacity: 0.4;
     }
   }
-  &.UserPlan-renewBtn {
-    width: 75px;
-    height: 21px;
+  .UserPlan-renewBtn {
     padding: 5px 10px;
     display: inline-block;
     border-radius: 10px;
-    background: ${Background.purpleBGLinear};
+    background: ${({ theme }) => theme.Background.purpleBGLinear};
     border: none;
     outline: none;
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightRegular};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.4;
-    color: ${Color.white};
+    color: ${({ theme }) => theme.Color.white};
     &:hover {
-      box-shadow: ${Shadows.boxShadowCard};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
     }
     margin-left: 8px;
   }
-  &.UserPlan-subscribeBtn {
+  .UserPlan-subscribeBtn {
     height: 21px;
     padding: 5px 10px;
     display: inline-block;
     border-radius: 10px;
-    background: ${Background.purpleBGLinear};
+    background: ${({ theme }) => theme.Background.purpleBGLinear};
     border: none;
     outline: none;
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightRegular};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.4;
-    color: ${Color.white};
+    color: ${({ theme }) => theme.Color.white};
     &:hover {
-      box-shadow: ${Shadows.boxShadowCard};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
     }
     width: 100px;
 

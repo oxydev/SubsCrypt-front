@@ -1,14 +1,4 @@
 import styled from "styled-components";
-import {
-  BorderRadius,
-  Gray,
-  FontSize,
-  Weight,
-  Primary,
-  Background,
-  Color,
-  Shadows,
-} from "./variables";
 
 export const Root = styled.div`
   &.ModalContainer {
@@ -23,7 +13,7 @@ export const Root = styled.div`
     width: fit-content;
     height: fit-content;
     background-color: #fff;
-    border-radius: ${BorderRadius.borderRadiusRegular};
+    border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
     padding: 30px;
     &.hidden {
       display: none;
@@ -48,7 +38,7 @@ export const Root = styled.div`
         left: 0;
         bottom: 0;
         margin: auto;
-        background-color: ${Gray.gray3};
+        background-color: ${({ theme }) => theme.Gray.gray3};
         transform-origin: center;
         transform: rotate(45deg);
       }
@@ -86,9 +76,9 @@ export const Subscription = styled.section`
     justify-content: center;
 
     h1 {
-      font-size: ${FontSize.fontSizeBodyLarge};
-      font-weight: ${Weight.fontWeightMedium};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLarge};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       margin-bottom: 30px;
     }
@@ -98,7 +88,7 @@ export const Subscription = styled.section`
     }
   }
 
-  &.Modal-InputPart {
+  .Modal-InputPart {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -106,9 +96,9 @@ export const Subscription = styled.section`
     margin: 20px 0;
 
     label {
-      font-size: ${FontSize.fontSizeBodySmall};
-      font-weight: ${Weight.fontWeightRegular};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       margin-bottom: 5px;
     }
@@ -117,28 +107,30 @@ export const Subscription = styled.section`
       width: 100%;
       height: 40px;
       outline: 0;
-      border: 1px solid ${Gray.gray5};
-      border-radius: ${BorderRadius.$borderRadiusSmall};
+      border: 1px solid ${({ theme }) => theme.Gray.gray5};
+      border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
       padding: 0 10px;
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray3};
+      color: ${({ theme }) => theme.Gray.gray3};
     }
   }
 
-  &.Modal-SubmitBtn {
+  .Modal-SubmitBtn {
+    height: 35px;
     padding: 5px 10px;
     display: inline-block;
-    background: ${Background.purpleBGLinear};
+    border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
+    background: ${({ theme }) => theme.Background.purpleBGLinear};
     border: none;
     outline: none;
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightRegular};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.4;
-    color: ${Color.white};
+    color: ${({ theme }) => theme.Color.white};
     &:hover {
-      box-shadow: ${Shadows.boxShadowCard};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
     }
     margin-top: 20px;
     width: 100%;
@@ -151,9 +143,9 @@ export const TokenForm = styled.form`
     display: flex;
     flex-direction: column;
     label {
-      font-size: ${FontSize.fontSizeBodySmall};
-      font-weight: ${Weight.fontWeightRegular};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
       margin-bottom: 15px;
     }
@@ -161,30 +153,30 @@ export const TokenForm = styled.form`
       width: 100%;
       height: 40px;
       outline: 0;
-      border: 1px solid ${Gray.gray5};
-      border-radius: ${BorderRadius.$borderRadiusSmall};
+      border: 1px solid ${({ theme }) => theme.Gray.gray5};
+      border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
       padding: 0 10px;
-      font-size: ${FontSize.fontSizeBodyLightSmall};
-      font-weight: ${Weight.fontWeightLight};
-      color: ${Primary.primary};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
+      color: ${({ theme }) => theme.Primary.primary};
       line-height: 1.4;
-      color: ${Gray.gray3};
+      color: ${({ theme }) => theme.Gray.gray3};
     }
 
     input[type="submit"] {
       padding: 5px 10px;
       display: inline-block;
-      background: ${Background.purpleBGLinear};
+      background: ${({ theme }) => theme.Background.purpleBGLinear};
       border: none;
       outline: none;
-      font-size: ${FontSize.fontSizeBodyVerySmall};
-      font-weight: ${Weight.fontWeightRegular};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
       line-height: 1.4;
-      color: ${Color.white};
+      color: ${({ theme }) => theme.Color.white};
       &:hover {
-        box-shadow: ${Shadows.boxShadowCard};
+        box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
       }
-      border-radius: ${BorderRadius.$borderRadiusSmall};
+      border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
       margin-top: 10px;
       cursor: pointer;
     }
@@ -196,9 +188,9 @@ export const SelectionModal = styled.section`
     ol {
       padding: 20px 25px;
       li {
-        font-size: ${FontSize.fontSizeBodySmall};
-        font-weight: ${Weight.fontWeightRegular};
-        color: ${Primary.primary};
+        font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+        font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
+        color: ${({ theme }) => theme.Primary.primary};
         line-height: 1.4;
         max-width: 100%;
         margin-bottom: 5px;
@@ -209,16 +201,16 @@ export const SelectionModal = styled.section`
     width: 100%;
     height: 40px;
     outline: 0;
-    border: 1px solid ${Gray.gray5};
-    border-radius: ${BorderRadius.$borderRadiusSmall};
+    border: 1px solid ${({ theme }) => theme.Gray.gray5};
+    border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
     padding: 0 10px;
-    font-size: ${FontSize.fontSizeBodyLightSmall};
-    font-weight: ${Weight.fontWeightLight};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyLightSmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
     line-height: 1.4;
-    color: ${Gray.gray3};
+    color: ${({ theme }) => theme.Gray.gray3};
 
     &:focus {
-      border: ${Color.blue} solid 2px;
+      border: ${({ theme }) => theme.Color.blue} solid 2px;
     }
   }
 
@@ -227,17 +219,17 @@ export const SelectionModal = styled.section`
     height: 35px;
     padding: 5px 10px;
     display: inline-block;
-    background: ${Background.purpleBGLinear};
+    background: ${({ theme }) => theme.Background.purpleBGLinear};
     border: none;
     outline: none;
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightRegular};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.4;
-    color: ${Color.white};
+    color: ${({ theme }) => theme.Color.white};
     &:hover {
-      box-shadow: ${Shadows.boxShadowCard};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
     }
-    border-radius: ${BorderRadius.$borderRadiusSmall};
+    border-radius: ${({ theme }) => theme.BorderRadius.$borderRadiusSmall};
     margin-top: 20px;
     cursor: pointer;
   }

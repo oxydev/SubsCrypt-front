@@ -6,21 +6,11 @@ import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import {
-  FontSize,
-  Weight,
-  Primary,
-  Gray,
-  Color,
-  BorderRadius,
-  Shadows,
-  Background,
-} from "../../styles/variables";
 
 const Card = styled.section`
   &.PlanCard {
-    border: 1px solid ${Gray.gray6};
-    border-radius: ${BorderRadius.borderRadiusRegular};
+    border: 1px solid ${({ theme }) => theme.Gray.gray6};
+    border-radius: ${({ theme }) => theme.BorderRadius.borderRadiusRegular};
     margin: 0 12px;
     padding: 12px 16px;
     cursor: pointer;
@@ -31,7 +21,7 @@ const Card = styled.section`
     flex-direction: column;
     transition: 0.3s;
     &:hover {
-      box-shadow: ${Shadows.boxShadowCard};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
     }
 
     header {
@@ -40,17 +30,17 @@ const Card = styled.section`
       margin-bottom: 7px;
       flex-shrink: 0;
       & > h1 {
-        font-size: ${FontSize.fontSizeBodySmall};
-        font-weight: ${Weight.fontWeightMedium};
-        color: ${Primary.primary};
+        font-size: ${({ theme }) => theme.FontSize.fontSizeBodySmall};
+        font-weight: ${({ theme }) => theme.Weight.fontWeightMedium};
+        color: ${({ theme }) => theme.Primary.primary};
         line-height: 1.4;
       }
     }
     main {
-      font-size: ${FontSize.fontSizeFootNote};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeFootNote};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray4};
+      color: ${({ theme }) => theme.Gray.gray4};
       margin-bottom: 16px;
       flex-grow: 1;
       display: flex;
@@ -67,7 +57,7 @@ const Card = styled.section`
       flex-shrink: 0;
     }
   }
-  &.PlanLogo {
+  .PlanLogo {
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -75,50 +65,48 @@ const Card = styled.section`
     background-color: #bdbdbd;
     object-fit: cover;
   }
-  &.PlanCard-Provider {
-    font-size: ${FontSize.fontSizeFootNote};
-    font-weight: ${Weight.fontWeightLight};
+  .PlanCard-Provider {
+    font-size: ${({ theme }) => theme.FontSize.fontSizeFootNote};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
     line-height: 1.4;
-    color: ${Gray.gray4};
+    color: ${({ theme }) => theme.Gray.gray4};
   }
-  &.PlanCard-description {
-    color: ${Gray.gray3};
+  .PlanCard-description {
+    color: ${({ theme }) => theme.Gray.gray3};
     margin-bottom: auto;
     line-height: 1.4;
   }
-  &.PlanCard-payMethod {
+  .PlanCard-payMethod {
     display: flex;
 
     label {
-      font-size: ${FontSize.fontSizeFootNote};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeFootNote};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
-      color: ${Gray.gray4};
+      color: ${({ theme }) => theme.Gray.gray4};
     }
   }
 
-  &.PlanCard-coinSelect {
+  .PlanCard-coinSelect {
     display: none;
   }
-  &.PlanCard-payBtn {
-    width: 61px;
-    height: 12px;
+  .PlanCard-payBtn {
     padding: 5px 10px;
     display: inline-block;
     border-radius: 6px;
-    background: ${Background.purpleBGLinear};
+    background: ${({ theme }) => theme.Background.purpleBGLinear};
     border: none;
     outline: none;
-    font-size: ${FontSize.fontSizeBodyVerySmall};
-    font-weight: ${Weight.fontWeightRegular};
+    font-size: ${({ theme }) => theme.FontSize.fontSizeBodyVerySmall};
+    font-weight: ${({ theme }) => theme.Weight.fontWeightRegular};
     line-height: 1.4;
-    color: ${Color.white};
+    color: ${({ theme }) => theme.Color.white};
     &:hover {
-      box-shadow: ${Shadows.boxShadowCard};
+      box-shadow: ${({ theme }) => theme.Shadows.boxShadowCard};
     }
     span {
-      font-size: ${FontSize.fontSizeFootNote};
-      font-weight: ${Weight.fontWeightLight};
+      font-size: ${({ theme }) => theme.FontSize.fontSizeFootNote};
+      font-weight: ${({ theme }) => theme.Weight.fontWeightLight};
       line-height: 1.4;
       color: inherit;
       margin-left: 2px;
