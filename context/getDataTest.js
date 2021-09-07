@@ -305,33 +305,14 @@ export const TestDataFunctions = (props) => {
   };
 
   const testdataContextValue = {
-    // sendMoneyToAddress,
     handleSubscriberLoginByWallet,
     handleProviderLogingByWallet,
     checkAuthByCookie,
     sendMoneyToAddress,
     handleSubscriberloginByUsername,
     handleProviderloginByUsername,
-    // connectToWalltByAddress,
-    // loadSubscriberDataByWallet,
-    // CheckSubscriberAuthByUsername,
-    // CheckProviderAuthByUsername,
-    // LoadProviderAllInfo,
-    // CheckAuthByCookie,
-    // loadPlanByIndex,
     loadOffers,
-    // loadProviderPlanList,
-    // handleSubscribtion,
-    // handleRenewPlan,
-    // handleRefundPlan,
     handleLogOut,
-    // providerRegistrationHandler,
-    // handleChangePassword,
-    // addNewsPlan,
-    // refundPlan,
-    // renewPlan,
-    // subscribePlan,
-    // getWalletInjector,
   };
   return (
     <testDataContext.Provider value={testdataContextValue}>
