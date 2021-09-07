@@ -165,7 +165,7 @@ export const SetDataFunctions = (props) => {
   };
 
   //Function for handling the Renew flow
-  const handleRenewPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
+  const handleRenewPlan = async (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
       await blockChainFuncs.connectToWallet(globalState.user.address).then((res) => {
@@ -212,7 +212,7 @@ export const SetDataFunctions = (props) => {
   };
 
   //Function for handling the Refund flow
-  const handleRefundPlan = (providerAddress, plan, planIndex, callback, manualAddress) => {
+  const handleRefundPlan = async (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
       await blockChainFuncs.connectToWallet(globalState.user.address).then((res) => {

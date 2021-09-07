@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { dataContext } from "../../context/getData";
 import { UserContext } from "../../context/store";
-
+import { setDataContext } from "../../context/setData";
+import { blockChainContext } from "../../context/blockChianFunctions";
+import { useRouter } from "next/router";
 //The component for handling changing password part in profile setting
 export default function ChangePassword(props) {
+  const router = useRouter();
   const { type } = props;
   const [data, setData] = useState({});
-  const { changePassword, connectToWalletByAddress } = useContext(dataContext);
+  const { connectToWallet } = useContext(blockChainContext);
+  const { changePassword } = useContext(setDataContext);
   const { globalState } = useContext(UserContext);
   function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
@@ -41,7 +44,10 @@ export default function ChangePassword(props) {
 
   useEffect(() => {
     if (!globalState.user.wallet) {
-      connectToWalletByAddress(globalState.user.address);
+      connectToWallet(globalState.user.address).then((res) => {
+        window.alert("You are not allowed to do this operation!");
+        router.push("/");
+      });
     }
   }, []);
   return (
