@@ -2,10 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 import { blockChainContext } from "./blockChianFunctions";
+import SubscriptionModal from "../componenets/user/subscriptionModal";
 
 let subscrypt;
 
