@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import { modalContext } from "./modal";
+import { serverDataContext } from "./getServerData";
 
 export const blockChainContext = React.createContext({});
 
@@ -8,6 +9,7 @@ let subscrypt;
 
 export const BlockChainFuncs = (props) => {
   const { setModal, setCallBack } = useContext(modalContext);
+  const serverFunctions = useContext(serverDataContext);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
@@ -163,14 +165,42 @@ export const BlockChainFuncs = (props) => {
 
   //Function for getting plan Characteristic
   const loadCharacs = async (address, index, plan) => {
-    return await (await subscrypt).getPlanCharacteristics(address, index).then((result) => {
-      // console.log(result);
-      if (result.status == "Fetched") {
-        plan.characteristics = result.result;
-        plan.providerAddress = address;
+    return await (
+      await subscrypt
+    )
+      .getPlanCharacteristics(address, index)
+      .then((result) => {
+        // console.log(result);
+        if (result.status == "Fetched") {
+          plan.characteristics = result.result;
+          plan.providerAddress = address;
+          return plan;
+        }
+      })
+      .then(async (res) => {
+        return await loadPlanServerInfo(address, index, res).then((res) => {
+          return res;
+        });
+      });
+  };
+
+  const loadPlanServerInfo = async (address, index, plan) => {
+    return await serverFunctions
+      .getProductDescription(address, index)
+      .then((res) => {
+        console.log(res, "dessc");
+        if (res) {
+          plan.name = res.name;
+          plan.description = res.description;
+        }
         return plan;
-      }
-    });
+      })
+      .then(async () => {
+        return await serverFunctions.getProviderDescription(address).then((respones) => {
+          plan.providerName = respones.name;
+          return plan;
+        });
+      });
   };
 
   //Function for getting subscriebr plans according to it's wallet address

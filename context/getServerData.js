@@ -45,15 +45,16 @@ export const ServerFunctions = (props) => {
   };
 
   //load a plan description from server
-  const getProductDescription = async (address, planIndex, type, index) => {
+  const getProductDescription = async (address, planIndex) => {
     const url =
       "https://api.subscrypt.io/profile/getProductDescription/" + address + "/" + planIndex;
-    axios
+    return axios
       .get(url)
       .then((result) => {
         // console.log(result);
         const data = result.data;
-        dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, type: type, value: data } });
+        return data;
+        // dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, type: type, value: data } });
       })
       .catch((error) => {
         // console.log(error);
