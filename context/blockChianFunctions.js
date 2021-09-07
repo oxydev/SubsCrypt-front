@@ -103,13 +103,11 @@ export const BlockChainFuncs = (props) => {
 
   //Functions for checking provider registration and return the planLength if registered.
   const checkProviderRegistration = async (address) => {
-    console.log("hamid1");
     return await (
       await subscrypt
     )
       .getPlanLength(address)
       .then((res) => {
-        console.log(res);
         if (res.status == "Fetched") {
           const planLength = parseInt(res.result);
           if (planLength == 0) {
@@ -136,7 +134,6 @@ export const BlockChainFuncs = (props) => {
         promiseList.push(
           await loadPlan(address, i)
             .then((res) => {
-              console.log(res);
               return res;
             })
             .catch(() => {
@@ -153,10 +150,8 @@ export const BlockChainFuncs = (props) => {
   //Function for getting a provider plan according to it's index
   const loadPlan = async (address, index) => {
     return await (await subscrypt).getPlanData(address, index).then(async (result) => {
-      // console.log(result);
       let plan = result.result;
       plan.planIndex = index;
-      // dispatch({ type: "LOAD_PROVIDER_PLANS", payload: result.result });
       return await loadCharacs(address, index, plan).then((res) => {
         return res;
       });
@@ -170,7 +165,6 @@ export const BlockChainFuncs = (props) => {
     )
       .getPlanCharacteristics(address, index)
       .then((result) => {
-        // console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
           plan.providerAddress = address;
@@ -188,7 +182,6 @@ export const BlockChainFuncs = (props) => {
     return await serverFunctions
       .getProductDescription(address, index)
       .then((res) => {
-        console.log(res, "dessc");
         if (res) {
           plan.name = res.name;
           plan.description = res.description;
@@ -212,9 +205,7 @@ export const BlockChainFuncs = (props) => {
       .retrieveWholeDataWithWallet(address)
       .then(async (result) => {
         if (result.status == "Fetched") {
-          console.log(result);
           plans = result.result;
-          // console.log(plans);
           if (plans.length == 0) {
             return 0;
           }
@@ -244,10 +235,7 @@ export const BlockChainFuncs = (props) => {
     return await (await subscrypt)
       .retrieveWholeDataWithUsername(username, password)
       .then(async (result) => {
-        console.log("hamid1");
-        console.log(result.result);
         let plans = result.result;
-        // console.log(plans);
         for (const item of plans) {
           promiseList.push(
             await loadCharacs(item.provider, item.plan_index, item).then((res) => {
@@ -255,8 +243,6 @@ export const BlockChainFuncs = (props) => {
             })
           );
         }
-
-        console.log(promiseList);
         return await Promise.all(promiseList).then((values) => {
           return values;
         });

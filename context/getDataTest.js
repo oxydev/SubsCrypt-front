@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
-import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
@@ -16,10 +15,10 @@ export const testDataContext = React.createContext({});
 
 export const TestDataFunctions = (props) => {
   const router = useRouter();
-  const { auth, setAuth } = useContext(authContext);
+  const { setAuth } = useContext(authContext);
   const { setLoading } = useContext(loadingContext);
-  const { setModal, setCallBack } = useContext(modalContext);
-  const { globalState, dispatch } = useContext(UserContext);
+  const { setModal } = useContext(modalContext);
+  const { dispatch } = useContext(UserContext);
   const serverFunctions = useContext(serverDataContext);
   const blockChainFuncs = useContext(blockChainContext);
 
@@ -50,7 +49,6 @@ export const TestDataFunctions = (props) => {
       })
       .then(async (res) => {
         await blockChainFuncs.loadSubscriberPlansbyWallet(res).then((res) => {
-          console.log(res);
           if (res.length > 0) {
             dispatch({ type: "LOAD_USER_PLANS", payload: res });
           }
@@ -172,7 +170,6 @@ export const TestDataFunctions = (props) => {
         }
       })
       .then(async (res) => {
-        console.log("hamid1");
         if (res == username) {
           dispatch({ type: "REGISTERED", payload: true });
           await (
@@ -186,7 +183,6 @@ export const TestDataFunctions = (props) => {
               return walletAddress;
             })
             .then(async (res) => {
-              console.log(res);
               await getProviderAllInfo(res).then(() => {
                 setLoading(false);
               });
@@ -200,7 +196,6 @@ export const TestDataFunctions = (props) => {
   };
   //Function for getting all provider plans info
   const getProviderAllInfo = async (address, count) => {
-    console.log(count);
     if (!count) {
       await (await subscrypt).getPlanLength(address).then(async (res) => {
         dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.result });
@@ -208,7 +203,6 @@ export const TestDataFunctions = (props) => {
       });
     } else {
       await serverFunctions.getProviderHeaderInfo(address).then((res) => {
-        console.log(res, "server1");
         dispatch({ type: "USER_NAME", payload: res.name });
         dispatch({ type: "USER_DESCRIPTION", payload: res.description });
         dispatch({ type: "USER_USERSCOUNT", payload: res.usersCount });
@@ -217,7 +211,9 @@ export const TestDataFunctions = (props) => {
       await blockChainFuncs.getProviderPlanslist(address, count).then((res) => {
         dispatch({ type: "LOAD_PROVIDER_PLANS", payload: res });
       });
-      serverFunctions.getProviderAllUsers(address);
+      serverFunctions.getProviderAllUsers(address).then((res) => {
+        dispatch({ type: "PROVIDER_ALLUSERS", payload: res });
+      });
     }
   };
 
@@ -267,7 +263,6 @@ export const TestDataFunctions = (props) => {
 
   //Function for getting the user address for charging money
   const sendMoneyToAddress = () => {
-    // console.log("send money ");
     const modalElement = (
       <div>
         <form className="GiveTokenForm" onSubmit={handleSendMoney}>
@@ -287,7 +282,6 @@ export const TestDataFunctions = (props) => {
       )
         .transferToken(address)
         .then((result) => {
-          // console.log(result.toHex());
           window.alert("Operation has been done successful!");
         })
         .catch((error) => {

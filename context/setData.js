@@ -303,6 +303,7 @@ export const SetDataFunctions = (props) => {
     handleRefundPlan,
     handleRefundPlan,
     changePassword,
+    handleRenewPlan,
     addNewPlans,
     providerRegisterHandler,
   };
