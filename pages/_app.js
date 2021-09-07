@@ -6,7 +6,6 @@ import Main from "../componenets/layOut/Main";
 import Login from "./login";
 import { Store } from "../context/store";
 import { Modal } from "../context/modal";
-import { DataFunctions } from "../context/getData";
 import React from "react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";

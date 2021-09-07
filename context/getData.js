@@ -24,7 +24,7 @@ export const DataFunctions = (props) => {
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
-  });
+  },[]);
 
   //Function for getting the user address for charging money
   const sendMoneyToAddress = () => {

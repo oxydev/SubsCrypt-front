@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
 import { authContext } from "./_app";
-import { dataContext } from "../context/getData";
 import { testDataContext } from "../context/getDataTest";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
