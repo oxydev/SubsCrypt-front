@@ -132,7 +132,7 @@ export const BlockChainFuncs = (props) => {
     } else {
       for (let i = 0; i < count; i++) {
         promiseList.push(
-          await loadPlan(address, i)
+          loadPlan(address, i)
             .then((res) => {
               return res;
             })
@@ -213,7 +213,7 @@ export const BlockChainFuncs = (props) => {
 
           for (const item of plans) {
             promiseList.push(
-              await loadCharacs(item.provider, item.plan_index, item).then((res) => {
+              loadCharacs(item.provider, item.plan_index, item).then((res) => {
                 return res;
               })
             );
@@ -238,7 +238,7 @@ export const BlockChainFuncs = (props) => {
         let plans = result.result;
         for (const item of plans) {
           promiseList.push(
-            await loadCharacs(item.provider, item.plan_index, item).then((res) => {
+            loadCharacs(item.provider, item.plan_index, item).then((res) => {
               return res;
             })
           );
