@@ -74,11 +74,12 @@ export const ServerFunctions = (props) => {
     const promiseList = [await getProviderDescription(address), await getProviderIncome(address)];
 
     return await Promise.all(promiseList).then((values) => {
+      console.log(values, "values");
       const data = {
         description: values[0].description,
         name: values[0].name,
         income: values[1].income,
-        userCount: values[1].userCount,
+        usersCount: values[1].usersCount,
       };
       return data;
     });
