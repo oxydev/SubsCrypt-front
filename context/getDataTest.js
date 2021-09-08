@@ -178,9 +178,8 @@ export const TestDataFunctions = (props) => {
                 return walletAddress;
               });
           dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
-          await getProviderAllInfo(subscryptAddress).then(() => {
-            setLoading(false);
-          });
+          setLoading(false);
+          getProviderAllInfo(subscryptAddress)
         }
       })
       .catch(() => {
