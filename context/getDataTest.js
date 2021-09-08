@@ -114,11 +114,16 @@ export const TestDataFunctions = (props) => {
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
           Cookies.set("subscryptType", "user");
-          await (await subscrypt).getAddressByUsername(username).then(async (result) => {
-            const walletAddress = result.result;
-            dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
-            Cookies.set("subscryptAddress", walletAddress);
-          });
+          let subscryptAddress = Cookies.get("subscryptAddress");
+          if (subscryptAddress === undefined) {
+            subscryptAddress = await (await subscrypt)
+              .getAddressByUsername(username)
+              .then(async (result) => {
+                const walletAddress = result.result;
+                Cookies.set("subscryptAddress", walletAddress);
+                return walletAddress;
+              });
+          }
           return username;
           //getting the user plans after login
         } else {
@@ -168,8 +173,8 @@ export const TestDataFunctions = (props) => {
       .then(async (res) => {
         if (res == username) {
           dispatch({ type: "REGISTERED", payload: true });
-          const subscryptAddress = Cookies.get("subscryptAddress");
-          if (subscryptAddress === undefined)
+          let subscryptAddress = Cookies.get("subscryptAddress");
+          if (subscryptAddress === undefined) {
             subscryptAddress = await (await subscrypt)
               .getAddressByUsername(username)
               .then(async (result) => {
@@ -177,9 +182,10 @@ export const TestDataFunctions = (props) => {
                 Cookies.set("subscryptAddress", walletAddress);
                 return walletAddress;
               });
+          }
           dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
           setLoading(false);
-          getProviderAllInfo(subscryptAddress)
+          getProviderAllInfo(subscryptAddress);
         }
       })
       .catch(() => {

@@ -294,7 +294,15 @@ export const SetDataFunctions = (props) => {
       injector = await injector.then((res) => res);
       await (
         await subscrypt
-      ).addPlan(address.address, injector, callback, durations, prices, refundPolicies, planChars);
+      ).addPlan(
+        walletAddress.address,
+        injector,
+        callback,
+        durations,
+        prices,
+        refundPolicies,
+        planChars
+      );
     }
   };
 

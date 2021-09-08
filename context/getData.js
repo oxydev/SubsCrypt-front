@@ -24,7 +24,7 @@ export const DataFunctions = (props) => {
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
-  },[]);
+  }, []);
 
   //Function for getting the user address for charging money
   const sendMoneyToAddress = () => {
@@ -743,14 +743,22 @@ export const DataFunctions = (props) => {
     // console.log(walletAddress);
     if (!walletAddress) {
       connectToWalletByAddress(globalState.user.address, (confirmAddress) => {
-        addNewPlans(providerAddress, plan, planIndex, callback, confirmAddress);
+        addNewPlans(address, plan, planIndex, callback, confirmAddress);
       });
     }
     var injector = getWalletInjector(walletAddress);
     injector = await injector.then((res) => res);
     await (
       await subscrypt
-    ).addPlan(address.address, injector, callback, durations, prices, refundPolicies, planChars);
+    ).addPlan(
+      walletAddress.address,
+      injector,
+      callback,
+      durations,
+      prices,
+      refundPolicies,
+      planChars
+    );
   };
 
   //Log out function
