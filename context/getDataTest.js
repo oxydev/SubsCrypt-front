@@ -157,14 +157,7 @@ export const TestDataFunctions = (props) => {
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
           Cookies.set("subscryptType", "provider");
-          var subscryptAddress = Cookies.get("subscryptAddress")
-          if(subscryptAddress===undefined)
-            subscryptAddress = await (await subscrypt).getAddressByUsername(username).then(async (result) => {
-              const walletAddress = result.result;
-              Cookies.set("subscryptAddress", walletAddress);
-              return walletAddress
-            });
-          dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
+
           return username;
           //getting the user plans after login
         } else {
@@ -175,21 +168,19 @@ export const TestDataFunctions = (props) => {
       .then(async (res) => {
         if (res == username) {
           dispatch({ type: "REGISTERED", payload: true });
-          await (
-            await subscrypt
-          )
-            .getAddressByUsername(username)
-            .then(async (result) => {
-              const walletAddress = result.result;
-              dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
-              Cookies.set("subscryptAddress", walletAddress);
-              return walletAddress;
-            })
-            .then(async (res) => {
-              await getProviderAllInfo(res).then(() => {
-                setLoading(false);
+          const subscryptAddress = Cookies.get("subscryptAddress");
+          if (subscryptAddress === undefined)
+            subscryptAddress = await (await subscrypt)
+              .getAddressByUsername(username)
+              .then(async (result) => {
+                const walletAddress = result.result;
+                Cookies.set("subscryptAddress", walletAddress);
+                return walletAddress;
               });
-            });
+          dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
+          await getProviderAllInfo(subscryptAddress).then(() => {
+            setLoading(false);
+          });
         }
       })
       .catch(() => {
