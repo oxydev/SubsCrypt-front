@@ -157,11 +157,14 @@ export const TestDataFunctions = (props) => {
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
           Cookies.set("subscryptType", "provider");
-          await (await subscrypt).getAddressByUsername(username).then(async (result) => {
-            const walletAddress = result.result;
-            dispatch({ type: "LOAD_USER_ADDRESS", payload: result.result });
-            Cookies.set("subscryptAddress", walletAddress);
-          });
+          var subscryptAddress = Cookies.get("subscryptAddress")
+          if(subscryptAddress===undefined)
+            subscryptAddress = await (await subscrypt).getAddressByUsername(username).then(async (result) => {
+              const walletAddress = result.result;
+              Cookies.set("subscryptAddress", walletAddress);
+              return walletAddress
+            });
+          dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
           return username;
           //getting the user plans after login
         } else {
