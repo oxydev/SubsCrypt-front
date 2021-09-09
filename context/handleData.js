@@ -66,7 +66,7 @@ export const HandleDataFunctions = (props) => {
     setLoading(true);
     blockChainFuncs
       .connectToWallet(address)
-      .then((res) => {
+      .then(async (res) => {
         setAuth(true);
         Cookies.set("subscryptType", "provider");
         Cookies.set("subscryptAddress", res.address);
@@ -74,6 +74,19 @@ export const HandleDataFunctions = (props) => {
           type: "LOAD_USER",
           payload: { type: "provider", wallet: res, address: res.address },
         });
+        let subscryptUsername = Cookies.get("subscrypt");
+        if (subscryptUsername === undefined) {
+          (await subscrypt).getUsername(address).then(async (result) => {
+            console.log(result, "username");
+            const username = result.result;
+            Cookies.set("subscrypt", username);
+            dispatch({ type: "LOAD_USER_USERNAME", payload: username });
+
+            return username;
+          });
+        } else {
+          dispatch({ type: "LOAD_USER_USERNAME", payload: subscryptUsername });
+        }
         return res.address;
       })
       .then(async (res) => {
@@ -118,13 +131,14 @@ export const HandleDataFunctions = (props) => {
           Cookies.set("subscryptType", "user");
           let subscryptAddress = Cookies.get("subscryptAddress");
           if (subscryptAddress === undefined) {
-            subscryptAddress = await (await subscrypt)
-              .getAddressByUsername(username)
-              .then(async (result) => {
-                const walletAddress = result.result;
-                Cookies.set("subscryptAddress", walletAddress);
-                return walletAddress;
-              });
+            (await subscrypt).getAddressByUsername(username).then(async (result) => {
+              const walletAddress = result.result;
+              Cookies.set("subscryptAddress", walletAddress);
+              dispatch({ type: "LOAD_USER_ADDRESS", payload: walletAddress });
+              return walletAddress;
+            });
+          } else {
+            dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
           }
           return username;
           //getting the user plans after login
