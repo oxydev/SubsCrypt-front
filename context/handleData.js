@@ -74,19 +74,7 @@ export const HandleDataFunctions = (props) => {
           type: "LOAD_USER",
           payload: { type: "provider", wallet: res, address: res.address },
         });
-        let subscryptUsername = Cookies.get("subscrypt");
-        if (subscryptUsername === undefined) {
-          (await subscrypt).getUsername(address).then(async (result) => {
-            console.log(result, "username");
-            const username = result.result;
-            Cookies.set("subscrypt", username);
-            dispatch({ type: "LOAD_USER_USERNAME", payload: username });
 
-            return username;
-          });
-        } else {
-          dispatch({ type: "LOAD_USER_USERNAME", payload: subscryptUsername });
-        }
         return res.address;
       })
       .then(async (res) => {
@@ -101,6 +89,17 @@ export const HandleDataFunctions = (props) => {
         } else {
           dispatch({ type: "REGISTERED", payload: true });
           dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.planNum });
+          let subscryptUsername = Cookies.get("subscrypt");
+          if (subscryptUsername === undefined) {
+            (await subscrypt).getUsername(address).then(async (result) => {
+              console.log(result, "username");
+              const username = result.result;
+              Cookies.set("subscrypt", username);
+              dispatch({ type: "LOAD_USER_USERNAME", payload: username });
+            });
+          } else {
+            dispatch({ type: "LOAD_USER_USERNAME", payload: subscryptUsername });
+          }
           await getProviderAllInfo(res.address, res.planNum).then(() => {
             setLoading(false);
           });
