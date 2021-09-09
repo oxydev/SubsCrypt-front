@@ -26,12 +26,6 @@ export const HandleDataFunctions = (props) => {
     subscrypt = import('@oxydev/subscrypt')
   }, [])
 
-  //Function for setting the wallet in the global state
-  const setWallet = (wallet) => {
-    dispatch({ type: 'LOAD_USER_WALLET', payload: wallet })
-    dispatch({ type: 'LOAD_USER_ADDRESS', payload: wallet.address })
-  }
-
   //Function for handling the user wallet connection as a subscriber
   const handleSubscriberLoginByWallet = async (address) => {
     setLoading(true)

@@ -10,7 +10,8 @@ export default function ChangePassword(props) {
   const [data, setData] = useState({});
   const { connectToWallet } = useContext(getBCDataContext);
   const { changePassword } = useContext(setDataContext);
-  const { globalState } = useContext(UserContext);
+  const { globalState, dispatch } = useContext(UserContext);
+
   function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
 
@@ -45,8 +46,12 @@ export default function ChangePassword(props) {
   useEffect(() => {
     if (!globalState.user.wallet) {
       connectToWallet(globalState.user.address).then((res) => {
-        window.alert("You are not allowed to do this operation!");
-        router.push("/");
+        if(!res) {
+          window.alert("You are not allowed to do this operation!");
+          router.push("/");
+        }else{
+          dispatch({ type: 'LOAD_USER_WALLET', payload: res })
+        }
       });
     }
   }, []);
