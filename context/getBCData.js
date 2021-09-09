@@ -3,11 +3,11 @@ import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import { modalContext } from "./modal";
 import { serverDataContext } from "./getServerData";
 
-export const blockChainContext = React.createContext({});
+export const getBCDataContext = React.createContext({});
 
 let subscrypt;
 
-export const BlockChainFuncs = (props) => {
+export const GetBCDataFunctions = (props) => {
   const { setModal, setCallBack } = useContext(modalContext);
   const serverFunctions = useContext(serverDataContext);
 
@@ -249,7 +249,7 @@ export const BlockChainFuncs = (props) => {
       });
   };
 
-  const blockchainContextValue = {
+  const getBCDataContextValue = {
     connectToWallet,
     checkProviderRegistration,
     getProviderPlanslist,
@@ -258,8 +258,8 @@ export const BlockChainFuncs = (props) => {
   };
 
   return (
-    <blockChainContext.Provider value={blockchainContextValue}>
+    <getBCDataContext.Provider value={getBCDataContextValue}>
       {props.children}
-    </blockChainContext.Provider>
+    </getBCDataContext.Provider>
   );
 };

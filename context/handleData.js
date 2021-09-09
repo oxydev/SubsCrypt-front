@@ -5,7 +5,7 @@ import { UserContext } from "./store";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
-import { blockChainContext } from "./blockChianFunctions";
+import { getBCDataContext } from "./getBCData";
 
 //Variable for using in dynamicly importing the subscrypt library
 let subscrypt;
@@ -20,7 +20,7 @@ export const HandleDataFunctions = (props) => {
   const { setModal } = useContext(modalContext);
   const { dispatch } = useContext(UserContext);
   const serverFunctions = useContext(serverDataContext);
-  const blockChainFuncs = useContext(blockChainContext);
+  const blockChainFuncs = useContext(getBCDataContext);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");

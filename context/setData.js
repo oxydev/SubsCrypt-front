@@ -4,7 +4,7 @@ import { modalContext } from "./modal";
 import { UserContext } from "./store";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
-import { blockChainContext } from "./blockChianFunctions";
+import { getBCDataContext } from "./getBCData";
 import SubscriptionModal from "../componenets/user/subscriptionModal";
 
 let subscrypt;
@@ -18,7 +18,7 @@ export const SetDataFunctions = (props) => {
   const { setModal, setCallBack } = useContext(modalContext);
   const { globalState, dispatch } = useContext(UserContext);
   const serverFunctions = useContext(serverDataContext);
-  const blockChainFuncs = useContext(blockChainContext);
+  const blockChainFuncs = useContext(getBCDataContext);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");

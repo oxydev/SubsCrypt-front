@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 import { ServerFunctions } from "../context/getServerData";
 import { HandleDataFunctions } from "../context/handleData";
-import { BlockChainFuncs } from "../context/blockChianFunctions";
+import { GetBCDataFunctions } from "../context/getBCData";
 import { SetDataFunctions } from "../context/setData";
 
 //Creating context for authentication and loading.
@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }) {
           <Store>
             <Modal>
               <ServerFunctions>
-                <BlockChainFuncs>
+                <GetBCDataFunctions>
                   <HandleDataFunctions>
                     <SetDataFunctions>
                       <div className="WholePageWrapper">
@@ -74,7 +74,7 @@ export default function App({ Component, pageProps }) {
                       </div>
                     </SetDataFunctions>
                   </HandleDataFunctions>
-                </BlockChainFuncs>
+                </GetBCDataFunctions>
               </ServerFunctions>
             </Modal>
           </Store>

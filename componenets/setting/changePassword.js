@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/store";
 import { setDataContext } from "../../context/setData";
-import { blockChainContext } from "../../context/blockChianFunctions";
+import { getBCDataContext } from "../../context/getBCData";
 import { useRouter } from "next/router";
 //The component for handling changing password part in profile setting
 export default function ChangePassword(props) {
   const router = useRouter();
   const { type } = props;
   const [data, setData] = useState({});
-  const { connectToWallet } = useContext(blockChainContext);
+  const { connectToWallet } = useContext(getBCDataContext);
   const { changePassword } = useContext(setDataContext);
   const { globalState } = useContext(UserContext);
   function callback({ events = [], status }) {
