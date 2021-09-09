@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 import { ServerFunctions } from "../context/getServerData";
-import { TestDataFunctions } from "../context/getDataTest";
+import { HandleDataFunctions } from "../context/handleData";
 import { BlockChainFuncs } from "../context/blockChianFunctions";
 import { SetDataFunctions } from "../context/setData";
 
@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }) {
             <Modal>
               <ServerFunctions>
                 <BlockChainFuncs>
-                  <TestDataFunctions>
+                  <HandleDataFunctions>
                     <SetDataFunctions>
                       <div className="WholePageWrapper">
                         <SideBar />
@@ -73,7 +73,7 @@ export default function App({ Component, pageProps }) {
                         <div></div>
                       </div>
                     </SetDataFunctions>
-                  </TestDataFunctions>
+                  </HandleDataFunctions>
                 </BlockChainFuncs>
               </ServerFunctions>
             </Modal>

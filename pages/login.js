@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
 import { authContext } from "./_app";
-import { testDataContext } from "../context/getDataTest";
+import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Login() {
   const [role, setRole] = useState("none");
-  const { checkAuthByCookie, sendMoneyToAddress } = useContext(testDataContext);
+  const { checkAuthByCookie, sendMoneyToAddress } = useContext(handleDataContext);
   const { auth } = useContext(authContext);
 
   //get coockies

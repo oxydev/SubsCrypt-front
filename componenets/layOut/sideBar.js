@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
-import { testDataContext } from "../../context/getDataTest";
+import { handleDataContext } from "../../context/handleData";
 
 //The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
-  const { handleLogOut } = useContext(testDataContext);
+  const { handleLogOut } = useContext(handleDataContext);
   const type = globalState.user.type;
   let sideBarData;
   if (type == "user") {

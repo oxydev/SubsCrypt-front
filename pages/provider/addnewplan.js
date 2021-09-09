@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/store";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import { setDataContext } from "../../context/setData";
-import { testDataContext } from "../../context/getDataTest";
+import { handleDataContext } from "../../context/handleData";
 
 export default function AddNewPlan() {
   const { globalState } = useContext(UserContext);
@@ -11,7 +11,7 @@ export default function AddNewPlan() {
 
   //importing necessary data functions from the data context
   const { addNewPlans } = useContext(setDataContext);
-  const { getProviderAllInfo } = useContext(testDataContext);
+  const { getProviderAllInfo } = useContext(handleDataContext);
 
   //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([

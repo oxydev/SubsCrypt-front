@@ -11,9 +11,9 @@ import { blockChainContext } from "./blockChianFunctions";
 let subscrypt;
 
 //creating a context for all getting and managin data functions to be available in all the components in the project
-export const testDataContext = React.createContext({});
+export const handleDataContext = React.createContext({});
 
-export const TestDataFunctions = (props) => {
+export const HandleDataFunctions = (props) => {
   const router = useRouter();
   const { setAuth } = useContext(authContext);
   const { setLoading } = useContext(loadingContext);
@@ -303,7 +303,7 @@ export const TestDataFunctions = (props) => {
     router.push("/");
   };
 
-  const testdataContextValue = {
+  const handleDataContextValue = {
     handleSubscriberLoginByWallet,
     handleProviderLogingByWallet,
     checkAuthByCookie,
@@ -315,8 +315,8 @@ export const TestDataFunctions = (props) => {
     getProviderAllInfo,
   };
   return (
-    <testDataContext.Provider value={testdataContextValue}>
+    <handleDataContext.Provider value={handleDataContextValue}>
       {props.children}
-    </testDataContext.Provider>
+    </handleDataContext.Provider>
   );
 };

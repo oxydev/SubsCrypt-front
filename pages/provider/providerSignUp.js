@@ -2,14 +2,14 @@ import React, { useContext, useState } from "react";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { setDataContext } from "../../context/setData";
-import { testDataContext } from "../../context/getDataTest";
+import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 
 export default function ProviderSignUp() {
   const router = useRouter();
   const { providerRegisterHandler } = useContext(setDataContext);
-  const { getProviderAllInfo } = useContext(testDataContext);
+  const { getProviderAllInfo } = useContext(handleDataContext);
   const { globalState, dispatch } = useContext(UserContext);
 
   const [info, setInfo] = useState({

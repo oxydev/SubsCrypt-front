@@ -3,12 +3,12 @@ import OfferCarousel from "./offerCarousel";
 import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import ProviderSelection from "./providerSelection";
-import { testDataContext } from "../../context/getDataTest";
+import { handleDataContext } from "../../context/handleData";
 
 //The component for managing subscription offer part
 export default function SubscryptionOffers() {
   const { globalState } = useContext(UserContext);
-  const { loadOffers } = useContext(testDataContext);
+  const { loadOffers } = useContext(handleDataContext);
   // const providerAddress = data.providerAddress;
   const providerAddress = globalState.offerProvider;
 
