@@ -91,7 +91,7 @@ export const HandleDataFunctions = (props) => {
           dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.planNum });
           let subscryptUsername = Cookies.get("subscrypt");
           if (subscryptUsername === undefined) {
-            (await subscrypt).getUsername(address).then(async (result) => {
+            (await subscrypt).getUsername(res.address).then(async (result) => {
               console.log(result, "username");
               const username = result.result;
               Cookies.set("subscrypt", username);
