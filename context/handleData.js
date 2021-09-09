@@ -56,7 +56,8 @@ export const HandleDataFunctions = (props) => {
         });
       })
       .catch(() => {
-        throw new Error("Wallet connection has been canceled");
+        window.alert("Can not connect to wallet!");
+        router.push("/");
       });
   };
 
@@ -93,7 +94,8 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(() => {
-        throw new Error("Wallet connection has been canceled");
+        window.alert("Can not connect to wallet!");
+        router.push("/");
       });
   };
 
@@ -141,6 +143,7 @@ export const HandleDataFunctions = (props) => {
       })
       .catch(() => {
         setLoading(false);
+        window.alert("Can not load data!");
         // console.log(error);
       });
   };
