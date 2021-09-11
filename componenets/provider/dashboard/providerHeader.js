@@ -107,16 +107,9 @@ export default function ProviderHeader() {
       <div>
         <div className="ProviderHeader-identity">
           <div className="ProviderHeader-profileImage">
-            <img
-              src={
-                "https://api.subscrypt.io/profile/getProviderPic/" +
-                user.userWallet.address
-              }
-            />
+            <img src={"https://api.subscrypt.io/profile/getProviderPic/" + user.address} />
           </div>
-          <h2 className="ProviderHeader-name">
-            {user.name ? user.name : "Loading..."}
-          </h2>
+          <h2 className="ProviderHeader-name">{user.name ? user.name : "Loading..."}</h2>
           <p className="ProviderHeader-Description">
             {user.description ? user.description : "Loading..."}
           </p>
@@ -125,25 +118,18 @@ export default function ProviderHeader() {
           <div className="PlanPart-featureBox">
             <h2>Total Income:</h2>
             <p className="ProviderHeader-income">
-              {user.income || user.income == 0
-                ? user.income / Math.pow(10, 12)
-                : "Loading..."}{" "}
+              {user.income || user.income == 0 ? user.income / Math.pow(10, 12) : "Loading..."}{" "}
               <span>DOT</span>
             </p>
           </div>
           <div className="PlanPart-featureBox">
             <h2>Total Users:</h2>
             <p className="TotalUsers">
-              {user.usersCount || user.usersCount == 0
-                ? user.usersCount
-                : "Loading..."}
+              {user.usersCount || user.usersCount == 0 ? user.usersCount : "Loading..."}
             </p>
           </div>
           <div className="PlanPart-featureBox">
-            <span>
-              Net income converted to todays conversation rate via
-              Coinmarketcap.com{" "}
-            </span>
+            <span>Net income converted to todays conversation rate via Coinmarketcap.com </span>
           </div>
         </div>
       </div>

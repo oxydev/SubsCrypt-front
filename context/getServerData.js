@@ -48,7 +48,7 @@ export const ServerFunctions = (props) => {
     axios
       .get(url)
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         const data = result.data;
         dispatch({ type: "PROVIDER_ALLUSERS", payload: data.subscriptions });
       })

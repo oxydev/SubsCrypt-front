@@ -2,7 +2,14 @@ import { useRouter } from "next/router";
 import React, { useEffect, useReducer } from "react";
 
 //Initialize the global state
-const initialState = { providerPlans: [], user: {}, plans: [], wallets: [], subscriptedUsers: [] };
+const initialState = {
+  providerPlans: [],
+  user: {},
+  plans: [],
+  wallets: [],
+  subscriptedUsers: [],
+  offerProvider: "5HWLj7XsXETx85nHsSHPbAaQdCdDmT5aJT73pSUGsM28pyfk",
+};
 
 //Craeting the context to pass to the components in the app tree
 export const UserContext = React.createContext(initialState);
@@ -18,10 +25,13 @@ const reducer = (state, action) => {
       return { ...state, user: { ...state.user, username: action.payload } };
     //load user wallet
     case "LOAD_USER_WALLET":
-      return { ...state, user: { ...state.user, userWallet: action.payload } };
+      return {
+        ...state,
+        user: { ...state.user, wallet: action.payload, address: action.payload.address },
+      };
     //load user address
     case "LOAD_USER_ADDRESS":
-      return { ...state, user: { ...state.user, userWallet: { address: action.payload } } };
+      return { ...state, user: { ...state.user, address: action.payload } };
     //load user plans
     case "LOAD_USER_PLANS":
       return { ...state, plans: action.payload };
@@ -50,6 +60,18 @@ const reducer = (state, action) => {
         providerPlans: [...newPlanList],
       };
     }
+    case "RESET_PROVIDER_PLAN": {
+      return {
+        ...state,
+        providerPlans: [...action.payload],
+      };
+    }
+    //Load the provider address for new offers
+    case "LOAD_OFFER_ADDRESS":
+      return {
+        ...state,
+        offerProvider: action.payload,
+      };
     //set the provider as a signed up provider
     case "REGISTERED":
       return {
@@ -148,7 +170,7 @@ export const Store = (props) => {
     }
   });
 
-  console.log(globalState); //for checking the value of global state when debugging
+  // console.log(globalState); //for checking the value of global state when debugging
 
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>

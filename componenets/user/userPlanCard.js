@@ -202,18 +202,14 @@ let subscrypt;
 //The component for generating a plan card which user has
 export default function UserPlanCard(props) {
   let plan = props.plan.plan;
-  console.log(props.plan);
+  // console.log(props.plan);
   const index = props.index;
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
-  const {
-    handleSubscribtion,
-    handleRenewPlan,
-    handleRefundPlan,
-    loadUserDataByWallet,
-  } = useContext(dataContext);
+  const { handleSubscribtion, handleRenewPlan, handleRefundPlan, loadUserDataByWallet } =
+    useContext(dataContext);
   const planStatus = props.plan.status;
-  const walletAddress = globalState.user.userWallet;
+  const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
 
   //plan amounts
@@ -221,6 +217,15 @@ export default function UserPlanCard(props) {
     parseInt(props.plan.subscription_time.replace(/,/g, "")),
     parseInt(plan.duration.replace(/,/g, ""))
   );
+
+  const refundPolicy = plan.max_refund_permille_policy.replace(/,/g, "") / 10;
+
+  const price = parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12);
+  const remianPercentage = 100 - usedPercentage;
+
+  const possibleRefund = Math.min(refundPolicy, remianPercentage);
+  const refundAmount = (price * possibleRefund) / 100;
+  // console.log(refundAmount);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
@@ -234,12 +239,7 @@ export default function UserPlanCard(props) {
         // console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
-          handleSubscribtion(
-            props.plan.provider,
-            plan,
-            props.plan.plan_index,
-            callback
-          );
+          handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback);
           setLocalLoading(false);
         }
       });
@@ -254,23 +254,13 @@ export default function UserPlanCard(props) {
 
   //Refunding function
   function handleRefund() {
-    handleRefundPlan(
-      props.plan.provider,
-      plan,
-      props.plan.plan_index,
-      callback
-    );
+    handleRefundPlan(props.plan.provider, plan, props.plan.plan_index, callback);
   }
 
   //Renew function
   function handleRenew() {
     // console.log(props.plan);
-    handleRenewPlan(
-      props.plan.provider,
-      props.plan,
-      props.plan.plan_index,
-      callback
-    );
+    handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback);
   }
 
   //callback function
@@ -294,7 +284,7 @@ export default function UserPlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      loadUserDataByWallet(globalState.user.userWallet.address);
+      loadUserDataByWallet(globalState.user.address);
     }
   }
 
@@ -310,15 +300,10 @@ export default function UserPlanCard(props) {
     >
       <img
         className="UserPlan-logo"
-        src={
-          "https://api.subscrypt.io/profile/getProviderPic/" +
-          props.plan.provider
-        }
+        src={"https://api.subscrypt.io/profile/getProviderPic/" + props.plan.provider}
       />
       <div className="UserPlan-specs">
-        <p className="UserPlan-name">
-          {props.plan.name ? props.plan.name : "Loading..."}
-        </p>
+        <p className="UserPlan-name">{props.plan.name ? props.plan.name : "Loading..."}</p>
         <p className="UserPlan-Provider">
           {props.plan.providerName ? props.plan.providerName : "Loading..."}
         </p>
@@ -328,22 +313,14 @@ export default function UserPlanCard(props) {
         </div>
         <div className="UserPlan-featurBox">
           <h6>Refund Policy</h6>
-          <p>
-            {"% " +
-              plan.max_refund_permille_policy.replace(/,/g, "") / 10 +
-              " Refund"}
-          </p>
+          <p>{"% " + refundPolicy + " Refund"}</p>
         </div>
       </div>
       <div className="UserPlan-specs">
         <p className="UserPlan-desc">{props.plan.description}</p>
         <div className="UserPlan-featurBox">
           <h6>Activation date</h6>
-          <p>
-            {utils.timeStamptoDate(
-              parseInt(props.plan.subscription_time.replace(/,/g, ""))
-            )}
-          </p>
+          <p>{utils.timeStamptoDate(parseInt(props.plan.subscription_time.replace(/,/g, "")))}</p>
         </div>
         <div className="UserPlan-featurBox">
           <h6>Expires on</h6>
@@ -364,10 +341,12 @@ export default function UserPlanCard(props) {
         <div className="UsePlanPercentage">
           <PercentageBar percentage={usedPercentage} />
         </div>
-        <p className="UsePlan-useAnnounce">
-          You have used {"%" + usedPercentage} of the service Refundable amount:{" "}
-          {plan.refundAmmount}
-        </p>
+
+        <p className="UsePlan-useAnnounce">You have used {"%" + usedPercentage} of the service</p>
+        {planStatus != -1 && (
+          <p className="UsePlan-useAnnounce">Refundable amount: {refundAmount} Dot</p>
+        )}
+
         <div className="UserPlan-PayPart">
           <div className="UserPlan-payMethod">
             <label>Pay with</label>
@@ -379,11 +358,7 @@ export default function UserPlanCard(props) {
           {planStatus == -1 ? (
             <>
               <button
-                className={
-                  localLoading
-                    ? "UserPlan-subscribeBtn loading"
-                    : "UserPlan-subscribeBtn"
-                }
+                className={localLoading ? "UserPlan-subscribeBtn loading" : "UserPlan-subscribeBtn"}
                 onClick={handleSubscribe}
               >
                 Subscribe

@@ -3,6 +3,7 @@ import PlanCard from "../../common/planCard";
 import { UserContext } from "../../../context/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import{Carousel_} from "../../../styles/carouselStyle"
 
 const PlanRoot = styled.section`
   &.ProviderPlansList {
@@ -59,6 +60,28 @@ const PlanRoot = styled.section`
     }
   }
 `;
+import Carousel from "react-multi-carousel";
+
+//carousel size
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 //The component for generating the provider plan lists
 export default function ProviderPlansList() {
@@ -75,7 +98,7 @@ export default function ProviderPlansList() {
       plan={item}
       index={index}
       type="provider"
-      address={globalState.user.userWallet.address}
+      address={globalState.user.address}
     />
   ));
   return (
@@ -94,6 +117,8 @@ export default function ProviderPlansList() {
         </button>
       </header>
       <div>{plansCard}</div>
+
+      <Carousel_ responsive={responsive}>{plansCard}</Carousel_>
     </PlanRoot>
   );
 }

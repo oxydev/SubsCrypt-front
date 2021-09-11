@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import PlanCard from "../common/planCard";
 import { UserContext } from "../../context/store";
 import styled from "styled-components";
+import {Carousel_} from "../../styles/carouselStyle"
 
-const Carousel = styled.div`
+const CarouselRoot = styled.div`
   &.OfferCarousel {
     position: relative;
   }
@@ -31,7 +32,31 @@ const Carousel = styled.div`
     transform: scaleX(-1);
     left: -35px;
   }
+  
 `;
+
+
+
+//carousel size
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 //The  component for generating offer plan carousel
 export default function OfferCarousel() {
@@ -51,10 +76,11 @@ export default function OfferCarousel() {
     />
   ));
   return (
-    <Carousel className="OfferCarousel">
-      <div className="OfferCarousel-itemList">{offerCards}</div>
+    <CarouselRoot className="OfferCarousel">
+      {/* <div className="OfferCarousel-itemList">{offerCards}</div>
       <button className="OfferCarousel-prevBtn" />
-      <button className="OfferCarousel-nextBtn" />
-    </Carousel>
+      <button className="OfferCarousel-nextBtn" /> */}
+      <Carousel_ responsive={responsive}>{offerCards}</Carousel_>
+    </CarouselRoot>
   );
 }

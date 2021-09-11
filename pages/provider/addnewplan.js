@@ -12,8 +12,7 @@ export default function AddNewPlan() {
   const planNumber = globalState.providerPlans.length;
 
   //importing necessary data functions from the data context
-  const { addNewPlans, CheckWallet, getProviderAllInfo } =
-    useContext(dataContext);
+  const { addNewPlans, getProviderAllInfo } = useContext(dataContext);
 
   //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([
@@ -44,7 +43,7 @@ export default function AddNewPlan() {
     }
     setPlanList([
       ...list,
-      { visibility: "visible", coins: [], characteristics: [] },
+      { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 },
     ]);
   }
 
@@ -79,7 +78,7 @@ export default function AddNewPlan() {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      getProviderAllInfo(globalState.user.userWallet.address);
+      getProviderAllInfo(globalState.user.address);
     }
   }
 
@@ -92,7 +91,7 @@ export default function AddNewPlan() {
         method: "patch",
         url: "https://api.subscrypt.io/profile/updateProductProfile",
         data: {
-          providerAddress: globalState.user.userWallet.address,
+          providerAddress: globalState.user.address,
           planName: plan.title,
           planIndex: index + planNumber,
           description: plan.description,
@@ -115,16 +114,14 @@ export default function AddNewPlan() {
   //plan regiteration function
   function handleRegister(e) {
     e.preventDefault();
-    var wallet = globalState.user.userWallet;
+    var wallet = globalState.user.wallet;
 
     function parseDurations(planList) {
       var dur = [];
       planList.forEach((plan) => {
         if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "3 m")
-          dur.push(3 * 30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "6 m")
-          dur.push(6 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
       });
       return dur;
     }
@@ -162,22 +159,8 @@ export default function AddNewPlan() {
     var refundPolicies = parsePolicies(planList);
     var plansChars = parseChars(planList);
 
-    addNewPlans(
-      wallet,
-      callback,
-      durations,
-      prices,
-      refundPolicies,
-      plansChars
-    );
+    addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars);
   }
-
-  //Check if the user wallet address is available in the wallet address list of the user
-  useEffect(() => {
-    if (!globalState.user.userWallet) {
-      CheckWallet(globalState.user.username);
-    }
-  }, []);
 
   return (
     <Providerstyled className="ProviderSignUp AddPlanPage">

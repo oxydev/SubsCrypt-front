@@ -284,7 +284,7 @@ export default function PercentSlider(props) {
         value={value}
         // onChangeStart={handleChangeStart}
         onChange={handleChangeDo}
-        onChangeComplete={handleChangeComplete}
+        onAfterChange={handleChangeComplete}
       />
     </div>
   );

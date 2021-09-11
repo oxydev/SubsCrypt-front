@@ -142,7 +142,7 @@ export default function Header() {
   const [showMenu, setShownMenu] = useState(false);
 
   const userName = globalState.user.username;
-  const userWallet = globalState.user.userWallet;
+  const userWallet = globalState.user.address;
 
   return (
     <HeaderRoot className="Header">
@@ -151,9 +151,7 @@ export default function Header() {
         {/* show each of user name or wallet address or both of them */}
         {userName && <p className="UserName">{userName}</p>}
         {userName && userWallet && <p className="Separator">|</p>}
-        {userWallet && (
-          <p className="UserWallet">{middleDots(userWallet.address)}</p>
-        )}
+        {userWallet && <p className="UserWallet">{middleDots(userWallet)}</p>}
       </div>
       <div
         className="UserMenu"
