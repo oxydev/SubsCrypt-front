@@ -74,9 +74,7 @@ export const GetBCDataFunctions = (props) => {
     const comfirmAddress = async (value) => {
       setModal(null);
       //cal back function is used in situations when you want to call another function after selecting the wallet address
-      setCallBack(() => () => {
-        throw new Error("Selection canceled!");
-      });
+
       wallet = walletList[value];
     };
 
@@ -92,6 +90,9 @@ export const GetBCDataFunctions = (props) => {
     }
 
     setModal(modalElement);
+    setCallBack(() => () => {
+      wallet = "notSet";
+    });
     return ensureWalletIsSet(60000)
       .then((res) => {
         return res;

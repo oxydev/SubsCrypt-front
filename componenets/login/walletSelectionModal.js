@@ -28,8 +28,10 @@ export default function WalletSelectionModal(props) {
       >
         <input
           className="WalletModal-input"
-          type="text"
+          type="number"
           ref={inputRef}
+          min={1}
+          max={addressList.length}
           onChange={(e) => {
             // console.log(e.target.value);
             setValue(parseInt(e.target.value));
