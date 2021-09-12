@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
-import { dataContext } from "../../context/getData";
+import { setDataContext } from "../../context/setData";
+import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import {Providerstyled} from '../../styles/pageStyle'
@@ -9,7 +10,8 @@ import Cookies from "js-cookie";
 
 export default function ProviderSignUp() {
   const router = useRouter();
-  const { providerRegisterHandler, getProviderAllInfo } = useContext(dataContext);
+  const { providerRegisterHandler } = useContext(setDataContext);
+  const { getProviderAllInfo } = useContext(handleDataContext);
   const { globalState, dispatch } = useContext(UserContext);
 
   const [info, setInfo] = useState({

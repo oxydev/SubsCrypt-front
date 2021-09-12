@@ -8,49 +8,15 @@ import axios from "axios";
 export const serverDataContext = React.createContext({});
 
 export const ServerFunctions = (props) => {
-  const { dispatch } = useContext(UserContext);
-
   //load the provider description from server
   const getProviderDescription = async (address) => {
     const url = "https://api.subscrypt.io/profile/getProviderDescription/" + address;
-    axios
+    return axios
       .get(url)
       .then((result) => {
         // console.log(result.data);
         const data = result.data;
-        dispatch({ type: "USER_NAME", payload: data.name });
-        dispatch({ type: "USER_DESCRIPTION", payload: data.description });
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-  };
-
-  //load a plan description from server
-  const getProductDescription = async (address, planIndex, type, index) => {
-    const url =
-      "https://api.subscrypt.io/profile/getProductDescription/" + address + "/" + planIndex;
-    axios
-      .get(url)
-      .then((result) => {
-        // console.log(result);
-        const data = result.data;
-        dispatch({ type: "PLAN_SERVERINFO", payload: { index: index, type: type, value: data } });
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-  };
-
-  //load the list of users who are subscripted to a provider's plans
-  const getProviderAllUsers = async (address) => {
-    const url = "https://api.subscrypt.io/subscriptions/getUsers/" + address;
-    axios
-      .get(url)
-      .then((result) => {
-        // console.log(result.data);
-        const data = result.data;
-        dispatch({ type: "PROVIDER_ALLUSERS", payload: data.subscriptions });
+        return data;
       })
       .catch((error) => {
         // console.log(error);
@@ -60,13 +26,43 @@ export const ServerFunctions = (props) => {
   //load the provider income and his users count
   const getProviderIncome = async (address) => {
     const url = "https://api.subscrypt.io/subscriptions/getProviderData/" + address;
-    axios
+    return axios
       .get(url)
       .then((result) => {
         // console.log(result.data);
         const data = result.data;
-        dispatch({ type: "USER_USERSCOUNT", payload: data.usersCount });
-        dispatch({ type: "USER_INCOME", payload: data.income });
+        return data;
+      })
+      .catch((error) => {
+        // console.log(error);
+      });
+  };
+
+  //load a plan description from server
+  const getProductDescription = async (address, planIndex) => {
+    const url =
+      "https://api.subscrypt.io/profile/getProductDescription/" + address + "/" + planIndex;
+    return axios
+      .get(url)
+      .then((result) => {
+        // console.log(result);
+        const data = result.data;
+        return data;
+      })
+      .catch((error) => {
+        // console.log(error);
+      });
+  };
+
+  //load the list of users who are subscripted to a provider's plans
+  const getProviderAllUsers = async (address) => {
+    const url = "https://api.subscrypt.io/subscriptions/getUsers/" + address;
+    return axios
+      .get(url)
+      .then((result) => {
+        // console.log(result.data);
+        const data = result.data.subscriptions;
+        return data;
       })
       .catch((error) => {
         // console.log(error);
@@ -74,56 +70,27 @@ export const ServerFunctions = (props) => {
   };
 
   //function for getting all needed provider info for showing in the provider dashboard header from server
-  const getProviderHeaderInfo = (address) => {
-    getProviderDescription(address);
-    getProviderIncome(address);
-  };
+  const getProviderHeaderInfo = async (address) => {
+    const promiseList = [await getProviderDescription(address), await getProviderIncome(address)];
 
-  //loading the list of users whoe are subscripted to a specific plan
-  const getUsersOfPlan = async (address, index) => {
-    const url = "https://api.subscrypt.io/subscriptions/getUsersOfPlan/" + address + "/" + index;
-    axios
-      .get(url)
-      .then((result) => {
-        // console.log(result);
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-  };
-
-  //loading a specific plan server info
-  const getPlanServerInfo = async (address, planIndex, type, index) => {
-    // console.log(address, index, type);
-    await getProductDescription(address, planIndex, type, index);
-    dispatch({
-      type: "PLAN_SERVERINFO",
-      payload: { index: index, type: type },
+    return await Promise.all(promiseList).then((values) => {
+      console.log(values, "values");
+      const data = {
+        description: values[0].description,
+        name: values[0].name,
+        income: values[1].income,
+        usersCount: values[1].usersCount,
+      };
+      return data;
     });
-    const nameUrl = "https://api.subscrypt.io/profile/getProviderDescription/" + address;
-    axios
-      .get(nameUrl)
-      .then((result) => {
-        // console.log(result.data);
-        const data = result.data;
-        dispatch({
-          type: "PLAN_SERVERINFO",
-          payload: { index: index, type: type, value: { providerName: data.name } },
-        });
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
   };
 
   //variable for exporting the functions form the components
   const contextValue = {
     getProviderDescription,
     getProviderAllUsers,
-    getUsersOfPlan,
     getProductDescription,
     getProviderHeaderInfo,
-    getPlanServerInfo,
   };
 
   return (

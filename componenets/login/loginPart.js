@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../context/store";
 import {LogIn} from "../../styles/wallet"
-
 //The component for generating login form
 export default function LoginPart(props) {
   const [loginData, setLoginData] = useState({ username: "", password: "" });

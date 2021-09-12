@@ -53,11 +53,11 @@ const reducer = (state, action) => {
       return { ...state, wallets: action.payload };
     //load providers plans. Means the plans that are not belong to the current user
     case "LOAD_PROVIDER_PLANS": {
-      const newPlanList = [...state.providerPlans];
-      newPlanList[action.payload.planIndex] = action.payload;
+      // const newPlanList = [...state.providerPlans];
+      // newPlanList[action.payload.planIndex] = action.payload;
       return {
         ...state,
-        providerPlans: [...newPlanList],
+        providerPlans: action.payload,
       };
     }
     case "RESET_PROVIDER_PLAN": {
@@ -170,7 +170,7 @@ export const Store = (props) => {
     }
   });
 
-  // console.log(globalState); //for checking the value of global state when debugging
+  console.log(globalState); //for checking the value of global state when debugging
 
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>

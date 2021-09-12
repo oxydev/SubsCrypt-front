@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import data from "../../data/sideBar.json";
+import { handleDataContext } from "../../context/handleData";
+
 import { UserContext } from "../../context/store";
-import { dataContext } from "../../context/getData";
 import styled from "styled-components";
 
 const SideRoot = styled.div`
@@ -33,7 +34,7 @@ const SideRoot = styled.div`
 //The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
-  const { handleLogOut } = useContext(dataContext);
+  const { handleLogOut } = useContext(handleDataContext);
   const type = globalState.user.type;
   let sideBarData;
   if (type == "user") {
@@ -44,7 +45,7 @@ export default function SideBar() {
     sideBarData = data.PublicSideBar;
   }
   const sideBarMenuItems = sideBarData.menuItem.map((item) => (
-    <li key={item.name} className="lll">
+    <li key={item.name}>
       {item.url ? (
         <Link href={item.url}>
           <a

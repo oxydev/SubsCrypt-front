@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import localData from "../../data/sunscryptionPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
 import { UserContext } from "../../context/store";
-import { dataContext } from "../../context/getData";
+import { setDataContext } from "../../context/setData";
 import PercentageBar from "../gadjets/percentageBar";
 import styled from "styled-components";
 
@@ -206,8 +206,7 @@ export default function UserPlanCard(props) {
   const index = props.index;
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
-  const { handleSubscribtion, handleRenewPlan, handleRefundPlan, loadUserDataByWallet } =
-    useContext(dataContext);
+  const { handleSubscribtion, handleRenewPlan, handleRefundPlan } = useContext(setDataContext);
   const planStatus = props.plan.status;
   const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
@@ -284,7 +283,7 @@ export default function UserPlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      loadUserDataByWallet(globalState.user.address);
+      // loadUserDataByWallet(globalState.user.address);
     }
   }
 

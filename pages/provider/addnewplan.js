@@ -1,18 +1,18 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/store";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
-import { dataContext } from "../../context/getData";
-import { useRouter } from "next/router";
+import { setDataContext } from "../../context/setData";
+import { handleDataContext } from "../../context/handleData";
 import { Providerstyled } from "../../styles/pageStyle";
 
 export default function AddNewPlan() {
-  const router = useRouter();
   const { globalState } = useContext(UserContext);
 
   const planNumber = globalState.providerPlans.length;
 
   //importing necessary data functions from the data context
-  const { addNewPlans, getProviderAllInfo } = useContext(dataContext);
+  const { addNewPlans } = useContext(setDataContext);
+  const { getProviderAllInfo } = useContext(handleDataContext);
 
   //set a state hook fot storing plan forms data
   const [planList, setPlanList] = useState([
@@ -181,9 +181,8 @@ export default function AddNewPlan() {
             </button>
             <div className="ProviderRegisteration">
               <p>
-                For signing up you need to send a transaction on chain to put
-                the data in smart contract on blockchain. Normal gas fee
-                applies.
+                For signing up you need to send a transaction on chain to put the data in smart
+                contract on blockchain. Normal gas fee applies.
               </p>
               <input
                 type="submit"
