@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../../context/store";
+import { UserContext } from "../../../context/Store";
 import styled from "styled-components";
 
 const Header = styled.section`

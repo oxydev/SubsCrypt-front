@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import { setDataContext } from "../../context/setData";
 import { handleDataContext } from "../../context/handleData";

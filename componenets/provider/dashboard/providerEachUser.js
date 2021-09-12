@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../../../context/store";
+import { UserContext } from "../../../context/Store";
 import * as utils from "../../../utilities/utilityFunctions";
 
 //The component for generating every row of the subscripted users list

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import {Subscription} from "../../styles/modal"
 
 export default function SubscriptionModal(props) {

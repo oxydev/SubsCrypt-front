@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import localData from "../../data/sunscryptionPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import { setDataContext } from "../../context/setData";
 import PercentageBar from "../gadjets/percentageBar";
 import styled from "styled-components";

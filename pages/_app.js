@@ -3,7 +3,7 @@ import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
 import Login from "./login";
-import { Store } from "../context/store";
+import { Store } from "../context/Store";
 import { Modal } from "../context/modal";
 import React from "react";
 import { useRouter } from "next/router";
@@ -64,7 +64,7 @@ export default function App({ Component, pageProps }) {
                 <GetBCDataFunctions>
                   <HandleDataFunctions>
                     <SetDataFunctions>
-                      <div className="WholePageWrapper">
+                      <PageWrapper className="WholePageWrapper">
                         <SideBar />
                         {/* Main componenet is for the main part of the app where each page content is shown */}
                         {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
@@ -79,7 +79,7 @@ export default function App({ Component, pageProps }) {
                           )}
                         </Main>
                         <div></div>
-                      </div>
+                      </PageWrapper>
                     </SetDataFunctions>
                   </HandleDataFunctions>
                 </GetBCDataFunctions>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import ImageUploader from "./imageUploader";
-import { UserContext } from "../../../context/store";
+import { UserContext } from "../../../context/Store";
 import {ProviderForm} from "../../../styles/providerForm"
 
 export default function ProviderInfo(props) {

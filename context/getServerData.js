@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { authContext, loadingContext } from "../pages/_app";
-import { UserContext } from "./store";
+import { UserContext } from "./Store";
 import { useRouter } from "next/router";
 import axios from "axios";
 

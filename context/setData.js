@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
-import { UserContext } from "./store";
+import { UserContext } from "./Store";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 import { getBCDataContext } from "./getBCData";

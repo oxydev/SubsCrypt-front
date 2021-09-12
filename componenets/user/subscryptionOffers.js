@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import OfferCarousel from "./offerCarousel";
 import data from "../../data/testData/providerAddress.json";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import ProviderSelection from "./providerSelection";
 import { handleDataContext } from "../../context/handleData";
 import styled from "styled-components";

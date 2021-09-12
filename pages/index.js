@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { UserContext } from "../context/store";
+import { UserContext } from "../context/Store";
 import { LoginPage } from "../styles/pageStyle";
 
 export default function Home() {

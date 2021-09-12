@@ -3,7 +3,7 @@ import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { setDataContext } from "../../context/setData";
 import { handleDataContext } from "../../context/handleData";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import { useRouter } from "next/router";
 import {Providerstyled} from '../../styles/pageStyle'
 import Cookies from "js-cookie";

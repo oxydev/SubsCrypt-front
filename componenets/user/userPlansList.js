@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import UserPlanCard from "./userPlanCard";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import * as utils from "../../utilities/utilityFunctions";
 
 //The component for generating the all plans list that a user has been subscripted to

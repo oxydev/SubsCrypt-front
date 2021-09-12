@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import styled from "styled-components";
 
 const Section=styled.div`

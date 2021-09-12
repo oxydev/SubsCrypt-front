@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import localData from "../../data/providerPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
 import data from "../../data/testData/providerAddress.json";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import { useRouter } from "next/router";
 import { setDataContext } from "../../context/setData";
 import styled from "styled-components";

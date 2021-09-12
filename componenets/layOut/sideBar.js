@@ -3,7 +3,7 @@ import Link from "next/link";
 import data from "../../data/sideBar.json";
 import { handleDataContext } from "../../context/handleData";
 
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import styled from "styled-components";
 
 const SideRoot = styled.div`

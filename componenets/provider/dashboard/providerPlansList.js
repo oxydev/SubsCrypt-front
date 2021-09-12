@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PlanCard from "../../common/planCard";
-import { UserContext } from "../../../context/store";
+import { UserContext } from "../../../context/Store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import{Carousel_} from "../../../styles/carouselStyle"

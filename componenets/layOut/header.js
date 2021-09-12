@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import userData from "../../data/userIdentity.json";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import { handleDataContext } from "../../context/handleData";
 import { middleDots } from "../../utilities/utilityFunctions";
 import Link from "next/link";

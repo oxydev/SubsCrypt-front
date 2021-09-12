@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import SubscryptionOffers from "../../componenets/user/subscryptionOffers";
 import UserPlansList from "../../componenets/user/userPlansList";
 import {UDashboard} from "../../styles/pageStyle"

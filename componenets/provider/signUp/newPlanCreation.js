@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import PercentSlider from "../../gadjets/percetageSlider";
 import TagInput from "../../gadjets/tagInput";
-import { UserContext } from "../../../context/store";
+import { UserContext } from "../../../context/Store";
 import {ProviderForm} from "../../../styles/providerForm"
 
 //The component for handling new plan creation for provider user

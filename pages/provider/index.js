@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import ProviderDashboard from "./providerDashboard";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import { useRouter } from "next/router";
 
 export default function ProviderHome() {

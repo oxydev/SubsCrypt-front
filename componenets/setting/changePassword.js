@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/store";
+import { UserContext } from "../../context/Store";
 import { setDataContext } from "../../context/setData";
 import { getBCDataContext } from "../../context/getBCData";
 import { useRouter } from "next/router";
