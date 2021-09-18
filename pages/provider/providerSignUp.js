@@ -7,12 +7,15 @@ import { UserContext } from "../../context/Store";
 import { useRouter } from "next/router";
 import {Providerstyled} from '../../styles/pageStyle'
 import Cookies from "js-cookie";
+import { modalContext } from '../../context/modal'
+import OperationModal from '../../componenets/user/operationModal'
 
 export default function ProviderSignUp() {
   const router = useRouter();
   const { providerRegisterHandler } = useContext(setDataContext);
   const { getProviderAllInfo } = useContext(handleDataContext);
   const { globalState, dispatch } = useContext(UserContext);
+  const {setModal,setCallBack} = useContext(modalContext);
 
   const [info, setInfo] = useState({
     ProviderMoneyAddress: globalState.user.address,
@@ -57,7 +60,10 @@ export default function ProviderSignUp() {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
-          window.alert("The operation has been done successfully");
+          //convert alert by modal
+         // window.alert("The operation has been done successfully");
+          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+          setModal(modalElement);
           // console.log("doneee");
           var axios = require("axios");
           var FormData = require("form-data");
@@ -88,7 +94,10 @@ export default function ProviderSignUp() {
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        //convert alert by modal
+       // window.alert("The operation failed!");
+        const modalElement=<OperationModal text={"The operation failed!"}/>
+        setModal(modalElement);
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -127,10 +136,16 @@ export default function ProviderSignUp() {
   function handleRegister() {
     const image = info.image;
     if (!image) {
-      window.alert("You should upload a photo!");
+      //convert alert by modal
+     // window.alert("You should upload a photo!");
+      const modalElement=<OperationModal text={"You should upload a photo!"}/>
+      setModal(modalElement)
     } else {
       if (info.ProviderPassword != info.ProviderConfirmedPasswords) {
-        window.alert("Password has not been comfirmed correctly!!");
+        //convert alert by modal
+        //window.alert("Password has not been comfirmed correctly!!");
+        const modalElement=<OperationModal text={"Password has not been comfirmed correctly!!"}/>
+        setModal(modalElement);
       } else {
         var wallet = globalState.user.wallet;
         function parseDurations(planList) {

@@ -5,6 +5,8 @@ import { UserContext } from "../../context/Store";
 import { setDataContext } from "../../context/setData";
 import PercentageBar from "../gadjets/percentageBar";
 import styled from "styled-components";
+import OperationModal from './operationModal'
+import { modalContext } from '../../context/modal'
 
 const PlanCard = styled.section`
   &.UserPlanCard {
@@ -207,6 +209,7 @@ export default function UserPlanCard(props) {
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
   const { handleSubscribtion, handleRenewPlan, handleRefundPlan } = useContext(setDataContext);
+  const {setModal , setCallBack}=useContext(modalContext)
   const planStatus = props.plan.status;
   const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
@@ -275,11 +278,17 @@ export default function UserPlanCard(props) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
-          window.alert("The operation has been done successfully");
+          //convert alert by modal
+          //window.alert("The operation has been done successfully");
+          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+          setModal(modalElement);
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        //convert alert by modal
+        //window.alert("The operation failed!");
+        const modalElement=<OperationModal text={"The operation failed!"}/>
+        setModal(modalElement)
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());

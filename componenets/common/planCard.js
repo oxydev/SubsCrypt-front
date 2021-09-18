@@ -6,6 +6,8 @@ import { UserContext } from "../../context/Store";
 import { useRouter } from "next/router";
 import { setDataContext } from "../../context/setData";
 import styled from "styled-components";
+import { modalContext } from '../../context/modal'
+import OperationModal from '../user/operationModal'
 
 const Card = styled.section`
   &.PlanCard {
@@ -124,6 +126,7 @@ export default function PlanCard(props) {
   const planIndex = plan.planIndex;
   const { handleSubscribtion } = useContext(setDataContext);
   const providerAddress = data.providerAddress;
+  const {setModal ,setCallBack} =useContext(modalContext);
 
   //Subscription function
   function handleSubscribe() {
@@ -143,11 +146,17 @@ export default function PlanCard(props) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
-          window.alert("The operation has been done successfully");
+          //convert alert by modal
+          //window.alert("The operation has been done successfully");
+          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+          setModal(modalElement)
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        //convert alert by modal
+        //window.alert("The operation failed!");
+        const modalElement=<OperationModal text={"The operation failed!"}/>
+        setModal(modalElement)
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());

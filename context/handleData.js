@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { serverDataContext } from './getServerData'
 import { getBCDataContext } from './getBCData'
 import {TokenForm} from "../styles/modal"
+import ValidateModal from '../componenets/setting/validateModal'
+import OperationModal from '../componenets/user/operationModal'
 
 //Variable for using in dynamicly importing the subscrypt library
 let subscrypt
@@ -68,8 +70,11 @@ export const HandleDataFunctions = (props) => {
         })
       })
       .catch(() => {
-        window.alert('Can not connect to wallet!')
-        router.push('/')
+        //convert alert by modal
+        // window.alert('Can not connect to wallet!')
+        // router.push('/')
+        const modalElement=<ValidateModal text={"Can not connect to wallet!"}/>
+        setModal(modalElement)
       })
   }
 
@@ -118,8 +123,11 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(() => {
-        window.alert('Can not connect to wallet!')
-        router.push('/')
+        //convert alert by modal
+        // window.alert('Can not connect to wallet!')
+        // router.push('/')
+      const modalElement=<ValidateModal text={"Can not connect to wallet!"}/>
+      setModal(modalElement)
       })
   }
 
@@ -157,7 +165,10 @@ export const HandleDataFunctions = (props) => {
           //getting the user plans after login
         } else {
           dispatch({ type: 'LOAD_USER', payload: { username: 'Invalid' } })
-          window.alert('Invalid username of password!')
+          //convert alert by modal
+          //window.alert('Invalid username of password!')
+          const modalElement=<OperationModal text={"Invalid username of password!"}/>
+          setModal(modalElement)
         }
       })
       .then(async (res) => {
@@ -171,7 +182,10 @@ export const HandleDataFunctions = (props) => {
       })
       .catch(() => {
         setLoading(false)
-        window.alert('Can not load data!')
+      //convert alert by modal
+       // window.alert('Can not load data!')
+      const modalElement=<OperationModal text={"Can not load data!"}/>
+      setModal(modalElement)
         // console.log(error);
       })
   }
@@ -198,7 +212,10 @@ export const HandleDataFunctions = (props) => {
           //getting the user plans after login
         } else {
           dispatch({ type: 'LOAD_USER', payload: { username: 'Invalid' } })
-          window.alert('Invalid username of password!')
+          //convert alert by modal
+          //window.alert('Invalid username of password!')
+          const modalElement=<OperationModal text={"Invalid username of password!"}/>
+          setModal(modalElement)
         }
       })
       .then(async (res) => {
@@ -259,7 +276,10 @@ export const HandleDataFunctions = (props) => {
           loadOffers(result.result)
         })
         .catch((error) => {
-          window.alert('The username you have entered is invalid!!')
+          //convert alert by modal
+          //window.alert('The username you have entered is invalid!!')
+        const modalElement=<OperationModal text={"he username you have entered is invalid!!"}/>
+        setModal(modalElement)
         })
     } else {
       await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
@@ -312,10 +332,16 @@ export const HandleDataFunctions = (props) => {
       )
         .transferToken(address)
         .then((result) => {
-          window.alert('Operation has been done successful!')
+          //convert alert by modal
+          //window.alert('Operation has been done successful!')
+        const modalElement_1=<OperationModal text={"Operation has been done successful!"}/>
+        setModal(modalElement_1);
         })
         .catch((error) => {
-          window.alert('Operation failed!')
+        //convert alert by modal
+         // window.alert('Operation failed!')
+        const modalElement_2=<OperationModal text={"Operation failed!"}/>
+        setModal(modalElement_2);
         })
     }
   }

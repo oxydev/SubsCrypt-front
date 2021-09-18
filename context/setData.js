@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 import { getBCDataContext } from "./getBCData";
 import SubscriptionModal from "../componenets/user/subscriptionModal";
+import OperationModal from "../componenets/user/operationModal"
 
 let subscrypt;
 
@@ -122,7 +123,10 @@ export const SetDataFunctions = (props) => {
         if (res) {
           handleSubscribtion(providerAddress, plan, planIndex, callback, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          //first convert alert to modal/hamidreza
+          //window.alert("You are not allowed to do this operation!");
+          const modalElement_1= <OperationModal text={"You are not allowed to do this operation"} />;
+          setModal(modalElement_1)
         }
       });
     } else {
@@ -172,7 +176,10 @@ export const SetDataFunctions = (props) => {
         if (res) {
           handleRenewPlan(providerAddress, plan, planIndex, callback, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          //second convert alert by modal
+          //window.alert("You are not allowed to do this operation!");
+          const modalElement_1=<OperationModal text={"You are not allowed to do this operation"}/>
+          setModal(modalElement_1);
         }
       });
     } else {
@@ -219,7 +226,10 @@ export const SetDataFunctions = (props) => {
         if (res) {
           handleRefundPlan(providerAddress, plan, planIndex, callback, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          //third convert alert by modal
+          //window.alert("You are not allowed to do this operation!");
+          const modalElement_1=<OperationModal text={"You are not allowed to do this operation"}/>
+          setModal(modalElement_1)
         }
       });
     } else {
@@ -282,7 +292,10 @@ export const SetDataFunctions = (props) => {
         if (res) {
           addNewPlans(address, callback, durations, prices, refundPolicies, planChars, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          //fourth convert alert by modal
+          //window.alert("You are not allowed to do this operation!");
+          const modalElement_1=<OperationModal text={"You are not allowed to do this operation"}/>
+          setModal(modalElement_1)
         }
       });
     } else {
@@ -308,7 +321,6 @@ export const SetDataFunctions = (props) => {
 
   const setDataContextvalue = {
     handleSubscribtion,
-    handleRefundPlan,
     handleRefundPlan,
     changePassword,
     handleRenewPlan,

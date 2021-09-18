@@ -4,10 +4,12 @@ import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import { setDataContext } from "../../context/setData";
 import { handleDataContext } from "../../context/handleData";
 import { Providerstyled } from "../../styles/pageStyle";
+import { modalContext } from '../../context/modal'
+import OperationModal from '../../componenets/user/operationModal'
 
 export default function AddNewPlan() {
   const { globalState } = useContext(UserContext);
-
+  const {setModal , setCallBack}=useContext(modalContext)
   const planNumber = globalState.providerPlans.length;
 
   //importing necessary data functions from the data context
@@ -70,11 +72,17 @@ export default function AddNewPlan() {
         if (method === "ExtrinsicSuccess") {
           check = true;
           allPlanPromise();
-          window.alert("The operation has been done successfully");
+          //convert alert by modal
+          //window.alert("The operation has been done successfully");
+          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+          setModal(modalElement)
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        //convert alert by modal
+        //window.alert("The operation failed!");
+        const modalElement=<OperationModal text={"The operation failed!"}/>
+        setModal(modalElement)
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());

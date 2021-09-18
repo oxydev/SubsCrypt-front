@@ -3,6 +3,9 @@ import { UserContext } from "../../context/Store";
 import { setDataContext } from "../../context/setData";
 import { getBCDataContext } from "../../context/getBCData";
 import { useRouter } from "next/router";
+import OperationModal from '../user/operationModal'
+import { modalContext } from '../../context/modal'
+import ValidateModal from './validateModal'
 //The component for handling changing password part in profile setting
 export default function ChangePassword(props) {
   const router = useRouter();
@@ -11,6 +14,7 @@ export default function ChangePassword(props) {
   const { connectToWallet } = useContext(getBCDataContext);
   const { changePassword } = useContext(setDataContext);
   const { globalState, dispatch } = useContext(UserContext);
+  const {setModal,setCallBack}=useContext(modalContext)
 
   function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
@@ -25,11 +29,17 @@ export default function ChangePassword(props) {
         if (method === "ExtrinsicSuccess") {
           // console.log("success");
           txStatus = true;
-          window.alert("The operation has been done successfully");
+          //convert alert by modal
+          //window.alert("The operation has been done successfully");
+          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+          setModal(modalElement)
         }
       });
       if (!txStatus) {
-        window.alert("The operation failed!");
+        //convert alert by modal
+        //window.alert("The operation failed!");
+        const modalElement = <OperationModal text={"The operation failed!"}/>
+        setModal(modalElement)
         // console.log("failed");
       }
     } else if (status.isFinalized) {
@@ -47,8 +57,11 @@ export default function ChangePassword(props) {
     if (!globalState.user.wallet) {
       connectToWallet(globalState.user.address).then((res) => {
         if(!res) {
-          window.alert("You are not allowed to do this operation!");
-          router.push("/");
+          //convert alert by modal
+          //window.alert("You are not allowed to do this operation!");
+          const modalElement=<ValidateModal text={"You are not allowed to do this operation!"}/>
+          setModal(modalElement)
+          //router.push("/");
         }else{
           dispatch({ type: 'LOAD_USER_WALLET', payload: res })
         }
