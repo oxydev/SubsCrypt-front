@@ -59,11 +59,18 @@ export default function ProviderSignUp() {
       events.forEach(({ event: { data, method, section }, phase }) => {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
-          check = true;
           //convert alert by modal
          // window.alert("The operation has been done successfully");
-          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
-          setModal(modalElement);
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal(){
+            const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+            setModal(modalElement)
+            await sleep(5000)
+          }
+          modal()
+          check = true;
           // console.log("doneee");
           var axios = require("axios");
           var FormData = require("form-data");
@@ -96,8 +103,15 @@ export default function ProviderSignUp() {
       if (check == false) {
         //convert alert by modal
        // window.alert("The operation failed!");
-        const modalElement=<OperationModal text={"The operation failed!"}/>
-        setModal(modalElement);
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function modal(){
+          const modalElement=<OperationModal text={"The operation failed!"}/>
+          setModal(modalElement)
+          await sleep(5000)
+        }
+        modal()
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -138,14 +152,27 @@ export default function ProviderSignUp() {
     if (!image) {
       //convert alert by modal
      // window.alert("You should upload a photo!");
-      const modalElement=<OperationModal text={"You should upload a photo!"}/>
-      setModal(modalElement)
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function modal(){
+        const modalElement=<OperationModal text={"You should upload a photo!"}/>
+        setModal(modalElement)
+        await sleep(5000)
+      }
+      modal()
+
     } else {
       if (info.ProviderPassword != info.ProviderConfirmedPasswords) {
         //convert alert by modal
         //window.alert("Password has not been comfirmed correctly!!");
-        const modalElement=<OperationModal text={"Password has not been comfirmed correctly!!"}/>
-        setModal(modalElement);
+        async function modal_1(){
+          const modalElement=<OperationModal text={"Password has not been comfirmed correctly!!"}/>
+          setModal(modalElement)
+          await sleep(5000)
+        }
+        modal_1()
+
       } else {
         var wallet = globalState.user.wallet;
         function parseDurations(planList) {

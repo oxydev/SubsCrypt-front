@@ -125,8 +125,15 @@ export const SetDataFunctions = (props) => {
         } else {
           //first convert alert to modal/hamidreza
           //window.alert("You are not allowed to do this operation!");
-          const modalElement_1= <OperationModal text={"You are not allowed to do this operation"} />;
-          setModal(modalElement_1)
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal() {
+            const modalElement_1 = <OperationModal text={"You are not allowed to do this operation"}/>
+            setModal(modalElement_1)
+            await sleep(5000);
+          }
+          modal()
         }
       });
     } else {
@@ -178,8 +185,16 @@ export const SetDataFunctions = (props) => {
         } else {
           //second convert alert by modal
           //window.alert("You are not allowed to do this operation!");
-          const modalElement_1=<OperationModal text={"You are not allowed to do this operation"}/>
-          setModal(modalElement_1);
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal() {
+            const modalElement_1 = <OperationModal text={"You are not allowed to do this operation"}/>
+            setModal(modalElement_1)
+            await sleep(5000);
+          }
+          modal()
+
         }
       });
     } else {
@@ -228,8 +243,16 @@ export const SetDataFunctions = (props) => {
         } else {
           //third convert alert by modal
           //window.alert("You are not allowed to do this operation!");
-          const modalElement_1=<OperationModal text={"You are not allowed to do this operation"}/>
-          setModal(modalElement_1)
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal() {
+            const modalElement = <OperationModal text={"You are not allowed to do this operation"}/>
+            setModal(modalElement)
+            await sleep(5000);
+          }
+          modal()
+
         }
       });
     } else {
@@ -294,8 +317,16 @@ export const SetDataFunctions = (props) => {
         } else {
           //fourth convert alert by modal
           //window.alert("You are not allowed to do this operation!");
-          const modalElement_1=<OperationModal text={"You are not allowed to do this operation"}/>
-          setModal(modalElement_1)
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal() {
+            const modalElement = <OperationModal text={"You are not allowed to do this operation"}/>
+            setModal(modalElement)
+            await sleep(5000);
+          }
+          modal()
+
         }
       });
     } else {

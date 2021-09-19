@@ -277,18 +277,34 @@ export default function UserPlanCard(props) {
       events.forEach(({ event: { data, method, section }, phase }) => {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
-          check = true;
           //convert alert by modal
           //window.alert("The operation has been done successfully");
-          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
-          setModal(modalElement);
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal(){
+            const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+            setModal(modalElement)
+            await sleep(5000)
+          }
+          modal()
+          check = true;
         }
       });
       if (check == false) {
         //convert alert by modal
         //window.alert("The operation failed!");
-        const modalElement=<OperationModal text={"The operation failed!"}/>
-        setModal(modalElement)
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function modal(){
+          const modalElement=<OperationModal text={"The operation failed!"}/>
+          setModal(modalElement)
+          await sleep(5000)
+        }
+
+        modal()
+
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());

@@ -73,8 +73,16 @@ export const HandleDataFunctions = (props) => {
         //convert alert by modal
         // window.alert('Can not connect to wallet!')
         // router.push('/')
-        const modalElement=<ValidateModal text={"Can not connect to wallet!"}/>
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function modal() {
+        const modalElement = <ValidateModal text={"Can not connect to wallet!"}/>
         setModal(modalElement)
+        await sleep(5000);
+      }
+      modal()
+
       })
   }
 
@@ -126,8 +134,16 @@ export const HandleDataFunctions = (props) => {
         //convert alert by modal
         // window.alert('Can not connect to wallet!')
         // router.push('/')
-      const modalElement=<ValidateModal text={"Can not connect to wallet!"}/>
-      setModal(modalElement)
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function modal() {
+        const modalElement = <ValidateModal text={"Can not connect to wallet!"}/>
+        setModal(modalElement)
+        await sleep(5000);
+      }
+      modal()
+
       })
   }
 
@@ -167,8 +183,16 @@ export const HandleDataFunctions = (props) => {
           dispatch({ type: 'LOAD_USER', payload: { username: 'Invalid' } })
           //convert alert by modal
           //window.alert('Invalid username of password!')
-          const modalElement=<OperationModal text={"Invalid username of password!"}/>
-          setModal(modalElement)
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal() {
+            const modalElement = <OperationModal text={"Invalid username of password!"}/>
+            setModal(modalElement)
+            await sleep(5000);
+          }
+          modal()
+
         }
       })
       .then(async (res) => {
@@ -181,12 +205,20 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(() => {
-        setLoading(false)
       //convert alert by modal
        // window.alert('Can not load data!')
-      const modalElement=<OperationModal text={"Can not load data!"}/>
-      setModal(modalElement)
-        // console.log(error);
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function modal() {
+        const modalElement = <OperationModal text={"Can not load data!"}/>
+        setModal(modalElement)
+        await sleep(5000);
+      }
+      modal()
+      setLoading(false)
+
+      // console.log(error);
       })
   }
 
@@ -214,8 +246,16 @@ export const HandleDataFunctions = (props) => {
           dispatch({ type: 'LOAD_USER', payload: { username: 'Invalid' } })
           //convert alert by modal
           //window.alert('Invalid username of password!')
-          const modalElement=<OperationModal text={"Invalid username of password!"}/>
-          setModal(modalElement)
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal() {
+            const modalElement = <OperationModal text={"Invalid username of password!"}/>
+            setModal(modalElement)
+            await sleep(5000);
+          }
+          modal()
+
         }
       })
       .then(async (res) => {
@@ -278,8 +318,15 @@ export const HandleDataFunctions = (props) => {
         .catch((error) => {
           //convert alert by modal
           //window.alert('The username you have entered is invalid!!')
-        const modalElement=<OperationModal text={"he username you have entered is invalid!!"}/>
-        setModal(modalElement)
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function modal() {
+          const modalElement = <OperationModal text={"he username you have entered is invalid!!"}/>
+          setModal(modalElement)
+          await sleep(5000);
+        }
+        modal()
         })
     } else {
       await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
@@ -334,14 +381,30 @@ export const HandleDataFunctions = (props) => {
         .then((result) => {
           //convert alert by modal
           //window.alert('Operation has been done successful!')
-        const modalElement_1=<OperationModal text={"Operation has been done successful!"}/>
-        setModal(modalElement_1);
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function modal() {
+          const modalElement_1 = <OperationModal text={"Operation has been done successful!"}/>
+          setModal(modalElement_1)
+          await sleep(5000);
+        }
+        modal()
+
         })
         .catch((error) => {
         //convert alert by modal
          // window.alert('Operation failed!')
-        const modalElement_2=<OperationModal text={"Operation failed!"}/>
-        setModal(modalElement_2);
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function modal() {
+          const modalElement_2 = <OperationModal text={"Operation failed!"}/>
+          setModal(modalElement_2)
+          await sleep(5000);
+        }
+        modal()
+
         })
     }
   }

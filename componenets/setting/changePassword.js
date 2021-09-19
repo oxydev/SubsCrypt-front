@@ -56,10 +56,7 @@ export default function ChangePassword(props) {
           await sleep(5000);
         }
         modal()
-        // console.log("salam")
-        // const modalElement = <OperationModal text={"The operation failed!"}/>
-        // setModal(modalElement)
-        // console.log("failed");
+
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
