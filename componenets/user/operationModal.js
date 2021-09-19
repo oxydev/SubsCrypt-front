@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext ,useEffect} from 'react'
 import styled from "styled-components"
 import { modalContext } from '../../context/modal'
 
@@ -41,8 +41,13 @@ const Root =styled.div`
 
 
 export default function OperationModal(props) {
-  const { setModal } = useContext(modalContext);
+  const {modal,setModal,setCallBack } = useContext(modalContext);
 
+  useEffect(()=>{
+    setCallBack(()=>()=>{
+      setModal(null)
+    })
+  },[modal])
 
   return (
     <Root>

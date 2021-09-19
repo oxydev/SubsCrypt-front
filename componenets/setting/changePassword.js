@@ -28,18 +28,37 @@ export default function ChangePassword(props) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           // console.log("success");
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal(){
+            const modalElement=<OperationModal text={"The operation has been done successfully"}/>
+            setModal(modalElement)
+            await sleep(5000)
+          }
+
+          modal()
           txStatus = true;
           //convert alert by modal
           //window.alert("The operation has been done successfully");
-          const modalElement=<OperationModal text={"The operation has been done successfully"}/>
-          setModal(modalElement)
+
         }
       });
       if (!txStatus) {
         //convert alert by modal
         //window.alert("The operation failed!");
-        const modalElement = <OperationModal text={"The operation failed!"}/>
-        setModal(modalElement)
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function modal() {
+          const modalElement = <OperationModal text={"The operation failed!"}/>
+          setModal(modalElement)
+          await sleep(5000);
+        }
+        modal()
+        // console.log("salam")
+        // const modalElement = <OperationModal text={"The operation failed!"}/>
+        // setModal(modalElement)
         // console.log("failed");
       }
     } else if (status.isFinalized) {
@@ -59,8 +78,15 @@ export default function ChangePassword(props) {
         if(!res) {
           //convert alert by modal
           //window.alert("You are not allowed to do this operation!");
-          const modalElement=<ValidateModal text={"You are not allowed to do this operation!"}/>
-          setModal(modalElement)
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          async function modal(){
+            const modalElement=<ValidateModal text={"You are not allowed to do this operation!"}/>
+            setModal(modalElement)
+            await sleep(5000)
+          }
+           modal()
           //router.push("/");
         }else{
           dispatch({ type: 'LOAD_USER_WALLET', payload: res })

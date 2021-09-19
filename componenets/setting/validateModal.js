@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useEffect } from 'react'
 import styled from "styled-components"
 import { modalContext } from '../../context/modal'
 import { useRouter } from 'next/router'
@@ -43,11 +43,16 @@ const Root =styled.div`
 
 export default function ValidateModal(props) {
   const router = useRouter();
-  const { setModal } = useContext(modalContext);
+  const { modal,setModal ,setCallBack} = useContext(modalContext);
 
+  useEffect(()=>{
+    setCallBack(()=>()=>{
+      router.push("/")
+    })
+  },[modal])
 
   return (
-    <Root>
+    <Root >
       <h3>{props.text}</h3>
       <button onClick={()=>{setModal(null); router.push("/");}}>ok</button>
     </Root>
