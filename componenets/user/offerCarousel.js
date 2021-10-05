@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PlanCard from "../common/planCard";
 import { UserContext } from "../../context/Store";
 import styled from "styled-components";
-import {Carousel_} from "../../styles/carouselStyle"
+import Carousel from 'react-multi-carousel'
 
 const CarouselRoot = styled.div`
   &.OfferCarousel {
@@ -80,7 +80,7 @@ export default function OfferCarousel() {
       {/* <div className="OfferCarousel-itemList">{offerCards}</div>
       <button className="OfferCarousel-prevBtn" />
       <button className="OfferCarousel-nextBtn" /> */}
-      <Carousel_ responsive={responsive}>{offerCards}</Carousel_>
+      <Carousel responsive={responsive}>{offerCards}</Carousel>
     </CarouselRoot>
   );
 }

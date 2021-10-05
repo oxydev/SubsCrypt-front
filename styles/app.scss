@@ -1,12 +1,12 @@
 // Abstract files
-//@import "abstracts/variables";
-//@import "abstracts/mixins";
+@import "abstracts/variables";
+@import "abstracts/mixins";
 //@import "abstracts/placeHolder";
 //
 //// Core files
-//@import "core/fonts";
-//@import "core/resets";
-//@import "core/typography";
+@import "core/fonts";
+@import "core/resets";
+@import "core/typography";
 
 // Components
 //@import "components/modal";
@@ -63,6 +63,6 @@
 // Vendor Files
 //@import "vendors/rangeSlider";
 //@import "vendors/reactTags";
-//@import "vendors/reactMultiCarousel";
-//@import "vendors/rangeSlider";
-//@import "vendors/reactTags";
+@import "vendors/reactMultiCarousel";
+@import "vendors/rangeSlider";
+@import "vendors/reactTags";

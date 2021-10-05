@@ -206,6 +206,9 @@ export const HandleDataFunctions = (props) => {
           }
         } else {
           //window.alert("Can not connect to wallet!");
+          function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
           async function modal_2() {
             const modalElement = <ValidateModal text={"Can not connect to wallet!"}/>
             setModal(modalElement)

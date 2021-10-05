@@ -3,7 +3,7 @@ import PlanCard from "../../common/planCard";
 import { UserContext } from "../../../context/Store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import{Carousel_} from "../../../styles/carouselStyle"
+import Carousel from 'react-multi-carousel'
 
 const PlanRoot = styled.section`
   &.ProviderPlansList {
@@ -118,7 +118,7 @@ export default function ProviderPlansList() {
       </header>
       <div>{plansCard}</div>
 
-      <Carousel_ responsive={responsive}>{plansCard}</Carousel_>
+      <Carousel responsive={responsive}>{plansCard}</Carousel>
     </PlanRoot>
   );
 }
