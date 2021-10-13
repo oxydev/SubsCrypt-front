@@ -1,7 +1,4 @@
-import React, { useContext } from "react";
-import { authContext, loadingContext } from "../pages/_app";
-import { UserContext } from "./store";
-import { useRouter } from "next/router";
+import React from "react";
 import axios from "axios";
 
 //creating the context to make all the server functions available in every component in the project

@@ -1,9 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { authContext, loadingContext } from "../pages/_app";
 import { modalContext } from "./modal";
 import { UserContext } from "./store";
-import { useRouter } from "next/router";
-import { serverDataContext } from "./getServerData";
 import { getBCDataContext } from "./getBCData";
 import SubscriptionModal from "../componenets/user/subscriptionModal";
 
@@ -12,12 +9,8 @@ let subscrypt;
 export const setDataContext = React.createContext({});
 
 export const SetDataFunctions = (props) => {
-  const router = useRouter();
-  const { auth, setAuth } = useContext(authContext);
-  const { setLoading } = useContext(loadingContext);
-  const { setModal, setCallBack } = useContext(modalContext);
-  const { globalState, dispatch } = useContext(UserContext);
-  const serverFunctions = useContext(serverDataContext);
+  const { setModal } = useContext(modalContext);
+  const { globalState } = useContext(UserContext);
   const blockChainFuncs = useContext(getBCDataContext);
 
   useEffect(() => {
@@ -308,7 +301,6 @@ export const SetDataFunctions = (props) => {
 
   const setDataContextvalue = {
     handleSubscribtion,
-    handleRefundPlan,
     handleRefundPlan,
     changePassword,
     handleRenewPlan,

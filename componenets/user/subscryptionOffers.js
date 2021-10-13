@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import OfferCarousel from "./offerCarousel";
-import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import ProviderSelection from "./providerSelection";
 import { handleDataContext } from "../../context/handleData";
