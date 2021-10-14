@@ -51,8 +51,11 @@ export const HandleDataFunctions = (props) => {
                   type: "LOAD_USER",
                   payload: { type: "user", wallet: res, address: res.address, username: username },
                 });
-              }else{
-                //todo
+              } else {
+                dispatch({
+                  type: "LOAD_USER",
+                  payload: { type: "user", wallet: res, address: res.address },
+                });
               }
             });
           } else {
