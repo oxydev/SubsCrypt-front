@@ -15,6 +15,8 @@ export default function SideBar() {
     sideBarData = data.UserSideBar;
   } else if (type == "provider" && registerStatus) {
     sideBarData = data.ProviderSideBar;
+  } else if (type == "provider" && !registerStatus) {
+    sideBarData = data.signUpSideBar;
   } else {
     sideBarData = data.PublicSideBar;
   }

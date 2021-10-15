@@ -35,17 +35,19 @@ export default function Header() {
         <div className="UserMenu-button"></div>
         <div className={showMenu ? "UserMenu-menu" : "UserMenu-menu hidden"}>
           <ul>
-            <li>
-              <Link
-                href={
-                  globalState.user.type == "user"
-                    ? "/user/profilesetting"
-                    : "/provider/profilesetting"
-                }
-              >
-                <a>Profile Setting</a>
-              </Link>
-            </li>
+            {(globalState.user.type == "user" || globalState.user.registered) && (
+              <li>
+                <Link
+                  href={
+                    globalState.user.type == "user"
+                      ? "/user/profilesetting"
+                      : "/provider/profilesetting"
+                  }
+                >
+                  <a>Profile Setting</a>
+                </Link>
+              </li>
+            )}
             <li>
               <Link href="#">
                 <a onClick={handleLogOut}>LogOut</a>
