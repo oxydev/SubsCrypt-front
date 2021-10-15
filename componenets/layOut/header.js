@@ -35,7 +35,7 @@ export default function Header() {
         <div className="UserMenu-button"></div>
         <div className={showMenu ? "UserMenu-menu" : "UserMenu-menu hidden"}>
           <ul>
-            {(globalState.user.type == "user" || globalState.user.registered) && (
+            {globalState.user.username && (
               <li>
                 <Link
                   href={

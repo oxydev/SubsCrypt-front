@@ -20,39 +20,42 @@ export default function SideBar() {
   } else {
     sideBarData = data.PublicSideBar;
   }
-  const sideBarMenuItems = sideBarData.menuItem.map((item) => (
-    <li key={item.name}>
-      {item.url ? (
-        <Link href={item.url}>
-          <a
-            id={item.id}
-            onClick={
-              item.name == "Log Out"
-                ? () => {
-                    handleLogOut();
-                  }
-                : () => {}
-            }
-          >
-            {item.name}
-          </a>
-        </Link>
-      ) : (
-        <p
-          id={item.id}
-          onClick={
-            item.name == "Log Out"
-              ? () => {
-                  handleLogOut();
+  const sideBarMenuItems = sideBarData.menuItem.map(
+    (item) =>
+      (item.name != "Profile Setting" || globalState.user.username) && (
+        <li key={item.name}>
+          {item.url ? (
+            <Link href={item.url}>
+              <a
+                id={item.id}
+                onClick={
+                  item.name == "Log Out"
+                    ? () => {
+                        handleLogOut();
+                      }
+                    : () => {}
                 }
-              : () => {}
-          }
-        >
-          {item.name}
-        </p>
-      )}
-    </li>
-  ));
+              >
+                {item.name}
+              </a>
+            </Link>
+          ) : (
+            <p
+              id={item.id}
+              onClick={
+                item.name == "Log Out"
+                  ? () => {
+                      handleLogOut();
+                    }
+                  : () => {}
+              }
+            >
+              {item.name}
+            </p>
+          )}
+        </li>
+      )
+  );
   return (
     <div className="SideBar">
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
