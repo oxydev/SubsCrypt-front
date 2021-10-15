@@ -3,6 +3,8 @@ import { UserContext } from "../../context/store";
 import { setDataContext } from "../../context/setData";
 import { getBCDataContext } from "../../context/getBCData";
 import { useRouter } from "next/router";
+import { operationContext } from "../../context/handleUserOperation";
+
 //The component for handling changing password part in profile setting
 export default function ChangePassword(props) {
   const router = useRouter();
@@ -11,6 +13,7 @@ export default function ChangePassword(props) {
   const { connectToWallet } = useContext(getBCDataContext);
   const { changePassword } = useContext(setDataContext);
   const { globalState, dispatch } = useContext(UserContext);
+  const { showResultToUser } = useContext(operationContext);
 
   function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
@@ -45,12 +48,14 @@ export default function ChangePassword(props) {
 
   useEffect(() => {
     if (!globalState.user.wallet) {
-      connectToWallet(globalState.user.address).then((res) => {
-        if(!res) {
-          window.alert("You are not allowed to do this operation!");
-          router.push("/");
-        }else{
-          dispatch({ type: 'LOAD_USER_WALLET', payload: res })
+      connectToWallet(globalState.user.address).then(async (res) => {
+        if (!res) {
+          // window.alert("You are not allowed to do this operation!");
+          await showResultToUser("notAllowed").then(() => {
+            router.push("/");
+          });
+        } else {
+          dispatch({ type: "LOAD_USER_WALLET", payload: res });
         }
       });
     }

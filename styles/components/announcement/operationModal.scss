@@ -1,0 +1,17 @@
+.OperationModal {
+  h1 {
+    @include text-body--large--medium;
+    margin-bottom: 10px;
+  }
+  p {
+    @include text-body--small--regular;
+  }
+
+  button {
+    text-align: center;
+    @include primaryButtons(60px, 15px);
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+  }
+}

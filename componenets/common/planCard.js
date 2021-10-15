@@ -5,11 +5,14 @@ import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import { setDataContext } from "../../context/setData";
+import { modalContext } from "../../context/modal";
+import { OperationModal } from "../announcement/operationModal";
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
   const router = useRouter();
   const { globalState } = useContext(UserContext);
+  const { setModal } = useContext(modalContext);
   const { plan, index, type, address } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
@@ -21,8 +24,34 @@ export default function PlanCard(props) {
     handleSubscribtion(providerAddress, plan, planIndex, callback);
   }
 
+  const showResultToUser = async (result) => {
+    let callback;
+    const successModal = <OperationModal type="result" callBack={handleCallBack} />;
+    const handleCallBack = () => {
+      setModal(null);
+      callback = true;
+    };
+    function ensureCallbackIsSet(timeout) {
+      var start = Date.now();
+      return new Promise(waitForCallback);
+      function waitForCallback(resolve, reject) {
+        if (wallet) resolve(wallet);
+        else if (timeout && Date.now() - start >= timeout) reject(new Error("timeout"));
+        else setTimeout(waitForCallback.bind(this, resolve, reject), 30);
+      }
+    }
+
+    return ensureCallbackIsSet(60000)
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+
   //callback function after handling subscription
-  function callback({ events = [], status }) {
+  async function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
@@ -30,15 +59,16 @@ export default function PlanCard(props) {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(({ event: { data, method, section }, phase }) => {
+      events.forEach(async ({ event: { data, method, section }, phase }) => {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
-          window.alert("The operation has been done successfully");
+          // window.alert("The operation has been done successfully");
+          await showResultToUser("successe");
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        await showResultToUser("failed");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
