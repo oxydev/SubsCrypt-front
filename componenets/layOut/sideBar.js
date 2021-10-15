@@ -9,10 +9,11 @@ export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut } = useContext(handleDataContext);
   const type = globalState.user.type;
+  const registerStatus = globalState.user.registered;
   let sideBarData;
   if (type == "user") {
     sideBarData = data.UserSideBar;
-  } else if (type == "provider") {
+  } else if (type == "provider" && registerStatus) {
     sideBarData = data.ProviderSideBar;
   } else {
     sideBarData = data.PublicSideBar;
