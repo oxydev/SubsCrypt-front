@@ -5,12 +5,14 @@ import { setDataContext } from "../../context/setData";
 import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
+import { operationContext } from "../../context/handleUserOperation";
 
 export default function ProviderSignUp() {
   const router = useRouter();
   const { providerRegisterHandler } = useContext(setDataContext);
   const { getProviderAllInfo } = useContext(handleDataContext);
   const { globalState, dispatch } = useContext(UserContext);
+  const { showResultToUser } = useContext(operationContext);
 
   const [info, setInfo] = useState({
     ProviderMoneyAddress: globalState.user.address,
@@ -43,7 +45,7 @@ export default function ProviderSignUp() {
     setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
   }
 
-  function callback({ events = [], status }) {
+  async function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
     // console.log(status);
     if (status.isInBlock) {
@@ -51,11 +53,12 @@ export default function ProviderSignUp() {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(({ event: { data, method, section }, phase }) => {
+      events.forEach(async ({ event: { data, method, section }, phase }) => {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
-          window.alert("The operation has been done successfully");
+          // window.alert("The operation has been done successfully");
+          await showResultToUser("successe");
           // console.log("doneee");
           var axios = require("axios");
           var FormData = require("form-data");
@@ -86,7 +89,8 @@ export default function ProviderSignUp() {
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        // window.alert("The operation failed!");
+        await showResultToUser("failed");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -122,13 +126,15 @@ export default function ProviderSignUp() {
     });
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     const image = info.image;
     if (!image) {
-      window.alert("You should upload a photo!");
+      // window.alert("You should upload a photo!");
+      await showResultToUser("photoUpload");
     } else {
       if (info.ProviderPassword != info.ProviderConfirmedPasswords) {
-        window.alert("Password has not been comfirmed correctly!!");
+        // window.alert("Password has not been comfirmed correctly!!");
+        await showResultToUser("confirmPass");
       } else {
         var wallet = globalState.user.wallet;
         function parseDurations(planList) {

@@ -4,6 +4,7 @@ import * as utils from "../../utilities/utilityFunctions";
 import { UserContext } from "../../context/store";
 import { setDataContext } from "../../context/setData";
 import PercentageBar from "../gadjets/percentageBar";
+import { operationContext } from "../../context/handleUserOperation";
 
 let subscrypt;
 
@@ -18,6 +19,7 @@ export default function UserPlanCard(props) {
   const planStatus = props.plan.status;
   const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
+  const { showResultToUser } = useContext(operationContext);
 
   //plan amounts
   const usedPercentage = utils.usePercentage(
@@ -71,7 +73,7 @@ export default function UserPlanCard(props) {
   }
 
   //callback function
-  function callback({ events = [], status }) {
+  async function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
@@ -79,15 +81,17 @@ export default function UserPlanCard(props) {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(({ event: { data, method, section }, phase }) => {
+      events.forEach(async ({ event: { data, method, section }, phase }) => {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
-          window.alert("The operation has been done successfully");
+          // window.alert("The operation has been done successfully");
+          await showResultToUser("successe");
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        // window.alert("The operation failed!");
+        await showResultToUser("failed");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());

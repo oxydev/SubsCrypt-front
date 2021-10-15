@@ -7,15 +7,25 @@ export const OperationModal = (props) => {
       <div>
         <h1>
           Operation{" "}
-          {type == "successe" ? "Successfull!" : type == "notAllowed" ? "Not Allowed!" : "Failed!"}
+          {type == "successe"
+            ? "Successfull!"
+            : type == "notAllowed"
+            ? "Not Allowed!"
+            : type == "photoUpload" || "confirmPass"
+            ? "Not Completed"
+            : "Failed!"}
         </h1>
         <p>
-          The operation{" "}
+          {" "}
           {type == "successe"
-            ? "has been done Successfully"
+            ? "The operation has been done Successfully"
             : type == "notAllowed"
-            ? "is not allowed for you!"
-            : "has not been doen successfully"}
+            ? "The operation is not allowed for you!"
+            : type == "photoUpload"
+            ? "Pleas upload your photo!"
+            : type == "confirmPass"
+            ? "Password has not been comfirmed correctly!"
+            : "The operation has not been done successfully!"}
         </p>
         <button
           onClick={(e) => {

@@ -3,9 +3,11 @@ import { UserContext } from "../../context/store";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import { setDataContext } from "../../context/setData";
 import { handleDataContext } from "../../context/handleData";
+import { operationContext } from "../../context/handleUserOperation";
 
 export default function AddNewPlan() {
   const { globalState } = useContext(UserContext);
+  const { showResultToUser } = useContext(operationContext);
 
   const planNumber = globalState.providerPlans.length;
 
@@ -56,7 +58,7 @@ export default function AddNewPlan() {
   }
 
   //function for calling after registeration result has been received
-  function callback({ events = [], status }) {
+  async function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
     // console.log(status);
     if (status.isInBlock) {
@@ -64,16 +66,18 @@ export default function AddNewPlan() {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(({ event: { data, method, section }, phase }) => {
+      events.forEach(async ({ event: { data, method, section }, phase }) => {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
           allPlanPromise();
-          window.alert("The operation has been done successfully");
+          // window.alert("The operation has been done successfully");
+          await showResultToUser("successe");
         }
       });
       if (check == false) {
-        window.alert("The operation failed!");
+        // window.alert("The operation failed!");
+        await showResultToUser("failed");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
