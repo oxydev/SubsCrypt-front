@@ -127,8 +127,8 @@ export const GetBCDataFunctions = (props) => {
   const getProviderPlanslist = async (address, count) => {
     let promiseList = [];
     if (!count) {
-      return await (await subscrypt).getPlanLength(address).then(async (res) => {
-        return await getProviderPlanslist(address, parseInt(res.result));
+      return (await subscrypt).getPlanLength(address).then(async (res) => {
+        return getProviderPlanslist(address, parseInt(res.result));
       });
     } else {
       for (let i = 0; i < count; i++) {

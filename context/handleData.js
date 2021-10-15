@@ -362,7 +362,7 @@ export const HandleDataFunctions = (props) => {
   };
 
   //Function for check authentication by cookie
-  const checkAuthByCookie = () => {
+  const checkAuthByCookie = async () => {
     const userName = Cookies.get("subscrypt");
     const password = Cookies.get("subscryptPass");
     const userType = Cookies.get("subscryptType");

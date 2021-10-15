@@ -35,6 +35,7 @@ export default function Login() {
   useEffect(() => {
     //Check the cookies and authentication if cokkies are set
     if (!auth && (password || userWallet)) {
+      // window.alert("auth");
       checkAuthByCookie();
     }
 
