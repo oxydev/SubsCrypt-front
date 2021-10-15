@@ -3,6 +3,7 @@ import { modalContext } from "./modal";
 import { UserContext } from "./store";
 import { getBCDataContext } from "./getBCData";
 import SubscriptionModal from "../componenets/user/subscriptionModal";
+import { operationContext } from "./handleUserOperation";
 
 let subscrypt;
 
@@ -12,6 +13,7 @@ export const SetDataFunctions = (props) => {
   const { setModal } = useContext(modalContext);
   const { globalState } = useContext(UserContext);
   const blockChainFuncs = useContext(getBCDataContext);
+  const { showResultToUser } = useContext(operationContext);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
@@ -111,11 +113,15 @@ export const SetDataFunctions = (props) => {
     let walletAddress = globalState.user.wallet;
 
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then((res) => {
+      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
         if (res) {
           handleSubscribtion(providerAddress, plan, planIndex, callback, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          // window.alert("You are not allowed to do this operation!");s
+          await showResultToUser(
+            "Operation not allowed!",
+            "You are not allowed to do this operation!"
+          );
         }
       });
     } else {
@@ -161,11 +167,15 @@ export const SetDataFunctions = (props) => {
   const handleRenewPlan = async (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then((res) => {
+      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
         if (res) {
           handleRenewPlan(providerAddress, plan, planIndex, callback, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          // window.alert("You are not allowed to do this operation!");
+          await showResultToUser(
+            "Operation Not Allowed!",
+            "You are not allowed to do this operation!"
+          );
         }
       });
     } else {
@@ -208,11 +218,15 @@ export const SetDataFunctions = (props) => {
   const handleRefundPlan = async (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then((res) => {
+      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
         if (res) {
           handleRefundPlan(providerAddress, plan, planIndex, callback, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          // window.alert("You are not allowed to do this operation!");
+          await showResultToUser(
+            "Operation Not Allowed!",
+            "You are not allowed to do this operation!"
+          );
         }
       });
     } else {
@@ -271,11 +285,15 @@ export const SetDataFunctions = (props) => {
   ) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then((res) => {
+      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
         if (res) {
           addNewPlans(address, callback, durations, prices, refundPolicies, planChars, res);
         } else {
-          window.alert("You are not allowed to do this operation!");
+          // window.alert("You are not allowed to do this operation!");
+          await showResultToUser(
+            "Operation Not Allowed!",
+            "You are not allowed to do this operation!"
+          );
         }
       });
     } else {

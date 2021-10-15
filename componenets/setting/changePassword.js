@@ -51,7 +51,10 @@ export default function ChangePassword(props) {
       connectToWallet(globalState.user.address).then(async (res) => {
         if (!res) {
           // window.alert("You are not allowed to do this operation!");
-          await showResultToUser("notAllowed").then(() => {
+          await showResultToUser(
+            "Operation Not Allowed!",
+            "You are not allowed to do this operation!"
+          ).then(() => {
             router.push("/");
           });
         } else {

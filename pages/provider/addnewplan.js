@@ -72,12 +72,15 @@ export default function AddNewPlan() {
           check = true;
           allPlanPromise();
           // window.alert("The operation has been done successfully");
-          await showResultToUser("successe");
+          await showResultToUser(
+            "Operation Successful!",
+            "The operation has been done successfully"
+          );
         }
       });
       if (check == false) {
         // window.alert("The operation failed!");
-        await showResultToUser("failed");
+        await showResultToUser("Operation faild!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());

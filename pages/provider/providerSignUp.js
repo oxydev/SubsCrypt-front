@@ -58,7 +58,10 @@ export default function ProviderSignUp() {
         if (method === "ExtrinsicSuccess") {
           check = true;
           // window.alert("The operation has been done successfully");
-          await showResultToUser("successe");
+          await showResultToUser(
+            "Operation Successful!",
+            "The operation has been done successfully"
+          );
           // console.log("doneee");
           var axios = require("axios");
           var FormData = require("form-data");
@@ -90,7 +93,7 @@ export default function ProviderSignUp() {
       });
       if (check == false) {
         // window.alert("The operation failed!");
-        await showResultToUser("failed");
+        await showResultToUser("Operation faild!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -130,11 +133,14 @@ export default function ProviderSignUp() {
     const image = info.image;
     if (!image) {
       // window.alert("You should upload a photo!");
-      await showResultToUser("photoUpload");
+      await showResultToUser("Photo is necessary!", "You should upload a photo!");
     } else {
       if (info.ProviderPassword != info.ProviderConfirmedPasswords) {
         // window.alert("Password has not been comfirmed correctly!!");
-        await showResultToUser("confirmPass");
+        await showResultToUser(
+          "Password Comfirmation!",
+          "Password has not been comfirmed correctly!!"
+        );
       } else {
         var wallet = globalState.user.wallet;
         function parseDurations(planList) {

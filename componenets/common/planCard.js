@@ -6,7 +6,7 @@ import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import { setDataContext } from "../../context/setData";
 import { modalContext } from "../../context/modal";
-import { OperationModal } from "../announcement/operationModal";
+import { operationContext } from "../../context/handleUserOperation";
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
@@ -18,37 +18,12 @@ export default function PlanCard(props) {
   const planIndex = plan.planIndex;
   const { handleSubscribtion } = useContext(setDataContext);
   const providerAddress = data.providerAddress;
+  const { showResultToUser } = useContext(operationContext);
 
   //Subscription function
   function handleSubscribe() {
     handleSubscribtion(providerAddress, plan, planIndex, callback);
   }
-
-  const showResultToUser = async (result) => {
-    let callback;
-    const successModal = <OperationModal type="result" callBack={handleCallBack} />;
-    const handleCallBack = () => {
-      setModal(null);
-      callback = true;
-    };
-    function ensureCallbackIsSet(timeout) {
-      var start = Date.now();
-      return new Promise(waitForCallback);
-      function waitForCallback(resolve, reject) {
-        if (wallet) resolve(wallet);
-        else if (timeout && Date.now() - start >= timeout) reject(new Error("timeout"));
-        else setTimeout(waitForCallback.bind(this, resolve, reject), 30);
-      }
-    }
-
-    return ensureCallbackIsSet(60000)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err;
-      });
-  };
 
   //callback function after handling subscription
   async function callback({ events = [], status }) {
@@ -64,11 +39,14 @@ export default function PlanCard(props) {
         if (method === "ExtrinsicSuccess") {
           check = true;
           // window.alert("The operation has been done successfully");
-          await showResultToUser("successe");
+          await showResultToUser(
+            "Operation Successful!",
+            "The operation has been done successfully"
+          );
         }
       });
       if (check == false) {
-        await showResultToUser("failed");
+        await showResultToUser("Operation faild!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());

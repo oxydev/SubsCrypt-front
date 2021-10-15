@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 import { getBCDataContext } from "./getBCData";
+import { operationContext } from "./handleUserOperation";
 
 //Variable for using in dynamicly importing the subscrypt library
 let subscrypt;
@@ -21,6 +22,7 @@ export const HandleDataFunctions = (props) => {
   const { dispatch } = useContext(UserContext);
   const serverFunctions = useContext(serverDataContext);
   const blockChainFuncs = useContext(getBCDataContext);
+  const { showResultToUser } = useContext(operationContext);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
@@ -76,9 +78,14 @@ export const HandleDataFunctions = (props) => {
         if (res == "notSet") {
           if (address) {
           } else {
-            window.alert("You should choose a wallet from your wallet list!");
-            router.push("/");
-            setAuth(false);
+            // window.alert("You should choose a wallet from your wallet list!");
+            await showResultToUser(
+              "Wallet selection Error!",
+              "You should choose a wallet from your wallet list!"
+            ).then(() => {
+              router.push("/");
+              setAuth(false);
+            });
           }
         } else {
           await blockChainFuncs.loadSubscriberPlansbyWallet(res).then((res) => {
@@ -89,18 +96,31 @@ export const HandleDataFunctions = (props) => {
           });
         }
       })
-      .catch((err) => {
+      .catch(async (err) => {
         if (err.message == "notSet") {
           if (address) {
-            window.alert("You should choose a wallet from your wallet list!");
+            // window.alert("You should choose a wallet from your wallet list!");
+            await showResultToUser(
+              "Wallet selection Error!",
+              "You should choose a wallet from your wallet list!"
+            );
           } else {
-            window.alert("You should choose a wallet from your wallet list!");
-            router.push("/");
-            setAuth(false);
+            // window.alert("You should choose a wallet from your wallet list!");
+            await showResultToUser(
+              "Wallet selection Error!",
+              "You should choose a wallet from your wallet list!"
+            ).then(() => {
+              router.push("/");
+              setAuth(false);
+            });
           }
         } else {
-          window.alert("Can not connect to wallet!");
-          router.push("/");
+          // window.alert("Can not connect to wallet!");
+          await showResultToUser("Wallet selection Error!", "Can not connect to wallet!").then(
+            () => {
+              router.push("/");
+            }
+          );
         }
       });
   };
@@ -153,18 +173,29 @@ export const HandleDataFunctions = (props) => {
           });
         }
       })
-      .catch((err) => {
+      .catch(async (err) => {
         if (err.message == "notSet") {
           if (address) {
-            window.alert("You should choose a wallet from your wallet list!");
+            await showResultToUser(
+              "Wallet selection Error!",
+              "You should choose a wallet from your wallet list!"
+            );
           } else {
-            window.alert("You should choose a wallet from your wallet list!");
-            router.push("/");
-            setAuth(false);
+            await showResultToUser(
+              "Wallet selection Error!",
+              "You should choose a wallet from your wallet list!"
+            ).then(() => {
+              router.push("/");
+              setAuth(false);
+            });
           }
         } else {
-          window.alert("Can not connect to wallet!");
-          router.push("/");
+          // window.alert("Can not connect to wallet!");
+          await showResultToUser("Wallet selection Error!", "Can not connect to wallet!").then(
+            () => {
+              router.push("/");
+            }
+          );
         }
       });
   };
@@ -213,7 +244,8 @@ export const HandleDataFunctions = (props) => {
           //getting the user plans after login
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
-          window.alert("Invalid username of password!");
+          // window.alert("Invalid username of password!");
+          await showResultToUser("Authentication Problem!", "Invalid username of password!");
         }
       })
       .then(async (res) => {
@@ -225,9 +257,10 @@ export const HandleDataFunctions = (props) => {
           });
         }
       })
-      .catch(() => {
+      .catch(async () => {
         setLoading(false);
-        window.alert("Can not load data!");
+        // window.alert("Can not load data!");
+        await showResultToUser("Authentication Problem!", "Can not load data!");
         // console.log(error);
       });
   };
@@ -254,7 +287,7 @@ export const HandleDataFunctions = (props) => {
           //getting the user plans after login
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
-          window.alert("Invalid username of password!");
+          await showResultToUser("Authentication Problem!", "Invalid username of password!");
         }
       })
       .then(async (res) => {
@@ -314,8 +347,12 @@ export const HandleDataFunctions = (props) => {
           dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
           loadOffers(result.result);
         })
-        .catch((error) => {
-          window.alert("The username you have entered is invalid!!");
+        .catch(async (error) => {
+          // window.alert("The username you have entered is invalid!!");
+          await showResultToUser(
+            "Authentication Problem!",
+            "The username you have entered is invalid!!"
+          );
         });
     } else {
       await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
@@ -367,11 +404,13 @@ export const HandleDataFunctions = (props) => {
         await subscrypt
       )
         .transferToken(address)
-        .then((result) => {
-          window.alert("Operation has been done successful!");
+        .then(async (result) => {
+          // window.alert("Operation has been done successful!");
+          await showResultToUser("Operation Successful!", "Operation has been done successfully!");
         })
-        .catch((error) => {
-          window.alert("Operation failed!");
+        .catch(async (error) => {
+          // window.alert("Operation failed!");
+          await showResultToUser("Operation Failed!", "Operation has been failed!");
         });
     }
   };

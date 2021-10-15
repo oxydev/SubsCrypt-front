@@ -7,13 +7,15 @@ export const operationContext = React.createContext();
 export const Operation = (props) => {
   const { setModal, setCallBack } = useContext(modalContext);
 
-  const showResultToUser = async (result) => {
+  const showResultToUser = async (title, message) => {
     let callback;
     const handleCallBack = () => {
       setModal(null);
       callback = true;
     };
-    const successModal = <OperationModal type={result} callBack={handleCallBack} />;
+    const successModal = (
+      <OperationModal title={title} message={message} callBack={handleCallBack} />
+    );
     setModal(successModal);
     setCallBack(() => () => {
       callback = true;
