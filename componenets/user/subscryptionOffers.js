@@ -18,7 +18,7 @@ export default function SubscryptionOffers() {
     if (auth && globalState.user.address) {
       loadOffers(providerAddress);
     }
-  }, [providerAddress]);
+  }, [providerAddress,globalState.user.address]);
 
   return (
     <section className="SubscryptionOffers">
