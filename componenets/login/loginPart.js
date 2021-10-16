@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../context/store";
 
 //The component for generating login form
 export default function LoginPart(props) {

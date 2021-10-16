@@ -2,19 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
 import { authContext } from "./_app";
-import { dataContext } from "../context/getData";
+import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Login() {
   const [role, setRole] = useState("none");
-  const { checkAuthByCookie, sendMoneyToAddress } = useContext(dataContext);
+  const { checkAuthByCookie, sendMoneyToAddress } = useContext(handleDataContext);
   const { auth } = useContext(authContext);
 
   //get coockies
   const password = Cookies.get("subscryptPass");
-  const userWallet = Cookies.get("subscryptWallet");
+  const userWallet = Cookies.get("subscryptAddress");
 
   function handleUserLogin() {
     setRole("user");
@@ -35,6 +35,7 @@ export default function Login() {
   useEffect(() => {
     //Check the cookies and authentication if cokkies are set
     if (!auth && (password || userWallet)) {
+      // window.alert("auth");
       checkAuthByCookie();
     }
 
@@ -45,23 +46,25 @@ export default function Login() {
     const signUpLink = document.getElementById("publicSignUp");
     const giveTokenLink = document.getElementById("giveSomeToken");
 
-    mainLoginLink.onclick = () => {
-      setRole("none");
-    };
+    if (mainLoginLink) {
+      mainLoginLink.onclick = () => {
+        setRole("none");
+      };
 
-    userLoginLink.onclick = () => {
-      setRole("user");
-    };
+      userLoginLink.onclick = () => {
+        setRole("user");
+      };
 
-    providerLoginLink.onclick = () => {
-      setRole("provider");
-    };
+      providerLoginLink.onclick = () => {
+        setRole("provider");
+      };
 
-    signUpLink.onclick = () => {
-      setRole("providerSignUp");
-    };
+      signUpLink.onclick = () => {
+        setRole("providerSignUp");
+      };
 
-    giveTokenLink.onclick = hanadleGetToken;
+      giveTokenLink.onclick = hanadleGetToken;
+    }
   });
 
   //change the login menu according to selecting each type

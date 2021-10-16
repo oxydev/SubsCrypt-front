@@ -6,12 +6,15 @@ import Main from "../componenets/layOut/Main";
 import Login from "./login";
 import { Store } from "../context/store";
 import { Modal } from "../context/modal";
-import { DataFunctions } from "../context/getData";
 import React from "react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Loading from "../componenets/layOut/loading";
 import { ServerFunctions } from "../context/getServerData";
+import { HandleDataFunctions } from "../context/handleData";
+import { GetBCDataFunctions } from "../context/getBCData";
+import { SetDataFunctions } from "../context/setData";
+import { Operation } from "../context/handleUserOperation";
 
 //Creating context for authentication and loading.
 export const authContext = React.createContext();
@@ -50,26 +53,32 @@ export default function App({ Component, pageProps }) {
         <authContext.Provider value={{ auth, setAuth }}>
           <Store>
             <Modal>
-              <ServerFunctions>
-                <DataFunctions>
-                  <div className="WholePageWrapper">
-                    <SideBar />
-                    {/* Main componenet is for the main part of the app where each page content is shown */}
-                    {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
-                    <Main>
-                      {loading ? (
-                        <Loading />
-                      ) : (
-                        <>
-                          {auth && <Header />}
-                          {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
-                        </>
-                      )}
-                    </Main>
-                    <div></div>
-                  </div>
-                </DataFunctions>
-              </ServerFunctions>
+              <Operation>
+                <ServerFunctions>
+                  <GetBCDataFunctions>
+                    <HandleDataFunctions>
+                      <SetDataFunctions>
+                        <div className="WholePageWrapper">
+                          <SideBar />
+                          {/* Main componenet is for the main part of the app where each page content is shown */}
+                          {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
+                          <Main>
+                            {loading ? (
+                              <Loading />
+                            ) : (
+                              <>
+                                {auth && <Header />}
+                                {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                              </>
+                            )}
+                          </Main>
+                          <div></div>
+                        </div>
+                      </SetDataFunctions>
+                    </HandleDataFunctions>
+                  </GetBCDataFunctions>
+                </ServerFunctions>
+              </Operation>
             </Modal>
           </Store>
         </authContext.Provider>

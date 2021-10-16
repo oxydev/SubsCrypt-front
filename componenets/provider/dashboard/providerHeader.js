@@ -33,7 +33,7 @@ export default function ProviderHeader() {
             </p>
           </div>
           <div className="PlanPart-featureBox">
-            <span>Net income converted to todays conversation rate via Coinmarketcap.com </span>
+            {/*<span>Net income converted to todays conversation rate via Coinmarketcap.com </span>*/}
           </div>
         </div>
       </div>

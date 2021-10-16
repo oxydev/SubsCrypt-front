@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import userData from "../../data/userIdentity.json";
 import { UserContext } from "../../context/store";
-import { dataContext } from "../../context/getData";
+import { handleDataContext } from "../../context/handleData";
 import { middleDots } from "../../utilities/utilityFunctions";
 import Link from "next/link";
 
 //The component for genrating page header
 export default function Header() {
   const { globalState } = useContext(UserContext);
-  const { handleLogOut } = useContext(dataContext);
+  const { handleLogOut } = useContext(handleDataContext);
   const [showMenu, setShownMenu] = useState(false);
 
   const userName = globalState.user.username;
@@ -35,17 +35,19 @@ export default function Header() {
         <div className="UserMenu-button"></div>
         <div className={showMenu ? "UserMenu-menu" : "UserMenu-menu hidden"}>
           <ul>
-            <li>
-              <Link
-                href={
-                  globalState.user.type == "user"
-                    ? "/user/profilesetting"
-                    : "/provider/profilesetting"
-                }
-              >
-                <a>Profile Setting</a>
-              </Link>
-            </li>
+            {globalState.user.username && (
+              <li>
+                <Link
+                  href={
+                    globalState.user.type == "user"
+                      ? "/user/profilesetting"
+                      : "/provider/profilesetting"
+                  }
+                >
+                  <a>Profile Setting</a>
+                </Link>
+              </li>
+            )}
             <li>
               <Link href="#">
                 <a onClick={handleLogOut}>LogOut</a>

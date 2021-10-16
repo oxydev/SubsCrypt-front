@@ -1,26 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import OfferCarousel from "./offerCarousel";
-import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
-import { dataContext } from "../../context/getData";
 import ProviderSelection from "./providerSelection";
+import { handleDataContext } from "../../context/handleData";
+import { authContext } from "../../pages/_app";
 
 //The component for managing subscription offer part
 export default function SubscryptionOffers() {
   const { globalState } = useContext(UserContext);
-  const { loadOffers } = useContext(dataContext);
+  const { loadOffers } = useContext(handleDataContext);
+  const { auth } = useContext(authContext);
+
   // const providerAddress = data.providerAddress;
   const providerAddress = globalState.offerProvider;
 
   useEffect(() => {
-    // if (globalState.providerPlans && globalState.providerPlans.length == 0) {
-    //   loadPlan(providerAddress, 0);
-    //   loadPlan(providerAddress, 1);
-    //   loadPlan(providerAddress, 2);
-    // }
-
-    loadOffers(providerAddress);
-  }, [providerAddress]);
+    if (auth && globalState.user.address) {
+      loadOffers(providerAddress);
+    }
+  }, [providerAddress,globalState.user.address]);
 
   return (
     <section className="SubscryptionOffers">

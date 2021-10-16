@@ -1,5 +1,8 @@
 .OfferCarousel {
   position: relative;
+  & > div {
+    padding: 10px 0;
+  }
 }
 .OfferCarousel-itemList {
   display: flex;

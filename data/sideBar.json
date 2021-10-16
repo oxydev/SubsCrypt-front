@@ -47,6 +47,15 @@
       }
     ]
   },
+  "signUpSideBar": {
+    "menuItem": [
+      {
+        "name": "Log Out",
+        "url": "/",
+        "icon": "/dashbord.png"
+      }
+    ]
+  },
 
   "PublicSideBar": {
     "menuItem": [
