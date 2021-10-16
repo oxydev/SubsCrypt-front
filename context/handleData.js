@@ -59,6 +59,8 @@ export const HandleDataFunctions = (props) => {
                   payload: { type: "user", wallet: res, address: res.address },
                 });
               }
+              setLoading(false);
+
             });
           } else {
             dispatch({
@@ -92,7 +94,6 @@ export const HandleDataFunctions = (props) => {
             if (res.length > 0) {
               dispatch({ type: "LOAD_USER_PLANS", payload: res });
             }
-            setLoading(false);
           });
         }
       })
