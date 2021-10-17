@@ -23,10 +23,14 @@
     border: $border-main;
     border-radius: $borderRadius--regular;
     background-color: transparent;
-    padding: 7px 35px 9px;
+    padding: 10px 60px;
     margin-bottom: 10px;
     @include text-body--small--regular;
     color: #8a8f99;
+    -webkit-transition: background-color 0.8s ease-out;
+    -moz-transition: background-color 0.8s ease-out;
+    -ms-transition: background-color 0.8s ease-out;
+    transition: background-color,color 0.8s ease-out;
     &:hover{
       background: linear-gradient(180deg, #C528FC 0%, #D71EAE 100%);
       border-radius: 12px;

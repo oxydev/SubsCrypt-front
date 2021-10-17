@@ -8,6 +8,7 @@ import { handleDataContext } from "../../context/handleData";
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut } = useContext(handleDataContext);
+  const[select,setSelect]=useState(false)
   const type = globalState.user.type;
   const registerStatus = globalState.user.registered;
   let sideBarData;
