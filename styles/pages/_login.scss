@@ -10,6 +10,7 @@
   h1 {
     @include text--heading3;
     margin-bottom: 40px;
+
   }
 
   & > div {
@@ -22,11 +23,24 @@
     border: $border-main;
     border-radius: $borderRadius--regular;
     background-color: transparent;
-    padding: 7px 20px 9px;
+    padding: 7px 35px 9px;
     margin-bottom: 10px;
     @include text-body--small--regular;
     color: #8a8f99;
+    &:hover{
+      background: linear-gradient(180deg, #C528FC 0%, #D71EAE 100%);
+      border-radius: 12px;
+      color: white;
+    }
   }
+
+  .Divider{
+    border: 1px solid #E6E7EB;
+    width: 120%;
+   margin: 35px auto;
+    transform: translateX(-8%);
+  }
+
 }
 
 .LoginPage {

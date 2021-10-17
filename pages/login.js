@@ -42,7 +42,7 @@ export default function Login() {
     //change the status by clicking on sidebar links
     const mainLoginLink = document.getElementById("PublicDashboard");
     const userLoginLink = document.getElementById("PublicUser");
-    const providerLoginLink = document.getElementById("PublicProvider");
+    //const providerLoginLink = document.getElementById("PublicProvider");
     const signUpLink = document.getElementById("publicSignUp");
     const giveTokenLink = document.getElementById("giveSomeToken");
 
@@ -55,15 +55,15 @@ export default function Login() {
         setRole("user");
       };
 
-      providerLoginLink.onclick = () => {
-        setRole("provider");
-      };
+      // providerLoginLink.onclick = () => {
+      //   setRole("provider");
+      // };
 
       signUpLink.onclick = () => {
         setRole("providerSignUp");
       };
 
-      giveTokenLink.onclick = hanadleGetToken;
+     giveTokenLink.onclick = hanadleGetToken;
     }
   });
 
@@ -71,12 +71,12 @@ export default function Login() {
   if (role == "none") {
     return (
       <section className="MainLoginPage">
-        <h1>Choose your role to login</h1>
+        <h1>Main Menu</h1>
         <div>
-          <button onClick={handleUserLogin}>Login as a User</button>
-          <button onClick={handleProviderLogin}>Login as a Provider</button>
-          <button onClick={handleProviderSignUp}>Sign Up as a Provider</button>
-          <button onClick={hanadleGetToken}>Give me some token</button>
+          <button onClick={handleUserLogin}>Login</button>
+          <button onClick={handleProviderSignUp}>Become Provider</button>
+          <div className="Divider"></div>
+          <button onClick={hanadleGetToken}>Faucet</button>
         </div>
       </section>
     );

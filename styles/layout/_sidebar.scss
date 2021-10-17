@@ -14,8 +14,25 @@
   list-style: none;
   margin: 175px auto auto;
   li {
+    display: flex;
+    flex-direction: row;
     margin: 19px 0;
     cursor: pointer;
+    p{
+      margin-left: 10px;
+    }
+    img{
+      @include box(24px,24px);
+    }
+
+  }
+  li:nth-child(1){
+    margin-left: -24px;
+  }
+  li:nth-child(2),li:nth-child(3),li:nth-child(4){
+    img{
+      display: none;
+    }
   }
 }
 .SideBar-logo {

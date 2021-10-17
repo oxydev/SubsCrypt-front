@@ -60,30 +60,28 @@
   "PublicSideBar": {
     "menuItem": [
       {
-        "name": "Login page",
+        "name": "Main Menu",
         "id": "PublicDashboard",
+        "item": "/icons/png/sideBar/mainMenu.png",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Login as a user",
+        "name": "Login",
         "id": "PublicUser",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Login as a Provider",
-        "id": "PublicProvider",
-        "icon": "/dashbord.png"
-      },
-      {
-        "name": "Sign up as a provider",
+        "name": "Become Provider",
         "id": "publicSignUp",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Give some token",
+        "name": "Faucet",
         "id": "giveSomeToken",
         "icon": "/dashbord.png"
       }
     ]
   }
 }
+
+

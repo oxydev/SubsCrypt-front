@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext ,useState,useEffect} from "react";
 import Link from "next/link";
 import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
@@ -20,10 +20,13 @@ export default function SideBar() {
   } else {
     sideBarData = data.PublicSideBar;
   }
+
+
+
   const sideBarMenuItems = sideBarData.menuItem.map(
     (item) =>
       (item.name != "Profile Setting" || globalState.user.username) && (
-        <li key={item.name}>
+        <li key={item.name} >
           {item.url ? (
             <Link href={item.url}>
               <a
@@ -40,6 +43,8 @@ export default function SideBar() {
               </a>
             </Link>
           ) : (
+            <>
+            <img src={item.item} alt="icon"/>
             <p
               id={item.id}
               onClick={
@@ -52,10 +57,13 @@ export default function SideBar() {
             >
               {item.name}
             </p>
+            </>
           )}
         </li>
       )
   );
+
+
   return (
     <div className="SideBar">
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
