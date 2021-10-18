@@ -1,4 +1,4 @@
-import React, { useContext ,useState,useEffect} from "react";
+import React, { useContext ,useState} from "react";
 import Link from "next/link";
 import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
@@ -47,7 +47,7 @@ function handleClick (name) {
             </Link>
           ) : (
             <>
-            <img src={item.item} alt="icon"/>
+              <embed src={item.item}/>
             <p
               id={item.id}
               onClick={
