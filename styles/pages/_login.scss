@@ -19,6 +19,8 @@
   }
 
   button {
+    position: relative;
+    z-index: 1;
     outline: none;
     border: $border-main;
     border-radius: $borderRadius--regular;
@@ -27,21 +29,42 @@
     margin-bottom: 10px;
     @include text-body--small--regular;
     color: #8a8f99;
-    -webkit-transition: background,color 2s ease-in-out ;
-    -moz-transition: background,color 2s ease-in-out;
-    transition: background,color 2s ease-in-out;
+    -moz-transition: color 1s ease-in-out;
+    -o-transition: color 1s ease-in-out;
+    -webkit-transition: color 1s ease-in-out;
+    transition: color 1s ease-in-out;
+    &::before{
+      background: linear-gradient(180deg, #C528FC 0%, #D71EAE 100%);
+      position: absolute;
+      content: "";
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      z-index: -1;
+      -moz-transition: opacity 2s ease;
+      -o-transition: opacity 2s ease;
+      -webkit-transition: opacity 2s ease;
+      transition: opacity 2s ease;
+      &:hover{
+        opacity: 1;
+      }
+    }
     &:hover{
       background: linear-gradient(180deg, #C528FC 0%, #D71EAE 100%);
       border-radius: 12px;
       color: white;
     }
-
   }
+
+
+
 
   .Divider{
     border: 1px solid #E6E7EB;
     width: 120%;
-   margin: 35px auto;
+    margin: 35px auto;
     transform: translateX(-8%);
   }
 
