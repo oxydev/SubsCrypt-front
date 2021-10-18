@@ -6,6 +6,7 @@ export const Tutorial = (props) => {
   const [tutorialList, setTutorialList] = useState(null);
   //lists is like : [{target: dom ref, tutorialElement: jsx}]
   const [order, setOrder] = useState(0);
+  const [position, setPosition] = useState(0, 0);
 
   useEffect(() => {
     if (tutorialList && tutorialList.length > 0) {
@@ -13,9 +14,38 @@ export const Tutorial = (props) => {
         elm.target.current.classList.remove("Dominent");
       }
       const target = tutorialList[order].target.current;
+      console.log(checkPos(target));
       target.classList.add("Dominent");
     }
   });
+
+  const checkPos = (elm) => {
+    const pos = elm.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const top = pos.top;
+    const left = pos.left;
+    const right = vw - pos.right;
+    const bottom = vh - pos.bottom;
+    console.log(pos);
+    console.log(top, right, bottom, left);
+    let place = { vertical: "middle", horizontal: "right" };
+    if (top > 160 && bottom < 160) {
+      place.vertical = "middle";
+    } else if (top < 160) {
+      place.vertical = "bottom";
+    } else {
+      place.vertical = "top";
+    }
+    if (right > 400) {
+      place.horizontal = "right";
+    } else if (left > 400) {
+      place.horizontal = "left";
+    } else {
+      place.horizontal = "middle";
+    }
+    return place;
+  };
 
   console.log(tutorialList);
   return (
@@ -49,12 +79,7 @@ export const Tutorial = (props) => {
                 Skip Tutorial
               </button>
             </div>
-            <div
-              className="TutorialFilter"
-              onClick={(e) => {
-                setTutorialList(null);
-              }}
-            ></div>
+            <div className="TutorialFilter"></div>
           </>
         )}
       </>
