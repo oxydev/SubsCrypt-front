@@ -1,0 +1,12 @@
+.TutorialBox {
+  position: fixed;
+  top: 200px;
+  left: 400px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: violet;
+}
