@@ -8,7 +8,7 @@ import { handleDataContext } from "../../context/handleData";
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut } = useContext(handleDataContext);
-  const[select,setSelect]=useState("")
+  const[select,setSelect]=useState(0)
   const type = globalState.user.type;
   const registerStatus = globalState.user.registered;
   let sideBarData;
@@ -22,14 +22,12 @@ export default function SideBar() {
     sideBarData = data.PublicSideBar;
   }
 
-function handleClick (name) {
- setSelect(`${name}`)
-}
+
 
   const sideBarMenuItems = sideBarData.menuItem.map(
-    (item) =>
+    (item,index) =>
       (item.name != "Profile Setting" || globalState.user.username) && (
-        <li key={item.name} className={select===item.name?"select":""} onClick={()=>handleClick(item.name)}>
+        <li key={item.name} className={select===index? "select":""} onClick={()=>setSelect(index)}>
           {item.url ? (
             <Link href={item.url}>
               <a
