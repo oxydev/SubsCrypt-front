@@ -62,22 +62,25 @@
       {
         "name": "Main Menu",
         "id": "PublicDashboard",
-        "item": "/icons/png/sideBar/mainMenu.png",
+        "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Login",
         "id": "PublicUser",
+        "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Become Provider",
         "id": "publicSignUp",
+        "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Faucet",
         "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
       }
     ]

@@ -22,7 +22,7 @@
     p{
       margin-left: 10px;
     }
-    img{
+    embed{
       @include box(20px,20px);
       opacity: 0.5;
     }
@@ -30,18 +30,17 @@
   }
   .select{
     color: white;
-    img{
+    embed{
       opacity: 1;
     }
   }
-  li:nth-child(1){
-    margin-left: -24px;
-  }
-  li:nth-child(2),li:nth-child(3),li:nth-child(4){
-    img{
-      display: none;
+  li:hover{
+    color: white;
+    embed{
+      opacity: 1;
     }
   }
+
 }
 .SideBar-logo {
   margin: auto auto 61px;
