@@ -18,13 +18,21 @@
     flex-direction: row;
     margin: 19px 0;
     cursor: pointer;
+    align-items: center;
     p{
       margin-left: 10px;
     }
     img{
-      @include box(24px,24px);
+      @include box(20px,20px);
+      opacity: 0.5;
     }
 
+  }
+  .select{
+    color: white;
+    img{
+      opacity: 1;
+    }
   }
   li:nth-child(1){
     margin-left: -24px;
