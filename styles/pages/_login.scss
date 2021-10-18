@@ -10,7 +10,6 @@
   h1 {
     @include text--heading3;
     margin-bottom: 40px;
-
   }
 
   & > div {
@@ -33,8 +32,8 @@
     -o-transition: color 1s ease-in-out;
     -webkit-transition: color 1s ease-in-out;
     transition: color 1s ease-in-out;
-    &::before{
-      background: linear-gradient(180deg, #C528FC 0%, #D71EAE 100%);
+    &::before {
+      background: linear-gradient(180deg, #c528fc 0%, #d71eae 100%);
       position: absolute;
       content: "";
       top: 0;
@@ -43,31 +42,28 @@
       left: 0;
       opacity: 0;
       z-index: -1;
-      -moz-transition: opacity 2s ease;
-      -o-transition: opacity 2s ease;
-      -webkit-transition: opacity 2s ease;
-      transition: opacity 2s ease;
-      &:hover{
+      border-radius: $borderRadius--regular;
+      -moz-transition: opacity 1s ease;
+      -o-transition: opacity 1s ease;
+      -webkit-transition: opacity 1s ease;
+      transition: opacity 1s ease;
+    }
+    &:hover {
+      // background: linear-gradient(180deg, #c528fc 0%, #d71eae 100%);
+      border-radius: 12px;
+      color: white;
+      &::before {
         opacity: 1;
       }
     }
-    &:hover{
-      background: linear-gradient(180deg, #C528FC 0%, #D71EAE 100%);
-      border-radius: 12px;
-      color: white;
-    }
   }
 
-
-
-
-  .Divider{
-    border: 1px solid #E6E7EB;
+  .Divider {
+    border: 1px solid #e6e7eb;
     width: 120%;
     margin: 35px auto;
     transform: translateX(-8%);
   }
-
 }
 
 .LoginPage {
