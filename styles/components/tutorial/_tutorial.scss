@@ -1,5 +1,5 @@
 .TutorialBox {
-  position: fixed;
+  position: absolute;
   top: 200px;
   left: 400px;
   width: 309px;
@@ -11,6 +11,36 @@
   align-items: center;
   background-color: $white;
   z-index: 100;
+  transition: all 0.25s ease-in-out;
+
+  &::after {
+    @include pseudo;
+    width: 100px;
+    height: 2px;
+    background-color: #5867ff;
+    position: absolute;
+  }
+
+  &.middleleft {
+    &::after {
+      right: -99px;
+    }
+  }
+  &.middleright {
+    &::after {
+      left: -99px;
+    }
+  }
+  &.topmiddle {
+    &::after {
+      bottom: -99px;
+    }
+  }
+  &.bottommiddle {
+    &::after {
+      top: -99px;
+    }
+  }
 }
 
 $offset: -5px;
@@ -22,8 +52,10 @@ $offset: -5px;
     top: $offset;
     left: $offset;
     bottom: $offset;
-    border: 1px solid #5867ff;
+    border: 2px solid #5867ff;
+    transition: all 0.5s ease-in-out;
   }
+  z-index: 250 !important;
 }
 
 .TutorialFilter {
@@ -33,7 +65,7 @@ $offset: -5px;
   left: 0;
   bottom: 0;
   z-index: 50;
-  background-color: #000;
-  opacity: 0.2;
-  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.329);
+  opacity: 0.7;
+  backdrop-filter: blur(40px);
 }

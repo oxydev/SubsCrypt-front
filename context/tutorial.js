@@ -6,7 +6,7 @@ export const Tutorial = (props) => {
   const [tutorialList, setTutorialList] = useState(null);
   //lists is like : [{target: dom ref, tutorialElement: jsx}]
   const [order, setOrder] = useState(0);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [position, setPosition] = useState({ top: -400, left: -400 });
 
   useEffect(() => {
     if (tutorialList && tutorialList.length > 0) {
@@ -16,7 +16,12 @@ export const Tutorial = (props) => {
       const target = tutorialList[order].target.current;
       console.log(checkPos(target));
       const tutPos = checkPos(target);
-      setPosition({ top: tutPos.top, left: tutPos.left });
+      setPosition({
+        top: tutPos.top,
+        left: tutPos.left,
+        vertical: tutPos.vertical,
+        horizontal: tutPos.horizontal,
+      });
       target.classList.add("Dominent");
       console.log(position);
     }
@@ -24,17 +29,8 @@ export const Tutorial = (props) => {
   }, [order, tutorialList]);
 
   useEffect(() => {
-    if (tutorialList && tutorialList.length > 0) {
-      for (const elm of tutorialList) {
-        elm.target.current.classList.remove("Dominent");
-      }
-      const target = tutorialList[order].target.current;
-      console.log(checkPos(target));
-      const tutPos = checkPos(target);
-      setPosition({ top: tutPos.top, left: tutPos.left });
-      target.classList.add("Dominent");
-    }
-  }, []);
+    console.log(position);
+  });
 
   const checkPos = (elm) => {
     const pos = elm.getBoundingClientRect();
@@ -52,26 +48,26 @@ export const Tutorial = (props) => {
     let place = { vertical: "middle", horizontal: "right" };
     if (top > 160 && bottom > 160) {
       place.vertical = "middle";
-      tutPos.top = top + height / 2 - 155;
+      place.top = top + height / 2 - 155;
     } else if (top < 160) {
       place.vertical = "bottom";
-      tutPos.top = top + height + 100;
+      place.top = top + height + 100;
     } else {
       place.vertical = "top";
-      tutPos.top = top - 409;
+      place.top = top - 409;
     }
     if (right > 400) {
       place.horizontal = "right";
-      tutPos.left = left + width + 100;
+      place.left = left + width + 100;
     } else if (left > 400) {
       place.horizontal = "left";
-      tutPos.left = left - 409;
+      place.left = left - 409;
     } else {
       place.horizontal = "middle";
-      tutPos.left = left + width / 2 - 155;
+      place.left = left + width / 2 - 155;
     }
 
-    return tutPos;
+    return place;
   };
 
   const endTutorial = () => {
@@ -89,7 +85,7 @@ export const Tutorial = (props) => {
         {tutorialList && tutorialList.length > 0 && (
           <>
             <div
-              className="TutorialBox"
+              className={"TutorialBox " + position.vertical + position.horizontal}
               style={{ top: `${position.top}px`, left: `${position.left}px` }}
             >
               {tutorialList[order].tutorialElement}
