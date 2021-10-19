@@ -1,11 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import UserLogin from "./user/userLogin";
+//import UserLogin from "./user/userLogin";
 import ProviderLogin from "./provider/providerLogin";
 import { authContext } from "./_app";
 import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
 import { tutorialContext } from "../context/tutorial";
+import SingIn from './sing_in'
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Login() {
@@ -36,11 +37,7 @@ export default function Login() {
   const userWallet = Cookies.get("subscryptAddress");
 
   function handleUserLogin() {
-    setRole("user");
-  }
-
-  function handleProviderLogin() {
-    setRole("provider");
+    setRole("sign_in");
   }
 
   function handleProviderSignUp() {
@@ -71,7 +68,7 @@ export default function Login() {
       };
 
       userLoginLink.onclick = () => {
-        setRole("user");
+        setRole("sign_in");
       };
 
       // providerLoginLink.onclick = () => {
@@ -105,8 +102,8 @@ export default function Login() {
         </div>
       </section>
     );
-  } else if (role == "user") {
-    return <UserLogin />;
+  } else if (role == "sign_in") {
+    return <SingIn />;
   } else if (role == "provider") {
     return <ProviderLogin />;
   } else if (role == "providerSignUp") {

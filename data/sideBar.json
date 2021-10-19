@@ -84,6 +84,45 @@
         "icon": "/dashbord.png"
       }
     ]
+  },
+  "signInSideBar": {
+    "menuItem": [
+      {
+        "name": "Dashboard",
+        "id": "",
+        "item": "/icons/png/sideBar/mainMenu.svg"
+      },
+      {
+        "name": "My Subscrypts",
+        "id": "",
+        "item": "/icons/png/sideBar/mainMenu.svg"
+      },
+      {
+        "name": "Profile Setting",
+        "id": "",
+        "item": "/icons/png/sideBar/mainMenu.svg"
+      },
+      {
+        "name": "Refunds",
+        "id": "",
+        "item": "/icons/png/sideBar/mainMenu.svg"
+      },
+      {
+        "name": "Invite friends",
+        "id": "",
+        "item": "/icons/png/sideBar/mainMenu.svg"
+      },
+      {
+        "name": "FAQ",
+        "id": "",
+        "item": "/icons/png/sideBar/mainMenu.svg"
+      },
+      {
+        "name": "Blog",
+        "id": "",
+        "item": "/icons/png/sideBar/mainMenu.svg"
+      }
+    ]
   }
 }
 

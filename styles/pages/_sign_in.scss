@@ -1,0 +1,163 @@
+.SingInPage{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .Topic{
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #8A8F99;
+  }
+  .Selection{
+    position: relative;
+    width: 205px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1px solid #C4C7CC;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 7px 40px 9px 25px;
+    div{
+      display: flex;
+      @include box(48px,48px);
+      border-radius: 48px;
+      background-color: #192025;
+      span{
+        margin: auto;
+        background-image: url("/icons/png/Polkadot.png");
+        background-size: contain;
+        @include box(21px,28px)
+      }
+      .select{
+        position: absolute;
+        @include box(16px,16px);
+        border-radius: 16px;
+        background: white;
+        border: 3px solid #162036;
+        box-sizing: border-box;
+        transform: translate(205%, 185%);
+      }
+      .ok{
+        position: absolute;
+        background-image: url("/icons/png/Check_1.png");
+        background-size: contain;
+        @include box(16px,16px);
+        box-sizing: border-box;
+        transform: translate(205%, 185%);
+        background-repeat: repeat;
+
+
+      }
+    }
+  }
+  .chooseRole{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 90px;
+  }
+  .SelectWallet{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    .Select{
+      position: relative;
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid #E0E0E0;
+      box-sizing: border-box;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      p{
+        font-size: 16px;
+        line-height: 28px;
+        color: #BDBDBD;
+      }
+      span{
+        background-image: url("/icons/png/dropDown.png");
+        background-size: contain;
+        @include box(9px,6px)
+      }
+    }
+    p{
+      font-size: 12px;
+      line-height: 18px;
+      color: #BDBDBD;
+    }
+    .DropDown{
+      display: flex;
+      flex-direction: column;
+      list-style-type: none;
+      position: absolute;
+      width: 36%;
+      margin-top:60px;
+      background: #FFFFFF;
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      padding: 10px;
+      li{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        span{
+          background-image: url("/icons/png/Metamask.png");
+          background-size: contain;
+          @include box(24px,24px);
+        }
+        .Wallet{
+          p{
+            font-size: 14px;
+            line-height: 28px;
+            color: #8A8F99;
+          }
+          .Address{
+            font-size: 12px;
+            line-height: 16px;
+            color: #8A8F99;
+          }
+        }
+      }
+      input{
+        width: 90%;
+        margin:10px auto;
+        background: #6FCF97;
+        border-radius: 4px;
+        padding: 10px;
+        color: white;
+        border: none;
+
+      }
+    }
+    .hidden{
+      display: none;
+    }
+  }
+  .Divider{
+    width: 100%;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    div{
+      width: 35%;
+      border-bottom: 1px solid #E6E7EB;
+      height: 1px;
+    }
+    p{
+      font-size: 12px;
+      line-height: 16px;
+      color: #000000;
+    }
+  }
+}
