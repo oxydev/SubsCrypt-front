@@ -80,7 +80,8 @@
     color: #000;
   }
   h1 {
-    @include text--heading2;
+    @include text-body--large--medium;
+    text-align: center;
     line-height: 69px;
   }
   p {

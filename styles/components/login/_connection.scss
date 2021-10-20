@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  .Title {
+    @include text-body--large--medium;
+    line-height: 69px;
+  }
   .Topic {
     font-size: 16px;
     line-height: 28px;
@@ -22,7 +26,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    .Select {
+    select {
       width: 100%;
       background: #ffffff;
       border: 1px solid #e0e0e0;
@@ -33,15 +37,12 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      p {
-        font-size: 16px;
-        line-height: 28px;
-        color: #bdbdbd;
-      }
-      span {
-        background-image: url("/icons/png/dropDown.png");
-        background-size: contain;
-        @include box(9px, 6px);
+      outline: none;
+      height: 48px;
+
+      option {
+        padding: 12px;
+        @include text-body--lightSmall--regular;
       }
     }
     p {
@@ -49,50 +50,21 @@
       line-height: 18px;
       color: #bdbdbd;
     }
-    .DropDown {
-      display: flex;
-      flex-direction: column;
-      list-style-type: none;
-      position: absolute;
+    button {
       width: 100%;
-      margin-top: 60px;
-      background: #ffffff;
-      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 8px;
-      padding: 10px;
-      li {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        img {
-          @include box(24px, 24px);
-        }
-        .Wallet {
-          p {
-            font-size: 14px;
-            line-height: 28px;
-            color: #8a8f99;
-          }
-          .Address {
-            font-size: 12px;
-            line-height: 16px;
-            color: #8a8f99;
-          }
-        }
+      height: 48px;
+      line-height: 4.8rem;
+      border-radius: $borderRadius--regular;
+      padding: 0 26px;
+      border: none;
+      background-color: $green;
+      @include text-body--large--medium;
+      color: #fff;
+      margin: 28px 0 0;
+      &:disabled {
+        opacity: 0.6;
+        cursor: default;
       }
-      input {
-        width: 90%;
-        margin: 10px auto;
-        background: #6fcf97;
-        border-radius: 4px;
-        padding: 10px;
-        color: white;
-        border: none;
-      }
-    }
-    .hidden {
-      display: none;
     }
   }
   .Divider {
@@ -111,6 +83,24 @@
       font-size: 12px;
       line-height: 16px;
       color: #000000;
+    }
+  }
+  .LoginMethod {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    p {
+      @include text-body--small--regular;
+      color: #8a8f99;
+      cursor: pointer;
+      margin: 10px 0;
+      text-decoration: underline;
+    }
+    span {
+      @include text-body--lightSmall--regular;
+      color: #8a8f99;
+      margin: 10px 30px;
     }
   }
 }
