@@ -6,7 +6,8 @@ import Card from "../componenets/login/card";
 import { handleDataContext } from "../context/handleData";
 import { UserContext } from "../context/store";
 
-const Login = () => {
+const Login = (props) => {
+  const { action } = props;
   const [network, setNtwork] = useState(-1);
   const [role, setRole] = useState(-1);
   const [steps, setSteps] = useState([true, false, false]);
@@ -22,6 +23,12 @@ const Login = () => {
   useEffect(() => {
     if (data.networks.length == 1) {
       setNtwork(0);
+    }
+    if (action == "signUp") {
+      setRole(1);
+      setSteps([true, true, true]);
+      setMethod("wallet");
+      handleWalletLists();
     }
   }, []);
   useEffect(() => {
@@ -42,7 +49,9 @@ const Login = () => {
       key={item.name}
       item={item}
       clickHandler={() => {
-        setRole(index);
+        if (action != "signUp") {
+          setRole(index);
+        }
       }}
       index={index}
       selected={index == role ? true : false}
@@ -64,7 +73,7 @@ const Login = () => {
             <div className="chooseRole">{users}</div>
           </>
         )}
-        {steps[2] && (
+        {steps[2] && action != "signUp" && (
           <>
             <p className="Topic">Login Method</p>
             <div className="LoginMethod">
@@ -76,6 +85,7 @@ const Login = () => {
               >
                 Login by Wallet
               </p>
+
               <span>or</span>
               <p
                 onClick={() => {

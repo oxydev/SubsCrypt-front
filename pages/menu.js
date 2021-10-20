@@ -107,7 +107,7 @@ export default function Menu() {
   } else if (task == "providerSignUp") {
     return (
       <div className="SignUp-walletConnection">
-        <WalletConnection type="provider" />
+        <Login action={"signUp"} />
       </div>
     );
   }
