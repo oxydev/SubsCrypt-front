@@ -3,7 +3,7 @@ import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
-import Login from "./login";
+import Menu from "./menu";
 import { Store } from "../context/store";
 import { Modal } from "../context/modal";
 import React from "react";
@@ -70,7 +70,7 @@ export default function App({ Component, pageProps }) {
                               ) : (
                                 <>
                                   {auth && <Header />}
-                                  {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                                  {auth ? <Component {...pageProps} /> : <Menu {...pageProps} />}
                                 </>
                               )}
                             </Main>

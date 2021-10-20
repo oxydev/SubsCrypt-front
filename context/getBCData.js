@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import { modalContext } from "./modal";
 import { serverDataContext } from "./getServerData";
-import SingIn from '../pages/sing_in'
+import SingIn from "../pages/login";
 
 export const getBCDataContext = React.createContext({});
 
@@ -62,10 +62,14 @@ export const GetBCDataFunctions = (props) => {
     let wallet;
 
     const addressList = walletList.map((item) => item.address);
-    const selectWallet=(<SingIn  addressList={addressList}
-                                 handleSubmit={async (value) => {
-                                   comfirmAddress(value);
-                                 }}/>)
+    const selectWallet = (
+      <SingIn
+        addressList={addressList}
+        handleSubmit={async (value) => {
+          comfirmAddress(value);
+        }}
+      />
+    );
     const modalElement = (
       <WalletSelectionModal
         addressList={addressList}
