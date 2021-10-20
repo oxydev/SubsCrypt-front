@@ -13,7 +13,7 @@ export default function SideBar() {
   const registerStatus = globalState.user.registered;
   let sideBarData;
   if (type == "user") {
-    sideBarData = data.UserSideBar;
+    sideBarData = data.signInSideBar;
   } else if (type == "provider" && registerStatus) {
     sideBarData = data.ProviderSideBar;
   } else if (type == "provider" && !registerStatus) {

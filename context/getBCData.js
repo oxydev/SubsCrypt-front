@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import { modalContext } from "./modal";
 import { serverDataContext } from "./getServerData";
+import SingIn from '../pages/sing_in'
 
 export const getBCDataContext = React.createContext({});
 
@@ -61,6 +62,10 @@ export const GetBCDataFunctions = (props) => {
     let wallet;
 
     const addressList = walletList.map((item) => item.address);
+    const selectWallet=(<SingIn  addressList={addressList}
+                                 handleSubmit={async (value) => {
+                                   comfirmAddress(value);
+                                 }}/>)
     const modalElement = (
       <WalletSelectionModal
         addressList={addressList}
@@ -88,11 +93,11 @@ export const GetBCDataFunctions = (props) => {
         else setTimeout(waitForWallet.bind(this, resolve, reject), 30);
       }
     }
-
-    setModal(modalElement);
-    setCallBack(() => () => {
-      wallet = "notSet";
-    });
+    selectWallet;
+    // setModal(modalElement);
+    // setCallBack(() => () => {
+    //   wallet = "notSet";
+    // });
     return ensureWalletIsSet(60000)
       .then((res) => {
         return res;

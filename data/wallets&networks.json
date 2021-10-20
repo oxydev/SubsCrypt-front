@@ -12,15 +12,28 @@
   "wallets": [
     {
       "name": "Metamask",
+      "address": "fj5x...lkc8",
       "imageURL": "/icons/png/wallets/MetamaskLogo.png"
     },
     {
       "name": "WalletConnect",
+      "address": "fj5x...lkc8",
       "imageURL": "/icons/png/wallets/WalletConnectLogo.png"
     },
     {
       "name": "Binance Chain Wallet",
+      "address": "fj5x...lkc8",
       "imageURL": "/icons/png/wallets/BinanceChainWalletLogo.png"
+    }
+  ],
+  "user": [
+    {
+      "name": "Subscriber",
+      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+    },
+    {
+      "name": "Provider",
+      "imageURL": "/icons/png/networks/PolkadotLogo.png"
     }
   ]
 }
