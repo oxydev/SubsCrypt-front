@@ -1,45 +1,62 @@
-.Selection{
+.ButtonCard {
   position: relative;
   width: 205px;
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  background: #FFFFFF;
-  border: 1px solid #C4C7CC;
+  background: #ffffff;
+  border: 1px solid #c4c7cc;
   box-sizing: border-box;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   padding: 7px 40px 9px 25px;
-  div{
+  cursor: pointer;
+  &.selected {
+    background-color: $purple;
+    p {
+      color: #fff;
+    }
+  }
+  p {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #8a8f99;
+  }
+  div {
     display: flex;
-    @include box(48px,48px);
+    @include box(48px, 48px);
     border-radius: 48px;
     //background-color: #192025;
-    img{
+    img {
       margin: auto;
-      @include box(48px,48px);
+      @include box(48px, 48px);
       border-radius: 48px;
     }
-    .select{
+
+    .lamp {
       position: absolute;
-      @include box(16px,16px);
+      @include box(16px, 16px);
       border-radius: 16px;
       background: white;
       border: 3px solid #162036;
       box-sizing: border-box;
       transform: translate(205%, 185%);
+
+      &.selected {
+        background-color: $green;
+      }
     }
-    .ok{
+    .ok {
       position: absolute;
       background-image: url("/icons/png/Check_1.png");
       background-size: contain;
-      @include box(16px,16px);
+      @include box(16px, 16px);
       box-sizing: border-box;
       transform: translate(205%, 185%);
       background-repeat: repeat;
-
-
     }
   }
 }

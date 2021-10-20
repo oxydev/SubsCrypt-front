@@ -28,6 +28,18 @@ export const HandleDataFunctions = (props) => {
     subscrypt = import("@oxydev/subscrypt");
   }, []);
 
+  //Function for loading user wallets
+  const handleWalletLists = async () => {
+    blockChainFuncs
+      .getWalletLists()
+      .then((res) => {
+        dispatch({ type: "LOAD_WALLETS", payload: res });
+      })
+      .catch(async () => {
+        await showResultToUser("Wallet selection Error!", "Unable to get the wallets list!");
+      });
+  };
+
   //Function for handling the user wallet connection as a subscriber
   const handleSubscriberLoginByWallet = async (address) => {
     setLoading(true);
@@ -60,7 +72,6 @@ export const HandleDataFunctions = (props) => {
                 });
               }
               setLoading(false);
-
             });
           } else {
             dispatch({
@@ -435,6 +446,7 @@ export const HandleDataFunctions = (props) => {
     handleProviderLogingByWallet,
     checkAuthByCookie,
     sendMoneyToAddress,
+    handleWalletLists,
     handleSubscriberloginByUsername,
     handleProviderloginByUsername,
     loadOffers,

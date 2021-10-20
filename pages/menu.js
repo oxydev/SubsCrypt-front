@@ -6,7 +6,7 @@ import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";
 import WalletConnection from "../componenets/login/walletConnection";
 import { tutorialContext } from "../context/tutorial";
-import SingIn from "./login";
+import Login from "./login";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
@@ -37,7 +37,7 @@ export default function Menu() {
   const userWallet = Cookies.get("subscryptAddress");
 
   function handleUserLogin() {
-    setTask("sign_in");
+    setTask("login");
   }
 
   function handleProviderSignUp() {
@@ -68,7 +68,7 @@ export default function Menu() {
       };
 
       userLoginLink.onclick = () => {
-        setTask("sign_in");
+        setTask("login");
       };
 
       // providerLoginLink.onclick = () => {
@@ -102,10 +102,8 @@ export default function Menu() {
         </div>
       </section>
     );
-  } else if (task == "sign_in") {
-    return <SingIn />;
-  } else if (task == "provider") {
-    return <ProviderLogin />;
+  } else if (task == "login") {
+    return <Login />;
   } else if (task == "providerSignUp") {
     return (
       <div className="SignUp-walletConnection">

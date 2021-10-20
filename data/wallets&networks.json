@@ -3,10 +3,6 @@
     {
       "name": "Polkadot",
       "imageURL": "/icons/png/networks/PolkadotLogo.png"
-    },
-    {
-      "name": "Binance",
-      "imageURL": "/icons/png/networks/BinanceLogo.png"
     }
   ],
   "wallets": [
@@ -26,7 +22,7 @@
       "imageURL": "/icons/png/wallets/BinanceChainWalletLogo.png"
     }
   ],
-  "user": [
+  "roles": [
     {
       "name": "Subscriber",
       "imageURL": "/icons/png/networks/PolkadotLogo.png"

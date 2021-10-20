@@ -111,6 +111,22 @@ export const GetBCDataFunctions = (props) => {
       });
   };
 
+  //Function for getting wallet address lists
+  const getWalletLists = async () => {
+    await (await subscrypt).getWalletAccess();
+    return await (
+      await subscrypt
+    )
+      .getWalletAccounts()
+      .then(async (result) => {
+        const walletList = result.map((item) => item);
+        return walletList;
+      })
+      .catch(() => {
+        throw new Error("Connection canceled!");
+      });
+  };
+
   //Functions for checking provider registration and return the planLength if registered.
   const checkProviderRegistration = async (address) => {
     return await (
@@ -262,6 +278,7 @@ export const GetBCDataFunctions = (props) => {
   const getBCDataContextValue = {
     connectToWallet,
     checkProviderRegistration,
+    getWalletLists,
     getProviderPlanslist,
     loadSubscriberPlansbyWallet,
     loadSubscriberPlansbyUsername,

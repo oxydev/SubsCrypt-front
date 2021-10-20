@@ -1,20 +1,17 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
+const Card = (props) => {
+  const { clickHandler, selected, item } = props;
 
-const Card =(props)=>{
-  const[select,setSelect]=useState(false)
-
-
-  return(
-    <div className="Selection" onClick={()=>select===false?setSelect(true):setSelect(false)}>
+  return (
+    <div className={selected ? "ButtonCard selected" : "ButtonCard"} onClick={clickHandler}>
       <div>
-        <img src={props.props.imageURL} alt=""/>
-        <span className={select===true?"ok":"select"}></span>
+        <img src={item.imageURL} alt="" />
+        <span className={selected ? "lamp selected" : "lamp"}></span>
       </div>
-      <p className="Topic">{props.props.name}</p>
+      <p>{item.name}</p>
     </div>
-  )
-}
-
+  );
+};
 
 export default Card;
