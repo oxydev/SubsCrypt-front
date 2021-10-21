@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { setDataContext } from "../../context/setData";
 import { modalContext } from "../../context/modal";
 import { operationContext } from "../../context/handleUserOperation";
+import { PlansDetailsModal } from "../provider/dashboard/planDetailsModal";
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
@@ -57,8 +58,13 @@ export default function PlanCard(props) {
     }
   }
 
+  function handleEdit() {
+    const modalElement = <PlansDetailsModal plan={plan} />;
+    setModal(modalElement);
+  }
+
   return (
-    <section className="PlanCard" onClick={type == "user" ? handleSubscribe : () => {}}>
+    <section className="PlanCard" onClick={type == "user" ? handleSubscribe : handleEdit}>
       <header>
         <img
           className="PlanLogo"
