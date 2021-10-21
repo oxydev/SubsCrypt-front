@@ -196,7 +196,9 @@ export default function ProviderSignUp() {
           info.ProviderUsername,
           info.ProviderPassword,
           plansChars
-        );
+        ).catch(async () => {
+          await showResultToUser("Operation faild!", "The operation has been failed!");
+        });
       }
     }
   }

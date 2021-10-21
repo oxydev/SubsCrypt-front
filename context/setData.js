@@ -49,22 +49,29 @@ export const SetDataFunctions = (props) => {
     pass,
     planChars
   ) => {
-    await (await subscrypt).getSha2(pass).then(async (res) => {
-      // console.log(address, providerAddress, planIndex, res.result, user, planChars);
-      injector = await injector.then((res) => res);
-      await (
-        await subscrypt
-      ).subscribe(
-        address,
-        injector,
-        callback,
-        providerAddress,
-        planIndex,
-        res.result,
-        user,
-        planChars
-      );
-    });
+    await (
+      await subscrypt
+    )
+      .getSha2(pass)
+      .then(async (res) => {
+        // console.log(address, providerAddress, planIndex, res.result, user, planChars);
+        injector = await injector.then((res) => res);
+        await (
+          await subscrypt
+        ).subscribe(
+          address,
+          injector,
+          callback,
+          providerAddress,
+          planIndex,
+          res.result,
+          user,
+          planChars
+        );
+      })
+      .catch(async () => {
+        await showResultToUser("Operation faild!", "The operation has been failed!");
+      });
   };
 
   const providerRegisterHandler = async (
@@ -82,20 +89,22 @@ export const SetDataFunctions = (props) => {
     // console.log(prices, refundPolicies, moneyAddress, username, pass, planChars);
     await (await subscrypt).getSha2(pass).then(async (res) => {
       injector = await injector.then((res) => res);
-      await (
-        await subscrypt
-      ).providerRegister(
-        address.address,
-        injector,
-        callback,
-        durations,
-        prices,
-        refundPolicies,
-        moneyAddress,
-        username,
-        res.result,
-        planChars
-      );
+      await (await subscrypt)
+        .providerRegister(
+          address.address,
+          injector,
+          callback,
+          durations,
+          prices,
+          refundPolicies,
+          moneyAddress,
+          username,
+          res.result,
+          planChars
+        )
+        .catch(async () => {
+          await showResultToUser("Operation faild!", "The operation has been failed!");
+        });
     });
   };
 
@@ -154,7 +163,9 @@ export const SetDataFunctions = (props) => {
           formData.username,
           formData.password,
           planChar
-        );
+        ).catch(async () => {
+          await showResultToUser("Operation faild!", "The operation has been failed!");
+        });
       }
 
       //check if the user has connected to his wallet or not. If not connect to t now.
@@ -208,7 +219,9 @@ export const SetDataFunctions = (props) => {
           providerAddress,
           planIndex,
           planChar
-        );
+        ).catch(async () => {
+          await showResultToUser("Operation faild!", "The operation has been failed!");
+        });
       }
       setModal(modalElement);
     }
@@ -239,7 +252,9 @@ export const SetDataFunctions = (props) => {
         callback,
         providerAddress,
         planIndex
-      );
+      ).catch(async () => {
+        await showResultToUser("Operation faild!", "The operation has been failed!");
+      });
     }
   };
 
@@ -303,17 +318,19 @@ export const SetDataFunctions = (props) => {
 
       var injector = getWalletInjector(walletAddress);
       injector = await injector.then((res) => res);
-      await (
-        await subscrypt
-      ).addPlan(
-        walletAddress.address,
-        injector,
-        callback,
-        durations,
-        prices,
-        refundPolicies,
-        planChars
-      );
+      await (await subscrypt)
+        .addPlan(
+          walletAddress.address,
+          injector,
+          callback,
+          durations,
+          prices,
+          refundPolicies,
+          planChars
+        )
+        .catch(async () => {
+          await showResultToUser("Operation faild!", "The operation has been failed!");
+        });
     }
   };
 

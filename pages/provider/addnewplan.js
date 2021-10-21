@@ -165,7 +165,9 @@ export default function AddNewPlan() {
     var refundPolicies = parsePolicies(planList);
     var plansChars = parseChars(planList);
 
-    addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars);
+    addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars).catch(async () => {
+      await showResultToUser("Operation faild!", "The operation has been failed!");
+    });
   }
 
   return (

@@ -48,7 +48,11 @@ export default function UserPlanCard(props) {
         // console.log(result);
         if (result.status == "Fetched") {
           plan.characteristics = result.result;
-          handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback);
+          handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback).catch(
+            async () => {
+              await showResultToUser("Operation faild!", "The operation has been failed!");
+            }
+          );
           setLocalLoading(false);
         }
       });
@@ -63,13 +67,19 @@ export default function UserPlanCard(props) {
 
   //Refunding function
   function handleRefund() {
-    handleRefundPlan(props.plan.provider, plan, props.plan.plan_index, callback);
+    handleRefundPlan(props.plan.provider, plan, props.plan.plan_index, callback).catch(async () => {
+      await showResultToUser("Operation faild!", "The operation has been failed!");
+    });
   }
 
   //Renew function
   function handleRenew() {
     // console.log(props.plan);
-    handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback);
+    handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback).catch(
+      async () => {
+        await showResultToUser("Operation faild!", "The operation has been failed!");
+      }
+    );
   }
 
   //callback function

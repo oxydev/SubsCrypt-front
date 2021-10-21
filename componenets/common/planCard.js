@@ -22,7 +22,9 @@ export default function PlanCard(props) {
 
   //Subscription function
   function handleSubscribe() {
-    handleSubscribtion(providerAddress, plan, planIndex, callback);
+    handleSubscribtion(providerAddress, plan, planIndex, callback).catch(async () => {
+      await showResultToUser("Operation faild!", "The operation has been failed!");
+    });
   }
 
   //callback function after handling subscription

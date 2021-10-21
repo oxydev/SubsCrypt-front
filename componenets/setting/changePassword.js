@@ -43,7 +43,9 @@ export default function ChangePassword(props) {
     if (data.newPassword !== data.currentPasswordConfirm) return;
     e.preventDefault();
     // console.log(data);
-    changePassword(type, data.newPassword, callback);
+    changePassword(type, data.newPassword, callback).catch(async () => {
+      await showResultToUser("Operation faild!", "The operation has been failed!");
+    });
   }
 
   useEffect(() => {
