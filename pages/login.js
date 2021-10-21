@@ -16,9 +16,6 @@ const Login = (props) => {
   const { globalState } = useContext(UserContext);
 
   const walletLists = globalState.wallets;
-  const addressList = walletLists.map((item, index) => (
-    <option key={item + index}>{item.address}</option>
-  ));
 
   useEffect(() => {
     if (data.networks.length == 1) {
@@ -55,6 +52,7 @@ const Login = (props) => {
       }}
       index={index}
       selected={index == role ? true : false}
+      disabled={index == 0 && action == "signUp" ? true : false}
     />
   ));
   const networks = data.networks.map((item, index) => (
@@ -64,7 +62,9 @@ const Login = (props) => {
   return (
     <div className="LoginPage SingInPage">
       <div className="LoginPage SingInPage">
-        <h1 className="Title">Login to Your Account</h1>
+        <h1 className="Title">
+          {action == "signUp" ? "Sign Up a new Account" : "Login to Your Account"}
+        </h1>
         <p className="Topic">Network</p>
         <div className="ChooseNetworks">{networks}</div>
         {steps[1] && (
