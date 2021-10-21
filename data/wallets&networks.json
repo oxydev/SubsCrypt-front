@@ -31,5 +31,15 @@
       "name": "Provider",
       "imageURL": "/icons/png/networks/PolkadotLogo.png"
     }
+  ],
+  "methods": [
+    {
+      "name": "Wallet",
+      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+    },
+    {
+      "name": "Username",
+      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+    }
   ]
 }

@@ -11,7 +11,7 @@ const Login = (props) => {
   const [network, setNtwork] = useState(-1);
   const [role, setRole] = useState(-1);
   const [steps, setSteps] = useState([true, false, false]);
-  const [method, setMethod] = useState("");
+  const [method, setMethod] = useState(-1);
   const { handleWalletLists } = useContext(handleDataContext);
   const { globalState } = useContext(UserContext);
 
@@ -24,7 +24,7 @@ const Login = (props) => {
     if (action == "signUp") {
       setRole(1);
       setSteps([true, true, true]);
-      setMethod("wallet");
+      setMethod(0);
       handleWalletLists();
     }
   }, []);
@@ -59,6 +59,24 @@ const Login = (props) => {
     <Card key={item.name} item={item} selected={index == network ? true : false} />
   ));
 
+  const methods = data.methods.map((item, index) => (
+    <Card
+      key={item.name}
+      item={item}
+      selected={index == method ? true : false}
+      clickHandler={
+        index == 0
+          ? () => {
+              setMethod(0);
+              handleWalletLists();
+            }
+          : () => {
+              setMethod(1);
+            }
+      }
+    />
+  ));
+
   return (
     <div className="LoginPage SingInPage">
       <div className="LoginPage SingInPage">
@@ -77,9 +95,9 @@ const Login = (props) => {
           <>
             <p className="Topic">Login Method</p>
             <div className="LoginMethod">
-              <p
+              {/* <p
                 onClick={() => {
-                  setMethod("wallet");
+                  setMethod(0);
                   handleWalletLists();
                 }}
               >
@@ -89,11 +107,12 @@ const Login = (props) => {
               <span>or</span>
               <p
                 onClick={() => {
-                  setMethod("username");
+                  setMethod(1);
                 }}
               >
                 Login by Username
-              </p>
+              </p> */}
+              {methods}
             </div>
             {/* <p className="Topic">Choose Wallet</p>
             <div className="SelectWallet">
@@ -102,8 +121,8 @@ const Login = (props) => {
           </>
         )}
       </div>
-      {method == "wallet" && <Connection type={role == 0 ? "subscriber" : "provider"} />}
-      {method == "username" && <LoginPart type={role == 0 ? "subscriber" : "provider"} />}
+      {method == 0 && <Connection type={role == 0 ? "subscriber" : "provider"} />}
+      {method == 1 && <LoginPart type={role == 0 ? "subscriber" : "provider"} />}
     </div>
   );
 };

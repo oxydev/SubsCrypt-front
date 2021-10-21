@@ -15,7 +15,8 @@
   }
 
   .chooseRole,
-  .ChooseNetworks {
+  .ChooseNetworks,
+  .LoginMethod {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -85,22 +86,12 @@
       color: #000000;
     }
   }
-  .LoginMethod {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    p {
-      @include text-body--small--regular;
-      color: #8a8f99;
-      cursor: pointer;
-      margin: 10px 0;
-      text-decoration: underline;
-    }
-    span {
-      @include text-body--lightSmall--regular;
-      color: #8a8f99;
-      margin: 10px 30px;
-    }
+
+  a {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: $purple;
   }
 }
