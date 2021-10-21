@@ -80,6 +80,22 @@ export default function Menu() {
       };
 
       giveTokenLink.onclick = hanadleGetToken;
+
+      const sideBarStyleHandler = (elm) => {
+        mainLoginLink.closest("li").classList.remove("select");
+        userLoginLink.closest("li").classList.remove("select");
+        signUpLink.closest("li").classList.remove("select");
+        giveTokenLink.closest("li").classList.remove("select");
+        elm.closest("li").classList.add("select");
+      };
+
+      if (task == "none") {
+        sideBarStyleHandler(mainLoginLink);
+      } else if (task == "login") {
+        sideBarStyleHandler(userLoginLink);
+      } else if (task == "providerSignUp") {
+        sideBarStyleHandler(signUpLink);
+      }
     }
   });
 
