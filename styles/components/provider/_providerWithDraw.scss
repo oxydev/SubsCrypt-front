@@ -1,0 +1,75 @@
+.ProviderWithDraw {
+  padding: 17px 0;
+  h1 {
+    @include text-body--large--medium;
+    margin-bottom: 5px;
+  }
+
+  p {
+    @include text-title--large--bold;
+    margin-bottom: 28px;
+    span {
+      @include text-body--small--light;
+      color: $gray-3;
+      margin-left: 5px;
+    }
+  }
+  button {
+    @include primaryButtons(100%, 35px);
+    width: 100%;
+    height: 40px;
+    border-radius: $borderRadius--regular;
+  }
+}
+.WithDrawModal {
+  width: 520px;
+  padding-top: 10px;
+  h1 {
+    @include text--heading3;
+    margin-bottom: 122px;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    input {
+      margin-bottom: 26px;
+      width: 100%;
+      @include ordinaryFormInput;
+    }
+    label {
+      @include text-body--small--regular;
+      margin-bottom: 7px;
+      color: #8a8f99;
+    }
+    input[type="submit"] {
+      margin: 51px auto 0;
+      @include primaryButtons(100%, 40px);
+      border-radius: $borderRadius--regular;
+      width: 260px;
+      @include text-body--large--regular;
+      color: #fff;
+    }
+  }
+  .Amount {
+    position: relative;
+    span {
+      position: absolute;
+      right: 0;
+      top: 6px;
+      @include text-body--small--medium;
+      line-height: 36px;
+      padding: 0 18px;
+      border-left: $border-main;
+      cursor: pointer;
+      &.Unit {
+        right: 50px;
+        @include text-body--lightSmall--regular;
+        line-height: 36px;
+        color: #8a8f99;
+        border-left: none;
+        cursor: default;
+      }
+    }
+  }
+}
