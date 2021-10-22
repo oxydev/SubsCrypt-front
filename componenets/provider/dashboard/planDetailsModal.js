@@ -9,11 +9,11 @@ export const PlansDetailsModal = (props) => {
     title: plan.name,
     description: plan.description,
     duration: utils.duration(parseInt(plan.duration.replace(/,/g, ""))),
-    refundValue: plan.max_refund_permille_policy,
+    refundValue: plan.max_refund_permille_policy / 10,
     price: parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12),
     characteristics: plan.characteristics.map((item) => ({ id: item, text: item })),
   });
-  const [refundValue, setRefundValue] = useState(plan.max_refund_permille_policy);
+  const [refundValue, setRefundValue] = useState(plan.max_refund_permille_policy / 10);
 
   const handleplanInfoUpdate = (key, value) => {
     planInfo[key] = value;
