@@ -1,0 +1,16 @@
+{
+  "tutorials": {
+    "pageName": [
+      {
+        "elementName": "loginButton",
+        "title": "Tutorial title",
+        "description": " Tutorial Description"
+      },
+      {
+        "elementName": "SignUpButton",
+        "title": "Tutorial title",
+        "description": " Tutorial Description"
+      }
+    ]
+  }
+}
