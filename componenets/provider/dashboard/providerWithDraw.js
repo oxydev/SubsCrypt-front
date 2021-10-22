@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
 import { modalContext } from "../../../context/modal";
 import { WithdrwaModal } from "./widthDrawModal";
+import { getBCDataContext } from "../../../context/getBCData";
 
 export const ProviderWithdraw = (props) => {
   const { setModal } = useContext(modalContext);
+  const { getWithdrawableAmount, getMoneyAddress } = useContext(getBCDataContext);
 
   const handleWithdraw = () => {
-    const modalElement = <WithdrwaModal />;
+    const modalElement = (
+      <WithdrwaModal
+        getWithdrawableAmount={getWithdrawableAmount}
+        getMoneyAddress={getMoneyAddress}
+      />
+    );
     setModal(modalElement);
   };
   return (

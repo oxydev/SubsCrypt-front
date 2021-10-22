@@ -206,26 +206,20 @@ export const GetBCDataFunctions = (props) => {
 
   //Function for getting plan Characteristic
   const getWithdrawableAmount = async (address) => {
-    return await (
-      await subscrypt
-    ).getWithdrawableAmount(address)
-      .then((result) => {
-        if (result.status == "Fetched") {
-          return result.result
-        }
-      });
+    return await (await subscrypt).getWithdrawableAmount(address).then((result) => {
+      if (result.status == "Fetched") {
+        return result.result;
+      }
+    });
   };
 
   //Function for getting money address
   const getMoneyAddress = async (address) => {
-    return await (
-      await subscrypt
-    ).getMoneyAddress(address)
-      .then((result) => {
-        if (result.status == "Fetched") {
-          return result.result
-        }
-      });
+    return await (await subscrypt).getMoneyAddress(address).then((result) => {
+      if (result.status == "Fetched") {
+        return result.result;
+      }
+    });
   };
 
   const loadPlanServerInfo = async (address, index, plan) => {
@@ -307,6 +301,8 @@ export const GetBCDataFunctions = (props) => {
     loadSubscriberPlansbyWallet,
     loadSubscriberPlansbyUsername,
     selectwalletFromList,
+    getWithdrawableAmount,
+    getMoneyAddress,
   };
 
   return (

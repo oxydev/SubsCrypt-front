@@ -4,8 +4,9 @@ import TagInput from "../../gadjets/tagInput";
 import * as utils from "../../../utilities/utilityFunctions";
 
 export const PlansDetailsModal = (props) => {
-  const { plan } = props;
+  const { plan, handleEditPlan } = props;
   const [planInfo, setplanInfo] = useState({
+    planIndex: plan.planIndex,
     title: plan.name,
     description: plan.description,
     duration: utils.duration(parseInt(plan.duration.replace(/,/g, ""))),
@@ -65,7 +66,7 @@ export const PlansDetailsModal = (props) => {
             type="text"
             name="PlanPrice"
             required
-            value={planInfo.price + " DOT"}
+            value={planInfo.price}
             placeholder="DOT xx.xx"
             onChange={(e) => {
               handleplanInfoUpdate("price", e.target.value);

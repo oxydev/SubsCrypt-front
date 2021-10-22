@@ -63,7 +63,7 @@
       border-left: $border-main;
       cursor: pointer;
       &.Unit {
-        right: 50px;
+        right: 0px;
         @include text-body--lightSmall--regular;
         line-height: 36px;
         color: #8a8f99;
