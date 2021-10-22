@@ -25,6 +25,11 @@ export const SetDataFunctions = (props) => {
     await (await subscrypt).refund(address, injector, callback, providerAddress, planIndex);
   };
 
+  const withdraw = async (address, injector, callback) => {
+    injector = await injector.then((res) => res);
+    await (await subscrypt).withdraw(address, injector, callback);
+  };
+
   const renewPlan = async (
     address,
     injector,

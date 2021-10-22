@@ -32,7 +32,7 @@ export default function Menu() {
   //   setTutorialList(list);
   // }, [tutorialRef1, tutorialRef2, tutorialRef3]);
 
-  //get coockies
+  //get cookies
   const password = Cookies.get("subscryptPass");
   const userWallet = Cookies.get("subscryptAddress");
 

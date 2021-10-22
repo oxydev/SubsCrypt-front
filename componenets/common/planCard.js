@@ -37,7 +37,7 @@ export default function PlanCard(props) {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(async ({ event: { data, method, section }, phase }) => {
+      for (const { event: { data1, method, section }, phase } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
@@ -47,7 +47,7 @@ export default function PlanCard(props) {
             "The operation has been done successfully"
           );
         }
-      });
+      }
       if (check == false) {
         await showResultToUser("Operation faild!", "The operation has been failed!");
       }

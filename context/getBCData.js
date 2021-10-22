@@ -97,7 +97,7 @@ export const GetBCDataFunctions = (props) => {
         else setTimeout(waitForWallet.bind(this, resolve, reject), 30);
       }
     }
-    selectWallet;
+    // selectWallet;
     // setModal(modalElement);
     // setCallBack(() => () => {
     //   wallet = "notSet";
@@ -201,6 +201,30 @@ export const GetBCDataFunctions = (props) => {
         return await loadPlanServerInfo(address, index, res).then((res) => {
           return res;
         });
+      });
+  };
+
+  //Function for getting plan Characteristic
+  const getWithdrawableAmount = async (address) => {
+    return await (
+      await subscrypt
+    ).getWithdrawableAmount(address)
+      .then((result) => {
+        if (result.status == "Fetched") {
+          return result.result
+        }
+      });
+  };
+
+  //Function for getting money address
+  const getMoneyAddress = async (address) => {
+    return await (
+      await subscrypt
+    ).getMoneyAddress(address)
+      .then((result) => {
+        if (result.status == "Fetched") {
+          return result.result
+        }
       });
   };
 
