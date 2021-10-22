@@ -37,7 +37,10 @@ export default function PlanCard(props) {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      for (const { event: { data1, method, section }, phase } of events) {
+      for (const {
+        event: { data1, method, section },
+        phase,
+      } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
@@ -86,22 +89,16 @@ export default function PlanCard(props) {
           <h6>Refund Policy</h6>
           <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
         </div>
+        <div className="PlanCard-price">
+          <h6>Pay with</h6>
+          <p>
+            {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
+            <span>DOT</span>
+          </p>
+        </div>
       </main>
       <footer>
-        <div className="PlanCard-payMethod">
-          <label>Pay with</label>
-          <select className="PlanCard-coinSelect">
-            <option value="coin1">coin1</option>
-            <option value="coin2">coin2</option>
-          </select>
-        </div>
-        <button className="PlanCard-payBtn" onClick={() => {}}>
-          {/* {type == "provider"
-            ? parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)
-            : plan.price} */}
-          {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
-          <span>DOT</span>
-        </button>
+        <button className="PlanCard-button">{type == "user" ? "Subscribe" : "Edit Plan"}</button>
       </footer>
     </section>
   );
