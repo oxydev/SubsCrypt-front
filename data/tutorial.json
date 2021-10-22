@@ -3,13 +3,13 @@
     "pageName": [
       {
         "elementName": "loginButton",
-        "title": "Tutorial title",
-        "description": " Tutorial Description"
+        "title": "Login",
+        "description": "If you want to subscribe to a plan or have already subscribed you can login here. Also if you are a registered provider you can login here."
       },
       {
         "elementName": "SignUpButton",
-        "title": "Tutorial title",
-        "description": " Tutorial Description"
+        "title": "Become A Provider",
+        "description": "You can Become a provider in SubsCrypt platform by connecting a PolkaDot.js wallet and filling a simple form. You are required to stake a minimum amount of token."
       }
     ]
   }
