@@ -11,7 +11,7 @@ export const PlansDetailsModal = (props) => {
     duration: utils.duration(parseInt(plan.duration.replace(/,/g, ""))),
     refundValue: plan.max_refund_permille_policy,
     price: parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12),
-    characteristics: plan.characteristics,
+    characteristics: plan.characteristics.map((item) => ({ id: item, text: item })),
   });
   const [refundValue, setRefundValue] = useState(plan.max_refund_permille_policy);
 
