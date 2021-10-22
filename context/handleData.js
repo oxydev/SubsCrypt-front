@@ -398,22 +398,29 @@ export const HandleDataFunctions = (props) => {
 
   //Function for getting the user address for charging money
   const sendMoneyToAddress = () => {
-    blockChainFuncs.getWalletLists().then((res) => {
-      const walletList = res.map((item) => (
-        <option key={item.address} value={item.address}>
-          {item.meta.name} : {item.address}
-        </option>
-      ));
-      const modalElement = (
-        <div>
-          <form className="GiveTokenForm" onSubmit={handleSendMoney}>
-            <label>Please Select your wallet address</label>
-            <select id="modalAddressInput">{walletList}</select>
-            <input type="submit" value="submit" />
-          </form>
-        </div>
-      );
-      setModal(modalElement);
+    blockChainFuncs.getWalletLists().then(async (res) => {
+      let modalElement;
+      if (res.length > 0) {
+        const walletList = res.map((item) => (
+          <option key={item.address} value={item.address}>
+            {item.meta.name} : {item.address}
+          </option>
+        ));
+
+        modalElement = (
+          <div>
+            <form className="GiveTokenForm" onSubmit={handleSendMoney}>
+              <label>Please Select your wallet address</label>
+              <select id="modalAddressInput">{walletList}</select>
+              <input type="submit" value="submit" />
+            </form>
+          </div>
+        );
+
+        setModal(modalElement);
+      } else {
+        await showResultToUser("No wallet to choose", "You do not have any wallet to choose");
+      }
     });
 
     async function handleSendMoney() {
