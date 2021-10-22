@@ -1,26 +1,96 @@
-import { useState } from "react";
+import { useContext, useState } from 'react'
 import PercentSlider from "../../gadjets/percetageSlider";
 import TagInput from "../../gadjets/tagInput";
 import * as utils from "../../../utilities/utilityFunctions";
+import { setDataContext } from '../../../context/setData'
+import { UserContext } from "../../../context/store";
+import { operationContext } from '../../../context/handleUserOperation'
 
 export const PlansDetailsModal = (props) => {
-  const { plan, handleEditPlan } = props;
+  const { plan, handleEditPlan, showResultToUser, getProviderAllInfo } = props;
+
   const [planInfo, setplanInfo] = useState({
     planIndex: plan.planIndex,
     title: plan.name,
     description: plan.description,
     duration: utils.duration(parseInt(plan.duration.replace(/,/g, ""))),
-    refundValue: plan.max_refund_permille_policy / 10,
+    refund: plan.max_refund_permille_policy / 10,
     price: parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12),
     characteristics: plan.characteristics.map((item) => ({ id: item, text: item })),
   });
-  const [refundValue, setRefundValue] = useState(plan.max_refund_permille_policy / 10);
+  const { globalState } = useContext(UserContext);
 
+  const [refundValue, setRefundValue] = useState(plan.max_refund_permille_policy / 10);
   const handleplanInfoUpdate = (key, value) => {
     planInfo[key] = value;
     setplanInfo({ ...planInfo });
   };
+  const callback = async ({ events = [], status }) => {
+    if (status.isInBlock) {
+      let check = false;
+      for (const { event: { data, method, section }, phase } of events) {
+        if (method === "ExtrinsicSuccess") {
+          check = true;
 
+          var axios = require("axios");
+          var config = {
+            method: "patch",
+            url: "https://api.subscrypt.io/profile/updateProductProfile",
+            data: {
+              providerAddress: globalState.user.address,
+              planName: planInfo.title,
+              planIndex: planInfo.planIndex,
+              description: planInfo.description,
+            },
+            headers: {
+              "Content-Type": `application/json`,
+            },
+            crossDomain: true,
+          };
+
+          axios(config)
+            .then(async function (response) {
+              if (response.status === 200) {
+                //todo show modal
+                await showResultToUser(
+                  "Operation Successful!",
+                  "The operation has been done successfully"
+                );
+              }
+            })
+            .catch(async function (error) {
+              await showResultToUser("Operation failed!", "The operation has been failed!");
+            });
+        }
+      }
+      if (check == false) {
+        await showResultToUser("Operation failed!", "The operation has been failed!");
+
+        // await showResultToUser("Operation failed!", "The operation has been failed!");
+      }
+    }else if (status.isFinalized) {
+      // console.log("Finalized block hash", status.asFinalized.toHex());
+      getProviderAllInfo(globalState.user.address);
+    }
+  }
+  const prepareEditPlan = () => {
+    const editedPlanData = {}
+    editedPlanData['plan_index'] = planInfo.planIndex
+    if (planInfo.duration === "1month") editedPlanData['duration'] = 30 * 24 * 60 * 60 * 1000;
+    else if (planInfo.duration === "3months") editedPlanData['duration'] = 3 * 30 * 24 * 60 * 60 * 1000;
+    else if (planInfo.duration === "6months") editedPlanData['duration'] = 6 * 30 * 24 * 60 * 60 * 1000;
+    editedPlanData['price'] = planInfo.price * 1e12
+    editedPlanData['max_refund_permille_policies'] = planInfo.refund * 10
+    editedPlanData['disabled'] = false
+    handleEditPlan(
+      globalState.user.address,
+      callback,
+      editedPlanData
+    ).catch(async () => {
+      //todo
+      await showResultToUser("Operation failed!", "The operation has been failed!");
+    });
+  }
   console.log(planInfo);
   return (
     <section className="PlanDetailsModal">
@@ -107,7 +177,7 @@ export const PlansDetailsModal = (props) => {
           For signing up you need to send a transaction on chain to put the data in smart contract
           on blockchain. Normal gas fee applies.
         </p>
-        <button>Edit</button>
+        <button onClick={prepareEditPlan}>Edit</button>
       </div>
     </section>
   );

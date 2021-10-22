@@ -8,16 +8,19 @@ import { setDataContext } from "../../context/setData";
 import { modalContext } from "../../context/modal";
 import { operationContext } from "../../context/handleUserOperation";
 import { PlansDetailsModal } from "../provider/dashboard/planDetailsModal";
+import { handleDataContext } from '../../context/handleData'
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
   const router = useRouter();
   const { globalState } = useContext(UserContext);
+  const { getProviderAllInfo } = useContext(handleDataContext);
+
   const { setModal } = useContext(modalContext);
   const { plan, index, type, address } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
-  const { handleSubscribtion } = useContext(setDataContext);
+  const { handleSubscribtion, editPlan } = useContext(setDataContext);
   const providerAddress = data.providerAddress;
   const { showResultToUser } = useContext(operationContext);
 
@@ -62,7 +65,7 @@ export default function PlanCard(props) {
   }
 
   function handleEdit() {
-    const modalElement = <PlansDetailsModal plan={plan} />;
+    const modalElement = <PlansDetailsModal plan={plan} handleEditPlan={editPlan} showResultToUser={showResultToUser} getProviderAllInfo={getProviderAllInfo}/>;
     setModal(modalElement);
   }
 

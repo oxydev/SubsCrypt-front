@@ -10,6 +10,11 @@
         "elementName": "SignUpButton",
         "title": "Become A Provider",
         "description": "You can Become a provider in SubsCrypt platform by connecting a PolkaDot.js wallet and filling a simple form. You are required to stake a minimum amount of token."
+      },
+      {
+        "elementName": "faucet",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
       }
     ]
   }

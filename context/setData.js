@@ -75,7 +75,7 @@ export const SetDataFunctions = (props) => {
         );
       })
       .catch(async () => {
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       });
   };
 
@@ -108,18 +108,15 @@ export const SetDataFunctions = (props) => {
           planChars
         )
         .catch(async () => {
-          await showResultToUser("Operation faild!", "The operation has been failed!");
+          await showResultToUser("Operation failed!", "The operation has been failed!");
         });
     });
   };
 
   //Get Injector
   const getWalletInjector = async (address) => {
-    let injector;
-    await (await subscrypt).getInjector(address).then((result) => {
-      injector = result;
-    });
-    return injector;
+    console.log(address)
+    return await (await subscrypt).getInjector(address)
   };
 
   //function for handle the subscription flow
@@ -169,7 +166,7 @@ export const SetDataFunctions = (props) => {
           formData.password,
           planChar
         ).catch(async () => {
-          await showResultToUser("Operation faild!", "The operation has been failed!");
+          await showResultToUser("Operation failed!", "The operation has been failed!");
         });
       }
 
@@ -225,7 +222,7 @@ export const SetDataFunctions = (props) => {
           planIndex,
           planChar
         ).catch(async () => {
-          await showResultToUser("Operation faild!", "The operation has been failed!");
+          await showResultToUser("Operation failed!", "The operation has been failed!");
         });
       }
       setModal(modalElement);
@@ -258,7 +255,7 @@ export const SetDataFunctions = (props) => {
         providerAddress,
         planIndex
       ).catch(async () => {
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       });
     }
   };
@@ -292,7 +289,29 @@ export const SetDataFunctions = (props) => {
 
     // console.log(globalState, type, newPassword);
   };
+  const editPlan = async (address, callback, data) => {
+    console.log(address)
 
+    await blockChainFuncs.connectToWallet(address).then(async (res) => {
+      if (res) {
+        const injector = await getWalletInjector(res);
+        console.log(data.plan_index, data.duration, data.price,
+          data.max_refund_permille_policies, data.disabled)
+        await (await subscrypt).editPlan(res.address, injector, callback, data.plan_index, data.duration, data.price,
+          data.max_refund_permille_policies, data.disabled)
+          .catch(async (err) => {
+            console.log(err)
+            await showResultToUser("Operation failed!", "The operation has been failed!");
+          });
+      } else {
+        // window.alert("You are not allowed to do this operation!");
+        await showResultToUser(
+          "Operation Not Allowed!",
+          "You are not allowed to do this operation!"
+        );
+      }
+    })
+  }
   //function for adding new plan as a provider
   const addNewPlans = async (
     address,
@@ -334,7 +353,7 @@ export const SetDataFunctions = (props) => {
           planChars
         )
         .catch(async () => {
-          await showResultToUser("Operation faild!", "The operation has been failed!");
+          await showResultToUser("Operation failed!", "The operation has been failed!");
         });
     }
   };
@@ -346,6 +365,7 @@ export const SetDataFunctions = (props) => {
     handleRenewPlan,
     addNewPlans,
     providerRegisterHandler,
+    editPlan,
   };
   return (
     <setDataContext.Provider value={setDataContextvalue}>{props.children}</setDataContext.Provider>
