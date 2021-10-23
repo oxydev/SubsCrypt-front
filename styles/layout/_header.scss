@@ -11,7 +11,7 @@
 .LoginBox {
   display: flex;
   align-items: center;
-  border: 1px solid $green;
+  border: 1px solid $purple;
   border-radius: $borderRadius--regular;
   padding: 0 23px;
   max-width: 355px;
@@ -19,7 +19,7 @@
   cursor: pointer;
 
   &.Green {
-    background-color: $green;
+    background-color: $purple;
     .UserName {
       color: #fff;
     }
@@ -40,14 +40,14 @@
   flex-shrink: 0;
   white-space: nowrap;
   @include text-body--large--medium;
-  color: $green;
+  color: $purple;
 }
 .Separator {
   line-height: 2.4rem;
   margin: 0 10px;
   flex-shrink: 0;
   @include text-body--large--medium;
-  color: $green;
+  color: $purple;
 }
 .UserWallet {
   line-height: 2.4rem;
@@ -55,7 +55,7 @@
   flex-shrink: 0;
   white-space: nowrap;
   @include text-body--large--medium;
-  color: $green;
+  color: $purple;
 }
 //Styles for usermenu in the header
 .UserMenu {
