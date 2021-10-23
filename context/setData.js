@@ -139,7 +139,13 @@ export const SetDataFunctions = (props) => {
   //function for handle the subscription flow
   const handleSubscribtion = async (providerAddress, plan, planIndex, callback, manualAddress) => {
     let walletAddress = globalState.user.wallet;
-
+    if(providerAddress === globalState.user.address){
+      await showResultToUser(
+        "Operation not allowed!",
+        "You are not allowed to do this operation!"
+      );
+      return
+    }
     if (!walletAddress && !manualAddress) {
       await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
         if (res) {
