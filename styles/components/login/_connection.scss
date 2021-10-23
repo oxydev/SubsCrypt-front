@@ -5,6 +5,7 @@
   .Title {
     @include text-body--large--medium;
     line-height: 69px;
+    text-align: center;
   }
   .Topic {
     font-size: 16px;
