@@ -3,15 +3,18 @@ import Link from "next/link";
 import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
 import { handleDataContext } from "../../context/handleData";
+import { useRouter } from 'next/router'
 
 //The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut } = useContext(handleDataContext);
-  const[select,setSelect]=useState(0)
+  const router = useRouter()
+  const [select,setSelect] = useState(0)
   const type = globalState.user.type;
   const registerStatus = globalState.user.registered;
   let sideBarData;
+
   if (type === "user") {
     sideBarData = data.UserSideBar;
   } else if (type === "provider" && registerStatus) {
@@ -22,16 +25,25 @@ export default function SideBar() {
     sideBarData = data.PublicSideBar;
   }
   useEffect(() => {
-    if(window.location.href.indexOf("profilesetting") > 0){
+    setSelect(0)
+    if(router.pathname.indexOf("profilesetting") > 0){
       sideBarData.menuItem.forEach((res, index)=>{
         if(res.name === "Profile Setting")
           setSelect(index)
       })
+    } else if(router.pathname.indexOf("addnewplan") > 0){
+      sideBarData.menuItem.forEach((res, index)=>{
+        if(res.name === "Add Plan")
+          setSelect(index)
+      })
+    } else if(router.pathname.indexOf("newOffers") > 0){
+      sideBarData.menuItem.forEach((res, index)=>{
+        if(res.name === "New Offers")
+          setSelect(index)
+      })
     }
-  })
-  useEffect(() => {
-    setSelect(0)
-  },[sideBarData])
+  },[router.pathname,sideBarData])
+
   const sideBarMenuItems = sideBarData.menuItem.map(
     (item,index) =>
       (item.name !== "Profile Setting" || globalState.user.username) && (
