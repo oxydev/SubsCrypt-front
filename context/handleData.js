@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 import { getBCDataContext } from "./getBCData";
 import { operationContext } from "./handleUserOperation";
+import { FaucetModal } from "../componenets/faucet/faucetMdal";
 
 //Variable for using in dynamicly importing the subscrypt library
 let subscrypt;
@@ -401,21 +402,7 @@ export const HandleDataFunctions = (props) => {
     blockChainFuncs.getWalletLists().then(async (res) => {
       let modalElement;
       if (res.length > 0) {
-        const walletList = res.map((item) => (
-          <option key={item.address} value={item.address}>
-            {item.meta.name} : {item.address}
-          </option>
-        ));
-
-        modalElement = (
-          <div>
-            <form className="GiveTokenForm" onSubmit={handleSendMoney}>
-              <label>Please Select your wallet address</label>
-              <select id="modalAddressInput">{walletList}</select>
-              <input type="submit" value="submit" />
-            </form>
-          </div>
-        );
+        modalElement = <FaucetModal walletList={res} handleSendMoney={handleSendMoney} />;
 
         setModal(modalElement);
       } else {
@@ -423,9 +410,9 @@ export const HandleDataFunctions = (props) => {
       }
     });
 
-    async function handleSendMoney() {
+    async function handleSendMoney(address) {
       setModal(null);
-      const address = document.getElementById("modalAddressInput").value;
+      // const address = document.getElementById("modalAddressInput").value;
       await (
         await subscrypt
       )
