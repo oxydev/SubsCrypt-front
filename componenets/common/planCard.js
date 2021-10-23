@@ -21,12 +21,11 @@ export default function PlanCard(props) {
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
   const { handleSubscribtion, editPlan } = useContext(setDataContext);
-  const providerAddress = data.providerAddress;
   const { showResultToUser } = useContext(operationContext);
 
   //Subscription function
   function handleSubscribe() {
-    handleSubscribtion(providerAddress, plan, planIndex, callback).catch(async () => {
+    handleSubscribtion(address, plan, planIndex, callback).catch(async () => {
       await showResultToUser("Operation faild!", "The operation has been failed!");
     });
   }
