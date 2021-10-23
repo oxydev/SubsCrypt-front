@@ -4,11 +4,11 @@
 export const duration = (milliseconds) => {
   const days = Math.floor(milliseconds / 86400000);
   if (days < 30) {
-    return days + " days";
+    return days + " Days";
   } else if (days < 60) {
-    return days / 30 + "month";
+    return days / 30 + " Month";
   } else {
-    return days / 30 + "months";
+    return days / 30 + " Months";
   }
 };
 

@@ -1,6 +1,6 @@
 {
   "tutorials": {
-    "pageName": [
+    "mainMenu": [
       {
         "elementName": "loginButton",
         "title": "Login",
@@ -14,24 +14,61 @@
       {
         "elementName": "faucet",
         "title": "Get Test Token",
-        "description": "SubsCrypt is blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
       }
     ],
-    "pageName2": [
+    "login": [
       {
-        "elementName": "loginButton",
-        "title": "Login",
-        "description": "If you want to subscribe to a plan or have already subscribed you can login here. Also if you are a registered provider you can login here."
+        "elementName": "network",
+        "title": "Choose Network",
+        "description": "The only supported chain is PolkaDot."
       },
       {
-        "elementName": "SignUpButton",
-        "title": "Become A Provider",
-        "description": "You can Become a provider in SubsCrypt platform by connecting a PolkaDot.js wallet and filling a simple form. You are required to stake a minimum amount of token."
+        "elementName": "roleSubscriber",
+        "title": "Subscriber Role",
+        "description": "Choose this if you are a subscriber or you want to be a subscriber."
       },
       {
-        "elementName": "faucet",
-        "title": "Get Test Token",
-        "description": "SubsCrypt is blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
+        "elementName": "roleProvider",
+        "title": "Provider Role",
+        "description": "Choose this if you are a provider in SubsCrypt platform."
+      },
+      {
+        "elementName": "walletButton",
+        "title": "Connect to Wallet",
+        "description": "If you are a new subscriber and you don't have any credentials and have a connected PolkaDot.js wallet on your browser choose this for easy login method."
+      },
+      {
+        "elementName": "usernameButton",
+        "title": "Credential login",
+        "description": "Choose this if you don't have access to your wallet and login with your username and password."
+      }
+    ],
+    "providerDashboard": [
+      {
+        "elementName": "withdraw",
+        "title": "Withdraw",
+        "description": "You can withdraw your tokens by simply requesting a withdraw. The tokens will be transferred to your Money Address."
+      },
+      {
+        "elementName": "addPlan",
+        "title": "Add a Plan",
+        "description": "You can add a new custom plan here."
+      },
+      {
+        "elementName": "plan1Card",
+        "title": "View and Edit Plan",
+        "description": "You can view and edit detail of your plan."
+      },
+      {
+        "elementName": "profileSetting",
+        "title": "Change your password",
+        "description": "You can change your password if you have access to your PolkaDot.js wallet."
+      },
+      {
+        "elementName": "logout",
+        "title": "Logout",
+        "description": "Click to log out of your account."
       }
     ]
   }

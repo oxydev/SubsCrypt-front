@@ -35,17 +35,11 @@ export const WithdrwaModal = (props) => {
     });
   };
   useEffect(() => {
-    console.log("hello");
-    console.log(userAddress);
     getMoneyAddress(userAddress)
       .then((res) => {
-        console.log(res);
         setAddress(res);
       })
-      .catch(async (err) => {
-        console.log(userAddress);
-        setAddress("");
-        //todo
+      .catch(async () => {
         await showResultToUser("Operation failed!", "Unable to get the money address!");
       });
   }, []);

@@ -96,7 +96,7 @@ export default function PlanCard(props) {
           <h6>Pay with</h6>
           <p>
             {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
-            <span>DOT</span>
+            <span>{" "}DOT</span>
           </p>
         </div>
       </main>

@@ -76,9 +76,9 @@ export const PlansDetailsModal = (props) => {
   const prepareEditPlan = () => {
     const editedPlanData = {}
     editedPlanData['plan_index'] = planInfo.planIndex
-    if (planInfo.duration === "1month") editedPlanData['duration'] = 30 * 24 * 60 * 60 * 1000;
-    else if (planInfo.duration === "3months") editedPlanData['duration'] = 3 * 30 * 24 * 60 * 60 * 1000;
-    else if (planInfo.duration === "6months") editedPlanData['duration'] = 6 * 30 * 24 * 60 * 60 * 1000;
+    if (planInfo.duration === "1 Month") editedPlanData['duration'] = 30 * 24 * 60 * 60 * 1000;
+    else if (planInfo.duration === "3 Months") editedPlanData['duration'] = 3 * 30 * 24 * 60 * 60 * 1000;
+    else if (planInfo.duration === "6 Months") editedPlanData['duration'] = 6 * 30 * 24 * 60 * 60 * 1000;
     editedPlanData['price'] = planInfo.price * 1e12
     editedPlanData['max_refund_permille_policies'] = planInfo.refund * 10
     editedPlanData['disabled'] = false
@@ -165,9 +165,9 @@ export const PlansDetailsModal = (props) => {
             }}
             s
           >
-            <option value="1month">1 Month</option>
-            <option value="3months">3 Months</option>
-            <option value="6months">6 Months</option>
+            <option value="1 Month">1 Month</option>
+            <option value="3 Months">3 Months</option>
+            <option value="6 Months">6 Months</option>
           </select>
           <p>Select from the list</p>
         </div>

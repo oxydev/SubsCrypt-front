@@ -36,7 +36,7 @@ export const ProviderWithdraw = (props) => {
       <h1>Total withdrawable Amount:</h1>
       <p>
         {amount}
-        <span>DOT</span>
+        <span>{" "}DOT</span>
       </p>
 
       <button onClick={handleWithdraw}>Withdraw</button>
