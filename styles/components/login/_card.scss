@@ -18,6 +18,9 @@
     p {
       color: #fff;
     }
+    &:hover {
+      background-color: $purple;
+    }
   }
   &.disabled {
     cursor: default;
@@ -46,7 +49,7 @@
     //background-color: #192025;
     img {
       margin: auto;
-      @include box(48px, 48px);
+      @include square(40px);
     }
 
     .lamp {
