@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react'
+import { useContext, useState } from "react";
 import PercentSlider from "../../gadjets/percetageSlider";
 import TagInput from "../../gadjets/tagInput";
 import * as utils from "../../../utilities/utilityFunctions";
-import { setDataContext } from '../../../context/setData'
+import { setDataContext } from "../../../context/setData";
 import { UserContext } from "../../../context/store";
-import { operationContext } from '../../../context/handleUserOperation'
+import { operationContext } from "../../../context/handleUserOperation";
 
 export const PlansDetailsModal = (props) => {
   const { plan, handleEditPlan, showResultToUser, getProviderAllInfo } = props;
@@ -28,7 +28,10 @@ export const PlansDetailsModal = (props) => {
   const callback = async ({ events = [], status }) => {
     if (status.isInBlock) {
       let check = false;
-      for (const { event: { data, method, section }, phase } of events) {
+      for (const {
+        event: { data, method, section },
+        phase,
+      } of events) {
         if (method === "ExtrinsicSuccess") {
           check = true;
 
@@ -68,29 +71,27 @@ export const PlansDetailsModal = (props) => {
 
         // await showResultToUser("Operation failed!", "The operation has been failed!");
       }
-    }else if (status.isFinalized) {
+    } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
       getProviderAllInfo(globalState.user.address);
     }
-  }
+  };
   const prepareEditPlan = () => {
-    const editedPlanData = {}
-    editedPlanData['plan_index'] = planInfo.planIndex
-    if (planInfo.duration === "1 Month") editedPlanData['duration'] = 30 * 24 * 60 * 60 * 1000;
-    else if (planInfo.duration === "3 Months") editedPlanData['duration'] = 3 * 30 * 24 * 60 * 60 * 1000;
-    else if (planInfo.duration === "6 Months") editedPlanData['duration'] = 6 * 30 * 24 * 60 * 60 * 1000;
-    editedPlanData['price'] = planInfo.price * 1e12
-    editedPlanData['max_refund_permille_policies'] = planInfo.refund * 10
-    editedPlanData['disabled'] = false
-    handleEditPlan(
-      globalState.user.address,
-      callback,
-      editedPlanData
-    ).catch(async () => {
+    const editedPlanData = {};
+    editedPlanData["plan_index"] = planInfo.planIndex;
+    if (planInfo.duration === "1 Month") editedPlanData["duration"] = 30 * 24 * 60 * 60 * 1000;
+    else if (planInfo.duration === "3 Months")
+      editedPlanData["duration"] = 3 * 30 * 24 * 60 * 60 * 1000;
+    else if (planInfo.duration === "6 Months")
+      editedPlanData["duration"] = 6 * 30 * 24 * 60 * 60 * 1000;
+    editedPlanData["price"] = planInfo.price * 1e12;
+    editedPlanData["max_refund_permille_policies"] = planInfo.refund * 10;
+    editedPlanData["disabled"] = false;
+    handleEditPlan(globalState.user.address, callback, editedPlanData).catch(async () => {
       //todo
       await showResultToUser("Operation failed!", "The operation has been failed!");
     });
-  }
+  };
   console.log(planInfo);
   return (
     <section className="PlanDetailsModal">
@@ -123,12 +124,28 @@ export const PlansDetailsModal = (props) => {
             }}
           />
           <p>Short and specific details of the plan</p>
-
+          {/* 
           <label>Special Charactristics of the plan</label>
           <div className="PlansForm-tag">
             <TagInput initailTags={planInfo.characteristics} handleChange={handleplanInfoUpdate} />
           </div>
-          <p>Some characteristics your plan may have e.g. Country, Region and etc.</p>
+          <p>Some characteristics your plan may have e.g. Country, Region and etc.</p> */}
+          <label>Plan Duration</label>
+          <select
+            type="text"
+            name="PlanDuration"
+            placeholder="Select Duration of Plan"
+            value={planInfo.duration}
+            onChange={(e) => {
+              handleplanInfoUpdate("duration", e.target.value);
+            }}
+            s
+          >
+            <option value="1 Month">1 Month</option>
+            <option value="3 Months">3 Months</option>
+            <option value="6 Months">6 Months</option>
+          </select>
+          <p>Select from the list</p>
         </div>
         <div>
           <label>Price</label>
@@ -154,22 +171,6 @@ export const PlansDetailsModal = (props) => {
           <p>
             Users can refund <span>{refundValue} percent</span> of the plan at any time.
           </p>
-          <label>Plan Duration</label>
-          <select
-            type="text"
-            name="PlanDuration"
-            placeholder="Select Duration of Plan"
-            value={planInfo.duration}
-            onChange={(e) => {
-              handleplanInfoUpdate("duration", e.target.value);
-            }}
-            s
-          >
-            <option value="1 Month">1 Month</option>
-            <option value="3 Months">3 Months</option>
-            <option value="6 Months">6 Months</option>
-          </select>
-          <p>Select from the list</p>
         </div>
       </div>
       <div className="PlanDetailsModal-footer">
