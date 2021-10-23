@@ -29,13 +29,13 @@ export const GetBCDataFunctions = (props) => {
         const walletList = result.map((item) => item);
 
         const walletNumber = walletList.length;
-        if (walletNumber == 1) {
+        if (walletNumber === 1) {
           return walletList[0];
         } else {
           if (address) {
             let targetWallet;
             for (const item of walletList) {
-              if (address == item.address) {
+              if (address === item.address) {
                 targetWallet = item;
               }
             }
@@ -136,9 +136,9 @@ export const GetBCDataFunctions = (props) => {
     )
       .getPlanLength(address)
       .then((res) => {
-        if (res.status == "Fetched") {
+        if (res.status === "Fetched") {
           const planLength = parseInt(res.result);
-          if (planLength == 0) {
+          if (planLength === 0) {
             return "NotRegistered";
           } else {
             return planLength;
@@ -194,7 +194,7 @@ export const GetBCDataFunctions = (props) => {
     )
       .getPlanCharacteristics(address, index)
       .then((result) => {
-        if (result.status == "Fetched") {
+        if (result.status === "Fetched") {
           plan.characteristics = result.result;
           plan.providerAddress = address;
           return plan;
@@ -210,7 +210,7 @@ export const GetBCDataFunctions = (props) => {
   //Function for getting plan Characteristic
   const getWithdrawableAmount = async (address) => {
     return await (await subscrypt).getWithdrawableAmount(address).then((result) => {
-      if (result.status == "Fetched") {
+      if (result.status === "Fetched") {
         return result.result;
       }
     });
@@ -219,7 +219,7 @@ export const GetBCDataFunctions = (props) => {
   //Function for getting money address
   const getMoneyAddress = async (address) => {
     return await (await subscrypt).getMoneyAddress(address).then((result) => {
-      if (result.status == "Fetched") {
+      if (result.status === "Fetched") {
         return result.result;
       }
     });
@@ -251,9 +251,9 @@ export const GetBCDataFunctions = (props) => {
     )
       .retrieveWholeDataWithWallet(address)
       .then(async (result) => {
-        if (result.status == "Fetched") {
+        if (result.status === "Fetched") {
           plans = result.result;
-          if (plans.length == 0) {
+          if (plans.length === 0) {
             return 0;
           }
           let promiseList = [];

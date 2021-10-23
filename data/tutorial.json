@@ -97,6 +97,33 @@
         "title": "Logout",
         "description": "Click to log out of your account."
       }
+    ],
+    "subscriberNewOffer": [
+      {
+        "elementName": "providerAddressInput",
+        "title": "Choose your provider",
+        "description": "You can add a new custom plan here."
+      },
+      {
+        "elementName": "plan1Card",
+        "title": "Choose a plan",
+        "description": "You can choose a plan "
+      },
+      {
+        "elementName": "plan1Card",
+        "title": "View and Edit Plan",
+        "description": "You can view and edit detail of your plan."
+      },
+      {
+        "elementName": "profileSetting",
+        "title": "Change your password",
+        "description": "You can change your password if you have access to your PolkaDot.js wallet."
+      },
+      {
+        "elementName": "logout",
+        "title": "Logout",
+        "description": "Click to log out of your account."
+      }
     ]
   }
 }

@@ -8,9 +8,9 @@ export default function Home() {
   const userType = globalState.user.type;
 
   //Navigate the user to the right path according to his type as a provider or ordinary user
-  if (userType == "provider") {
+  if (userType === "provider") {
     router.push("/provider/");
-  } else if (userType == "user") {
+  } else if (userType === "user") {
     router.push("/user/");
   }
 

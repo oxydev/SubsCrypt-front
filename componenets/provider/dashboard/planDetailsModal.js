@@ -63,7 +63,7 @@ export const PlansDetailsModal = (props) => {
             });
         }
       }
-      if (check == false) {
+      if (check === false) {
         await showResultToUser("Operation failed!", "The operation has been failed!");
 
         // await showResultToUser("Operation failed!", "The operation has been failed!");

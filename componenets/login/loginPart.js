@@ -9,10 +9,10 @@ export default function LoginPart(props) {
     useContext(handleDataContext);
   const handleLogin = () => {
     console.log(type)
-    if (type == "subscriber") {
+    if (type === "subscriber") {
       handleSubscriberloginByUsername(loginData.username, loginData.password);
       console.log("subscriber");
-    } else if (type == "provider") {
+    } else if (type === "provider") {
       handleProviderloginByUsername(loginData.username, loginData.password);
     }
   };

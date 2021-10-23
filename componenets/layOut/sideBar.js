@@ -1,4 +1,4 @@
-import React, { useContext ,useState} from "react";
+import React, { useContext, useEffect, useState } from 'react'
 import Link from "next/link";
 import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
@@ -22,11 +22,13 @@ export default function SideBar() {
     sideBarData = data.PublicSideBar;
   }
 
-
+  useEffect(() => {
+    setSelect(0)
+  },[sideBarData])
 
   const sideBarMenuItems = sideBarData.menuItem.map(
     (item,index) =>
-      (item.name != "Profile Setting" || globalState.user.username) && (
+      (item.name !== "Profile Setting" || globalState.user.username) && (
         <li key={item.name} className={select===index? "select":""} onClick={()=>setSelect(index)}>
           {item.url ? (
             <>
@@ -36,7 +38,7 @@ export default function SideBar() {
               <p
                 id={item.id}
                 onClick={
-                  item.name == "Log Out"
+                  item.name === "Log Out"
                     ? (e) => {
                         e.preventDefault();
                         handleLogOut();
@@ -54,7 +56,7 @@ export default function SideBar() {
             <p
               id={item.id}
               onClick={
-                item.name == "Log Out"
+                item.name === "Log Out"
                   ? (e) => {
                     e.preventDefault();
 

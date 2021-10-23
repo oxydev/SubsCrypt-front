@@ -47,7 +47,7 @@ export const HandleDataFunctions = (props) => {
     blockChainFuncs
       .connectToWallet(address)
       .then(async (res) => {
-        if (res == "notSet") {
+        if (res === "notSet") {
           throw new Error("notSet");
         } else {
           setAuth(true);
@@ -89,7 +89,7 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .then(async (res) => {
-        if (res == "notSet") {
+        if (res === "notSet") {
           if (address) {
           } else {
             // window.alert("You should choose a wallet from your wallet list!");
@@ -110,7 +110,7 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(async (err) => {
-        if (err.message == "notSet") {
+        if (err.message === "notSet") {
           if (address) {
             // window.alert("You should choose a wallet from your wallet list!");
             await showResultToUser(
@@ -142,7 +142,7 @@ export const HandleDataFunctions = (props) => {
   const handleProviderLogingByWallet = async (address) => {
     setLoading(true);
     blockChainFuncs.connectToWallet(address).then(async (res) => {
-        if (res == "notSet") {
+        if (res === "notSet") {
           throw new Error("notSet");
         } else {
           setAuth(true);
@@ -161,7 +161,7 @@ export const HandleDataFunctions = (props) => {
         });
       })
       .then(async (res) => {
-        if (res.planNum == "NotRegistered") {
+        if (res.planNum === "NotRegistered") {
           dispatch({ type: "REGISTERED", payload: false });
           setLoading(false);
         } else {
@@ -184,7 +184,7 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(async (err) => {
-        if (err.message == "notSet") {
+        if (err.message === "notSet") {
           if (address) {
             await showResultToUser(
               "Wallet selection Error!",
@@ -217,7 +217,7 @@ export const HandleDataFunctions = (props) => {
     )
       .userCheckAuthWithUsername(username, password)
       .then(async (result) => {
-        if (result.result == true) {
+        if (result.result === true) {
           setLoading(true);
           setAuth(true);
           Cookies.set("subscrypt", username);
@@ -259,7 +259,7 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .then(async (res) => {
-        if (res == username) {
+        if (res === username) {
           setLoading(false);
 
           await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
@@ -282,7 +282,7 @@ export const HandleDataFunctions = (props) => {
     )
       .providerCheckAuthWithUsername(username, password)
       .then(async (result) => {
-        if (result.result == true) {
+        if (result.result === true) {
           setLoading(true);
           dispatch({
             type: "LOAD_USER",
@@ -301,7 +301,7 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .then(async (res) => {
-        if (res == username) {
+        if (res === username) {
           dispatch({ type: "REGISTERED", payload: true });
           let subscryptAddress = Cookies.get("subscryptAddress");
           if (subscryptAddress === undefined) {
@@ -353,16 +353,20 @@ export const HandleDataFunctions = (props) => {
         await subscrypt
       )
         .getAddressByUsername(providerAddress)
-        .then((result) => {
-          dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
-          loadOffers(result.result);
+        .then(async (result) => {
+          if(result.status === "Fetched")
+          {
+            dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
+            await loadOffers(result.result);
+          } else {
+            await showResultToUser(
+              "Provider Not found!",
+              "The username you have entered is not a valid Provider!"
+            );
+          }
         })
-        .catch(async (error) => {
-          // window.alert("The username you have entered is invalid!!");
-          await showResultToUser(
-            "Authentication Problem!",
-            "The username you have entered is invalid!!"
-          );
+        .catch(() => {
+
         });
     } else {
       await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
@@ -382,15 +386,15 @@ export const HandleDataFunctions = (props) => {
     if (password) {
       setLoading(true);
       //do the stuff for auth by username
-      if (userType == "user") {
+      if (userType === "user") {
         handleSubscriberloginByUsername(userName, password);
-      } else if (userType == "provider") {
+      } else if (userType === "provider") {
         handleProviderloginByUsername(userName, password);
       }
     } else if (userAddress) {
-      if (userType == "user") {
+      if (userType === "user") {
         handleSubscriberLoginByWallet(userAddress);
-      } else if (userType == "provider") {
+      } else if (userType === "provider") {
         handleProviderLogingByWallet(userAddress);
       }
     }

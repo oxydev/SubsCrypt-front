@@ -91,7 +91,7 @@ export default function ProviderSignUp() {
             });
         }
       });
-      if (check == false) {
+      if (check === false) {
         // window.alert("The operation failed!");
         await showResultToUser("Operation faild!", "The operation has been failed!");
       }
@@ -135,7 +135,7 @@ export default function ProviderSignUp() {
       // window.alert("You should upload a photo!");
       await showResultToUser("Photo is necessary!", "You should upload a photo!");
     } else {
-      if (info.ProviderPassword != info.ProviderConfirmedPasswords) {
+      if (info.ProviderPassword !== info.ProviderConfirmedPasswords) {
         // window.alert("Password has not been comfirmed correctly!!");
         await showResultToUser(
           "Password Comfirmation!",

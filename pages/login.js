@@ -18,10 +18,10 @@ const Login = (props) => {
   const walletLists = globalState.wallets;
 
   useEffect(() => {
-    if (data.networks.length == 1) {
+    if (data.networks.length === 1) {
       setNtwork(0);
     }
-    if (action == "signUp") {
+    if (action === "signUp") {
       setRole(1);
       setSteps([true, true, true]);
       setMethod(0);
@@ -35,7 +35,7 @@ const Login = (props) => {
   }, [network]);
 
   useEffect(() => {
-    if (role != -1) {
+    if (role !== -1) {
       setSteps([true, true, true]);
     }
     console.log(role);
@@ -46,26 +46,26 @@ const Login = (props) => {
       key={item.name}
       item={item}
       clickHandler={() => {
-        if (action != "signUp") {
+        if (action !== "signUp") {
           setRole(index);
         }
       }}
       index={index}
-      selected={index == role ? true : false}
-      disabled={index == 0 && action == "signUp" ? true : false}
+      selected={index === role ? true : false}
+      disabled={index === 0 && action === "signUp" ? true : false}
     />
   ));
   const networks = data.networks.map((item, index) => (
-    <Card key={item.name} item={item} selected={index == network ? true : false} />
+    <Card key={item.name} item={item} selected={index === network ? true : false} />
   ));
 
   const methods = data.methods.map((item, index) => (
     <Card
       key={item.name}
       item={item}
-      selected={index == method ? true : false}
+      selected={index === method ? true : false}
       clickHandler={
-        index == 0
+        index === 0
           ? () => {
               setMethod(0);
               handleWalletLists();
@@ -81,7 +81,7 @@ const Login = (props) => {
     <div className="LoginPage SingInPage">
       <div className="LoginPage SingInPage">
         <h1 className="Title">
-          {action == "signUp" ? "Sign Up a new Account" : "Login to Your Account"}
+          {action === "signUp" ? "Sign Up a new Account" : "Login to Your Account"}
         </h1>
         <p className="Topic">Network</p>
         <div className="ChooseNetworks">{networks}</div>
@@ -91,7 +91,7 @@ const Login = (props) => {
             <div className="chooseRole">{users}</div>
           </>
         )}
-        {steps[2] && action != "signUp" && (
+        {steps[2] && action !== "signUp" && (
           <>
             <p className="Topic">Login Method</p>
             <div className="LoginMethod">
@@ -121,8 +121,8 @@ const Login = (props) => {
           </>
         )}
       </div>
-      {method == 0 && <Connection type={role == 0 ? "subscriber" : "provider"} />}
-      {method == 1 && <LoginPart type={role == 0 ? "subscriber" : "provider"} />}
+      {method === 0 && <Connection type={role === 0 ? "subscriber" : "provider"} />}
+      {method === 1 && <LoginPart type={role === 0 ? "subscriber" : "provider"} />}
     </div>
   );
 };

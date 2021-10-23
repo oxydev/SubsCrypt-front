@@ -46,7 +46,7 @@ export default function UserPlanCard(props) {
       .getPlanCharacteristics(props.plan.provider, props.plan.plan_index)
       .then((result) => {
         // console.log(result);
-        if (result.status == "Fetched") {
+        if (result.status === "Fetched") {
           plan.characteristics = result.result;
           handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback).catch(
             async () => {
@@ -102,7 +102,7 @@ export default function UserPlanCard(props) {
           );
         }
       });
-      if (check == false) {
+      if (check === false) {
         // window.alert("The operation failed!");
         await showResultToUser("Operation faild!", "The operation has been failed!");
       }
@@ -115,7 +115,7 @@ export default function UserPlanCard(props) {
   return (
     <section
       className={
-        planStatus == -1
+        planStatus === -1
           ? "UserPlanCard expired"
           : planStatus > 90
           ? "UserPlanCard warning"
@@ -167,7 +167,7 @@ export default function UserPlanCard(props) {
         </div>
 
         <p className="UsePlan-useAnnounce">You have used {"%" + usedPercentage} of the service</p>
-        {planStatus != -1 && (
+        {planStatus !== -1 && (
           <p className="UsePlan-useAnnounce">Refundable amount: {refundAmount} Dot</p>
         )}
 
@@ -179,7 +179,7 @@ export default function UserPlanCard(props) {
               <option value="coin2">coin2</option>
             </select>
           </div>
-          {planStatus == -1 ? (
+          {planStatus === -1 ? (
             <>
               <button
                 className={localLoading ? "UserPlan-subscribeBtn loading" : "UserPlan-subscribeBtn"}

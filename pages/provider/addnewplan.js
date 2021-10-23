@@ -78,7 +78,7 @@ export default function AddNewPlan() {
           );
         }
       });
-      if (check == false) {
+      if (check === false) {
         // window.alert("The operation failed!");
         await showResultToUser("Operation faild!", "The operation has been failed!");
       }

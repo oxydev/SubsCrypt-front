@@ -74,10 +74,10 @@ export default function Connection(props) {
   const [address, setAddress] = useState(null);
 
   const handleConnection = () => {
-    if (type == "subscriber") {
+    if (type === "subscriber") {
       handleSubscriberLoginByWallet(address);
       console.log("subscriber");
-    } else if (type == "provider") {
+    } else if (type === "provider") {
       handleProviderLogingByWallet(address);
     }
   };

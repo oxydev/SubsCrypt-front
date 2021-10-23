@@ -54,7 +54,7 @@ export default function PlanCard(props) {
           );
         }
       }
-      if (check == false) {
+      if (check === false) {
         await showResultToUser("Operation faild!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
@@ -70,7 +70,7 @@ export default function PlanCard(props) {
   }
 
   return (
-    <section className="PlanCard" onClick={type == "user" ? handleSubscribe : handleEdit}>
+    <section className="PlanCard" onClick={type === "user" ? handleSubscribe : handleEdit}>
       <header>
         <img
           className="PlanLogo"
@@ -101,7 +101,7 @@ export default function PlanCard(props) {
         </div>
       </main>
       <footer>
-        <button className="PlanCard-button">{type == "user" ? "Subscribe" : "Edit Plan"}</button>
+        <button className="PlanCard-button">{type === "user" ? "Subscribe" : "Edit Plan"}</button>
       </footer>
     </section>
   );

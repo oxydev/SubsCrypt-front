@@ -10,7 +10,7 @@ export default function ProviderAllUsers() {
   // console.log(allUsers);
   if (
     globalState.providerPlans.length > 0 &&
-    globalState.providerPlans.length == globalState.user.plansCount
+    globalState.providerPlans.length === globalState.user.plansCount
   ) {
     allUsers.forEach((user)=>console.log(user))
     userList = allUsers.map((item, index) => (

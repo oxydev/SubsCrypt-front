@@ -89,18 +89,18 @@ export default function Menu() {
         elm.closest("li").classList.add("select");
       };
 
-      if (task == "none") {
+      if (task === "none") {
         sideBarStyleHandler(mainLoginLink);
-      } else if (task == "login") {
+      } else if (task === "login") {
         sideBarStyleHandler(userLoginLink);
-      } else if (task == "providerSignUp") {
+      } else if (task === "providerSignUp") {
         sideBarStyleHandler(signUpLink);
       }
     }
   });
 
   //change the login menu according to selecting each type
-  if (task == "none") {
+  if (task === "none") {
     return (
       <section className="MainLoginPage">
         <h1>Main Menu</h1>
@@ -118,9 +118,9 @@ export default function Menu() {
         </div>
       </section>
     );
-  } else if (task == "login") {
+  } else if (task === "login") {
     return <Login />;
-  } else if (task == "providerSignUp") {
+  } else if (task === "providerSignUp") {
     return (
       <div className="SignUp-walletConnection">
         <Login action={"signUp"} />

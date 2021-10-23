@@ -115,7 +115,7 @@ const reducer = (state, action) => {
     case "PLAN_SERVERINFO":
       const index = action.payload.index;
       const type = action.payload.type;
-      if (type == "provider") {
+      if (type === "provider") {
         let providerPlans = [...state.providerPlans];
         providerPlans[index] = {
           ...providerPlans[index],
@@ -125,7 +125,7 @@ const reducer = (state, action) => {
           ...state,
           providerPlans: [...providerPlans],
         };
-      } else if (type == "user") {
+      } else if (type === "user") {
         let plans = [...state.plans];
         plans[index] = {
           ...plans[index],
@@ -161,10 +161,10 @@ export const Store = (props) => {
 
   useEffect(() => {
     if (globalState.user) {
-      if (globalState.user.type == "user" && router.pathname == "/provider") {
+      if (globalState.user.type === "user" && router.pathname === "/provider") {
         router.push("/user/");
       }
-      if (globalState.user.type == "provider" && router.pathname == "/user") {
+      if (globalState.user.type === "provider" && router.pathname === "/user") {
         router.push("/provider/");
       }
     }

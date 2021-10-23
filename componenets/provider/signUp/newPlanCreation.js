@@ -36,7 +36,7 @@ export default function NewPlanCreation(props) {
   //function for handle minimizing or maximazing he forms
   function toggleVisibility() {
     const status = plan.visibility;
-    if (status == "visible") {
+    if (status === "visible") {
       handlePlanListUpdate("visibility", "hidden");
     } else {
       handlePlanListUpdate("visibility", "visible");
@@ -53,7 +53,7 @@ export default function NewPlanCreation(props) {
 
   return (
     <section
-      className={plan.visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
+      className={plan.visibility === "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
     >
       <h1 onClick={toggleVisibility}>
         Create a Subscryption Plan #{index + planNumber + 1}
