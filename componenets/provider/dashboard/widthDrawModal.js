@@ -3,9 +3,8 @@ import { UserContext } from "../../../context/store";
 
 export const WithdrwaModal = (props) => {
   const [address, setAddress] = useState("");
-  const [amount, setAmount] = useState(0);
 
-  const { getWithdrawableAmount, getMoneyAddress, withdrawMoney,showResultToUser } = props;
+  const { withDrawAbleAmount, getMoneyAddress, withdrawMoney, showResultToUser } = props;
   const { globalState } = useContext(UserContext);
 
   const userAddress = globalState.user.address;
@@ -13,20 +12,22 @@ export const WithdrwaModal = (props) => {
   const callback = async ({ events = [], status }) => {
     if (status.isInBlock) {
       let check = false;
-      for (const { event: { data, method, section }, phase } of events) {
-        if (method === "ExtrinsicSuccess")
-          check = true;
+      for (const {
+        event: { data, method, section },
+        phase,
+      } of events) {
+        if (method === "ExtrinsicSuccess") check = true;
       }
       if (check === false) {
         await showResultToUser("Operation failed!", "The operation has been failed!");
 
         // await showResultToUser("Operation failed!", "The operation has been failed!");
       }
-    }else if (status.isFinalized) {
+    } else if (status.isFinalized) {
       //todo finish and refresh
       // console.log("Finalized block hash", status.asFinalized.toHex());
     }
-  }
+  };
   const handleWithdraw = (e) => {
     e.preventDefault();
     withdrawMoney(userAddress, callback).catch(async () => {
@@ -34,20 +35,19 @@ export const WithdrwaModal = (props) => {
     });
   };
   useEffect(() => {
-    getMoneyAddress(userAddress).then((res) => {
-      setAddress(res);
-    }).catch((err) => {
-      setAddress("");
-      //todo
-      // await showResultToUser("Operation failed!", "The operation has been failed!");
-    });
-    getWithdrawableAmount(userAddress).then((res) => {
-      setAmount(res);
-    }).catch((err) => {
-      setAmount(0);
-      //todo
-      // await showResultToUser("Operation failed!", "The operation has been failed!");
-    });
+    console.log("hello");
+    console.log(userAddress);
+    getMoneyAddress(userAddress)
+      .then((res) => {
+        console.log(res);
+        setAddress(res);
+      })
+      .catch(async (err) => {
+        console.log(userAddress);
+        setAddress("");
+        //todo
+        await showResultToUser("Operation failed!", "Unable to get the money address!");
+      });
   }, []);
   return (
     <section className="WithDrawModal">
@@ -57,7 +57,7 @@ export const WithdrwaModal = (props) => {
         <input type="text" value={address} disabled />
         <label>Withdrawable Amount:</label>
         <div className="Amount">
-          <input type="text" value={amount} disabled />
+          <input type="text" value={withDrawAbleAmount} disabled />
           <span className="Unit">DOT</span>
         </div>
         <input type="submit" value="Withdraw" />
