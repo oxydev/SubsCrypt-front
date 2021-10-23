@@ -45,13 +45,16 @@ export default function Header() {
                       : "/provider/profilesetting"
                   }
                 >
-                  <a>Profile Setting</a>
+
+                  <a>                  <embed src={'/icons/png/sideBar/setting-black.svg'}/>
+                    Profile Setting</a>
                 </Link>
               </li>
             )}
             <li>
               <Link href="#">
-                <a onClick={handleLogOut}>LogOut</a>
+                <a onClick={handleLogOut}><embed src={'/icons/png/sideBar/logout-black.svg'}/>
+                  LogOut</a>
               </Link>
             </li>
           </ul>

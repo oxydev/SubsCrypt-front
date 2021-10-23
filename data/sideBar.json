@@ -13,21 +13,21 @@
         "url": "/user/newOffers",
         "id": "newOffers",
         "icon": "/dashbord.png",
-        "item": "/icons/png/sideBar/mainMenu.svg"
+        "item": "/icons/png/sideBar/offer2.svg"
       },
       {
         "name": "Profile Setting",
         "url": "/user/profilesetting",
         "id": "profilesetting",
         "icon": "/dashbord.png",
-        "item": "/icons/png/sideBar/mainMenu.svg"
+        "item": "/icons/png/sideBar/setting.svg"
       },
       {
         "name": "Log Out",
         "url": "/",
         "id": "logout",
         "icon": "/dashbord.png",
-        "item": "/icons/png/sideBar/mainMenu.svg"
+        "item": "/icons/png/sideBar/logout.svg"
       }
     ]
   },
@@ -36,22 +36,27 @@
       {
         "name": "Dashboard",
         "url": "/provider/",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
         "name": "Add plan",
         "url": "/provider/addnewplan",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/addplan.svg"
       },
       {
         "name": "Profile Setting",
         "url": "/provider/profilesetting",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/setting.svg"
       },
       {
         "name": "Log Out",
         "url": "/",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/logout.svg"
+
       }
     ]
   },
@@ -60,8 +65,9 @@
       {
         "name": "Log Out",
         "url": "/",
-        "item": "/icons/png/sideBar/mainMenu.svg",
+        "item": "/icons/png/sideBar/logout.svg",
         "icon": "/dashbord.png"
+
       }
     ]
   },

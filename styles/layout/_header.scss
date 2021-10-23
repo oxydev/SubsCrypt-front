@@ -106,9 +106,17 @@
       @include text-body--verySmall--light;
       color: $gray-4;
       border-bottom: $border-main;
+      embed {
+        @include box(25px, 25px);
+        opacity: 0.5;
+        transition: opacity 0.2s ease-in-out;
+        padding-right: 4px;
+        padding-top: 9px;
+      }
       &:last-child {
         border-bottom: none;
       }
+
     }
   }
 

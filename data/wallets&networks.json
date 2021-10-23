@@ -25,7 +25,7 @@
   "roles": [
     {
       "name": "Subscriber",
-      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+      "imageURL": "/icons/png/networks/subscriber.png"
     },
     {
       "name": "Provider",
@@ -35,11 +35,11 @@
   "methods": [
     {
       "name": "Wallet",
-      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+      "imageURL": "/icons/png/networks/wallet.png"
     },
     {
       "name": "Username",
-      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+      "imageURL": "/icons/png/networks/username.png"
     }
   ]
 }

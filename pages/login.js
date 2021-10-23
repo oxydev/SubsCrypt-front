@@ -75,7 +75,7 @@ const Login = (props) => {
               setMethod(1);
             }
       }
-      circle={true}
+      circle={false}
 
     />
   ));
