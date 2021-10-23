@@ -37,7 +37,8 @@ export default function SideBar() {
                 id={item.id}
                 onClick={
                   item.name == "Log Out"
-                    ? () => {
+                    ? (e) => {
+                        e.preventDefault();
                         handleLogOut();
                       }
                     : () => {}
@@ -54,8 +55,10 @@ export default function SideBar() {
               id={item.id}
               onClick={
                 item.name == "Log Out"
-                  ? () => {
-                      handleLogOut();
+                  ? (e) => {
+                    e.preventDefault();
+
+                    handleLogOut();
                     }
                   : () => {}
               }
