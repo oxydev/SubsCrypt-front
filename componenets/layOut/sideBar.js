@@ -12,15 +12,13 @@ export default function SideBar() {
   const type = globalState.user.type;
   const registerStatus = globalState.user.registered;
   let sideBarData;
-  if (type == "user") {
-    sideBarData = data.signInSideBar;
-  } else if (type == "provider" && registerStatus) {
+  if (type === "user") {
+    sideBarData = data.UserSideBar;
+  } else if (type === "provider" && registerStatus) {
     sideBarData = data.ProviderSideBar;
-  } else if (type == "provider" && !registerStatus) {
+  } else if (type === "provider" && !registerStatus) {
     sideBarData = data.signUpSideBar;
-  } else if(type==="sign_in"){
-    sideBarData=data.signInSideBar
-  }else{
+  } else {
     sideBarData = data.PublicSideBar;
   }
 
@@ -31,8 +29,11 @@ export default function SideBar() {
       (item.name != "Profile Setting" || globalState.user.username) && (
         <li key={item.name} className={select===index? "select":""} onClick={()=>setSelect(index)}>
           {item.url ? (
+            <>
+            <embed src={item.item}/>
+
             <Link href={item.url}>
-              <a
+              <p
                 id={item.id}
                 onClick={
                   item.name == "Log Out"
@@ -43,8 +44,9 @@ export default function SideBar() {
                 }
               >
                 {item.name}
-              </a>
+              </p>
             </Link>
+            </>
           ) : (
             <>
               <embed src={item.item}/>

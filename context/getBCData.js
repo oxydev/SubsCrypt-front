@@ -3,6 +3,7 @@ import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import { modalContext } from "./modal";
 import { serverDataContext } from "./getServerData";
 import SingIn from "../pages/login";
+import { operationContext } from './handleUserOperation'
 
 export const getBCDataContext = React.createContext({});
 
@@ -11,6 +12,7 @@ let subscrypt;
 export const GetBCDataFunctions = (props) => {
   const { setModal, setCallBack } = useContext(modalContext);
   const serverFunctions = useContext(serverDataContext);
+  const { showResultToUser } = useContext(operationContext);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
@@ -154,7 +156,8 @@ export const GetBCDataFunctions = (props) => {
     if (!count) {
       return (await subscrypt).getPlanLength(address).then(async (res) => {
         return getProviderPlanslist(address, parseInt(res.result));
-      });
+      }).catch(async (err) =>
+        await showResultToUser("Failed!", "The Address is not valid!"))
     } else {
       for (let i = 0; i < count; i++) {
         promiseList.push(

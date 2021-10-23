@@ -27,7 +27,7 @@ export default function ProviderSelection() {
       >
         <label>Input the Provider username or address</label>
         <div>
-          <input type="text" ref={textRef} />
+          <input type="text" defaultValue={"5HWLj7XsXETx85nHsSHPbAaQdCdDmT5aJT73pSUGsM28pyfk"} ref={textRef} />
           <input type="submit" value="Submit" />
           <button
             onClick={(e) => {

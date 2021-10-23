@@ -11,7 +11,7 @@ export default function SubscriptionModal(props) {
   const characteristics = plan.characteristics;
   const characsInputs = characteristics.map((item) => (
     <div key={item} className="Modal-InputPart">
-      <label>{item}</label>
+      <label>{item+":"}</label>
       <input
         type="text"
         onChange={(e) => {

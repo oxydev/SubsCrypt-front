@@ -4,22 +4,26 @@
       {
         "name": "Dashboard",
         "url": "/user/",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
         "name": "New Offers",
         "url": "/user/newOffers",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
         "name": "Profile Setting",
         "url": "/user/profilesetting",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
         "name": "Log Out",
         "url": "/",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/mainMenu.svg"
       }
     ]
   },
@@ -52,6 +56,7 @@
       {
         "name": "Log Out",
         "url": "/",
+        "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
       }
     ]
@@ -82,45 +87,6 @@
         "id": "giveSomeToken",
         "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
-      }
-    ]
-  },
-  "signInSideBar": {
-    "menuItem": [
-      {
-        "name": "Dashboard",
-        "id": "",
-        "item": "/icons/png/sideBar/mainMenu.svg"
-      },
-      {
-        "name": "My Subscrypts",
-        "id": "",
-        "item": "/icons/png/sideBar/mainMenu.svg"
-      },
-      {
-        "name": "Profile Setting",
-        "id": "",
-        "item": "/icons/png/sideBar/mainMenu.svg"
-      },
-      {
-        "name": "Refunds",
-        "id": "",
-        "item": "/icons/png/sideBar/mainMenu.svg"
-      },
-      {
-        "name": "Invite friends",
-        "id": "",
-        "item": "/icons/png/sideBar/mainMenu.svg"
-      },
-      {
-        "name": "FAQ",
-        "id": "",
-        "item": "/icons/png/sideBar/mainMenu.svg"
-      },
-      {
-        "name": "Blog",
-        "id": "",
-        "item": "/icons/png/sideBar/mainMenu.svg"
       }
     ]
   }
