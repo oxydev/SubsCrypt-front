@@ -153,9 +153,12 @@ export const GetBCDataFunctions = (props) => {
   //Functions for getting the provider plans data
   const getProviderPlanslist = async (address, count) => {
     let promiseList = [];
+
     if (!count) {
       return (await subscrypt).getPlanLength(address).then(async (res) => {
-        return getProviderPlanslist(address, parseInt(res.result));
+        console.log(res)
+        if(res.status === "Fetched")
+          return getProviderPlanslist(address, parseInt(res.result));
       }).catch(async (err) =>
         await showResultToUser("Failed!", "The Address is not valid!"))
     } else {
@@ -248,9 +251,11 @@ export const GetBCDataFunctions = (props) => {
     let plans = [];
     return await (
       await subscrypt
-    )
-      .retrieveWholeDataWithWallet(address)
+    ).retrieveWholeDataWithWallet(address)
       .then(async (result) => {
+        console.log('fuck')
+
+        console.log(result)
         if (result.status === "Fetched") {
           plans = result.result;
           if (plans.length === 0) {
@@ -272,7 +277,8 @@ export const GetBCDataFunctions = (props) => {
           return plans;
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         throw new Error("Problem with loading subscriber plans!");
       });
   };

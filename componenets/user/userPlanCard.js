@@ -157,11 +157,11 @@ export default function UserPlanCard(props) {
         </div>
       </div>
       <div className="UserPlan-specs">
-        <div className="UserPlan-rate">
-          <h6>Rate this provider</h6>
-          <p>{localPlans.rateAmmount} rates </p>
-          {/* <p>{localPlans.rateNumber}</p> */}
-        </div>
+        {/*<div className="UserPlan-rate">*/}
+        {/*  <h6>Rate this provider</h6>*/}
+        {/*  <p>{localPlans.rateAmmount} rates </p>*/}
+        {/*  /!* <p>{localPlans.rateNumber}</p> *!/*/}
+        {/*</div>*/}
         <div className="UsePlanPercentage">
           <PercentageBar percentage={usedPercentage} />
         </div>

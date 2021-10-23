@@ -91,8 +91,6 @@ export const HandleDataFunctions = (props) => {
         if (res === "notSet") {
           if (address) {
           } else {
-            // window.alert("You should choose a wallet from your wallet list!");
-
             setLoading(false);
             await showResultToUser(
               "Wallet selection Error!",
@@ -144,9 +142,7 @@ export const HandleDataFunctions = (props) => {
   //Function for handling the user wallet connection as a subscriber
   const handleProviderLogingByWallet = async (address) => {
     setLoading(true);
-    blockChainFuncs
-      .connectToWallet(address)
-      .then(async (res) => {
+    blockChainFuncs.connectToWallet(address).then(async (res) => {
         if (res === "notSet") {
           throw new Error("notSet");
         } else {
@@ -267,7 +263,9 @@ export const HandleDataFunctions = (props) => {
         if (res === username) {
           await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
             setLoading(false);
-            if (res) dispatch({ type: "LOAD_USER_PLANS", payload: res });
+            if (res) {
+              dispatch({ type: "LOAD_USER_PLANS", payload: res })
+            };
           });
         }
       })
@@ -333,7 +331,7 @@ export const HandleDataFunctions = (props) => {
       await (await subscrypt).getPlanLength(address).then(async (res) => {
         dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.result });
         await getProviderAllInfo(address, parseInt(res.result));
-      });
+      })
     } else {
       await serverFunctions.getProviderHeaderInfo(address).then((res) => {
         dispatch({ type: "USER_NAME", payload: res.name });
@@ -358,7 +356,8 @@ export const HandleDataFunctions = (props) => {
       )
         .getAddressByUsername(providerAddress)
         .then(async (result) => {
-          if (result.status === "Fetched") {
+          if(result.status === "Fetched")
+          {
             dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
             await loadOffers(result.result);
           } else {
@@ -368,10 +367,12 @@ export const HandleDataFunctions = (props) => {
             );
           }
         })
-        .catch(() => {});
+        .catch(() => {
+
+        });
     } else {
       await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
-        if (res !== true) {
+        if(res !== true) {
           dispatch({ type: "RESET_PROVIDER_PLAN", payload: res });
         }
       });
