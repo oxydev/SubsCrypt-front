@@ -26,10 +26,27 @@ export const SetDataFunctions = (props) => {
   };
 
   const withdraw = async (address, injector, callback) => {
-    injector = await injector.then((res) => res);
     await (await subscrypt).withdraw(address, injector, callback);
   };
 
+  const withdrawMoney = async (address, callback) => {
+    await blockChainFuncs.connectToWallet(address).then(async (res) => {
+      if (res) {
+        const injector = await getWalletInjector(res);
+        await withdraw(res.address, injector, callback)
+          .catch(async (err) => {
+            console.log(err)
+            await showResultToUser("Operation failed!", "The operation has been failed!");
+          });
+      } else {
+        // window.alert("You are not allowed to do this operation!");
+        await showResultToUser(
+          "Operation Not Allowed!",
+          "You are not allowed to do this operation!"
+        );
+      }
+    })
+  };
   const renewPlan = async (
     address,
     injector,
@@ -290,8 +307,6 @@ export const SetDataFunctions = (props) => {
     // console.log(globalState, type, newPassword);
   };
   const editPlan = async (address, callback, data) => {
-    console.log(address)
-
     await blockChainFuncs.connectToWallet(address).then(async (res) => {
       if (res) {
         const injector = await getWalletInjector(res);
@@ -366,6 +381,7 @@ export const SetDataFunctions = (props) => {
     addNewPlans,
     providerRegisterHandler,
     editPlan,
+    withdrawMoney
   };
   return (
     <setDataContext.Provider value={setDataContextvalue}>{props.children}</setDataContext.Provider>
