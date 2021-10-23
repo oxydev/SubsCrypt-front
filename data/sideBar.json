@@ -3,25 +3,29 @@
     "menuItem": [
       {
         "name": "Dashboard",
-        "url": "/user/",
+        "url": "/user",
+        "id": "dashbord",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
         "name": "New Offers",
         "url": "/user/newOffers",
+        "id": "newOffers",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
         "name": "Profile Setting",
         "url": "/user/profilesetting",
+        "id": "profilesetting",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
         "name": "Log Out",
         "url": "/",
+        "id": "logout",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/mainMenu.svg"
       }
@@ -73,19 +77,19 @@
       {
         "name": "Login",
         "id": "PublicUser",
-        "item": "/icons/png/sideBar/mainMenu.svg",
+        "item": "/icons/png/sideBar/login.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Become Provider",
         "id": "publicSignUp",
-        "item": "/icons/png/sideBar/mainMenu.svg",
+        "item": "/icons/png/sideBar/signup.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Faucet",
         "id": "giveSomeToken",
-        "item": "/icons/png/sideBar/mainMenu.svg",
+        "item": "/icons/png/sideBar/faucet.svg",
         "icon": "/dashbord.png"
       }
     ]

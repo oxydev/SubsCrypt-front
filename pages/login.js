@@ -51,12 +51,13 @@ const Login = (props) => {
         }
       }}
       index={index}
+      circle={false}
       selected={index === role ? true : false}
       disabled={index === 0 && action === "signUp" ? true : false}
     />
   ));
   const networks = data.networks.map((item, index) => (
-    <Card key={item.name} item={item} selected={index === network ? true : false} />
+    <Card key={item.name} item={item} selected={index === network ? true : false} circle={true}/>
   ));
 
   const methods = data.methods.map((item, index) => (
@@ -74,6 +75,8 @@ const Login = (props) => {
               setMethod(1);
             }
       }
+      circle={true}
+
     />
   ));
 
@@ -125,6 +128,6 @@ const Login = (props) => {
       {method === 1 && <LoginPart type={role === 0 ? "subscriber" : "provider"} />}
     </div>
   );
-};
+}
 
 export default Login;

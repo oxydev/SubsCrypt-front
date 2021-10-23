@@ -32,7 +32,6 @@ export default function SideBar() {
   useEffect(() => {
     setSelect(0)
   },[sideBarData])
-
   const sideBarMenuItems = sideBarData.menuItem.map(
     (item,index) =>
       (item.name !== "Profile Setting" || globalState.user.username) && (
@@ -42,17 +41,16 @@ export default function SideBar() {
             handleLogOut();
           }
         }}>
-          {item.url ? (
-            <Link href={item.url} >
+          {item.url ? (<Link href={item.url}>
+              <a>
             <embed src={item.item}/>
-
               <p>
                 {item.name}
               </p>
+              </a>
             </Link>
           ) : (
-            <>
-              <embed src={item.item}/>
+            <><embed src={item.item}/>
             <p>
               {item.name}
             </p>
