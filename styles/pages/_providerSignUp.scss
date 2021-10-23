@@ -8,6 +8,7 @@
 }
 .PlansForm-addBtn {
   @include text-body--standard--regular;
+  color: $gray-3;
   background-color: transparent;
   border: none;
   outline: none;
@@ -15,6 +16,11 @@
   align-items: center;
   margin-top: 6px;
   margin-bottom: 66px;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $black;
+  }
 
   &::before {
     @include pseudo;
