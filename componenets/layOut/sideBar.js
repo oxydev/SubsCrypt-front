@@ -21,7 +21,14 @@ export default function SideBar() {
   } else {
     sideBarData = data.PublicSideBar;
   }
-
+  useEffect(() => {
+    if(window.location.href.indexOf("profilesetting") > 0){
+      sideBarData.menuItem.forEach((res, index)=>{
+        if(res.name === "Profile Setting")
+          setSelect(index)
+      })
+    }
+  })
   useEffect(() => {
     setSelect(0)
   },[sideBarData])
@@ -29,42 +36,24 @@ export default function SideBar() {
   const sideBarMenuItems = sideBarData.menuItem.map(
     (item,index) =>
       (item.name !== "Profile Setting" || globalState.user.username) && (
-        <li key={item.name} className={select===index? "select":""} onClick={()=>setSelect(index)}>
+        <li id={item.id} key={item.name} className={select===index? "select":""} onClick={()=>{
+          setSelect(index)
+          if(item.name === "Log Out"){
+            handleLogOut();
+          }
+        }}>
           {item.url ? (
-            <>
+            <Link href={item.url} >
             <embed src={item.item}/>
 
-            <Link href={item.url}>
-              <p
-                id={item.id}
-                onClick={
-                  item.name === "Log Out"
-                    ? (e) => {
-                        e.preventDefault();
-                        handleLogOut();
-                      }
-                    : () => {}
-                }
-              >
+              <p>
                 {item.name}
               </p>
             </Link>
-            </>
           ) : (
             <>
               <embed src={item.item}/>
-            <p
-              id={item.id}
-              onClick={
-                item.name === "Log Out"
-                  ? (e) => {
-                    e.preventDefault();
-
-                    handleLogOut();
-                    }
-                  : () => {}
-              }
-            >
+            <p>
               {item.name}
             </p>
             </>

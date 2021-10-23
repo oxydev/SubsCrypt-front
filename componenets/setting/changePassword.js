@@ -82,6 +82,7 @@ export default function ChangePassword(props) {
           className="NewPassField"
           type="password"
           required
+          autoComplete="on"
           placeholder="New Password"
           onChange={(e) => {
             setData({ ...data, newPassword: e.target.value });
@@ -91,6 +92,7 @@ export default function ChangePassword(props) {
           className="NewPassField"
           type="password"
           required
+          autoComplete="on"
           placeholder="Repeat the New Password"
           onChange={(e) => {
             setData({ ...data, currentPasswordConfirm: e.target.value });
