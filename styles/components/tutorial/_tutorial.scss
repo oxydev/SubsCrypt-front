@@ -2,9 +2,7 @@
   position: absolute;
   top: 200px;
   left: 400px;
-  width: 309px;
-  height: 309px;
-  border-radius: 50%;
+  @include circle(310px);
   border: 1px dashed #414141;
   display: flex;
   flex-direction: column;
@@ -23,27 +21,27 @@
 
   h2 {
     @include text-body--large--medium;
-    margin: 15px 0 10px;
+    margin: 10px 0;
   }
   p {
     @include text-body--small--regular;
-    margin: 0 0 20px;
+    margin: 0 0 10px;
   }
 
   .BtnContainer {
     display: flex;
     justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-
-    button {
-      @include primaryButtons(60px, 20px);
-      height: 25px;
-      border-radius: $borderRadius--small;
-      margin: 0 5px;
-      &.TutorialSkipBtn {
-        @include secondaryButtons(60px, 20px);
-      }
+    width: 150px;
+  }
+  button {
+    @include primaryButtons(60px, 20px);
+    height: 25px;
+    border-radius: $borderRadius--small;
+    margin: 0 5px;
+    &.TutorialSkipBtn {
+      @include secondaryButtons(60px, 20px);
+      margin-top: 5px;
+      width: 120px;
     }
   }
 
