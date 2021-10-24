@@ -234,7 +234,7 @@ export default function ProviderSignUp() {
           >
             <ProviderInfo info={info} setInfo={setInfo} />
             {planFormList}
-            <button className="PlansForm-addBtn" onClick={addAnotherPlan}>
+            <button id={"addAnotherPlan"} className="PlansForm-addBtn" onClick={addAnotherPlan}>
               Add another plan
             </button>
             <div className="ProviderRegisteration">
@@ -244,6 +244,7 @@ export default function ProviderSignUp() {
               </p>
               <input
                 type="submit"
+                id={"register"}
                 className="RegisterBtn"
                 onClick={() => {
                   makeFieldsVisible();

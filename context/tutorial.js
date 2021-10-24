@@ -48,7 +48,7 @@ export const Tutorial = (props) => {
   };
 
   useEffect(async () => {
-    if (Cookies.get("tutorial") == "off") {
+    if (Cookies.get("tutorial") === "off") {
       console.log("hamid");
       setTutorialList(null);
     } else if (tutorialList && tutorialList.length > 0) {

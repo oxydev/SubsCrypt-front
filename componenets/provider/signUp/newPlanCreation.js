@@ -54,7 +54,7 @@ export default function NewPlanCreation(props) {
     <section
       className={plan.visibility === "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
     >
-      <h1 onClick={toggleVisibility}>
+      <h1 id={"newPlan"+index+"Creation"} onClick={toggleVisibility}>
         Create a Subscryption Plan #{index + planNumber + 1}
         <span></span>
         {planList.length > 1 && (
@@ -126,7 +126,7 @@ export default function NewPlanCreation(props) {
           <div className="PlansForm-tag">
             <TagInput initailTags={plan.characteristics} handleChange={handlePlanListUpdate} />
           </div>
-          <p>Some characteristics your plan may have e.g. Country, Region and etc.</p>
+          <p>Some information that you want from users like email, address and etc.</p>
         </div>
         <div className="PlanForm-financial">
           <label htmlFor="PlanTokens">Users can pay via these tokens</label>

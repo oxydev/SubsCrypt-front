@@ -122,6 +122,11 @@
     ],
     "becomeProvider": [
       {
+        "elementName": "giveSomeToken",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here. You can check your balance in up menu."
+      },
+      {
         "elementName": "serviceProviderName",
         "title": "Enter your name",
         "description": "You will be shown you subscriber with this name."
@@ -137,14 +142,34 @@
         "description": "This is your username for login with credentials, please be aware that you can not change your username in future."
       },
       {
-        "elementName": "giveSomeToken",
-        "title": "Get Test Token",
-        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here. You can check your balance in up menu."
+        "elementName": "serviceProvidePassword",
+        "title": "Enter your Password",
+        "description": "This is your password for login with credentials, You can change your password in future."
       },
       {
-        "elementName": "logout",
-        "title": "Logout",
-        "description": "Click to cancel process of signing up."
+        "elementName": "moneyAddress",
+        "title": "Enter your Address",
+        "description": "This address will be used to send you your earnings."
+      },
+      {
+        "elementName": "profilePictureUploaded",
+        "title": "Upload your profile",
+        "description": "Please upload a profile picture for your account. This picture will be shown to users."
+      },
+      {
+        "elementName": "newPlan0Creation",
+        "title": "Create your custom plan",
+        "description": "Please fill details of your custom plan, You can change the details in future."
+      },
+      {
+        "elementName": "addAnotherPlan",
+        "title": "Create another custom plan",
+        "description": "You can create more custom plans."
+      },
+      {
+        "elementName": "register",
+        "title": "Register As a provider",
+        "description": "Sign a transaction and lock 0.01 token in the contract to join our platform, Please be sure that your wallet has enough token otherwise use the faucet to get some."
       }
     ]
   }
