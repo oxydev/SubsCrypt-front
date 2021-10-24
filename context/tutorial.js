@@ -47,13 +47,13 @@ export const Tutorial = (props) => {
     setTutorialList(tutList);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (tutorialList && tutorialList.length > 0) {
       for (const elm of tutorialList) {
         elm.target.classList.remove("Dominent");
       }
       const target = tutorialList[order].target;
-      const tutPos = checkPos(target);
+      const tutPos = await checkPos(target);
       setPosition({
         top: tutPos.top,
         left: tutPos.left,
@@ -66,18 +66,35 @@ export const Tutorial = (props) => {
   }, [order, tutorialList]);
 
 
-  const checkPos = (elm) => {
-    const pos = elm.getBoundingClientRect();
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const top = pos.top;
-    const left = pos.left;
-    const right = vw - pos.right;
-    const bottom = vh - pos.bottom;
-    const height = pos.height;
-    const width = pos.width;
+  const checkPos = async (elm) => {
+    elm.scrollIntoView({block:'center'});
+    await sleep(100)
+
+    let pos = elm.getBoundingClientRect();
+    let vw = window.innerWidth;
+    let vh = window.innerHeight;
+    let top = pos.top;
+    let left = pos.left;
+    let right = vw - pos.right;
+    let bottom = vh - pos.bottom;
+    let height = pos.height;
+    let width = pos.width;
     console.log(pos);
     console.log(top, right, bottom, left);
+    // if(bottom < 100){
+    //   pos = elm.getBoundingClientRect();
+    //   vw = window.innerWidth;
+    //   vh = window.innerHeight;
+    //   top = pos.top;
+    //   left = pos.left;
+    //   right = vw - pos.right;
+    //   bottom = vh - pos.bottom;
+    //   height = pos.height;
+    //   width = pos.width;
+    //   console.log(pos);
+    //   console.log(top, right, bottom, left);
+    // }
+
     let place = { vertical: "middle", horizontal: "right" };
     if (top > 160 && bottom > 160) {
       place.vertical = "middle";
@@ -124,6 +141,21 @@ export const Tutorial = (props) => {
               <h2>{tutorialList[order].tutorialElement.title}</h2>
               <p>{tutorialList[order].tutorialElement.description}</p>
               <div className="BtnContainer">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (order > 0) {
+                      setOrder(order - 1);
+                    } else {
+                      for (const elm of tutorialList) {
+                        elm.target.classList.remove("Dominent");
+                      }
+                      setTutorialList(null);
+                    }
+                  }}
+                >
+                  Previous
+                </button>
                 <button
                   className="TutorialNextBtn"
                   onClick={(e) => {

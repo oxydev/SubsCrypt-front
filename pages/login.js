@@ -72,6 +72,7 @@ const Login = (props) => {
       setRole(1);
       setSteps([true, true, true]);
       setMethod(0);
+      handleTutorial([tutData.tutorials.login[0],tutData.tutorials.login[2],tutData.tutorials.login[5]]);
       handleWalletLists();
     } else {
       handleTutorial(tutData.tutorials.login.slice(0,3));

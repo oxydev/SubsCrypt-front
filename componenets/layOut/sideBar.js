@@ -4,6 +4,7 @@ import data from "../../data/sideBar.json";
 import { UserContext } from "../../context/store";
 import { handleDataContext } from "../../context/handleData";
 import { useRouter } from 'next/router'
+import ToggleButton from '../gadjets/toggle'
 
 //The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
@@ -75,6 +76,7 @@ export default function SideBar() {
 
   return (
     <div className="SideBar">
+      <ToggleButton />
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
       <img className="SideBar-logo" src="/logo/Logo--light.png"></img>
     </div>
