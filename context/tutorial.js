@@ -104,6 +104,10 @@ export const Tutorial = (props) => {
       place.left = left + width / 2 - 155;
     }
 
+    if (place.horizontal == "middle" && place.vertical == "middle") {
+      place.vertical = "bottom";
+      place.top = top + height + 100;
+    }
     return place;
   };
 

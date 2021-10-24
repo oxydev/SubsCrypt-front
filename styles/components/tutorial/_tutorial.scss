@@ -47,8 +47,6 @@
 
   &::after {
     @include pseudo;
-    width: 100px;
-    height: 2px;
     background-color: #5867ff;
     position: absolute;
   }
@@ -56,21 +54,29 @@
   &.middleleft {
     &::after {
       right: -99px;
+      width: 100px;
+      height: 2px;
     }
   }
   &.middleright {
     &::after {
       left: -99px;
+      width: 100px;
+      height: 2px;
     }
   }
   &.topmiddle {
     &::after {
       bottom: -99px;
+      height: 100px;
+      width: 2px;
     }
   }
   &.bottommiddle {
     &::after {
       top: -99px;
+      height: 100px;
+      width: 2px;
     }
   }
 }
