@@ -35,8 +35,9 @@ export const Tutorial = (props) => {
     await sleep(500);
 
     for (const item of tutorialData) {
-      while (document.getElementById(item.elementName) == null) await sleep(200);
       console.log(item, document.getElementById(item.elementName));
+
+      while (document.getElementById(item.elementName) == null) await sleep(200);
 
       tutList.push({
         target: document.getElementById(item.elementName),

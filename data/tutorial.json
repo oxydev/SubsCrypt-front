@@ -78,22 +78,17 @@
     ],
     "subscriberNewOffer": [
       {
-        "elementName": "providerAddressInput",
+        "elementName": "providerAddressSearch",
         "title": "Choose your provider",
-        "description": "You can add a new custom plan here."
+        "description": "You can enter a provider address or username here or use the default one."
       },
       {
-        "elementName": "plan1Card",
+        "elementName": "plan0Card",
         "title": "Choose a plan",
         "description": "You can choose a plan "
       },
       {
-        "elementName": "plan1Card",
-        "title": "View and Edit Plan",
-        "description": "You can view and edit detail of your plan."
-      },
-      {
-        "elementName": "profileSetting",
+        "elementName": "profilesetting",
         "title": "Change your password",
         "description": "You can change your password if you have access to your PolkaDot.js wallet."
       },
