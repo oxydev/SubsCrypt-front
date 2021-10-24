@@ -60,7 +60,11 @@
         "title": "Add a Plan",
         "description": "You can add a new custom plan here."
       },
-
+      {
+        "elementName": "plan0Card",
+        "title": "View and Edit Plan",
+        "description": "You can view and edit detail of your plan."
+      },
       {
         "elementName": "profilesetting",
         "title": "Change your password",

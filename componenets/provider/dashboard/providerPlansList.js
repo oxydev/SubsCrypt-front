@@ -39,7 +39,7 @@ export default function ProviderPlansList() {
       key={"providerPlan" + index}
       plan={item}
       index={index}
-      id={"plan0Card"}
+      id={"plan"+index+"Card"}
       type="provider"
       address={globalState.user.address}
     />

@@ -17,7 +17,7 @@ export default function PlanCard(props) {
   const { getProviderAllInfo } = useContext(handleDataContext);
 
   const { setModal } = useContext(modalContext);
-  const { plan, index, type, address } = props;
+  const { plan, index, type, address,id } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
   const { handleSubscribtion, editPlan } = useContext(setDataContext);
@@ -69,7 +69,7 @@ export default function PlanCard(props) {
   }
 
   return (
-    <section className="PlanCard" onClick={type === "user" ? handleSubscribe : handleEdit}>
+    <section id={id} className="PlanCard" onClick={type === "user" ? handleSubscribe : handleEdit}>
       <header>
         <img
           className="PlanLogo"

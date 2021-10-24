@@ -39,6 +39,8 @@ export const Tutorial = (props) => {
     for (const item of tutorialData) {
       while (document.getElementById(item.elementName) == null)
         await sleep(200)
+      console.log(item,document.getElementById(item.elementName))
+
       tutList.push({
         target: document.getElementById(item.elementName),
         tutorialElement: { title: item.title, description: item.description },
