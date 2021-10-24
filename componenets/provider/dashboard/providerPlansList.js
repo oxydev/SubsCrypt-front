@@ -39,6 +39,7 @@ export default function ProviderPlansList() {
       key={"providerPlan" + index}
       plan={item}
       index={index}
+      id={"plan0Card"}
       type="provider"
       address={globalState.user.address}
     />
@@ -48,7 +49,7 @@ export default function ProviderPlansList() {
       <header>
         <h1>Your Plans</h1>
         <p>Total Plans: {plans.length}</p>
-        <button
+        <button id={"addPlan"}
           onClick={(e) => {
             e.preventDefault();
             router.push("/provider/addnewplan");

@@ -57,7 +57,7 @@ export const ServerFunctions = (props) => {
     return axios
       .get(url)
       .then((result) => {
-        // console.log(result.data);
+        console.log(result.data);
         const data = result.data.subscriptions;
         return data;
       })

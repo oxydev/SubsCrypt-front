@@ -8,15 +8,42 @@ export const Tutorial = (props) => {
   const [order, setOrder] = useState(0);
   const [position, setPosition] = useState({ top: -400, left: -400 });
 
-  const handleTutorial = (tutorialData) => {
-    let tutList = [];
+  function sleep (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  const continueTutorial = async (tutorialData, newOrder) => {
+    console.log(tutorialData)
+    if(order === tutorialData.length - 1)
+      return
+    setOrder(newOrder)
+    let tutList = []
+    await sleep(500);
     for (const item of tutorialData) {
+      console.log("fuck",document.getElementById(item.elementName),item)
+      while (document.getElementById(item.elementName) == null)
+        await sleep(200)
       tutList.push({
         target: document.getElementById(item.elementName),
         tutorialElement: { title: item.title, description: item.description },
       });
     }
+    setTutorialList(tutList);
 
+  }
+
+  const handleTutorial = async (tutorialData) => {
+    let tutList = [];
+    setOrder(0)
+    await sleep(500);
+
+    for (const item of tutorialData) {
+      while (document.getElementById(item.elementName) == null)
+        await sleep(200)
+      tutList.push({
+        target: document.getElementById(item.elementName),
+        tutorialElement: { title: item.title, description: item.description },
+      });
+    }
     setTutorialList(tutList);
   };
 
@@ -26,7 +53,6 @@ export const Tutorial = (props) => {
         elm.target.classList.remove("Dominent");
       }
       const target = tutorialList[order].target;
-      console.log(checkPos(target));
       const tutPos = checkPos(target);
       setPosition({
         top: tutPos.top,
@@ -37,12 +63,8 @@ export const Tutorial = (props) => {
       target.classList.add("Dominent");
       console.log(position);
     }
-    console.log(position);
   }, [order, tutorialList]);
 
-  useEffect(() => {
-    console.log(position);
-  });
 
   const checkPos = (elm) => {
     const pos = elm.getBoundingClientRect();
@@ -88,9 +110,8 @@ export const Tutorial = (props) => {
     setTutorialList(null);
   };
 
-  console.log(tutorialList);
   return (
-    <tutorialContext.Provider value={{ handleTutorial }}>
+    <tutorialContext.Provider value={{ handleTutorial, continueTutorial}}>
       <>
         {props.children}
         {tutorialList && tutorialList.length > 0 && (
@@ -110,6 +131,9 @@ export const Tutorial = (props) => {
                     if (order < tutorialList.length - 1) {
                       setOrder(order + 1);
                     } else {
+                      for (const elm of tutorialList) {
+                        elm.target.classList.remove("Dominent");
+                      }
                       setTutorialList(null);
                     }
                   }}

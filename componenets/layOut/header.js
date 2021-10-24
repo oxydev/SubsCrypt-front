@@ -5,7 +5,7 @@ import { handleDataContext } from "../../context/handleData";
 import { middleDots } from "../../utilities/utilityFunctions";
 import Link from "next/link";
 
-//The component for genrating page header
+//The component for generating page header
 export default function Header() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut } = useContext(handleDataContext);
@@ -36,7 +36,7 @@ export default function Header() {
         <div className={showMenu ? "UserMenu-menu" : "UserMenu-menu hidden"}>
           <ul>
             {globalState.user.username && (
-              <li>
+              <li >
                 <Link
                   href={
 
@@ -51,7 +51,7 @@ export default function Header() {
                 </Link>
               </li>
             )}
-            <li>
+            <li >
               <Link href="#">
                 <a onClick={handleLogOut}><embed src={'/icons/png/sideBar/logout-black.svg'}/>
                   LogOut</a>

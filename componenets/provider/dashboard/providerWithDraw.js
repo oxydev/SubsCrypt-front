@@ -39,7 +39,7 @@ export const ProviderWithdraw = (props) => {
         <span>{" "}DOT</span>
       </p>
 
-      <button onClick={handleWithdraw}>Withdraw</button>
+      <button id="withdraw" onClick={handleWithdraw}>Withdraw</button>
     </section>
   );
 };

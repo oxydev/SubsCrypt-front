@@ -49,11 +49,13 @@
         "name": "Profile Setting",
         "url": "/provider/profilesetting",
         "icon": "/dashbord.png",
+        "id": "profilesetting",
         "item": "/icons/png/sideBar/setting.svg"
       },
       {
         "name": "Log Out",
         "url": "/",
+        "id": "logout",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/logout.svg"
 
@@ -65,6 +67,7 @@
       {
         "name": "Log Out",
         "url": "/",
+        "id": "logout",
         "item": "/icons/png/sideBar/logout.svg",
         "icon": "/dashbord.png"
 

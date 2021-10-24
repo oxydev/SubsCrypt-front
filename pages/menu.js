@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { tutorialContext } from "../context/tutorial";
 import Login from "./login";
 import tutData from "../data/tutorial.json";
+import { UserContext } from '../context/store'
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
@@ -14,10 +15,7 @@ export default function Menu() {
   const { checkAuthByCookie, sendMoneyToAddress } = useContext(handleDataContext);
   const { auth } = useContext(authContext);
   const tutorialData = tutData.tutorials.mainMenu;
-
-  useEffect(() => {
-    handleTutorial(tutorialData);
-  }, []);
+  const { globalState } = useContext(UserContext);
 
   //get cookies
   const password = Cookies.get("subscryptPass");
@@ -38,9 +36,12 @@ export default function Menu() {
   useEffect(() => {
     //Check the cookies and authentication if cokkies are set
     if (!auth && (password || userWallet)) {
-      // window.alert("auth");
       checkAuthByCookie();
+    } else {
+      handleTutorial(tutorialData);
+
     }
+    console.log("fucl",auth,password,userWallet,globalState)
 
     //change the status by clicking on sidebar links
     const mainLoginLink = document.getElementById("PublicDashboard");
@@ -84,7 +85,8 @@ export default function Menu() {
         sideBarStyleHandler(signUpLink);
       }
     }
-  });
+  },[auth]);
+
 
   //change the login menu according to selecting each type
   if (task === "none") {
@@ -106,6 +108,7 @@ export default function Menu() {
       </section>
     );
   } else if (task === "login") {
+
     return <Login />;
   } else if (task === "providerSignUp") {
     return (

@@ -179,9 +179,8 @@ export const HandleDataFunctions = (props) => {
           } else {
             dispatch({ type: "LOAD_USER_USERNAME", payload: subscryptUsername });
           }
-          await getProviderAllInfo(res.address, res.planNum).then(() => {
-            setLoading(false);
-          });
+          setLoading(false);
+          await getProviderAllInfo(res.address, res.planNum)
         }
       })
       .catch(async (err) => {
@@ -333,18 +332,19 @@ export const HandleDataFunctions = (props) => {
         await getProviderAllInfo(address, parseInt(res.result));
       })
     } else {
-      await serverFunctions.getProviderHeaderInfo(address).then((res) => {
+      serverFunctions.getProviderHeaderInfo(address).then((res) => {
         dispatch({ type: "USER_NAME", payload: res.name });
         dispatch({ type: "USER_DESCRIPTION", payload: res.description });
         dispatch({ type: "USER_USERSCOUNT", payload: res.usersCount });
         dispatch({ type: "USER_INCOME", payload: res.income });
       });
-      await blockChainFuncs.getProviderPlanslist(address, count).then((res) => {
+      blockChainFuncs.getProviderPlanslist(address, count).then((res) => {
         dispatch({ type: "LOAD_PROVIDER_PLANS", payload: res });
+        serverFunctions.getProviderAllUsers(address).then((res) => {
+          dispatch({ type: "PROVIDER_ALLUSERS", payload: res });
+        });
       });
-      serverFunctions.getProviderAllUsers(address).then((res) => {
-        dispatch({ type: "PROVIDER_ALLUSERS", payload: res });
-      });
+
     }
   };
 

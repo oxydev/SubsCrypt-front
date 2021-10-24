@@ -76,14 +76,12 @@ export default function Connection(props) {
   const handleConnection = () => {
     if (type === "subscriber") {
       handleSubscriberLoginByWallet(address);
-      console.log("subscriber");
     } else if (type === "provider") {
       handleProviderLogingByWallet(address);
     }
   };
 
   const walletList = globalState.wallets;
-
   const addressList = walletList.map((item, index) => {
     const value = (
       <>
@@ -105,14 +103,13 @@ export default function Connection(props) {
         <>
           <p className="Topic">Choose your Wallet</p>
           <div className="SelectWallet">
-            <Select
-              options={addressList}
+            <Select id="chooseWalletAccount"
+                    options={addressList}
               styles={customStyles}
               isSearchable={false}
               placeholder="Select your wallet"
               onChange={(e) => {
                 setAddress(walletList[e.value].address);
-                8;
               }}
             />
             <button

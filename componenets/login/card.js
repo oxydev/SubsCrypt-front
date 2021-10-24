@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Card = (props) => {
-  const { clickHandler, selected, item, disabled, circle } = props;
+  const { clickHandler, selected, item, disabled, circle, id} = props;
   const styleCircle = {
     'border-radius': "48px"
   };
@@ -9,8 +9,7 @@ const Card = (props) => {
     'border-radius': "0px"
   };
   return (
-    <div
-      className={selected ? "ButtonCard selected" : disabled ? "ButtonCard disabled" : "ButtonCard"}
+    <div id={id} className={selected ? "ButtonCard selected" : disabled ? "ButtonCard disabled" : "ButtonCard"}
       onClick={clickHandler}
     >
       <div>

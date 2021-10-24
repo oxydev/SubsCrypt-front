@@ -5,27 +5,76 @@ import data from "../data/wallets&networks.json";
 import Card from "../componenets/login/card";
 import { handleDataContext } from "../context/handleData";
 import { UserContext } from "../context/store";
+import tutData from '../data/tutorial.json'
+import { tutorialContext } from '../context/tutorial'
 
 const Login = (props) => {
   const { action } = props;
-  const [network, setNtwork] = useState(-1);
+  const [network, setNetwork] = useState(-1);
   const [role, setRole] = useState(-1);
   const [steps, setSteps] = useState([true, false, false]);
   const [method, setMethod] = useState(-1);
   const { handleWalletLists } = useContext(handleDataContext);
   const { globalState } = useContext(UserContext);
+  const { handleTutorial, continueTutorial } = useContext(tutorialContext);
 
-  const walletLists = globalState.wallets;
+
+
+  const users = data.roles.map((item, index) => (
+    <Card
+      key={item.name}
+      item={item}
+      id={index === 0 ? "roleSubscriber" : "roleProvider"}
+      clickHandler={() => {
+        if (action !== "signUp") {
+          setRole(index);
+          continueTutorial(tutData.tutorials.login.slice(0,5), 3);
+        }
+      }}
+      index={index}
+      circle={false}
+      selected={index === role}
+      disabled={index === 0 && action === "signUp"}
+    />
+  ));
+  const networks = data.networks.map((item, index) => (
+    <Card id={"network"} key={item.name} item={item} selected={index === network} circle={true}/>
+  ));
+
+  const methods = data.methods.map((item, index) => (
+    <Card
+      key={item.name}
+      item={item}
+      id={index === 0 ? "walletButton" : "usernameButton"}
+      selected={index === method}
+      clickHandler={
+        index === 0
+          ? () => {
+              setMethod(0);
+              handleWalletLists()
+              continueTutorial(tutData.tutorials.login, 5);
+          }
+          : () => {
+            handleWalletLists()
+            setMethod(1);
+            }
+      }
+      circle={false}
+
+    />
+  ));
 
   useEffect(() => {
     if (data.networks.length === 1) {
-      setNtwork(0);
+      setNetwork(0);
     }
     if (action === "signUp") {
       setRole(1);
       setSteps([true, true, true]);
       setMethod(0);
       handleWalletLists();
+    } else {
+      handleTutorial(tutData.tutorials.login.slice(0,3));
     }
   }, []);
   useEffect(() => {
@@ -40,46 +89,6 @@ const Login = (props) => {
     }
     console.log(role);
   }, [role]);
-
-  const users = data.roles.map((item, index) => (
-    <Card
-      key={item.name}
-      item={item}
-      clickHandler={() => {
-        if (action !== "signUp") {
-          setRole(index);
-        }
-      }}
-      index={index}
-      circle={false}
-      selected={index === role ? true : false}
-      disabled={index === 0 && action === "signUp" ? true : false}
-    />
-  ));
-  const networks = data.networks.map((item, index) => (
-    <Card key={item.name} item={item} selected={index === network ? true : false} circle={true}/>
-  ));
-
-  const methods = data.methods.map((item, index) => (
-    <Card
-      key={item.name}
-      item={item}
-      selected={index === method ? true : false}
-      clickHandler={
-        index === 0
-          ? () => {
-              setMethod(0);
-              handleWalletLists();
-            }
-          : () => {
-              setMethod(1);
-            }
-      }
-      circle={false}
-
-    />
-  ));
-
   return (
     <div className="LoginPage SingInPage">
       <div className="LoginPage SingInPage">
@@ -87,7 +96,7 @@ const Login = (props) => {
           {action === "signUp" ? "Sign Up a new Account" : "Login to Your Account"}
         </h1>
         <p className="Topic">Network</p>
-        <div className="ChooseNetworks">{networks}</div>
+        <div id={"network"} className="ChooseNetworks">{networks}</div>
         {steps[1] && (
           <>
             <p className="Topic">Choose Role</p>
@@ -129,5 +138,4 @@ const Login = (props) => {
     </div>
   );
 }
-
-export default Login;
+export default Login

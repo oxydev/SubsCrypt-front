@@ -42,6 +42,11 @@
         "elementName": "usernameButton",
         "title": "Credential login",
         "description": "Choose this if you don't have access to your wallet and login with your username and password."
+      },
+      {
+        "elementName": "chooseWalletAccount",
+        "title": "Choose your Wallet",
+        "description": "Choose your preferred account between your connected wallet addresses."
       }
     ],
     "providerDashboard": [
@@ -55,40 +60,9 @@
         "title": "Add a Plan",
         "description": "You can add a new custom plan here."
       },
+
       {
-        "elementName": "plan1Card",
-        "title": "View and Edit Plan",
-        "description": "You can view and edit detail of your plan."
-      },
-      {
-        "elementName": "profileSetting",
-        "title": "Change your password",
-        "description": "You can change your password if you have access to your PolkaDot.js wallet."
-      },
-      {
-        "elementName": "logout",
-        "title": "Logout",
-        "description": "Click to log out of your account."
-      }
-    ],
-    "providerDashboard": [
-      {
-        "elementName": "withdraw",
-        "title": "Withdraw",
-        "description": "You can withdraw your tokens by simply requesting a withdraw. The tokens will be transferred to your Money Address."
-      },
-      {
-        "elementName": "addPlan",
-        "title": "Add a Plan",
-        "description": "You can add a new custom plan here."
-      },
-      {
-        "elementName": "plan1Card",
-        "title": "View and Edit Plan",
-        "description": "You can view and edit detail of your plan."
-      },
-      {
-        "elementName": "profileSetting",
+        "elementName": "profilesetting",
         "title": "Change your password",
         "description": "You can change your password if you have access to your PolkaDot.js wallet."
       },
