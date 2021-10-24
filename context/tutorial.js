@@ -84,7 +84,7 @@ export const Tutorial = (props) => {
 
   const endTutorial = () => {
     for (const elm of tutorialList) {
-      elm.target.current.classList.remove("Dominent");
+      elm.target.classList.remove("Dominent");
     }
     setTutorialList(null);
   };
