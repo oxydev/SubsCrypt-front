@@ -79,21 +79,7 @@ export const Tutorial = (props) => {
     let bottom = vh - pos.bottom;
     let height = pos.height;
     let width = pos.width;
-    console.log(pos);
-    console.log(top, right, bottom, left);
-    // if(bottom < 100){
-    //   pos = elm.getBoundingClientRect();
-    //   vw = window.innerWidth;
-    //   vh = window.innerHeight;
-    //   top = pos.top;
-    //   left = pos.left;
-    //   right = vw - pos.right;
-    //   bottom = vh - pos.bottom;
-    //   height = pos.height;
-    //   width = pos.width;
-    //   console.log(pos);
-    //   console.log(top, right, bottom, left);
-    // }
+
 
     let place = { vertical: "middle", horizontal: "right" };
     if (top > 160 && bottom > 160) {
