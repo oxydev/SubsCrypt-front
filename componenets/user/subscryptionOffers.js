@@ -4,12 +4,20 @@ import { UserContext } from "../../context/store";
 import ProviderSelection from "./providerSelection";
 import { handleDataContext } from "../../context/handleData";
 import { authContext } from "../../pages/_app";
+import tutData from '../../data/tutorial.json'
+import { tutorialContext } from '../../context/tutorial'
 
 //The component for managing subscription offer part
 export default function SubscryptionOffers() {
   const { globalState } = useContext(UserContext);
   const { loadOffers } = useContext(handleDataContext);
   const { auth } = useContext(authContext);
+  const tutorialData = tutData.tutorials.subscriberNewOffer;
+  const { handleTutorial } = useContext(tutorialContext);
+
+  useEffect(() => {
+    handleTutorial(tutorialData);
+  }, []);
 
   // const providerAddress = data.providerAddress;
   const providerAddress = globalState.offerProvider;
@@ -21,7 +29,7 @@ export default function SubscryptionOffers() {
   }, [providerAddress,globalState.user.address]);
 
   return (
-    <section className="SubscryptionOffers">
+    <section  className="SubscryptionOffers">
       <h1>Currently you don't have any active plans</h1>
       <ProviderSelection />
       <div className="OfferPart">

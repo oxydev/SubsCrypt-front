@@ -38,6 +38,7 @@ export default function OfferCarousel() {
       plan={item}
       index={index}
       type="user"
+      id={"plan"+index+"Card"}
       address={item.providerAddress}
     />
   ));
