@@ -4,33 +4,21 @@ import ProviderLogin from "./provider/providerLogin";
 import { authContext } from "./_app";
 import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";
-import WalletConnection from "../componenets/login/walletConnection";
 import { tutorialContext } from "../context/tutorial";
 import Login from "./login";
+import tutData from "../data/tutorial.json";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
   const [task, setTask] = useState("none");
-  const { setTutorialList } = useContext(tutorialContext);
+  const { handleTutorial } = useContext(tutorialContext);
   const { checkAuthByCookie, sendMoneyToAddress } = useContext(handleDataContext);
   const { auth } = useContext(authContext);
-
-  const tutorialRef1 = useRef(null);
-  const tutorialRef2 = useRef(null);
-  const tutorialRef3 = useRef(null);
-
-  const tutorial1 = { title: "hello1", text: "this is me1" };
-  const tutorial2 = { title: "hello2", text: "this is me2" };
-  const tutorial3 = { title: "hello3", text: "this is me3" };
+  const tutorialData = tutData.tutorials.mainMenu;
 
   useEffect(() => {
-    const list = [
-      { target: tutorialRef1, tutorialElement: tutorial1 },
-      { target: tutorialRef2, tutorialElement: tutorial2 },
-      { target: tutorialRef3, tutorialElement: tutorial3 },
-    ];
-    setTutorialList(list);
-  }, [tutorialRef1, tutorialRef2, tutorialRef3]);
+    handleTutorial(tutorialData);
+  }, []);
 
   //get cookies
   const password = Cookies.get("subscryptPass");
@@ -105,14 +93,14 @@ export default function Menu() {
       <section className="MainLoginPage">
         <h1>Main Menu</h1>
         <div>
-          <button ref={tutorialRef1} onClick={handleUserLogin}>
+          <button id="loginButton" onClick={handleUserLogin}>
             Login
           </button>
-          <button ref={tutorialRef2} onClick={handleProviderSignUp}>
+          <button id="SignUpButton" onClick={handleProviderSignUp}>
             Become Provider
           </button>
           <div className="Divider"></div>
-          <button ref={tutorialRef3} onClick={hanadleGetToken}>
+          <button id="faucet" onClick={hanadleGetToken}>
             Faucet
           </button>
         </div>

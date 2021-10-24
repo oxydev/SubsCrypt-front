@@ -13,6 +13,7 @@
   background-color: $white;
   z-index: 100;
   transition: all 0.25s ease-in-out;
+  padding: 30px;
 
   img {
     @include circle(43px);

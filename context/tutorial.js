@@ -8,12 +8,24 @@ export const Tutorial = (props) => {
   const [order, setOrder] = useState(0);
   const [position, setPosition] = useState({ top: -400, left: -400 });
 
+  const handleTutorial = (tutorialData) => {
+    let tutList = [];
+    for (const item of tutorialData) {
+      tutList.push({
+        target: document.getElementById(item.elementName),
+        tutorialElement: { title: item.title, description: item.description },
+      });
+    }
+
+    setTutorialList(tutList);
+  };
+
   useEffect(() => {
     if (tutorialList && tutorialList.length > 0) {
       for (const elm of tutorialList) {
-        elm.target.current.classList.remove("Dominent");
+        elm.target.classList.remove("Dominent");
       }
-      const target = tutorialList[order].target.current;
+      const target = tutorialList[order].target;
       console.log(checkPos(target));
       const tutPos = checkPos(target);
       setPosition({
@@ -79,7 +91,7 @@ export const Tutorial = (props) => {
 
   console.log(tutorialList);
   return (
-    <tutorialContext.Provider value={{ setTutorialList }}>
+    <tutorialContext.Provider value={{ handleTutorial }}>
       <>
         {props.children}
         {tutorialList && tutorialList.length > 0 && (
@@ -90,7 +102,7 @@ export const Tutorial = (props) => {
             >
               <img src="/logo/tutLogo.png" />
               <h2>{tutorialList[order].tutorialElement.title}</h2>
-              <p>{tutorialList[order].tutorialElement.text}</p>
+              <p>{tutorialList[order].tutorialElement.description}</p>
               <div className="BtnContainer">
                 <button
                   className="TutorialNextBtn"
