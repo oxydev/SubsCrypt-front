@@ -159,16 +159,16 @@ export const Tutorial = (props) => {
                 >
                   Next
                 </button>
-                <button
-                  className="TutorialSkipBtn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    endTutorial();
-                  }}
-                >
-                  Skip Tutorial
-                </button>
               </div>
+              <button
+                className="TutorialSkipBtn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  endTutorial();
+                }}
+              >
+                Skip
+              </button>
             </div>
             <div className="TutorialFilter"></div>
           </>
