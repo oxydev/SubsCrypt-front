@@ -46,7 +46,6 @@ export const Tutorial = (props) => {
 
   const checkPos = (elm) => {
     const pos = elm.getBoundingClientRect();
-    const tutPos = {};
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const top = pos.top;

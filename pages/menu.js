@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 //import UserLogin from "./user/userLogin";
-import ProviderLogin from "./provider/providerLogin";
 import { authContext } from "./_app";
 import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";

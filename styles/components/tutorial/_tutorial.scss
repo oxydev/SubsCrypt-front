@@ -80,6 +80,7 @@
 $offset: -5px;
 .Dominent {
   position: relative;
+  pointer-events: none;
   &::after {
     @include pseudo;
     right: $offset;
