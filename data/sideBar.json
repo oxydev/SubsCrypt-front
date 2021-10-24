@@ -2,14 +2,14 @@
   "UserSideBar": {
     "menuItem": [
       {
-        "name": "Dashboard",
+        "name": "My SubsCrypt",
         "url": "/user",
         "id": "dashbord",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
-        "name": "New Offers",
+        "name": "Marketplace",
         "url": "/user/newOffers",
         "id": "newOffers",
         "icon": "/dashbord.png",
@@ -21,6 +21,12 @@
         "id": "profilesetting",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/setting.svg"
+      },
+      {
+        "name": "Faucet",
+        "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
+        "icon": "/dashbord.png"
       },
       {
         "name": "Log Out",
@@ -46,6 +52,12 @@
         "item": "/icons/png/sideBar/addplan.svg"
       },
       {
+        "name": "Faucet",
+        "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
+        "icon": "/dashbord.png"
+      },
+      {
         "name": "Profile Setting",
         "url": "/provider/profilesetting",
         "icon": "/dashbord.png",
@@ -64,6 +76,12 @@
   },
   "signUpSideBar": {
     "menuItem": [
+      {
+        "name": "Faucet",
+        "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
+        "icon": "/dashbord.png"
+      },
       {
         "name": "Log Out",
         "url": "/",

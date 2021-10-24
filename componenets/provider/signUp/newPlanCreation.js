@@ -50,7 +50,6 @@ export default function NewPlanCreation(props) {
     list.splice(index, 1);
     setPlanList([...list]);
   }
-
   return (
     <section
       className={plan.visibility === "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
@@ -74,6 +73,7 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanTitle"
+
             required
             minLength={3}
             value={plan.title}

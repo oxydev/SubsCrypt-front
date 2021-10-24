@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react'
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { setDataContext } from "../../context/setData";
@@ -6,6 +6,8 @@ import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import { operationContext } from "../../context/handleUserOperation";
+import tutData from '../../data/tutorial.json'
+import { tutorialContext } from '../../context/tutorial'
 
 export default function ProviderSignUp() {
   const router = useRouter();
@@ -13,6 +15,12 @@ export default function ProviderSignUp() {
   const { getProviderAllInfo } = useContext(handleDataContext);
   const { globalState, dispatch } = useContext(UserContext);
   const { showResultToUser } = useContext(operationContext);
+  const tutorialData = tutData.tutorials.becomeProvider;
+  const { handleTutorial } = useContext(tutorialContext);
+
+  useEffect(() => {
+    handleTutorial(tutorialData);
+  }, []);
 
   const [info, setInfo] = useState({
     ProviderMoneyAddress: globalState.user.address,

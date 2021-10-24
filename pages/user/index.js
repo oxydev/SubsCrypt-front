@@ -10,7 +10,7 @@ export default function UserHome() {
   // show the user plan list. If there is no plans, it will switch to the offers
   return (
     <div className="userDashboard">
-      <h1>My Subscryption</h1>
+      <h1>{plans.length > 0 ? "My SubsCrypt":"Marketplace"}</h1>
       <div className="row">
         <div className="Container--medium">
           {plans.length > 0 ? <UserPlansList /> : <SubscryptionOffers />}

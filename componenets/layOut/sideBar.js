@@ -9,7 +9,8 @@ import ToggleButton from '../gadjets/toggle'
 //The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
-  const { handleLogOut } = useContext(handleDataContext);
+  const { handleLogOut, sendMoneyToAddress } = useContext(handleDataContext);
+
   const router = useRouter()
   const [select,setSelect] = useState(0)
   const type = globalState.user.type;
@@ -39,19 +40,24 @@ export default function SideBar() {
       })
     } else if(router.pathname.indexOf("newOffers") > 0){
       sideBarData.menuItem.forEach((res, index)=>{
-        if(res.name === "New Offers")
+        if(res.name === "Marketplace")
           setSelect(index)
       })
     }
   },[router.pathname,sideBarData])
 
+  function hanadleGetToken() {
+    sendMoneyToAddress();
+  }
   const sideBarMenuItems = sideBarData.menuItem.map(
     (item,index) =>
-      (item.name !== "Profile Setting" || globalState.user.username) && (
+      (item.name !== "Profile Setting"  || globalState.user.username) && (item.name !== "My SubsCrypt" || globalState.plans.length > 0) && (
         <li id={item.id} key={item.name} className={select===index? "select":""} onClick={()=>{
           setSelect(index)
-          if(item.name === "Log Out"){
+          if(item.id === "logout") {
             handleLogOut();
+          }else if(item.id === "giveSomeToken") {
+            hanadleGetToken();
           }
         }}>
           {item.url ? (<Link href={item.url}>

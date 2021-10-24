@@ -5,6 +5,8 @@ import { UserContext } from "../../context/store";
 import { setDataContext } from "../../context/setData";
 import PercentageBar from "../gadjets/percentageBar";
 import { operationContext } from "../../context/handleUserOperation";
+import tutData from '../../data/tutorial.json'
+import { tutorialContext } from '../../context/tutorial'
 
 let subscrypt;
 
@@ -20,7 +22,12 @@ export default function UserPlanCard(props) {
   const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
   const { showResultToUser } = useContext(operationContext);
+  const tutorialData = tutData.tutorials.subscriberWithPlan;
+  const { handleTutorial } = useContext(tutorialContext);
 
+  useEffect(() => {
+    handleTutorial(tutorialData);
+  }, []);
   //plan amounts
   const usedPercentage = utils.usePercentage(
     parseInt(props.plan.subscription_time.replace(/,/g, "")),
@@ -91,7 +98,7 @@ export default function UserPlanCard(props) {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(async ({ event: { data, method, section }, phase }) => {
+      for (const { event: { data, method, section }, phase } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
@@ -101,7 +108,7 @@ export default function UserPlanCard(props) {
             "The operation has been done successfully"
           );
         }
-      });
+      }
       if (check === false) {
         // window.alert("The operation failed!");
         await showResultToUser("Operation faild!", "The operation has been failed!");
@@ -113,7 +120,7 @@ export default function UserPlanCard(props) {
   }
 
   return (
-    <section
+    <section id={"plan"+index+"Detail"}
       className={
         planStatus === -1
           ? "UserPlanCard expired"
@@ -190,10 +197,10 @@ export default function UserPlanCard(props) {
             </>
           ) : (
             <>
-              <button className="UserPlan-refundBtn" onClick={handleRefund}>
+              <button id={"plan"+index+"Refund"}  className="UserPlan-refundBtn" onClick={handleRefund}>
                 Refund
               </button>
-              <button className="UserPlan-renewBtn" onClick={handleRenew}>
+              <button id={"plan"+index+"Renew"} className="UserPlan-renewBtn" onClick={handleRenew}>
                 Renew
               </button>
             </>

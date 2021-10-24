@@ -97,6 +97,55 @@
         "title": "Logout",
         "description": "Click to log out of your account."
       }
+    ],
+    "subscriberWithPlan": [
+      {
+        "elementName": "plan0Detail",
+        "title": "See your subscribed plan",
+        "description": "You can check details of your subscribed plans."
+      },
+      {
+        "elementName": "plan0Renew",
+        "title": "Renew your plan",
+        "description": "You can easily renew your plan if you have a connected wallet."
+      },
+      {
+        "elementName": "plan0Refund",
+        "title": "Change your password",
+        "description": "You can easily refund your plan if you have a connected wallet. The refundable amount will be transferred to your wallet."
+      },
+      {
+        "elementName": "newOffers",
+        "title": "Marketplace",
+        "description": "Click to log out of your account."
+      }
+    ],
+    "becomeProvider": [
+      {
+        "elementName": "serviceProviderName",
+        "title": "Enter your name",
+        "description": "You will be shown you subscriber with this name."
+      },
+      {
+        "elementName": "serviceProviderDescription",
+        "title": "Enter your description",
+        "description": "This is a short description of you and your services."
+      },
+      {
+        "elementName": "serviceProvideUsername",
+        "title": "Enter your Username",
+        "description": "This is your username for login with credentials, please be aware that you can not change your username in future."
+      },
+      {
+        "elementName": "giveSomeToken",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here. You can check your balance in up menu."
+      },
+      {
+        "elementName": "logout",
+        "title": "Logout",
+        "description": "Click to cancel process of signing up."
+      }
     ]
   }
 }

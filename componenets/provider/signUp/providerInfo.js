@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from 'react'
 import ImageUploader from "./imageUploader";
 import { UserContext } from "../../../context/store";
 
@@ -14,7 +14,11 @@ export default function ProviderInfo(props) {
       setInfo({ ...info, ProviderUsername: defaultUsername });
     }
   }, [globalState]);
+  const focusDiv = useRef();
 
+  useEffect(() => {
+    if(focusDiv.current) focusDiv.current.focus();
+  }, [focusDiv]);
   return (
     <section className="ProviderInfo">
       <h1>Service Provider Information</h1>
@@ -23,8 +27,11 @@ export default function ProviderInfo(props) {
           <label htmlFor="ProviderName">Service Provider Name</label>
           <input
             type="text"
+            ref={focusDiv}
             required
+            id="serviceProviderName"
             minLength={3}
+            maxLength={20}
             name="ProviderName"
             placeholder="Name of the service provider"
             onChange={(e) => {
@@ -37,7 +44,9 @@ export default function ProviderInfo(props) {
           <input
             type="text"
             required
+            id={"serviceProviderDescription"}
             minLength={10}
+            maxLength={70}
             name="ProviderDescription"
             placeholder="Description"
             onChange={(e) => {
@@ -50,8 +59,11 @@ export default function ProviderInfo(props) {
           <input
             type="text"
             required
+            id={"serviceProvideUsername"}
             minLength={3}
+            maxLength={20}
             name="ProviderUserName"
+            autoComplete={"username"}
             placeholder="Username"
             value={info.ProviderUsername}
             disabled={defaultUsername ? true : false}
@@ -67,10 +79,11 @@ export default function ProviderInfo(props) {
             required
             minLength={6}
             name="ProviderPassword"
-            placeholder="type your password"
+            placeholder="Type your password"
             onChange={(e) => {
               setInfo({ ...info, ProviderPassword: e.target.value });
             }}
+            autoComplete={"new-password"}
           />
           <p>Choose a password for your account.</p>
 
@@ -78,6 +91,7 @@ export default function ProviderInfo(props) {
           <input
             type="password"
             required
+            autoComplete={"new-password"}
             minLength={6}
             name="ProviderConfirmedPassword"
             placeholder="Repeat your password"

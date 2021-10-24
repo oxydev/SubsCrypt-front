@@ -30,6 +30,7 @@ export default function Menu() {
   }
 
   function hanadleGetToken() {
+    console.log('sssss')
     sendMoneyToAddress();
   }
 
@@ -39,9 +40,7 @@ export default function Menu() {
       checkAuthByCookie();
     } else {
       handleTutorial(tutorialData);
-
     }
-    console.log("fucl",auth,password,userWallet,globalState)
 
     //change the status by clicking on sidebar links
     const mainLoginLink = document.getElementById("PublicDashboard");
@@ -67,7 +66,7 @@ export default function Menu() {
         setTask("providerSignUp");
       };
 
-      giveTokenLink.onclick = hanadleGetToken;
+
 
       const sideBarStyleHandler = (elm) => {
         mainLoginLink.closest("li").classList.remove("select");

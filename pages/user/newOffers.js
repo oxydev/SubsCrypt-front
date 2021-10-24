@@ -7,7 +7,7 @@ export default function NewOffers() {
 
   return (
     <div className="userDashboard">
-      <h1>Offers</h1>
+      <h1>Marketplace</h1>
       <div className="row">
         <div className="Container--medium">
           <SubscryptionOffers />
