@@ -88,29 +88,33 @@ export const Tutorial = (props) => {
               className={"TutorialBox " + position.vertical + position.horizontal}
               style={{ top: `${position.top}px`, left: `${position.left}px` }}
             >
-              {tutorialList[order].tutorialElement}
-              <button
-                className="TutorialNextBtn"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (order < tutorialList.length - 1) {
-                    setOrder(order + 1);
-                  } else {
-                    setTutorialList(null);
-                  }
-                }}
-              >
-                Next
-              </button>
-              <button
-                className="TutorialSkipBtn"
-                onClick={(e) => {
-                  e.preventDefault();
-                  endTutorial();
-                }}
-              >
-                Skip Tutorial
-              </button>
+              <img src="/logo/tutLogo.png" />
+              <h2>{tutorialList[order].tutorialElement.title}</h2>
+              <p>{tutorialList[order].tutorialElement.text}</p>
+              <div className="BtnContainer">
+                <button
+                  className="TutorialNextBtn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (order < tutorialList.length - 1) {
+                      setOrder(order + 1);
+                    } else {
+                      setTutorialList(null);
+                    }
+                  }}
+                >
+                  Next
+                </button>
+                <button
+                  className="TutorialSkipBtn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    endTutorial();
+                  }}
+                >
+                  Skip Tutorial
+                </button>
+              </div>
             </div>
             <div className="TutorialFilter"></div>
           </>

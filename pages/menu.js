@@ -19,18 +19,18 @@ export default function Menu() {
   const tutorialRef2 = useRef(null);
   const tutorialRef3 = useRef(null);
 
-  const tutorial1 = <h1>hello tutorial1</h1>;
-  const tutorial2 = <h1>hello tutorial2</h1>;
-  const tutorial3 = <h1>hello tutorial3</h1>;
+  const tutorial1 = { title: "hello1", text: "this is me1" };
+  const tutorial2 = { title: "hello2", text: "this is me2" };
+  const tutorial3 = { title: "hello3", text: "this is me3" };
 
-  // useEffect(() => {
-  //   const list = [
-  //     { target: tutorialRef1, tutorialElement: tutorial1 },
-  //     { target: tutorialRef2, tutorialElement: tutorial2 },
-  //     { target: tutorialRef3, tutorialElement: tutorial3 },
-  //   ];
-  //   setTutorialList(list);
-  // }, [tutorialRef1, tutorialRef2, tutorialRef3]);
+  useEffect(() => {
+    const list = [
+      { target: tutorialRef1, tutorialElement: tutorial1 },
+      { target: tutorialRef2, tutorialElement: tutorial2 },
+      { target: tutorialRef3, tutorialElement: tutorial3 },
+    ];
+    setTutorialList(list);
+  }, [tutorialRef1, tutorialRef2, tutorialRef3]);
 
   //get cookies
   const password = Cookies.get("subscryptPass");
