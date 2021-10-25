@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/oxydev/SubsCrypt-front#readme",
   "dependencies": {
-    "@oxydev/subscrypt": "oxydev/SubsCrypt-npm-library#issue31-add-fucntions",
+    "@oxydev/subscrypt": "^0.3.0",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "form-data": "^4.0.0",
