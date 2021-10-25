@@ -66,6 +66,11 @@
         "description": "You can view and edit detail of your plan."
       },
       {
+        "elementName": "giveSomeToken",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
+      },
+      {
         "elementName": "profilesetting",
         "title": "Change your password",
         "description": "You can change your password if you have access to your PolkaDot.js wallet."
@@ -91,6 +96,11 @@
         "elementName": "profilesetting",
         "title": "Change your password",
         "description": "You can change your password if you have access to your PolkaDot.js wallet."
+      },
+      {
+        "elementName": "giveSomeToken",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
       },
       {
         "elementName": "logout",

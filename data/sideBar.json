@@ -16,17 +16,17 @@
         "item": "/icons/png/sideBar/offer2.svg"
       },
       {
+        "name": "Faucet",
+        "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
+        "icon": "/dashbord.png"
+      },
+      {
         "name": "Profile Setting",
         "url": "/user/profilesetting",
         "id": "profilesetting",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/setting.svg"
-      },
-      {
-        "name": "Faucet",
-        "id": "giveSomeToken",
-        "item": "/icons/png/sideBar/faucet.svg",
-        "icon": "/dashbord.png"
       },
       {
         "name": "Log Out",

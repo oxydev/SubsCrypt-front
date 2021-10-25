@@ -37,7 +37,7 @@ export default function SubscryptionOffers() {
     <section  className="SubscryptionOffers">
       <h1>Currently you don't have any active plans</h1>
       <ProviderSelection />
-      <div className="OfferPart">
+      <div className="OfferPart" id={"plan0Card"}>
         <h2>
           You can view all the available plans to purchase in this link or pick among suggested
           plans for you 👾

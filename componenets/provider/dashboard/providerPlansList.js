@@ -39,13 +39,12 @@ export default function ProviderPlansList() {
       key={"providerPlan" + index}
       plan={item}
       index={index}
-      id={"plan"+index+"Card"}
       type="provider"
       address={globalState.user.address}
     />
   ));
   return (
-    <section className="ProviderPlansList">
+    <section id={"plan0Card"} className="ProviderPlansList">
       <header>
         <h1>Your Plans</h1>
         <p>Total Plans: {plans.length}</p>
