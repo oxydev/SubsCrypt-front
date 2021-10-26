@@ -299,7 +299,8 @@ export const HandleDataFunctions = (props) => {
             });
         }
       })
-      .catch(async () => {
+      .catch(async (err) => {
+        console.log(err);
         setLoading(false);
         // window.alert("Can not load data!");
         await showResultToUser("Authentication Problem!", "Can not load data!");

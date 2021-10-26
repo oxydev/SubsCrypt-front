@@ -73,16 +73,20 @@
   @include box(54px, 40px);
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &::after {
-    background-image: url("/icons/png/userMenuBtn.svg");
-    @include pseudo;
-    @include backgroundImage(center, 20px);
-    @include square(100%);
+  svg {
+    @include square(20px);
+    transition: background-color 0.2s ease-in-out;
   }
 
   &:hover {
     background-color: $purple;
+    svg {
+      fill: #fff;
+    }
   }
 }
 
