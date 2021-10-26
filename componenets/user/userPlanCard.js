@@ -7,6 +7,7 @@ import PercentageBar from "../gadjets/percentageBar";
 import { operationContext } from "../../context/handleUserOperation";
 import tutData from '../../data/tutorial.json'
 import { tutorialContext } from '../../context/tutorial'
+import { handleDataContext } from '../../context/handleData'
 
 let subscrypt;
 
@@ -17,6 +18,7 @@ export default function UserPlanCard(props) {
   const index = props.index;
   const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
+  const { handleSubscriberLoginByWallet } = useContext(handleDataContext);
   const { handleSubscribtion, handleRenewPlan, handleRefundPlan } = useContext(setDataContext);
   const planStatus = props.plan.status;
   const walletAddress = globalState.user.wallet;
@@ -115,9 +117,7 @@ export default function UserPlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      // loadUserDataByWallet(globalState.user.address);
-      router.push("/user");
-
+      handleSubscriberLoginByWallet(globalState.user.address);
     }
   }
 
