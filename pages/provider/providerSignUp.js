@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { setDataContext } from "../../context/setData";
@@ -6,8 +6,8 @@ import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import { operationContext } from "../../context/handleUserOperation";
-import tutData from '../../data/tutorial.json'
-import { tutorialContext } from '../../context/tutorial'
+import tutData from "../../data/tutorial.json";
+import { tutorialContext } from "../../context/tutorial";
 
 export default function ProviderSignUp() {
   const router = useRouter();
@@ -71,17 +71,17 @@ export default function ProviderSignUp() {
             "The operation has been done successfully"
           );
           // console.log("doneee");
-          var axios = require("axios");
-          var FormData = require("form-data");
-          var data = new FormData();
-          data.append("profile", info.image);
-          data.append("providerAddress", globalState.user.address);
-          data.append("description", info.ProviderDescription);
-          data.append("providerName", info.ProviderName);
+          const axios = require("axios");
+          const FormData = require("form-data");
+          let formData = new FormData();
+          formData.append("profile", info.image);
+          formData.append("providerAddress", globalState.user.address);
+          formData.append("description", info.ProviderDescription);
+          formData.append("providerName", info.ProviderName);
           var config = {
             method: "post",
             url: "https://api.subscrypt.io/profile/newProviderRegister",
-            data: data,
+            data: formData,
             headers: {
               "Content-Type": `multipart/form-data;`,
             },
@@ -93,7 +93,7 @@ export default function ProviderSignUp() {
                 allPlanPromise();
               }
             })
-            .catch(function (error) {
+            .catch(function () {
               alert("error");
               // console.log(error);
             });
@@ -130,11 +130,57 @@ export default function ProviderSignUp() {
 
       promiseList.push(axios(config));
     });
-    await Promise.all(promiseList).then((results) => {
+    await Promise.all(promiseList).then(() => {
       dispatch({ type: "REGISTERED", payload: true });
       router.push("/provider");
       // console.log(results);
     });
+  }
+
+  function parseDurations(planList) {
+    var dur = [];
+    planList.forEach((plan) => {
+      if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
+      else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+      else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
+    });
+    return dur;
+  }
+
+  function parsePrices(planList) {
+    var prices = [];
+    planList.forEach((plan) => {
+      prices.push(Number(plan.price) * 10 ** 12);
+    });
+    return prices;
+  }
+
+  function parsePolicies(planList) {
+    var policies = [];
+    planList.forEach((plan) => {
+      policies.push(plan.refund * 10);
+    });
+    return policies;
+  }
+
+  function parseChars(planList) {
+    const plansChars = [];
+    planList.forEach((plan) => {
+      const chars = [];
+      plan.characteristics.forEach((char) => {
+        chars.push(char.text);
+      });
+      plansChars.push(chars);
+    });
+    return plansChars;
+  }
+
+  function makeFieldsVisible() {
+    const list = planList;
+    for (const item of list) {
+      item.visibility = "visible";
+    }
+    setPlanList([...list]);
   }
 
   async function handleRegister() {
@@ -151,43 +197,6 @@ export default function ProviderSignUp() {
         );
       } else {
         var wallet = globalState.user.wallet;
-        function parseDurations(planList) {
-          var dur = [];
-          planList.forEach((plan) => {
-            if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
-            else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
-            else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
-          });
-          return dur;
-        }
-
-        function parsePrices(planList) {
-          var prices = [];
-          planList.forEach((plan) => {
-            prices.push(Number(plan.price) * 10 ** 12);
-          });
-          return prices;
-        }
-
-        function parsePolicies(planList) {
-          var policies = [];
-          planList.forEach((plan) => {
-            policies.push(plan.refund * 10);
-          });
-          return policies;
-        }
-
-        function parseChars(planList) {
-          const plansChars = [];
-          planList.forEach((plan) => {
-            const chars = [];
-            plan.characteristics.forEach((char) => {
-              chars.push(char.text);
-            });
-            plansChars.push(chars);
-          });
-          return plansChars;
-        }
 
         var durations = parseDurations(planList);
         var prices = parsePrices(planList);
@@ -209,14 +218,6 @@ export default function ProviderSignUp() {
         });
       }
     }
-  }
-
-  function makeFieldsVisible() {
-    const list = planList;
-    for (const item of list) {
-      item.visibility = "visible";
-    }
-    setPlanList([...list]);
   }
 
   return (

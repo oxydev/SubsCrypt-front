@@ -6,7 +6,8 @@
     "dev": "next dev -p 5000",
     "build": "next build",
     "start": "next start -p 5555",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "lint": "next lint"
   },
   "repository": {
     "type": "git",
@@ -36,5 +37,9 @@
     "react-select": "^5.1.0",
     "react-tag-input": "^6.7.3",
     "sass": "^1.35.1"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2"
   }
 }

@@ -4,7 +4,6 @@ import Connection from "../componenets/login/connection";
 import data from "../data/wallets&networks.json";
 import Card from "../componenets/login/card";
 import { handleDataContext } from "../context/handleData";
-import { UserContext } from "../context/store";
 import tutData from "../data/tutorial.json";
 import { tutorialContext } from "../context/tutorial";
 
@@ -15,7 +14,6 @@ const Login = (props) => {
   const [steps, setSteps] = useState([true, false, false]);
   const [method, setMethod] = useState(-1);
   const { handleWalletLists } = useContext(handleDataContext);
-  const { globalState } = useContext(UserContext);
   const { handleTutorial, continueTutorial } = useContext(tutorialContext);
 
   const users = data.roles.map((item, index) => (
@@ -36,13 +34,7 @@ const Login = (props) => {
     />
   ));
   const networks = data.networks.map((item, index) => (
-    <Card
-      id={"network"}
-      key={item.name}
-      item={item}
-      selected={index === network}
-      circle={true}
-    />
+    <Card id={"network"} key={item.name} item={item} selected={index === network} circle={true} />
   ));
 
   const methods = data.methods.map((item, index) => (
@@ -85,6 +77,7 @@ const Login = (props) => {
       handleTutorial(tutData.tutorials.login.slice(0, 3));
     }
   }, []);
+
   useEffect(() => {
     if (steps[0]) {
       setSteps([true, true, false]);
@@ -106,9 +99,7 @@ const Login = (props) => {
             : "Login to Your Account"}
         </h1>
         <p className="Topic">Network</p>
-        <div id={"network"} className="ChooseNetworks">
-          {networks}
-        </div>
+        <div id={"network"} className="ChooseNetworks">{networks}</div>
         {steps[1] && (
           <>
             <p className="Topic">Choose Role</p>
@@ -145,13 +136,9 @@ const Login = (props) => {
           </>
         )}
       </div>
-      {method === 0 && (
-        <Connection type={role === 0 ? "subscriber" : "provider"} />
-      )}
-      {method === 1 && (
-        <LoginPart type={role === 0 ? "subscriber" : "provider"} />
-      )}
+      {method === 0 && <Connection type={role === 0 ? "subscriber" : "provider"} />}
+      {method === 1 && <LoginPart type={role === 0 ? "subscriber" : "provider"} />}
     </div>
   );
-};
-export default Login;
+}
+export default Login

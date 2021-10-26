@@ -1,22 +1,18 @@
-import { useContext, useEffect, useRef, useState } from "react";
-//import UserLogin from "./user/userLogin";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "./_app";
 import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";
 import { tutorialContext } from "../context/tutorial";
 import Login from "./login";
 import tutData from "../data/tutorial.json";
-import { UserContext } from "../context/store";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
   const [task, setTask] = useState("none");
   const { handleTutorial } = useContext(tutorialContext);
-  const { checkAuthByCookie, sendMoneyToAddress } =
-    useContext(handleDataContext);
+  const { checkAuthByCookie, sendMoneyToAddress } = useContext(handleDataContext);
   const { auth } = useContext(authContext);
   const tutorialData = tutData.tutorials.mainMenu;
-  const { globalState } = useContext(UserContext);
 
   //get cookies
   const password = Cookies.get("subscryptPass");

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/store";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import { setDataContext } from "../../context/setData";
@@ -110,7 +110,7 @@ export default function AddNewPlan() {
 
       promiseList.push(axios(config));
     });
-    await Promise.all(promiseList).then((results) => {
+    await Promise.all(promiseList).then(() => {
       // console.log("redirect here");
       // router.push("/provider");
       // console.log(results);
