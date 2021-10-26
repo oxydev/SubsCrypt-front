@@ -26,7 +26,7 @@ export default function PlanCard(props) {
   //Subscription function
   function handleSubscribe() {
     handleSubscribtion(address, plan, planIndex, callback).catch(async () => {
-      await showResultToUser("Operation faild!", "The operation has been failed!");
+      await showResultToUser("Operation failed!", "The operation has been failed!");
     });
   }
 
@@ -48,17 +48,18 @@ export default function PlanCard(props) {
           check = true;
           // window.alert("The operation has been done successfully");
           await showResultToUser(
-            "Operation Successful!",
-            "The operation has been done successfully"
+            "Successful SubsCryption!",
+            "You are successfully subscribed to this plan, please wait while your transaction gets confirmed on Blockchain."
           );
         }
       }
       if (check === false) {
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
       handleSubscriberLoginByWallet(globalState.user.address);
+      router.push("/")
     }
   }
 

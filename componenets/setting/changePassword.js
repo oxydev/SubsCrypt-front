@@ -44,7 +44,7 @@ export default function ChangePassword(props) {
     e.preventDefault();
     // console.log(data);
     changePassword(type, data.newPassword, callback).catch(async () => {
-      await showResultToUser("Operation faild!", "The operation has been failed!");
+      await showResultToUser("Operation failed!", "The operation has been failed!");
     });
   }
 

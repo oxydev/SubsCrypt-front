@@ -80,7 +80,7 @@ export default function AddNewPlan() {
       });
       if (check === false) {
         // window.alert("The operation failed!");
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -166,7 +166,7 @@ export default function AddNewPlan() {
     var plansChars = parseChars(planList);
 
     addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars).catch(async () => {
-      await showResultToUser("Operation faild!", "The operation has been failed!");
+      await showResultToUser("Operation failed!", "The operation has been failed!");
     });
   }
 

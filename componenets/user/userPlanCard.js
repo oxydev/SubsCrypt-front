@@ -59,7 +59,7 @@ export default function UserPlanCard(props) {
           plan.characteristics = result.result;
           handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback).catch(
             async () => {
-              await showResultToUser("Operation faild!", "The operation has been failed!");
+              await showResultToUser("Operation failed!", "The operation has been failed!");
             }
           );
           setLocalLoading(false);
@@ -77,7 +77,7 @@ export default function UserPlanCard(props) {
   //Refunding function
   function handleRefund() {
     handleRefundPlan(props.plan.provider, plan, props.plan.plan_index, callback).catch(async () => {
-      await showResultToUser("Operation faild!", "The operation has been failed!");
+      await showResultToUser("Operation failed!", "The operation has been failed!");
     });
   }
 
@@ -86,7 +86,7 @@ export default function UserPlanCard(props) {
     // console.log(props.plan);
     handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback).catch(
       async () => {
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       }
     );
   }
@@ -118,6 +118,7 @@ export default function UserPlanCard(props) {
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
       handleSubscriberLoginByWallet(globalState.user.address);
+      router.push("/")
     }
   }
 
