@@ -10,7 +10,8 @@ import tutData from "../data/tutorial.json";
 export default function Menu() {
   const [task, setTask] = useState("none");
   const { handleTutorial } = useContext(tutorialContext);
-  const { checkAuthByCookie, sendMoneyToAddress } = useContext(handleDataContext);
+  const { checkAuthByCookie, sendMoneyToAddress } =
+    useContext(handleDataContext);
   const { auth } = useContext(authContext);
   const tutorialData = tutData.tutorials.mainMenu;
 
@@ -83,21 +84,23 @@ export default function Menu() {
   //change the login menu according to selecting each type
   if (task === "none") {
     return (
-      <section className="MainLoginPage">
-        <h1>Main Menu</h1>
-        <div>
-          <button id="loginButton" onClick={handleUserLogin}>
-            Login
-          </button>
-          <button id="SignUpButton" onClick={handleProviderSignUp}>
-            Become Provider
-          </button>
-          <div className="Divider"></div>
-          <button id="faucet" onClick={hanadleGetToken}>
-            Faucet
-          </button>
-        </div>
-      </section>
+      <>
+        <section className="MainLoginPage">
+          <h1>Main Menu</h1>
+          <div>
+            <button id="loginButton" onClick={handleUserLogin}>
+              Login
+            </button>
+            <button id="SignUpButton" onClick={handleProviderSignUp}>
+              Become Provider
+            </button>
+            <div className="Divider"></div>
+            <button id="faucet" onClick={hanadleGetToken}>
+              Faucet
+            </button>
+          </div>
+        </section>
+      </>
     );
   } else if (task === "login") {
     return <Login action={"login"} />;

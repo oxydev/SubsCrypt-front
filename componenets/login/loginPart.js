@@ -18,7 +18,10 @@ export default function LoginPart(props) {
   return (
     <section className="Login">
       <h1>Log in by Username and Password</h1>
-      <p>If you have interacted with the contract and have an account you can log in here.</p>
+      <p>
+        If you have interacted with the contract and have an account you can log
+        in here.
+      </p>
       <form
         onSubmit={(e) => {
           e.preventDefault();

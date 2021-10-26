@@ -44,7 +44,13 @@ export default function AddNewPlan() {
     }
     setPlanList([
       ...list,
-      { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 },
+      {
+        visibility: "visible",
+        coins: [],
+        characteristics: [],
+        duration: "1 m",
+        refund: 20,
+      },
     ]);
   }
 
@@ -66,7 +72,7 @@ export default function AddNewPlan() {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(async ({ event: { data, method, section }, phase }) => {
+      events.forEach(async ({ event: { method } }) => {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
@@ -80,7 +86,10 @@ export default function AddNewPlan() {
       });
       if (check === false) {
         // window.alert("The operation failed!");
-        await showResultToUser("Operation failed!", "The operation has been failed!");
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -126,8 +135,10 @@ export default function AddNewPlan() {
       var dur = [];
       planList.forEach((plan) => {
         if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
-        else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "3 m")
+          dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+        else if (plan.duration === "6 m")
+          dur.push(6 * 30 * 24 * 60 * 60 * 1000);
       });
       return dur;
     }
@@ -165,8 +176,18 @@ export default function AddNewPlan() {
     var refundPolicies = parsePolicies(planList);
     var plansChars = parseChars(planList);
 
-    addNewPlans(wallet, callback, durations, prices, refundPolicies, plansChars).catch(async () => {
-      await showResultToUser("Operation failed!", "The operation has been failed!");
+    addNewPlans(
+      wallet,
+      callback,
+      durations,
+      prices,
+      refundPolicies,
+      plansChars
+    ).catch(async () => {
+      await showResultToUser(
+        "Operation failed!",
+        "The operation has been failed!"
+      );
     });
   }
 
@@ -189,8 +210,9 @@ export default function AddNewPlan() {
             </button>
             <div className="ProviderRegisteration">
               <p>
-                For signing up you need to send a transaction on chain to put the data in smart
-                contract on blockchain. Normal gas fee applies.
+                For signing up you need to send a transaction on chain to put
+                the data in smart contract on blockchain. Normal gas fee
+                applies.
               </p>
               <input
                 type="submit"

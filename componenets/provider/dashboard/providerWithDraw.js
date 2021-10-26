@@ -8,7 +8,8 @@ import { UserContext } from "../../../context/store";
 
 export const ProviderWithdraw = (props) => {
   const { setModal } = useContext(modalContext);
-  const { getWithdrawableAmount, getMoneyAddress } = useContext(getBCDataContext);
+  const { getWithdrawableAmount, getMoneyAddress } =
+    useContext(getBCDataContext);
   const { withdrawMoney } = useContext(setDataContext);
   const { showResultToUser } = useContext(operationContext);
   const { globalState } = useContext(UserContext);
@@ -35,11 +36,13 @@ export const ProviderWithdraw = (props) => {
     <section className="ProviderWithDraw">
       <h1>Total withdrawable Amount:</h1>
       <p>
-        {isNaN(amount/1e12)?0:amount/1e12}
-        <span>{" "}DOT</span>
+        {isNaN(amount / 1e12) ? 0 : amount / 1e12}
+        <span> DOT</span>
       </p>
 
-      <button id="withdraw" onClick={handleWithdraw}>Withdraw</button>
+      <button id="withdraw" onClick={handleWithdraw}>
+        Withdraw
+      </button>
     </section>
   );
 };

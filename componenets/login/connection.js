@@ -8,25 +8,29 @@ const customStyles = {
     ...provided,
     borderBottom: "1px dotted pink",
     color: state.isSelected ? "#fff" : "#212121",
-    backgroundColor: state.isSelected ? "#d71eae" : state.isFocused ? "#eeeeee" : "#fff",
+    backgroundColor: state.isSelected
+      ? "#d71eae"
+      : state.isFocused
+      ? "#eeeeee"
+      : "#fff",
     padding: 20,
     cursor: "pointer",
 
     h1: {
       fontSize: "14px",
-      marginBottom: "10px"
+      marginBottom: "10px",
     },
 
     p: state.isSelected
       ? {
           fontSize: "12px",
           fontWeight: 600,
-          color: "#fff"
+          color: "#fff",
         }
       : {
           fontSize: "12px",
-          fontWeight: 600
-        }
+          fontWeight: 600,
+        },
   }),
   control: (provided) => ({
     ...provided,
@@ -36,16 +40,16 @@ const customStyles = {
     borderRadius: "8px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   }),
   valueContainer: (provided) => ({
     ...provided,
-    padding: "5px 20px"
+    padding: "5px 20px",
   }),
 
   placeholder: (provider) => ({
     ...provider,
-    fontSize: "14px"
+    fontSize: "14px",
   }),
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
@@ -57,13 +61,13 @@ const customStyles = {
       transition,
       h1: {
         fontSize: "14px",
-        marginBottom: "5px"
+        marginBottom: "5px",
       },
       p: {
-        fontSize: "12px"
-      }
+        fontSize: "12px",
+      },
     };
-  }
+  },
 };
 
 export default function Connection(props) {
@@ -77,7 +81,7 @@ export default function Connection(props) {
     if (type === "subscriber") {
       handleSubscriberLoginByWallet(address);
     } else if (type === "provider") {
-      console.log(action)
+      // console.log(action)
       handleProviderLoginByWallet(address, action);
     }
   };
@@ -92,7 +96,7 @@ export default function Connection(props) {
     );
     return {
       value: index,
-      label: value
+      label: value,
     };
   });
 
@@ -104,8 +108,9 @@ export default function Connection(props) {
         <>
           <p className="Topic">Choose your Wallet</p>
           <div className="SelectWallet">
-            <Select id="chooseWalletAccount"
-                    options={addressList}
+            <Select
+              id="chooseWalletAccount"
+              options={addressList}
               styles={customStyles}
               isSearchable={false}
               placeholder="Select your wallet"

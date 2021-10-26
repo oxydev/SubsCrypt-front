@@ -14,7 +14,11 @@ export const Operation = (props) => {
       callback = true;
     };
     const successModal = (
-      <OperationModal title={title} message={message} callBack={handleCallBack} />
+      <OperationModal
+        title={title}
+        message={message}
+        callBack={handleCallBack}
+      />
     );
     setModal(successModal);
     setCallBack(() => () => {
@@ -26,7 +30,8 @@ export const Operation = (props) => {
       return new Promise(waitForCallback);
       function waitForCallback(resolve, reject) {
         if (callback) resolve(callback);
-        else if (timeout && Date.now() - start >= timeout) reject(new Error("timeout"));
+        else if (timeout && Date.now() - start >= timeout)
+          reject(new Error("timeout"));
         else setTimeout(waitForCallback.bind(this, resolve, reject), 30);
       }
     }

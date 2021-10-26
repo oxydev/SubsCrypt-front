@@ -4,7 +4,12 @@ import { UserContext } from "../../../context/store";
 export const WithdrwaModal = (props) => {
   const [address, setAddress] = useState("");
 
-  const { withDrawAbleAmount, getMoneyAddress, withdrawMoney, showResultToUser } = props;
+  const {
+    withDrawAbleAmount,
+    getMoneyAddress,
+    withdrawMoney,
+    showResultToUser,
+  } = props;
   const { globalState } = useContext(UserContext);
 
   const userAddress = globalState.user.address;
@@ -19,7 +24,10 @@ export const WithdrwaModal = (props) => {
         if (method === "ExtrinsicSuccess") check = true;
       }
       if (check === false) {
-        await showResultToUser("Operation failed!", "The operation has been failed!");
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
 
         // await showResultToUser("Operation failed!", "The operation has been failed!");
       }
@@ -31,7 +39,10 @@ export const WithdrwaModal = (props) => {
   const handleWithdraw = (e) => {
     e.preventDefault();
     withdrawMoney(userAddress, callback).catch(async () => {
-      await showResultToUser("Operation failed!", "The operation has been failed!");
+      await showResultToUser(
+        "Operation failed!",
+        "The operation has been failed!"
+      );
     });
   };
   useEffect(() => {
@@ -40,7 +51,10 @@ export const WithdrwaModal = (props) => {
         setAddress(res);
       })
       .catch(async () => {
-        await showResultToUser("Operation failed!", "Unable to get the money address!");
+        await showResultToUser(
+          "Operation failed!",
+          "Unable to get the money address!"
+        );
       });
   }, []);
   return (

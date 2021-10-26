@@ -70,7 +70,9 @@ export default function ProviderSignUp() {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(async ({ event: { data, method, section }, phase }) => {
+      for (const {
+        event: { method },
+      } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
@@ -107,7 +109,7 @@ export default function ProviderSignUp() {
               // console.log(error);
             });
         }
-      });
+      }
       if (check === false) {
         // window.alert("The operation failed!");
         await showResultToUser(
@@ -205,10 +207,10 @@ export default function ProviderSignUp() {
       );
     } else {
       if (info.ProviderPassword !== info.ProviderConfirmedPasswords) {
-        // window.alert("Password has not been comfirmed correctly!!");
+        // window.alert("Password has not been confirmed correctly!!");
         await showResultToUser(
-          "Password Comfirmation!",
-          "Password has not been comfirmed correctly!!"
+          "Password Confirmation!",
+          "Password has not been confirmed correctly!!"
         );
       } else {
         var wallet = globalState.user.wallet;
@@ -274,11 +276,11 @@ export default function ProviderSignUp() {
                   makeFieldsVisible();
                 }}
                 value="Register"
-              ></input>
+              />
             </div>
           </form>
         </div>
-        <div className="Container--small"></div>
+        <div className="Container--small" />
       </div>
     </section>
   );

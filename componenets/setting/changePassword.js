@@ -16,7 +16,7 @@ export default function ChangePassword(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const { showResultToUser } = useContext(operationContext);
 
-  async function callback ({ events = [], status }) {
+  async function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
@@ -24,7 +24,9 @@ export default function ChangePassword(props) {
       // console.log("Events:");
       // console.log(events);
       var txStatus = false;
-      for (const { event: { data1, method, section }, phase } of events) {
+      for (const {
+        event: { method },
+      } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           // console.log("success");
@@ -44,9 +46,9 @@ export default function ChangePassword(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      Cookies.set("password", data.newPassword)
+      Cookies.set("password", data.newPassword);
       dispatch({ type: "LOAD_USER_PASSWORD", payload: data.newPassword });
-      router.push("/")
+      router.push("/");
     }
   }
   function handleSubmit(e) {
@@ -54,7 +56,10 @@ export default function ChangePassword(props) {
     e.preventDefault();
     // console.log(data);
     changePassword(type, data.newPassword, callback).catch(async () => {
-      await showResultToUser("Operation failed!", "The operation has been failed!");
+      await showResultToUser(
+        "Operation failed!",
+        "The operation has been failed!"
+      );
     });
   }
 

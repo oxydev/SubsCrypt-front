@@ -31,7 +31,7 @@ export const HandleDataFunctions = (props) => {
 
   const handleWalletBalance = async (address) => {
     blockChainFuncs.getBalance(address).then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch({ type: "LOAD_USER_BALANCE", payload: res });
     });
   };
@@ -78,13 +78,13 @@ export const HandleDataFunctions = (props) => {
                     type: "user",
                     wallet: res,
                     address: res.address,
-                    username: username
-                  }
+                    username: username,
+                  },
                 });
               } else {
                 dispatch({
                   type: "LOAD_USER",
-                  payload: { type: "user", wallet: res, address: res.address }
+                  payload: { type: "user", wallet: res, address: res.address },
                 });
               }
             });
@@ -95,8 +95,8 @@ export const HandleDataFunctions = (props) => {
                 type: "user",
                 wallet: res,
                 address: res.address,
-                username: subscryptUsername
-              }
+                username: subscryptUsername,
+              },
             });
           }
           return res.address;
@@ -115,7 +115,7 @@ export const HandleDataFunctions = (props) => {
             });
           }
         } else {
-          await blockChainFuncs.loadSubscriberPlansbyWallet(res).then((res) => {
+          await blockChainFuncs.loadSubscriberPlansByWallet(res).then((res) => {
             setLoading(false);
             if (res.length > 0) {
               dispatch({ type: "LOAD_USER_PLANS", payload: res });
@@ -156,7 +156,7 @@ export const HandleDataFunctions = (props) => {
 
   //Function for handling the user wallet connection as a subscriber
   const handleProviderLoginByWallet = async (address, action) => {
-    console.log(address, action)
+    // console.log(address, action)
     setLoading(true);
     blockChainFuncs
       .connectToWallet(address)
@@ -169,7 +169,7 @@ export const HandleDataFunctions = (props) => {
           Cookies.set("subscryptAddress", res.address);
           dispatch({
             type: "LOAD_USER",
-            payload: { type: "provider", wallet: res, address: res.address }
+            payload: { type: "provider", wallet: res, address: res.address },
           });
           return res.address;
         }
@@ -183,36 +183,41 @@ export const HandleDataFunctions = (props) => {
       })
       .then(async (res) => {
         if (res.planNum === "NotRegistered") {
-          if(action !== "login") {
+          if (action !== "login") {
             dispatch({ type: "REGISTERED", payload: false });
             setLoading(false);
           } else {
             throw new Error("notSignedUp");
           }
         } else {
-          console.log(action)
+          console.log(action);
 
-          if(action !== "signUp") {
-            console.log(action)
+          if (action !== "signUp") {
+            console.log(action);
             dispatch({ type: "REGISTERED", payload: true });
-            dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.planNum });
+            dispatch({
+              type: "LOAD_PROVIDER_PLANS_COUNT",
+              payload: res.planNum,
+            });
             let subscryptUsername = Cookies.get("subscrypt");
             if (subscryptUsername === undefined) {
-              (await subscrypt).getUsername(res.address).then(async (result) => {
-                // console.log(result, "username");
-                const username = result.result;
-                Cookies.set("subscrypt", username);
-                dispatch({ type: "LOAD_USER_USERNAME", payload: username });
-              });
+              (await subscrypt)
+                .getUsername(res.address)
+                .then(async (result) => {
+                  // console.log(result, "username");
+                  const username = result.result;
+                  Cookies.set("subscrypt", username);
+                  dispatch({ type: "LOAD_USER_USERNAME", payload: username });
+                });
             } else {
               dispatch({
                 type: "LOAD_USER_USERNAME",
-                payload: subscryptUsername
+                payload: subscryptUsername,
               });
             }
             setLoading(false);
             await getProviderAllInfo(res.address, res.planNum);
-          }else{
+          } else {
             throw new Error("alreadyProvider");
           }
         }
@@ -233,23 +238,23 @@ export const HandleDataFunctions = (props) => {
               setAuth(false);
             });
           }
-        } else if(err.message === "notSignedUp") {
+        } else if (err.message === "notSignedUp") {
           await showResultToUser(
             "Failed Authentication!",
             "You should first become a provider and then login with your wallet!"
           ).then(() => {
-            handleLogOut()
+            handleLogOut();
             router.push("/");
           });
-        } else if(err.message === "alreadyProvider") {
+        } else if (err.message === "alreadyProvider") {
           await showResultToUser(
             "Failed to Sign-Up!",
             "You are already a valid provider, please login into your account!"
           ).then(() => {
-            handleLogOut()
+            handleLogOut();
             router.push("/");
           });
-        }else {
+        } else {
           // window.alert("Can not connect to wallet!");
           await showResultToUser(
             "Wallet selection Error!",
@@ -287,8 +292,8 @@ export const HandleDataFunctions = (props) => {
                     username: username,
                     password: password,
                     type: "user",
-                    address: walletAddress
-                  }
+                    address: walletAddress,
+                  },
                 });
                 return walletAddress;
               });
@@ -299,8 +304,8 @@ export const HandleDataFunctions = (props) => {
                 username: username,
                 password: password,
                 type: "user",
-                address: subscryptAddress
-              }
+                address: subscryptAddress,
+              },
             });
           }
           return username;
@@ -317,7 +322,7 @@ export const HandleDataFunctions = (props) => {
       .then(async (res) => {
         if (res === username) {
           await blockChainFuncs
-            .loadSubscriberPlansbyUsername(username, password)
+            .loadSubscriberPlansByUsername(username, password)
             .then((res) => {
               setLoading(false);
               if (res) {
@@ -327,7 +332,7 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(async (err) => {
-        console.log(err)
+        console.log(err);
         setLoading(false);
         // window.alert("Can not load data!");
         await showResultToUser("Authentication Problem!", "Can not load data!");
@@ -349,8 +354,8 @@ export const HandleDataFunctions = (props) => {
             payload: {
               username: username,
               password: password,
-              type: "provider"
-            }
+              type: "provider",
+            },
           });
           setAuth(true);
           Cookies.set("subscrypt", username);
@@ -461,7 +466,7 @@ export const HandleDataFunctions = (props) => {
       if (userType === "user") {
         handleSubscriberLoginByWallet(userAddress);
       } else if (userType === "provider") {
-        handleProviderLoginByWallet(userAddress,"custom");
+        handleProviderLoginByWallet(userAddress, "custom");
       }
     }
   };
@@ -517,7 +522,7 @@ export const HandleDataFunctions = (props) => {
     setAuth(false);
     dispatch({
       type: "LOG_OUT",
-      payload: {}
+      payload: {},
     });
     router.push("/");
   };
@@ -533,7 +538,7 @@ export const HandleDataFunctions = (props) => {
     handleProviderloginByUsername,
     loadOffers,
     handleLogOut,
-    getProviderAllInfo
+    getProviderAllInfo,
   };
   return (
     <handleDataContext.Provider value={handleDataContextValue}>

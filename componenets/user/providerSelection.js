@@ -26,7 +26,7 @@ export default function ProviderSelection() {
         }}
       >
         <label>Input the Provider username or address</label>
-        <div >
+        <div>
           <input type="text" defaultValue={"subscrypt"} ref={textRef} />
           <input type="submit" value="Submit" />
           <button

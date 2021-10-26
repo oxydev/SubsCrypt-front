@@ -34,7 +34,13 @@ const Login = (props) => {
     />
   ));
   const networks = data.networks.map((item, index) => (
-    <Card id={"network"} key={item.name} item={item} selected={index === network} circle={true} />
+    <Card
+      id={"network"}
+      key={item.name}
+      item={item}
+      selected={index === network}
+      circle={true}
+    />
   ));
 
   const methods = data.methods.map((item, index) => (
@@ -111,14 +117,19 @@ const Login = (props) => {
         {steps[2] && action !== "signUp" && (
           <>
             <p className="Topic">Login Method</p>
-            <div className="LoginMethod">
-              {methods}
-            </div>
+            <div className="LoginMethod">{methods}</div>
           </>
         )}
       </div>
-      {method === 0 && <Connection type={role === 0 ? "subscriber" : "provider"} action={action}/>}
-      {method === 1 && <LoginPart type={role === 0 ? "subscriber" : "provider"} />}
+      {method === 0 && (
+        <Connection
+          type={role === 0 ? "subscriber" : "provider"}
+          action={action}
+        />
+      )}
+      {method === 1 && (
+        <LoginPart type={role === 0 ? "subscriber" : "provider"} />
+      )}
     </div>
   );
 };

@@ -22,7 +22,7 @@ export const Modal = (props) => {
               setModal(null);
               callBack();
             }}
-          ></span>
+          />
         </div>
         <div
           className={modal ? "Filler" : "Filler hidden"}
@@ -30,7 +30,7 @@ export const Modal = (props) => {
             setModal(null);
             callBack();
           }}
-        ></div>
+        />
       </>
     </modalContext.Provider>
   );
