@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Cookies from "js-cookie";
+import { useRouter } from "next/dist/client/router";
 
 const CheckedIcon = () => <>📚</>;
 const UncheckedIcon = () => <>👩‍💻</>;
 
 const ToggleButton = (props) => {
+  const router = useRouter();
   const [toggle, setToggle] = useState(true);
   const { defaultChecked, onChange, disabled, className } = props;
 
@@ -31,6 +33,7 @@ const ToggleButton = (props) => {
       Cookies.set("tutorial", "off");
     } else {
       Cookies.set("tutorial", "on");
+      router.reload(window.location.pathname);
     }
 
     setToggle(!toggle);
@@ -46,7 +49,9 @@ const ToggleButton = (props) => {
       return null;
     }
 
-    return icons[type] === undefined ? ToggleButton.defaultProps.icons[type] : icons[type];
+    return icons[type] === undefined
+      ? ToggleButton.defaultProps.icons[type]
+      : icons[type];
   };
 
   const toggleClasses = classNames(
@@ -63,11 +68,19 @@ const ToggleButton = (props) => {
       Tutorial
       <div onClick={triggerToggle} className={toggleClasses}>
         <div className="wrg-toggle-container">
-          <div className="wrg-toggle-check">{/* <span>{getIcon('checked')}</span> */}</div>
-          <div className="wrg-toggle-uncheck">{/* <span>{getIcon('unchecked')}</span> */}</div>
+          <div className="wrg-toggle-check">
+            {/* <span>{getIcon('checked')}</span> */}
+          </div>
+          <div className="wrg-toggle-uncheck">
+            {/* <span>{getIcon('unchecked')}</span> */}
+          </div>
         </div>
         <div className="wrg-toggle-circle"></div>
-        <input type="checkbox" aria-label="Toggle Button" className="wrg-toggle-input" />
+        <input
+          type="checkbox"
+          aria-label="Toggle Button"
+          className="wrg-toggle-input"
+        />
       </div>
     </div>
   );
