@@ -8,7 +8,7 @@ const initialState = {
   plans: [],
   wallets: [],
   subscriptedUsers: [],
-  offerProvider: "5HWLj7XsXETx85nHsSHPbAaQdCdDmT5aJT73pSUGsM28pyfk",
+  offerProvider: "5Dyu5YxLufavjPg8vP31BhKs5xz8ncdkQcNdGwf5XtW4C9Ym",
 };
 
 //Craeting the context to pass to the components in the app tree

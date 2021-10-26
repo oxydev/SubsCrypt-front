@@ -50,7 +50,7 @@ export default function ProviderSignUp() {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
+    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 }]);
   }
 
   async function callback({ events = [], status }) {
