@@ -4,9 +4,8 @@ import Connection from "../componenets/login/connection";
 import data from "../data/wallets&networks.json";
 import Card from "../componenets/login/card";
 import { handleDataContext } from "../context/handleData";
-import { UserContext } from "../context/store";
-import tutData from '../data/tutorial.json'
-import { tutorialContext } from '../context/tutorial'
+import tutData from "../data/tutorial.json";
+import { tutorialContext } from "../context/tutorial";
 
 const Login = (props) => {
   const { action } = props;
@@ -15,10 +14,7 @@ const Login = (props) => {
   const [steps, setSteps] = useState([true, false, false]);
   const [method, setMethod] = useState(-1);
   const { handleWalletLists } = useContext(handleDataContext);
-  const { globalState } = useContext(UserContext);
   const { handleTutorial, continueTutorial } = useContext(tutorialContext);
-
-
 
   const users = data.roles.map((item, index) => (
     <Card
@@ -28,7 +24,7 @@ const Login = (props) => {
       clickHandler={() => {
         if (action !== "signUp") {
           setRole(index);
-          continueTutorial(tutData.tutorials.login.slice(0,5), 3);
+          continueTutorial(tutData.tutorials.login.slice(0, 5), 3);
         }
       }}
       index={index}
@@ -38,7 +34,7 @@ const Login = (props) => {
     />
   ));
   const networks = data.networks.map((item, index) => (
-    <Card id={"network"} key={item.name} item={item} selected={index === network} circle={true}/>
+    <Card id={"network"} key={item.name} item={item} selected={index === network} circle={true} />
   ));
 
   const methods = data.methods.map((item, index) => (
@@ -51,16 +47,15 @@ const Login = (props) => {
         index === 0
           ? () => {
               setMethod(0);
-              handleWalletLists()
+              handleWalletLists();
               continueTutorial(tutData.tutorials.login, 5);
-          }
+            }
           : () => {
-            handleWalletLists()
-            setMethod(1);
+              handleWalletLists();
+              setMethod(1);
             }
       }
       circle={false}
-
     />
   ));
 
@@ -72,12 +67,17 @@ const Login = (props) => {
       setRole(1);
       setSteps([true, true, true]);
       setMethod(0);
-      handleTutorial([tutData.tutorials.login[0],tutData.tutorials.login[2],tutData.tutorials.login[5]]);
+      handleTutorial([
+        tutData.tutorials.login[0],
+        tutData.tutorials.login[2],
+        tutData.tutorials.login[5],
+      ]);
       handleWalletLists();
     } else {
-      handleTutorial(tutData.tutorials.login.slice(0,3));
+      handleTutorial(tutData.tutorials.login.slice(0, 3));
     }
   }, []);
+
   useEffect(() => {
     if (steps[0]) {
       setSteps([true, true, false]);
@@ -97,7 +97,9 @@ const Login = (props) => {
           {action === "signUp" ? "Sign Up a new Account" : "Login to Your Account"}
         </h1>
         <p className="Topic">Network</p>
-        <div id={"network"} className="ChooseNetworks">{networks}</div>
+        <div id={"network"} className="ChooseNetworks">
+          {networks}
+        </div>
         {steps[1] && (
           <>
             <p className="Topic">Choose Role</p>
@@ -138,5 +140,5 @@ const Login = (props) => {
       {method === 1 && <LoginPart type={role === 0 ? "subscriber" : "provider"} />}
     </div>
   );
-}
-export default Login
+};
+export default Login;

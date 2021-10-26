@@ -28,10 +28,10 @@ export default function App({ Component, pageProps }) {
 
   //Turn on and off the loading when the page url has been changed
   useEffect(() => {
-    router.events.on("routeChangeStart", (url) => {
+    router.events.on("routeChangeStart", () => {
       setLoading(true);
     });
-    router.events.on("routeChangeComplete", (url) => {
+    router.events.on("routeChangeComplete", () => {
       setTimeout(() => {
         setLoading(false);
       }, 200);
