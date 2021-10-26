@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <div className="Header">
       <div className={userName || userWallet ? "LoginBox" : "LoginBox Green"}>
-        {/* <img className="Avatar" src={user.avatar} /> */}
+         <img className="Avatar" src={"/avatar/notLogedin.svg"} />
         {/* show each of user name or wallet address or both of them */}
         {userName && <p className="UserName">{userName}</p>}
         {userName && userWallet && <p className="Separator">|</p>}

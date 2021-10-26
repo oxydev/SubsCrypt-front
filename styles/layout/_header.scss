@@ -72,14 +72,14 @@
   transition: background-color 0.2s ease-in-out;
 
   &::after {
-    background-image: url("/icons/png/userMenuBtn.png");
+    background-image: url("/icons/png/userMenuBtn.svg");
     @include pseudo;
     @include backgroundImage(center, 20px);
     @include square(100%);
   }
 
   &:hover {
-    background-color: $gray-5;
+    background-color: $purple;
   }
 }
 

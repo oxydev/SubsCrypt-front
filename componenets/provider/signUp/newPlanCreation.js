@@ -141,7 +141,7 @@ export default function NewPlanCreation(props) {
                 handleCoinCheckBox(e);
               }}
             ></input>
-            <img src="/icons/png/networks/PolkadotLogo.png" />
+            <img src="/icons/png/networks/polkadot.svg" />
             <label htmlFor="Polkadot">Polkadot (DOT)</label>
           </div>
           <p>

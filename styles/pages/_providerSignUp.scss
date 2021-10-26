@@ -28,7 +28,7 @@
     @include pseudo;
     @include square(42px);
     @include backgroundImage;
-    background-image: url("/icons/png/uploadBtn.png");
+    background-image: url("/icons/png/uploadBtn.svg");
     position: static;
     margin-right: 24px;
     transition: opacity 0.2s ease-in-out;

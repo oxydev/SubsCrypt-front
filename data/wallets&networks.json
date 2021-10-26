@@ -2,7 +2,7 @@
   "networks": [
     {
       "name": "Polkadot",
-      "imageURL": "/icons/png/networks/PolkadotLogo.png"
+      "imageURL": "/icons/png/networks/polkadot.svg"
     }
   ],
   "wallets": [

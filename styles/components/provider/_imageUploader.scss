@@ -6,9 +6,10 @@
     border: 2px dashed $gray-4;
     margin: auto;
     background-color: transparent;
-    background-image: url("/icons/png/uploadButton.png");
+    background-image: url("/icons/png/uploadButton.svg");
     @include backgroundImage;
     background-size: 128px;
+    border: none;
   }
 
   input {

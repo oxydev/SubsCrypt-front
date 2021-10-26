@@ -16,7 +16,7 @@
     &::before {
       @include pseudo;
       @include box(19px, 17px);
-      background-image: url("/icons/png/sunscryption/Wallet.png");
+      background-image: url("/icons/png/sunscryption/Wallet.svg");
       @include backgroundImage;
       left: -30px;
       top: 0;
@@ -28,7 +28,7 @@
 .SubscryptionOffers::after {
   @include pseudo;
   @include box(139px, 126px);
-  background-image: url("/icons/png/sunscryption/OffersIcon.png");
+  background-image: url("/icons/png/sunscryption/OffersIcon.svg");
   @include backgroundImage;
   top: 10%;
   right: 15%;

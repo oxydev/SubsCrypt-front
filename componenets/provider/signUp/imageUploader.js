@@ -5,7 +5,7 @@ export default function ImageUploader(props) {
   const { info, setInfo } = props;
   const inputRF = useRef(null);
   const [file, setFile] = useState();
-  const [url, setUrl] = useState("/icons/png/uploadButton.png");
+  const [url, setUrl] = useState("/icons/png/uploadButton.svg");
 
   //Function for handling the input file chnaging
   function inputChangeHandler(e) {
