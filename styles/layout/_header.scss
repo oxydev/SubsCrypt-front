@@ -28,7 +28,8 @@
     }
   }
 
-  .UserMenu-menu {
+  &:hover {
+    box-shadow: $box-shadow--card;
   }
 }
 .Avatar {
