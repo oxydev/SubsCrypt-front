@@ -33,7 +33,7 @@
   }
 }
 .Avatar {
-  @include circle(24px);
+  @include square(20px);
   @include backgroundImage;
 }
 .UserName {

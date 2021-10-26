@@ -32,7 +32,7 @@ export default function Header() {
           setShowIdentity(false);
         }}
       >
-        <img className="Avatar" src={"/avatar/notLogedin.svg"} />
+        <img className="Avatar" src={"/icons/png/networks/wallet.png"} />
         {userWallet && <p className="UserWallet">{middleDots(userWallet)}</p>}
         <div
           className={showIdentity ? "UserMenu-menu" : "UserMenu-menu hidden"}
@@ -50,14 +50,14 @@ export default function Header() {
               <li>
                 <p>
                   <embed src={"/icons/png/sideBar/balance.svg"} />
-                  <b>{userBalance.toFixed(2)}</b> <span>USDT</span>
+                  <b>{userBalance.toFixed(2)}</b> <span>Dot</span>
                 </p>
               </li>
             )}
             {userWallet && (
               <li>
                 <p>
-                  <embed src={"/icons/png/sideBar/wallet.svg"} />
+                  <embed src={"/icons/png/networks/wallet.png"} />
                   {middleDots(userWallet)}
                 </p>
               </li>
