@@ -24,15 +24,21 @@
       margin: auto;
     }
   }
+  embed {
+    position: absolute;
+    top: 6%;
+    right: 10%;
+  }
 }
-.SubscryptionOffers::after {
-  @include pseudo;
-  @include box(139px, 126px);
-  background-image: url("/icons/png/sunscryption/OffersIcon.svg");
-  @include backgroundImage;
-  top: 10%;
-  right: 15%;
-}
+// .SubscryptionOffers::after {
+//   @include pseudo;
+//   @include box(139px, 126px);
+//   background-image: url("/icons/png/sunscryption/OffersIcon.svg");
+//   @include backgroundImage;
+//   top: 10%;
+//   right: 15%;
+// }
+
 .OfferPart {
   & > h2 {
     @include text-body--lightSmall--light;
