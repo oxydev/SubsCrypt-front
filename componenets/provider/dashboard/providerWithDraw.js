@@ -35,7 +35,7 @@ export const ProviderWithdraw = (props) => {
     <section className="ProviderWithDraw">
       <h1>Total withdrawable Amount:</h1>
       <p>
-        {amount/1e12}
+        {isNaN(amount/1e12)?0:amount/1e12}
         <span>{" "}DOT</span>
       </p>
 

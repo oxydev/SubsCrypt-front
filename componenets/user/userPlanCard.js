@@ -111,11 +111,13 @@ export default function UserPlanCard(props) {
       }
       if (check === false) {
         // window.alert("The operation failed!");
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
       // loadUserDataByWallet(globalState.user.address);
+      router.push("/user");
+
     }
   }
 
