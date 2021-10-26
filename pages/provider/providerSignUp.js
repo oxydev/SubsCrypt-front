@@ -50,7 +50,16 @@ export default function ProviderSignUp() {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 }]);
+    setPlanList([
+      ...list,
+      {
+        visibility: "visible",
+        coins: [],
+        characteristics: [],
+        duration: "1 m",
+        refund: 20,
+      },
+    ]);
   }
 
   async function callback({ events = [], status }) {
@@ -101,7 +110,10 @@ export default function ProviderSignUp() {
       });
       if (check === false) {
         // window.alert("The operation failed!");
-        await showResultToUser("Operation failed!", "The operation has been failed!");
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -187,7 +199,10 @@ export default function ProviderSignUp() {
     const image = info.image;
     if (!image) {
       // window.alert("You should upload a photo!");
-      await showResultToUser("Photo is necessary!", "You should upload a photo!");
+      await showResultToUser(
+        "Photo is necessary!",
+        "You should upload a photo!"
+      );
     } else {
       if (info.ProviderPassword !== info.ProviderConfirmedPasswords) {
         // window.alert("Password has not been comfirmed correctly!!");
@@ -214,7 +229,10 @@ export default function ProviderSignUp() {
           info.ProviderPassword,
           plansChars
         ).catch(async () => {
-          await showResultToUser("Operation failed!", "The operation has been failed!");
+          await showResultToUser(
+            "Operation failed!",
+            "The operation has been failed!"
+          );
         });
       }
     }
@@ -235,13 +253,18 @@ export default function ProviderSignUp() {
           >
             <ProviderInfo info={info} setInfo={setInfo} />
             {planFormList}
-            <button id={"addAnotherPlan"} className="PlansForm-addBtn" onClick={addAnotherPlan}>
+            <button
+              id={"addAnotherPlan"}
+              className="PlansForm-addBtn"
+              onClick={addAnotherPlan}
+            >
               Add another plan
             </button>
             <div className="ProviderRegisteration">
               <p>
-                For signing up you need to send a transaction on chain to put the data in smart
-                contract on blockchain. Normal gas fee applies.
+                For signing up you need to send a transaction on chain to put
+                the data in smart contract on blockchain. Normal gas fee
+                applies.
               </p>
               <input
                 type="submit"

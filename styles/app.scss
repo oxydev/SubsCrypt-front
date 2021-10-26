@@ -10,8 +10,6 @@
 
 // Components
 @import "components/modal";
-@import "components/buttons";
-@import "components/containers";
 @import "components/input";
 @import "components/MySubscryption/subscryptionOffers";
 @import "components/common/planCard";
@@ -37,7 +35,6 @@
 // Layout
 @import "layout/Main";
 @import "layout/body";
-@import "layout/footer";
 @import "layout/header";
 @import "layout/sidebar";
 @import "layout/containers";
@@ -49,10 +46,6 @@
 @import "pages/providerSignUp";
 @import "pages/providerDashboard";
 @import "pages/providerSetting";
-@import "pages/sign_in";
-
-// Sections
-@import "sections/wallet";
 
 // Vendor Files
 @import "vendors/reactMultiCarousel";
