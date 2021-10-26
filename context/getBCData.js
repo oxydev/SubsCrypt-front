@@ -3,7 +3,7 @@ import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import { modalContext } from "./modal";
 import { serverDataContext } from "./getServerData";
 import SingIn from "../pages/login";
-import { operationContext } from './handleUserOperation'
+import { operationContext } from "./handleUserOperation";
 
 export const getBCDataContext = React.createContext({});
 
@@ -95,7 +95,8 @@ export const GetBCDataFunctions = (props) => {
       return new Promise(waitForWallet);
       function waitForWallet(resolve, reject) {
         if (wallet) resolve(wallet);
-        else if (timeout && Date.now() - start >= timeout) reject(new Error("timeout"));
+        else if (timeout && Date.now() - start >= timeout)
+          reject(new Error("timeout"));
         else setTimeout(waitForWallet.bind(this, resolve, reject), 30);
       }
     }
@@ -155,12 +156,17 @@ export const GetBCDataFunctions = (props) => {
     let promiseList = [];
 
     if (!count) {
-      return (await subscrypt).getPlanLength(address).then(async (res) => {
-        console.log(res)
-        if(res.status === "Fetched")
-          return getProviderPlanslist(address, parseInt(res.result));
-      }).catch(async (err) =>
-        await showResultToUser("Failed!", "The Address is not valid!"))
+      return (await subscrypt)
+        .getPlanLength(address)
+        .then(async (res) => {
+          // console.log(res)
+          if (res.status === "Fetched")
+            return getProviderPlanslist(address, parseInt(res.result));
+        })
+        .catch(
+          async (err) =>
+            await showResultToUser("Failed!", "The Address is not valid!")
+        );
     } else {
       for (let i = 0; i < count; i++) {
         promiseList.push(
@@ -181,13 +187,15 @@ export const GetBCDataFunctions = (props) => {
 
   //Function for getting a provider plan according to it's index
   const loadPlan = async (address, index) => {
-    return await (await subscrypt).getPlanData(address, index).then(async (result) => {
-      let plan = result.result;
-      plan.planIndex = index;
-      return await loadCharacs(address, index, plan).then((res) => {
-        return res;
+    return await (await subscrypt)
+      .getPlanData(address, index)
+      .then(async (result) => {
+        let plan = result.result;
+        plan.planIndex = index;
+        return await loadCharacs(address, index, plan).then((res) => {
+          return res;
+        });
       });
-    });
   };
 
   //Function for getting plan Characteristic
@@ -212,11 +220,13 @@ export const GetBCDataFunctions = (props) => {
 
   //Function for getting plan Characteristic
   const getWithdrawableAmount = async (address) => {
-    return await (await subscrypt).getWithdrawableAmount(address).then((result) => {
-      if (result.status === "Fetched") {
-        return result.result;
-      }
-    });
+    return await (await subscrypt)
+      .getWithdrawableAmount(address)
+      .then((result) => {
+        if (result.status === "Fetched") {
+          return result.result;
+        }
+      });
   };
 
   //Function for getting money address
@@ -239,10 +249,12 @@ export const GetBCDataFunctions = (props) => {
         return plan;
       })
       .then(async () => {
-        return await serverFunctions.getProviderDescription(address).then((respones) => {
-          plan.providerName = respones.name;
-          return plan;
-        });
+        return await serverFunctions
+          .getProviderDescription(address)
+          .then((respones) => {
+            plan.providerName = respones.name;
+            return plan;
+          });
       });
   };
 
@@ -251,11 +263,10 @@ export const GetBCDataFunctions = (props) => {
     let plans = [];
     return await (
       await subscrypt
-    ).retrieveWholeDataWithWallet(address)
+    )
+      .retrieveWholeDataWithWallet(address)
       .then(async (result) => {
-        console.log('fuck')
-
-        console.log(result)
+        // console.log(result)
         if (result.status === "Fetched") {
           plans = result.result;
           if (plans.length === 0) {
@@ -278,7 +289,7 @@ export const GetBCDataFunctions = (props) => {
         }
       })
       .catch((err) => {
-        console.log(err)
+        // console.log(err)
         throw new Error("Problem with loading subscriber plans!");
       });
   };

@@ -37,7 +37,10 @@ export const HandleDataFunctions = (props) => {
         dispatch({ type: "LOAD_WALLETS", payload: res });
       })
       .catch(async () => {
-        await showResultToUser("Wallet selection Error!", "Unable to get the wallets list!");
+        await showResultToUser(
+          "Wallet selection Error!",
+          "Unable to get the wallets list!"
+        );
       });
   };
 
@@ -55,16 +58,21 @@ export const HandleDataFunctions = (props) => {
           Cookies.set("subscryptAddress", res.address);
 
           let subscryptUsername = Cookies.get("subscrypt");
-          console.log(subscryptUsername);
+          // console.log(subscryptUsername);
           if (subscryptUsername === undefined) {
             (await subscrypt).getUsername(res.address).then(async (result) => {
-              console.log(result, "username");
+              // console.log(result, "username");
               if (result.status === "Fetched") {
                 const username = result.result;
                 Cookies.set("subscrypt", username);
                 dispatch({
                   type: "LOAD_USER",
-                  payload: { type: "user", wallet: res, address: res.address, username: username },
+                  payload: {
+                    type: "user",
+                    wallet: res,
+                    address: res.address,
+                    username: username,
+                  },
                 });
               } else {
                 dispatch({
@@ -130,11 +138,12 @@ export const HandleDataFunctions = (props) => {
           }
         } else {
           // window.alert("Can not connect to wallet!");
-          await showResultToUser("Wallet selection Error!", "Can not connect to wallet!").then(
-            () => {
-              router.push("/");
-            }
-          );
+          await showResultToUser(
+            "Wallet selection Error!",
+            "Can not connect to wallet!"
+          ).then(() => {
+            router.push("/");
+          });
         }
       });
   };
@@ -142,7 +151,9 @@ export const HandleDataFunctions = (props) => {
   //Function for handling the user wallet connection as a subscriber
   const handleProviderLogingByWallet = async (address) => {
     setLoading(true);
-    blockChainFuncs.connectToWallet(address).then(async (res) => {
+    blockChainFuncs
+      .connectToWallet(address)
+      .then(async (res) => {
         if (res === "notSet") {
           throw new Error("notSet");
         } else {
@@ -157,9 +168,11 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .then(async (res) => {
-        return await blockChainFuncs.checkProviderRegistration(res).then((response) => {
-          return { address: res, planNum: response };
-        });
+        return await blockChainFuncs
+          .checkProviderRegistration(res)
+          .then((response) => {
+            return { address: res, planNum: response };
+          });
       })
       .then(async (res) => {
         if (res.planNum === "NotRegistered") {
@@ -171,16 +184,19 @@ export const HandleDataFunctions = (props) => {
           let subscryptUsername = Cookies.get("subscrypt");
           if (subscryptUsername === undefined) {
             (await subscrypt).getUsername(res.address).then(async (result) => {
-              console.log(result, "username");
+              // console.log(result, "username");
               const username = result.result;
               Cookies.set("subscrypt", username);
               dispatch({ type: "LOAD_USER_USERNAME", payload: username });
             });
           } else {
-            dispatch({ type: "LOAD_USER_USERNAME", payload: subscryptUsername });
+            dispatch({
+              type: "LOAD_USER_USERNAME",
+              payload: subscryptUsername,
+            });
           }
           setLoading(false);
-          await getProviderAllInfo(res.address, res.planNum)
+          await getProviderAllInfo(res.address, res.planNum);
         }
       })
       .catch(async (err) => {
@@ -201,11 +217,12 @@ export const HandleDataFunctions = (props) => {
           }
         } else {
           // window.alert("Can not connect to wallet!");
-          await showResultToUser("Wallet selection Error!", "Can not connect to wallet!").then(
-            () => {
-              router.push("/");
-            }
-          );
+          await showResultToUser(
+            "Wallet selection Error!",
+            "Can not connect to wallet!"
+          ).then(() => {
+            router.push("/");
+          });
         }
       });
   };
@@ -225,20 +242,22 @@ export const HandleDataFunctions = (props) => {
           Cookies.set("subscryptType", "user");
           let subscryptAddress = Cookies.get("subscryptAddress");
           if (subscryptAddress === undefined) {
-            (await subscrypt).getAddressByUsername(username).then(async (result) => {
-              const walletAddress = result.result;
-              Cookies.set("subscryptAddress", walletAddress);
-              dispatch({
-                type: "LOAD_USER",
-                payload: {
-                  username: username,
-                  password: password,
-                  type: "user",
-                  address: walletAddress,
-                },
+            (await subscrypt)
+              .getAddressByUsername(username)
+              .then(async (result) => {
+                const walletAddress = result.result;
+                Cookies.set("subscryptAddress", walletAddress);
+                dispatch({
+                  type: "LOAD_USER",
+                  payload: {
+                    username: username,
+                    password: password,
+                    type: "user",
+                    address: walletAddress,
+                  },
+                });
+                return walletAddress;
               });
-              return walletAddress;
-            });
           } else {
             dispatch({
               type: "LOAD_USER",
@@ -255,17 +274,22 @@ export const HandleDataFunctions = (props) => {
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           // window.alert("Invalid username of password!");
-          await showResultToUser("Authentication Problem!", "Invalid username of password!");
+          await showResultToUser(
+            "Authentication Problem!",
+            "Invalid username of password!"
+          );
         }
       })
       .then(async (res) => {
         if (res === username) {
-          await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
-            setLoading(false);
-            if (res) {
-              dispatch({ type: "LOAD_USER_PLANS", payload: res })
-            };
-          });
+          await blockChainFuncs
+            .loadSubscriberPlansbyUsername(username, password)
+            .then((res) => {
+              setLoading(false);
+              if (res) {
+                dispatch({ type: "LOAD_USER_PLANS", payload: res });
+              }
+            });
         }
       })
       .catch(async () => {
@@ -287,7 +311,11 @@ export const HandleDataFunctions = (props) => {
           setLoading(true);
           dispatch({
             type: "LOAD_USER",
-            payload: { username: username, password: password, type: "provider" },
+            payload: {
+              username: username,
+              password: password,
+              type: "provider",
+            },
           });
           setAuth(true);
           Cookies.set("subscrypt", username);
@@ -298,7 +326,10 @@ export const HandleDataFunctions = (props) => {
           //getting the user plans after login
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
-          await showResultToUser("Authentication Problem!", "Invalid username of password!");
+          await showResultToUser(
+            "Authentication Problem!",
+            "Invalid username of password!"
+          );
         }
       })
       .then(async (res) => {
@@ -330,7 +361,7 @@ export const HandleDataFunctions = (props) => {
       await (await subscrypt).getPlanLength(address).then(async (res) => {
         dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.result });
         await getProviderAllInfo(address, parseInt(res.result));
-      })
+      });
     } else {
       serverFunctions.getProviderHeaderInfo(address).then((res) => {
         dispatch({ type: "USER_NAME", payload: res.name });
@@ -344,7 +375,6 @@ export const HandleDataFunctions = (props) => {
           dispatch({ type: "PROVIDER_ALLUSERS", payload: res });
         });
       });
-
     }
   };
 
@@ -356,8 +386,7 @@ export const HandleDataFunctions = (props) => {
       )
         .getAddressByUsername(providerAddress)
         .then(async (result) => {
-          if(result.status === "Fetched")
-          {
+          if (result.status === "Fetched") {
             dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
             await loadOffers(result.result);
           } else {
@@ -367,15 +396,15 @@ export const HandleDataFunctions = (props) => {
             );
           }
         })
-        .catch(() => {
-
-        });
+        .catch(() => {});
     } else {
-      await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
-        if(res !== true) {
-          dispatch({ type: "RESET_PROVIDER_PLAN", payload: res });
-        }
-      });
+      await blockChainFuncs
+        .getProviderPlanslist(providerAddress)
+        .then((res) => {
+          if (res !== true) {
+            dispatch({ type: "RESET_PROVIDER_PLAN", payload: res });
+          }
+        });
     }
   };
 
@@ -407,11 +436,16 @@ export const HandleDataFunctions = (props) => {
     blockChainFuncs.getWalletLists().then(async (res) => {
       let modalElement;
       if (res.length > 0) {
-        modalElement = <FaucetModal walletList={res} handleSendMoney={handleSendMoney} />;
+        modalElement = (
+          <FaucetModal walletList={res} handleSendMoney={handleSendMoney} />
+        );
 
         setModal(modalElement);
       } else {
-        await showResultToUser("No wallet to choose", "You do not have any wallet to choose");
+        await showResultToUser(
+          "No wallet to choose",
+          "You do not have any wallet to choose"
+        );
       }
     });
 
@@ -424,11 +458,17 @@ export const HandleDataFunctions = (props) => {
         .transferToken(address)
         .then(async (result) => {
           // window.alert("Operation has been done successful!");
-          await showResultToUser("Operation Successful!", "Operation has been done successfully!");
+          await showResultToUser(
+            "Operation Successful!",
+            "Operation has been done successfully!"
+          );
         })
         .catch(async (error) => {
           // window.alert("Operation failed!");
-          await showResultToUser("Operation Failed!", "Operation has been failed!");
+          await showResultToUser(
+            "Operation Failed!",
+            "Operation has been failed!"
+          );
         });
     }
   };

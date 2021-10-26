@@ -6,13 +6,14 @@ import Cookies from "js-cookie";
 import { tutorialContext } from "../context/tutorial";
 import Login from "./login";
 import tutData from "../data/tutorial.json";
-import { UserContext } from '../context/store'
+import { UserContext } from "../context/store";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
   const [task, setTask] = useState("none");
   const { handleTutorial } = useContext(tutorialContext);
-  const { checkAuthByCookie, sendMoneyToAddress } = useContext(handleDataContext);
+  const { checkAuthByCookie, sendMoneyToAddress } =
+    useContext(handleDataContext);
   const { auth } = useContext(authContext);
   const tutorialData = tutData.tutorials.mainMenu;
   const { globalState } = useContext(UserContext);
@@ -30,7 +31,6 @@ export default function Menu() {
   }
 
   function hanadleGetToken() {
-    console.log('sssss')
     sendMoneyToAddress();
   }
 
@@ -66,8 +66,6 @@ export default function Menu() {
         setTask("providerSignUp");
       };
 
-
-
       const sideBarStyleHandler = (elm) => {
         mainLoginLink.closest("li").classList.remove("select");
         userLoginLink.closest("li").classList.remove("select");
@@ -84,8 +82,7 @@ export default function Menu() {
         sideBarStyleHandler(signUpLink);
       }
     }
-  },[auth]);
-
+  }, [auth]);
 
   //change the login menu according to selecting each type
   if (task === "none") {
@@ -107,7 +104,6 @@ export default function Menu() {
       </section>
     );
   } else if (task === "login") {
-
     return <Login />;
   } else if (task === "providerSignUp") {
     return (

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/store";
 import ProviderEachUser from "./providerEachUser";
 
@@ -9,14 +9,18 @@ export default function ProviderAllUsers() {
 
   useEffect(() => {
     const allUsers = globalState.subscriptedUsers;
-    console.log(allUsers);
-    setUserList(allUsers.map((item, index) =>
-      (
-        <ProviderEachUser key={"subscriptedUser" + index} userInfo={item} userIndex={index}/>
-      )
-    ));
-    console.log(userList)
-  },[globalState.subscriptedUsers])
+    // console.log(allUsers);
+    setUserList(
+      allUsers.map((item, index) => (
+        <ProviderEachUser
+          key={"subscriptedUser" + index}
+          userInfo={item}
+          userIndex={index}
+        />
+      ))
+    );
+    // console.log(userList)
+  }, [globalState.subscriptedUsers]);
   return (
     <section className="ProviderAllUsers">
       <h1>All Subscribed Users</h1>

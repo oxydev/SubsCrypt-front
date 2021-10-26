@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import userData from "../../data/userIdentity.json";
 import { UserContext } from "../../context/store";
 import { handleDataContext } from "../../context/handleData";
 import { middleDots } from "../../utilities/utilityFunctions";
@@ -17,7 +16,7 @@ export default function Header() {
   return (
     <div className="Header">
       <div className={userName || userWallet ? "LoginBox" : "LoginBox Green"}>
-         <img className="Avatar" src={"/avatar/notLogedin.svg"} />
+        <img className="Avatar" src={"/avatar/notLogedin.svg"} />
         {/* show each of user name or wallet address or both of them */}
         {userName && <p className="UserName">{userName}</p>}
         {userName && userWallet && <p className="Separator">|</p>}
@@ -36,25 +35,28 @@ export default function Header() {
         <div className={showMenu ? "UserMenu-menu" : "UserMenu-menu hidden"}>
           <ul>
             {globalState.user.username && (
-              <li >
+              <li>
                 <Link
                   href={
-
                     globalState.user.type === "user"
                       ? "/user/profilesetting"
                       : "/provider/profilesetting"
                   }
                 >
-
-                  <a>                  <embed src={'/icons/png/sideBar/setting-black.svg'}/>
-                    Profile Setting</a>
+                  <a>
+                    {" "}
+                    <embed src={"/icons/png/sideBar/setting-black.svg"} />
+                    Profile Setting
+                  </a>
                 </Link>
               </li>
             )}
-            <li >
+            <li>
               <Link href="#">
-                <a onClick={handleLogOut}><embed src={'/icons/png/sideBar/logout-black.svg'}/>
-                  LogOut</a>
+                <a onClick={handleLogOut}>
+                  <embed src={"/icons/png/sideBar/logout-black.svg"} />
+                  LogOut
+                </a>
               </Link>
             </li>
           </ul>

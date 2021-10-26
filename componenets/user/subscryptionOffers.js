@@ -4,8 +4,8 @@ import { UserContext } from "../../context/store";
 import ProviderSelection from "./providerSelection";
 import { handleDataContext } from "../../context/handleData";
 import { authContext } from "../../pages/_app";
-import tutData from '../../data/tutorial.json'
-import { tutorialContext } from '../../context/tutorial'
+import tutData from "../../data/tutorial.json";
+import { tutorialContext } from "../../context/tutorial";
 
 //The component for managing subscription offer part
 export default function SubscryptionOffers() {
@@ -16,12 +16,9 @@ export default function SubscryptionOffers() {
   const { handleTutorial } = useContext(tutorialContext);
 
   useEffect(() => {
-    console.log(globalState)
-    if(globalState.user.username)
-      handleTutorial(tutorialData);
-    else
-      handleTutorial([...tutorialData.slice(0,2),tutorialData[3]]);
-
+    // console.log(globalState)
+    if (globalState.user.username) handleTutorial(tutorialData);
+    else handleTutorial([...tutorialData.slice(0, 2), tutorialData[3]]);
   }, []);
 
   // const providerAddress = data.providerAddress;
@@ -31,16 +28,16 @@ export default function SubscryptionOffers() {
     if (auth && globalState.user.address) {
       loadOffers(providerAddress);
     }
-  }, [providerAddress,globalState.user.address]);
+  }, [providerAddress, globalState.user.address]);
 
   return (
-    <section  className="SubscryptionOffers">
+    <section className="SubscryptionOffers">
       <h1>Currently you don't have any active plans</h1>
       <ProviderSelection />
       <div className="OfferPart" id={"plan0Card"}>
         <h2>
-          You can view all the available plans to purchase in this link or pick among suggested
-          plans for you 👾
+          You can view all the available plans to purchase in this link or pick
+          among suggested plans for you 👾
         </h2>
         <OfferCarousel />
       </div>
