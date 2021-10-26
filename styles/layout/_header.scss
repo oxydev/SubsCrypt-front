@@ -88,7 +88,7 @@
   background-color: $white;
   box-shadow: $box-shadow--card;
   border-radius: $borderRadius--regular;
-  padding: 14px;
+  padding: 0 14px 16px;
   position: absolute;
   right: 0;
   top: 53px;
@@ -105,14 +105,16 @@
   ul {
     padding: 0;
     list-style: none;
+    margin: 0;
 
     li {
-      padding: 9px 35px;
+      padding: 9px 0;
       @include text-body--verySmall--light;
       color: $gray-4;
       border-bottom: $border-main;
 
-      a {
+      a,
+      p {
         display: flex;
         align-items: center;
         transition: color 0.2s ease-in-out;
@@ -121,17 +123,15 @@
         @include square(25px);
         opacity: 0.5;
         transition: opacity 0.2s ease-in-out;
-        padding-right: 5px;
-      }
-      &:last-child {
-        border-bottom: none;
+        margin-right: 20px;
       }
 
       &:hover {
         embed {
           opacity: 1;
         }
-        a {
+        a,
+        p {
           color: $gray-3;
         }
       }
