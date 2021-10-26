@@ -13,14 +13,15 @@ export const Tutorial = (props) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   const continueTutorial = async (tutorialData, newOrder) => {
-    console.log(tutorialData);
+    // console.log(tutorialData);
     if (order === tutorialData.length - 1) return;
     setOrder(newOrder);
     let tutList = [];
     await sleep(500);
     for (const item of tutorialData) {
-      console.log("fuck", document.getElementById(item.elementName), item);
-      while (document.getElementById(item.elementName) == null) await sleep(200);
+      // console.log("fuck", document.getElementById(item.elementName), item);
+      while (document.getElementById(item.elementName) == null)
+        await sleep(200);
       tutList.push({
         target: document.getElementById(item.elementName),
         tutorialElement: { title: item.title, description: item.description },
@@ -35,9 +36,10 @@ export const Tutorial = (props) => {
     await sleep(500);
 
     for (const item of tutorialData) {
-      console.log(item, document.getElementById(item.elementName));
+      // console.log(item, document.getElementById(item.elementName));
 
-      while (document.getElementById(item.elementName) == null) await sleep(200);
+      while (document.getElementById(item.elementName) == null)
+        await sleep(200);
 
       tutList.push({
         target: document.getElementById(item.elementName),
@@ -49,7 +51,6 @@ export const Tutorial = (props) => {
 
   useEffect(async () => {
     if (Cookies.get("tutorial") === "off") {
-      console.log("hamid");
       setTutorialList(null);
     } else if (tutorialList && tutorialList.length > 0) {
       for (const elm of tutorialList) {
@@ -64,7 +65,7 @@ export const Tutorial = (props) => {
         horizontal: tutPos.horizontal,
       });
       target.classList.add("Dominent");
-      console.log(position);
+      // console.log(position);
     }
   }, [order, tutorialList]);
 
@@ -125,7 +126,9 @@ export const Tutorial = (props) => {
         {tutorialList && tutorialList.length > 0 && (
           <>
             <div
-              className={"TutorialBox " + position.vertical + position.horizontal}
+              className={
+                "TutorialBox " + position.vertical + position.horizontal
+              }
               style={{ top: `${position.top}px`, left: `${position.left}px` }}
             >
               <img src="/logo/tutLogo.png" />
