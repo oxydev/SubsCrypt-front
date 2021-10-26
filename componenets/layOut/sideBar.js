@@ -84,7 +84,7 @@ export default function SideBar() {
     <div className="SideBar">
       <ToggleButton />
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
-      <img className="SideBar-logo" src="/logo/Logo--light.png"></img>
+      <img className="SideBar-logo" src="/logo/logo.svg"></img>
     </div>
   );
 }
