@@ -14,7 +14,7 @@ import { handleDataContext } from '../../context/handleData'
 export default function PlanCard(props) {
   const router = useRouter();
   const { globalState } = useContext(UserContext);
-  const { getProviderAllInfo } = useContext(handleDataContext);
+  const { getProviderAllInfo, handleSubscriberLoginByWallet } = useContext(handleDataContext);
 
   const { setModal } = useContext(modalContext);
   const { plan, index, type, address,id } = props;
@@ -58,8 +58,7 @@ export default function PlanCard(props) {
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      // loadUserDataByWallet(globalState.user.address);
-      router.push("/user");
+      handleSubscriberLoginByWallet(globalState.user.address);
     }
   }
 
