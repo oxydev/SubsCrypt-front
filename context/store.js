@@ -8,7 +8,7 @@ const initialState = {
   plans: [],
   wallets: [],
   subscriptedUsers: [],
-  offerProvider: "5Dyu5YxLufavjPg8vP31BhKs5xz8ncdkQcNdGwf5XtW4C9Ym",
+  offerProvider: "5Dyu5YxLufavjPg8vP31BhKs5xz8ncdkQcNdGwf5XtW4C9Ym"
 };
 
 //Craeting the context to pass to the components in the app tree
@@ -23,6 +23,9 @@ const reducer = (state, action) => {
     //load user username
     case "LOAD_USER_USERNAME":
       return { ...state, user: { ...state.user, username: action.payload } };
+    //load user password
+    case "LOAD_USER_PASSWORD":
+      return { ...state, user: { ...state.user, password: action.payload } };
     //load user wallet
     case "LOAD_USER_WALLET":
       return {
@@ -30,8 +33,8 @@ const reducer = (state, action) => {
         user: {
           ...state.user,
           wallet: action.payload,
-          address: action.payload.address,
-        },
+          address: action.payload.address
+        }
       };
     //load user address
     case "LOAD_USER_ADDRESS":
@@ -64,26 +67,26 @@ const reducer = (state, action) => {
       // newPlanList[action.payload.planIndex] = action.payload;
       return {
         ...state,
-        providerPlans: action.payload,
+        providerPlans: action.payload
       };
     }
     case "RESET_PROVIDER_PLAN": {
       return {
         ...state,
-        providerPlans: [...action.payload],
+        providerPlans: [...action.payload]
       };
     }
     //Load the provider address for new offers
     case "LOAD_OFFER_ADDRESS":
       return {
         ...state,
-        offerProvider: action.payload,
+        offerProvider: action.payload
       };
     //set the provider as a signed up provider
     case "REGISTERED":
       return {
         ...state,
-        user: { ...state.user, registered: action.payload },
+        user: { ...state.user, registered: action.payload }
       };
 
     //provider server data action type
@@ -92,31 +95,31 @@ const reducer = (state, action) => {
     case "USER_INCOME":
       return {
         ...state,
-        user: { ...state.user, income: action.payload },
+        user: { ...state.user, income: action.payload }
       };
     //load the provider name. caveat: Care not be mistaken by the LOAD_USER_USERNAME which is for loading the username not name.
     case "USER_NAME":
       return {
         ...state,
-        user: { ...state.user, name: action.payload },
+        user: { ...state.user, name: action.payload }
       };
     //load the provider decription
     case "USER_DESCRIPTION":
       return {
         ...state,
-        user: { ...state.user, description: action.payload },
+        user: { ...state.user, description: action.payload }
       };
     //load the provider image
     case "USER_IMAGE":
       return {
         ...state,
-        user: { ...state.user, image: action.payload },
+        user: { ...state.user, image: action.payload }
       };
     //load the count of all users are subscripted to the provider
     case "USER_USERSCOUNT":
       return {
         ...state,
-        user: { ...state.user, usersCount: action.payload },
+        user: { ...state.user, usersCount: action.payload }
       };
     //load the information of a specific plan of a povider
     case "PLAN_SERVERINFO":
@@ -126,28 +129,28 @@ const reducer = (state, action) => {
         let providerPlans = [...state.providerPlans];
         providerPlans[index] = {
           ...providerPlans[index],
-          ...action.payload.value,
+          ...action.payload.value
         };
         return {
           ...state,
-          providerPlans: [...providerPlans],
+          providerPlans: [...providerPlans]
         };
       } else if (type === "user") {
         let plans = [...state.plans];
         plans[index] = {
           ...plans[index],
-          ...action.payload.value,
+          ...action.payload.value
         };
         return {
           ...state,
-          plans: [...plans],
+          plans: [...plans]
         };
       }
     //load the list of subscripted users of a provider with their info
     case "PROVIDER_ALLUSERS":
       return {
         ...state,
-        subscriptedUsers: [...action.payload],
+        subscriptedUsers: [...action.payload]
       };
     //remove all infos which is stored in the global state when loging out
     case "LOG_OUT":

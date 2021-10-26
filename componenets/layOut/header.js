@@ -15,10 +15,10 @@ export default function Header() {
   const userWallet = globalState.user.address;
   const userBalance = globalState.user.balance;
   useEffect(() => {
-    if (userWallet) {
-      handleWalletBalance(userWallet);
+    if (globalState.user.address) {
+      handleWalletBalance(globalState.user.address);
     }
-  }, [userWallet]);
+  }, [globalState.user.address]);
 
   return (
     <div className="Header">

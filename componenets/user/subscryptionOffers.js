@@ -16,9 +16,12 @@ export default function SubscryptionOffers() {
   const { handleTutorial } = useContext(tutorialContext);
 
   useEffect(() => {
-    // console.log(globalState)
-    if (globalState.user.username) handleTutorial(tutorialData);
-    else handleTutorial([...tutorialData.slice(0, 2), tutorialData[3]]);
+    console.log(globalState)
+    if(globalState.user.username)
+      handleTutorial(tutorialData);
+    else
+      handleTutorial([...tutorialData.slice(0,2),tutorialData[3]]);
+
   }, []);
 
   // const providerAddress = data.providerAddress;
@@ -32,7 +35,7 @@ export default function SubscryptionOffers() {
 
   return (
     <section className="SubscryptionOffers">
-      <h1>Currently you don't have any active plans</h1>
+      <h1>{globalState.plans.length === 0 ? "Currently you don't have any active plans" : "Search for your desired plans"}</h1>
       <embed src={"/icons/png/sunscryption/OffersIcon.svg"}/>
       <ProviderSelection />
       <div className="OfferPart" id={"plan0Card"}>

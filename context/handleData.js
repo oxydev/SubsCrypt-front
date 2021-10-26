@@ -78,13 +78,13 @@ export const HandleDataFunctions = (props) => {
                     type: "user",
                     wallet: res,
                     address: res.address,
-                    username: username,
-                  },
+                    username: username
+                  }
                 });
               } else {
                 dispatch({
                   type: "LOAD_USER",
-                  payload: { type: "user", wallet: res, address: res.address },
+                  payload: { type: "user", wallet: res, address: res.address }
                 });
               }
             });
@@ -95,8 +95,8 @@ export const HandleDataFunctions = (props) => {
                 type: "user",
                 wallet: res,
                 address: res.address,
-                username: subscryptUsername,
-              },
+                username: subscryptUsername
+              }
             });
           }
           return res.address;
@@ -104,8 +104,7 @@ export const HandleDataFunctions = (props) => {
       })
       .then(async (res) => {
         if (res === "notSet") {
-          if (address) {
-          } else {
+          if (!address) {
             setLoading(false);
             await showResultToUser(
               "Wallet selection Error!",
@@ -156,7 +155,8 @@ export const HandleDataFunctions = (props) => {
   };
 
   //Function for handling the user wallet connection as a subscriber
-  const handleProviderLogingByWallet = async (address) => {
+  const handleProviderLoginByWallet = async (address, action) => {
+    console.log(address, action)
     setLoading(true);
     blockChainFuncs
       .connectToWallet(address)
@@ -169,7 +169,7 @@ export const HandleDataFunctions = (props) => {
           Cookies.set("subscryptAddress", res.address);
           dispatch({
             type: "LOAD_USER",
-            payload: { type: "provider", wallet: res, address: res.address },
+            payload: { type: "provider", wallet: res, address: res.address }
           });
           return res.address;
         }
@@ -183,27 +183,38 @@ export const HandleDataFunctions = (props) => {
       })
       .then(async (res) => {
         if (res.planNum === "NotRegistered") {
-          dispatch({ type: "REGISTERED", payload: false });
-          setLoading(false);
-        } else {
-          dispatch({ type: "REGISTERED", payload: true });
-          dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.planNum });
-          let subscryptUsername = Cookies.get("subscrypt");
-          if (subscryptUsername === undefined) {
-            (await subscrypt).getUsername(res.address).then(async (result) => {
-              // console.log(result, "username");
-              const username = result.result;
-              Cookies.set("subscrypt", username);
-              dispatch({ type: "LOAD_USER_USERNAME", payload: username });
-            });
+          if(action !== "login") {
+            dispatch({ type: "REGISTERED", payload: false });
+            setLoading(false);
           } else {
-            dispatch({
-              type: "LOAD_USER_USERNAME",
-              payload: subscryptUsername,
-            });
+            throw new Error("notSignedUp");
           }
-          setLoading(false);
-          await getProviderAllInfo(res.address, res.planNum);
+        } else {
+          console.log(action)
+
+          if(action !== "signUp") {
+            console.log(action)
+            dispatch({ type: "REGISTERED", payload: true });
+            dispatch({ type: "LOAD_PROVIDER_PLANS_COUNT", payload: res.planNum });
+            let subscryptUsername = Cookies.get("subscrypt");
+            if (subscryptUsername === undefined) {
+              (await subscrypt).getUsername(res.address).then(async (result) => {
+                // console.log(result, "username");
+                const username = result.result;
+                Cookies.set("subscrypt", username);
+                dispatch({ type: "LOAD_USER_USERNAME", payload: username });
+              });
+            } else {
+              dispatch({
+                type: "LOAD_USER_USERNAME",
+                payload: subscryptUsername
+              });
+            }
+            setLoading(false);
+            await getProviderAllInfo(res.address, res.planNum);
+          }else{
+            throw new Error("alreadyProvider");
+          }
         }
       })
       .catch(async (err) => {
@@ -222,7 +233,23 @@ export const HandleDataFunctions = (props) => {
               setAuth(false);
             });
           }
-        } else {
+        } else if(err.message === "notSignedUp") {
+          await showResultToUser(
+            "Failed Authentication!",
+            "You should first become a provider and then login with your wallet!"
+          ).then(() => {
+            handleLogOut()
+            router.push("/");
+          });
+        } else if(err.message === "alreadyProvider") {
+          await showResultToUser(
+            "Failed to Sign-Up!",
+            "You are already a valid provider, please login into your account!"
+          ).then(() => {
+            handleLogOut()
+            router.push("/");
+          });
+        }else {
           // window.alert("Can not connect to wallet!");
           await showResultToUser(
             "Wallet selection Error!",
@@ -260,8 +287,8 @@ export const HandleDataFunctions = (props) => {
                     username: username,
                     password: password,
                     type: "user",
-                    address: walletAddress,
-                  },
+                    address: walletAddress
+                  }
                 });
                 return walletAddress;
               });
@@ -272,8 +299,8 @@ export const HandleDataFunctions = (props) => {
                 username: username,
                 password: password,
                 type: "user",
-                address: subscryptAddress,
-              },
+                address: subscryptAddress
+              }
             });
           }
           return username;
@@ -322,8 +349,8 @@ export const HandleDataFunctions = (props) => {
             payload: {
               username: username,
               password: password,
-              type: "provider",
-            },
+              type: "provider"
+            }
           });
           setAuth(true);
           Cookies.set("subscrypt", username);
@@ -434,7 +461,7 @@ export const HandleDataFunctions = (props) => {
       if (userType === "user") {
         handleSubscriberLoginByWallet(userAddress);
       } else if (userType === "provider") {
-        handleProviderLogingByWallet(userAddress);
+        handleProviderLoginByWallet(userAddress,"custom");
       }
     }
   };
@@ -464,14 +491,14 @@ export const HandleDataFunctions = (props) => {
         await subscrypt
       )
         .transferToken(address)
-        .then(async (result) => {
+        .then(async () => {
           // window.alert("Operation has been done successful!");
           await showResultToUser(
             "Operation Successful!",
             "Operation has been done successfully!"
           );
         })
-        .catch(async (error) => {
+        .catch(async () => {
           // window.alert("Operation failed!");
           await showResultToUser(
             "Operation Failed!",
@@ -490,7 +517,7 @@ export const HandleDataFunctions = (props) => {
     setAuth(false);
     dispatch({
       type: "LOG_OUT",
-      payload: {},
+      payload: {}
     });
     router.push("/");
   };
@@ -498,7 +525,7 @@ export const HandleDataFunctions = (props) => {
   const handleDataContextValue = {
     handleWalletBalance,
     handleSubscriberLoginByWallet,
-    handleProviderLogingByWallet,
+    handleProviderLoginByWallet,
     checkAuthByCookie,
     sendMoneyToAddress,
     handleWalletLists,
@@ -506,7 +533,7 @@ export const HandleDataFunctions = (props) => {
     handleProviderloginByUsername,
     loadOffers,
     handleLogOut,
-    getProviderAllInfo,
+    getProviderAllInfo
   };
   return (
     <handleDataContext.Provider value={handleDataContextValue}>
