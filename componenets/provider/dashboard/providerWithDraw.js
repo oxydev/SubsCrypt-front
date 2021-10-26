@@ -35,7 +35,7 @@ export const ProviderWithdraw = (props) => {
     <section className="ProviderWithDraw">
       <h1>Total withdrawable Amount:</h1>
       <p>
-        {amount}
+        {amount/1e12}
         <span>{" "}DOT</span>
       </p>
 
