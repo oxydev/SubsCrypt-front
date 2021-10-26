@@ -313,6 +313,18 @@ export const GetBCDataFunctions = (props) => {
       });
   };
 
+  const getBalance = async (address) => {
+    return (await subscrypt)
+      .getBalance(address)
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .catch(async () => {
+        await showResultToUser("Failed!", "Con not get the balance!");
+      });
+  };
+
   const getBCDataContextValue = {
     connectToWallet,
     checkProviderRegistration,
@@ -323,6 +335,7 @@ export const GetBCDataFunctions = (props) => {
     selectwalletFromList,
     getWithdrawableAmount,
     getMoneyAddress,
+    getBalance,
   };
 
   return (

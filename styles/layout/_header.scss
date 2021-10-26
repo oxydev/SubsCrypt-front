@@ -109,7 +109,7 @@
 
     li {
       padding: 9px 0;
-      @include text-body--verySmall--light;
+      @include text-body--small--light;
       color: $gray-4;
       border-bottom: $border-main;
 
@@ -118,6 +118,10 @@
         display: flex;
         align-items: center;
         transition: color 0.2s ease-in-out;
+        span {
+          margin: 5px 0 0 5px;
+          font-size: 0.8rem;
+        }
       }
       embed {
         @include square(25px);

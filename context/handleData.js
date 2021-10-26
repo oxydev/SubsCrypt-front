@@ -29,6 +29,13 @@ export const HandleDataFunctions = (props) => {
     subscrypt = import("@oxydev/subscrypt");
   }, []);
 
+  const handleWalletBalance = async (address) => {
+    blockChainFuncs.getBalance(address).then((res) => {
+      console.log(res);
+      // dispatch({ type: "LOAD_BALANCE", payload: res });
+    });
+  };
+
   //Function for loading user wallets
   const handleWalletLists = async () => {
     blockChainFuncs
@@ -488,6 +495,7 @@ export const HandleDataFunctions = (props) => {
   };
 
   const handleDataContextValue = {
+    handleWalletBalance,
     handleSubscriberLoginByWallet,
     handleProviderLogingByWallet,
     checkAuthByCookie,

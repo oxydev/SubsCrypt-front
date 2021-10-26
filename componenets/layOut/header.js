@@ -1,17 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/store";
 import { handleDataContext } from "../../context/handleData";
 import { middleDots } from "../../utilities/utilityFunctions";
-import Link from "next/link";
+// import Link from "next/link";
 
 //The component for generating page header
 export default function Header() {
   const { globalState } = useContext(UserContext);
-  // const { handleLogOut } = useContext(handleDataContext);
+  const { handleWalletBalance } = useContext(handleDataContext);
   const [showMenu, setShownMenu] = useState(false);
 
   const userName = globalState.user.username;
   const userWallet = globalState.user.address;
+
+  useEffect(() => {
+    if (userWallet) {
+      handleWalletBalance(userWallet);
+    }
+  }, [userWallet]);
 
   return (
     <div className="Header">
@@ -42,7 +48,14 @@ export default function Header() {
                 </p>
               </li>
             )}
-
+            {userWallet && (
+              <li>
+                <p>
+                  <embed src={"/icons/png/sideBar/balance.svg"} />
+                  <b>19.37</b> <span>USDT</span>
+                </p>
+              </li>
+            )}
             {userWallet && (
               <li>
                 <p>
