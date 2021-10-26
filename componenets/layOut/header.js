@@ -14,7 +14,6 @@ export default function Header() {
   const userName = globalState.user.username;
   const userWallet = globalState.user.address;
   const userBalance = globalState.user.balance;
-
   useEffect(() => {
     if (userWallet) {
       handleWalletBalance(userWallet);
@@ -46,7 +45,7 @@ export default function Header() {
                 </p>
               </li>
             )}
-            {userBalance && (
+            {(userBalance || userBalance === 0) && (
               <li>
                 <p>
                   <embed src={"/icons/png/sideBar/balance.svg"} />

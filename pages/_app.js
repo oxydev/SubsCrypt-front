@@ -71,15 +71,15 @@ export default function App({ Component, pageProps }) {
                             ) : (
                               <>
                                 <SideBar />
-                                {/* Main componenet is for the main part of the app where each page content is shown */}
-                                {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
+                                {/* Main component is for the main part of the app where each page content is shown */}
+                                {/* Auth context is for checking user authentication. If false header and other pages are not shown */}
                                 <Main>
                                   <>
                                     {auth && <Header />}
                                     {auth ? <Component {...pageProps} /> : <Menu {...pageProps} />}
                                   </>
                                 </Main>
-                                <div></div>
+                                <div/>
                               </>
                             )}
                           </div>
