@@ -112,33 +112,12 @@ const Login = (props) => {
           <>
             <p className="Topic">Login Method</p>
             <div className="LoginMethod">
-              {/* <p
-                onClick={() => {
-                  setMethod(0);
-                  handleWalletLists();
-                }}
-              >
-                Login by Wallet
-              </p>
-
-              <span>or</span>
-              <p
-                onClick={() => {
-                  setMethod(1);
-                }}
-              >
-                Login by Username
-              </p> */}
               {methods}
             </div>
-            {/* <p className="Topic">Choose Wallet</p>
-            <div className="SelectWallet">
-              <select>{addressList}</select>
-            </div> */}
           </>
         )}
       </div>
-      {method === 0 && <Connection type={role === 0 ? "subscriber" : "provider"} />}
+      {method === 0 && <Connection type={role === 0 ? "subscriber" : "provider"} action={action}/>}
       {method === 1 && <LoginPart type={role === 0 ? "subscriber" : "provider"} />}
     </div>
   );

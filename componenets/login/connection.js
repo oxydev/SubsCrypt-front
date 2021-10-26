@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import Select from "react-select";
@@ -14,19 +14,19 @@ const customStyles = {
 
     h1: {
       fontSize: "14px",
-      marginBottom: "10px",
+      marginBottom: "10px"
     },
 
     p: state.isSelected
       ? {
           fontSize: "12px",
           fontWeight: 600,
-          color: "#fff",
+          color: "#fff"
         }
       : {
           fontSize: "12px",
-          fontWeight: 600,
-        },
+          fontWeight: 600
+        }
   }),
   control: (provided) => ({
     ...provided,
@@ -36,16 +36,16 @@ const customStyles = {
     borderRadius: "8px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   }),
   valueContainer: (provided) => ({
     ...provided,
-    padding: "5px 20px",
+    padding: "5px 20px"
   }),
 
   placeholder: (provider) => ({
     ...provider,
-    fontSize: "14px",
+    fontSize: "14px"
   }),
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
@@ -57,18 +57,18 @@ const customStyles = {
       transition,
       h1: {
         fontSize: "14px",
-        marginBottom: "5px",
+        marginBottom: "5px"
       },
       p: {
-        fontSize: "12px",
-      },
+        fontSize: "12px"
+      }
     };
-  },
+  }
 };
 
 export default function Connection(props) {
-  const { type } = props;
-  const { handleSubscriberLoginByWallet, handleProviderLogingByWallet } =
+  const { type, action } = props;
+  const { handleSubscriberLoginByWallet, handleProviderLoginByWallet } =
     useContext(handleDataContext);
   const { globalState } = useContext(UserContext);
   const [address, setAddress] = useState(null);
@@ -77,7 +77,8 @@ export default function Connection(props) {
     if (type === "subscriber") {
       handleSubscriberLoginByWallet(address);
     } else if (type === "provider") {
-      handleProviderLogingByWallet(address);
+      console.log(action)
+      handleProviderLoginByWallet(address, action);
     }
   };
 
@@ -91,7 +92,7 @@ export default function Connection(props) {
     );
     return {
       value: index,
-      label: value,
+      label: value
     };
   });
 
@@ -113,20 +114,20 @@ export default function Connection(props) {
               }}
             />
             <button
-              disabled={address ? false : true}
+              disabled={!address}
               onClick={(e) => {
                 e.preventDefault();
                 handleConnection();
               }}
             >
-              Login
+              {action === "signUp" ? "Sign Up" : "Log in"}
             </button>
           </div>
         </>
       ) : (
         <>
           <p className="Topic">You do not have any wallet to connect!</p>
-          <a href="https://polkadot.network/">Polkadot Network</a>
+          <a href="https://polkadot.js.org/extension/">PolkaDot.js Wallet</a>
         </>
       )}
     </div>

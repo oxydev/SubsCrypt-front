@@ -3,10 +3,10 @@ import React, { useState } from "react";
 const Card = (props) => {
   const { clickHandler, selected, item, disabled, circle, id} = props;
   const styleCircle = {
-    'border-radius': "48px"
+    'borderRadius': "48px"
   };
   const styleNormal = {
-    'border-radius': "0px"
+    'borderRadius': "0px"
   };
   return (
     <div id={id} className={selected ? "ButtonCard selected" : disabled ? "ButtonCard disabled" : "ButtonCard"}

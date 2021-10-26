@@ -35,11 +35,11 @@
     "react-dom": "^17.0.2",
     "react-multi-carousel": "^2.6.5",
     "react-select": "^5.1.0",
-    "react-tag-input": "^6.7.3",
-    "sass": "^1.35.1"
+    "react-tag-input": "^6.7.3"
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2"
+    "eslint-config-next": "11.1.2",
+    "sass": "^1.35.1"
   }
 }

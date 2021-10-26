@@ -100,7 +100,7 @@ export default function Menu() {
       </section>
     );
   } else if (task === "login") {
-    return <Login />;
+    return <Login action={"login"} />;
   } else if (task === "providerSignUp") {
     return (
       <div className="SignUp-walletConnection">
