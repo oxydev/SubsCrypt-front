@@ -32,7 +32,7 @@ export const HandleDataFunctions = (props) => {
   const handleWalletBalance = async (address) => {
     blockChainFuncs.getBalance(address).then((res) => {
       console.log(res);
-      // dispatch({ type: "LOAD_BALANCE", payload: res });
+      dispatch({ type: "LOAD_USER_BALANCE", payload: res });
     });
   };
 

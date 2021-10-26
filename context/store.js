@@ -27,7 +27,11 @@ const reducer = (state, action) => {
     case "LOAD_USER_WALLET":
       return {
         ...state,
-        user: { ...state.user, wallet: action.payload, address: action.payload.address },
+        user: {
+          ...state.user,
+          wallet: action.payload,
+          address: action.payload.address,
+        },
       };
     //load user address
     case "LOAD_USER_ADDRESS":
@@ -51,6 +55,9 @@ const reducer = (state, action) => {
     //load all the addresses in the wallet
     case "LOAD_WALLETS":
       return { ...state, wallets: action.payload };
+    //load user wallet account balance by address
+    case "LOAD_USER_BALANCE":
+      return { ...state, user: { ...state.user, balance: action.payload } };
     //load providers plans. Means the plans that are not belong to the current user
     case "LOAD_PROVIDER_PLANS": {
       // const newPlanList = [...state.providerPlans];
@@ -170,7 +177,11 @@ export const Store = (props) => {
     }
   });
 
+  console.log(globalState);
+
   return (
-    <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={{ globalState, dispatch }}>
+      {props.children}
+    </UserContext.Provider>
   );
 };

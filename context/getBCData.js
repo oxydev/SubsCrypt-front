@@ -318,7 +318,7 @@ export const GetBCDataFunctions = (props) => {
       .getBalance(address)
       .then((res) => {
         console.log(res);
-        return res;
+        return res.toNumber() / 1e12;
       })
       .catch(async () => {
         await showResultToUser("Failed!", "Con not get the balance!");

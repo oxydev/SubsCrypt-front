@@ -13,6 +13,7 @@ export default function Header() {
 
   const userName = globalState.user.username;
   const userWallet = globalState.user.address;
+  const userBalance = globalState.user.balance;
 
   useEffect(() => {
     if (userWallet) {
@@ -48,11 +49,11 @@ export default function Header() {
                 </p>
               </li>
             )}
-            {userWallet && (
+            {userBalance && (
               <li>
                 <p>
                   <embed src={"/icons/png/sideBar/balance.svg"} />
-                  <b>19.37</b> <span>USDT</span>
+                  <b>{userBalance.toFixed(2)}</b> <span>USDT</span>
                 </p>
               </li>
             )}
