@@ -15,8 +15,9 @@
   border-radius: $borderRadius--regular;
   padding: 0 23px;
   max-width: 355px;
-  overflow: hidden;
+  overflow: visible;
   cursor: pointer;
+  position: relative;
 
   &.Green {
     background-color: $purple;
@@ -26,6 +27,9 @@
     img {
       display: none;
     }
+  }
+
+  .UserMenu-menu {
   }
 }
 .Avatar {
