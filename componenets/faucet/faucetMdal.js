@@ -96,10 +96,9 @@ export const FaucetModal = (props) => {
           placeholder="Select your wallet"
           onChange={(e) => {
             setAddress(walletList[e.value].address);
-            8;
           }}
         />
-        <input type="submit" value="submit" disabled={address ? false : true} />
+        <input type="submit" value="Submit" disabled={!address} />
       </form>
     </section>
   );
