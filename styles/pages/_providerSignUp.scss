@@ -15,14 +15,23 @@
   align-items: center;
   margin-top: 6px;
   margin-bottom: 66px;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $gray-3;
+    &::before {
+      opacity: 0.6;
+    }
+  }
 
   &::before {
     @include pseudo;
     @include square(42px);
     @include backgroundImage;
-    background-image: url("/icons/png/uploadBtn.png");
+    background-image: url("/icons/png/uploadBtn.svg");
     position: static;
     margin-right: 24px;
+    transition: opacity 0.2s ease-in-out;
   }
 }
 .ProviderRegisteration {

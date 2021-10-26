@@ -80,7 +80,8 @@
     color: #000;
   }
   h1 {
-    @include text--heading2;
+    @include text-body--large--medium;
+    text-align: center;
     line-height: 69px;
   }
   p {
@@ -108,7 +109,7 @@
   }
   input[type="submit"] {
     border: none;
-    background-color: $green;
+    background-color: $purple;
     @include text-body--large--medium;
     color: #fff;
     margin: 28px 0 0;

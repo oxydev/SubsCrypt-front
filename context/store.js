@@ -8,7 +8,7 @@ const initialState = {
   plans: [],
   wallets: [],
   subscriptedUsers: [],
-  offerProvider: "5HWLj7XsXETx85nHsSHPbAaQdCdDmT5aJT73pSUGsM28pyfk",
+  offerProvider: "5Dyu5YxLufavjPg8vP31BhKs5xz8ncdkQcNdGwf5XtW4C9Ym",
 };
 
 //Craeting the context to pass to the components in the app tree
@@ -27,7 +27,11 @@ const reducer = (state, action) => {
     case "LOAD_USER_WALLET":
       return {
         ...state,
-        user: { ...state.user, wallet: action.payload, address: action.payload.address },
+        user: {
+          ...state.user,
+          wallet: action.payload,
+          address: action.payload.address,
+        },
       };
     //load user address
     case "LOAD_USER_ADDRESS":
@@ -51,6 +55,9 @@ const reducer = (state, action) => {
     //load all the addresses in the wallet
     case "LOAD_WALLETS":
       return { ...state, wallets: action.payload };
+    //load user wallet account balance by address
+    case "LOAD_USER_BALANCE":
+      return { ...state, user: { ...state.user, balance: action.payload } };
     //load providers plans. Means the plans that are not belong to the current user
     case "LOAD_PROVIDER_PLANS": {
       // const newPlanList = [...state.providerPlans];
@@ -115,7 +122,7 @@ const reducer = (state, action) => {
     case "PLAN_SERVERINFO":
       const index = action.payload.index;
       const type = action.payload.type;
-      if (type == "provider") {
+      if (type === "provider") {
         let providerPlans = [...state.providerPlans];
         providerPlans[index] = {
           ...providerPlans[index],
@@ -125,7 +132,7 @@ const reducer = (state, action) => {
           ...state,
           providerPlans: [...providerPlans],
         };
-      } else if (type == "user") {
+      } else if (type === "user") {
         let plans = [...state.plans];
         plans[index] = {
           ...plans[index],
@@ -161,18 +168,20 @@ export const Store = (props) => {
 
   useEffect(() => {
     if (globalState.user) {
-      if (globalState.user.type == "user" && router.pathname == "/provider") {
+      if (globalState.user.type === "user" && router.pathname === "/provider") {
         router.push("/user/");
       }
-      if (globalState.user.type == "provider" && router.pathname == "/user") {
+      if (globalState.user.type === "provider" && router.pathname === "/user") {
         router.push("/provider/");
       }
     }
   });
 
-  console.log(globalState); //for checking the value of global state when debugging
+  console.log(globalState);
 
   return (
-    <UserContext.Provider value={{ globalState, dispatch }}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={{ globalState, dispatch }}>
+      {props.children}
+    </UserContext.Provider>
   );
 };

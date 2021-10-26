@@ -11,15 +11,15 @@
 .LoginBox {
   display: flex;
   align-items: center;
-  border: 1px solid $green;
+  border: 1px solid $purple;
   border-radius: $borderRadius--regular;
   padding: 0 23px;
   max-width: 355px;
-  overflow: hidden;
-  cursor: pointer;
+  overflow: visible;
+  position: relative;
 
   &.Green {
-    background-color: $green;
+    background-color: $purple;
     .UserName {
       color: #fff;
     }
@@ -27,9 +27,13 @@
       display: none;
     }
   }
+
+  &:hover {
+    box-shadow: $box-shadow--card;
+  }
 }
 .Avatar {
-  @include circle(24px);
+  @include square(20px);
   @include backgroundImage;
 }
 .UserName {
@@ -40,14 +44,14 @@
   flex-shrink: 0;
   white-space: nowrap;
   @include text-body--large--medium;
-  color: $green;
+  color: $purple;
 }
 .Separator {
   line-height: 2.4rem;
   margin: 0 10px;
   flex-shrink: 0;
   @include text-body--large--medium;
-  color: $green;
+  color: $purple;
 }
 .UserWallet {
   line-height: 2.4rem;
@@ -55,7 +59,7 @@
   flex-shrink: 0;
   white-space: nowrap;
   @include text-body--large--medium;
-  color: $green;
+  color: $purple;
 }
 //Styles for usermenu in the header
 .UserMenu {
@@ -64,17 +68,26 @@
 }
 .UserMenu-button {
   border-radius: $borderRadius--regular;
-  background: $light-BG;
+  background: $gray-6;
   border: 1px solid $gray--notInKit-1;
   position: relative;
   @include box(54px, 40px);
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &::after {
-    background-image: url("/icons/png/userMenuBtn.png");
-    @include pseudo;
-    @include backgroundImage(center, 20px);
-    @include square(100%);
+  svg {
+    @include square(20px);
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  &:hover {
+    background-color: $purple;
+    svg {
+      fill: #fff;
+    }
   }
 }
 
@@ -83,7 +96,7 @@
   background-color: $white;
   box-shadow: $box-shadow--card;
   border-radius: $borderRadius--regular;
-  padding: 14px;
+  padding: 0 14px 16px;
   position: absolute;
   right: 0;
   top: 53px;
@@ -100,14 +113,39 @@
   ul {
     padding: 0;
     list-style: none;
+    margin: 0;
 
     li {
-      padding: 9px 35px;
-      @include text-body--verySmall--light;
+      padding: 9px 0;
+      @include text-body--small--light;
       color: $gray-4;
       border-bottom: $border-main;
-      &:last-child {
-        border-bottom: none;
+
+      a,
+      p {
+        display: flex;
+        align-items: center;
+        transition: color 0.2s ease-in-out;
+        span {
+          margin: 5px 0 0 5px;
+          font-size: 0.8rem;
+        }
+      }
+      embed {
+        @include square(25px);
+        opacity: 0.5;
+        transition: opacity 0.2s ease-in-out;
+        margin-right: 20px;
+      }
+
+      &:hover {
+        embed {
+          opacity: 1;
+        }
+        a,
+        p {
+          color: $gray-3;
+        }
       }
     }
   }

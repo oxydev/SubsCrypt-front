@@ -7,7 +7,8 @@ export const serverDataContext = React.createContext({});
 export const ServerFunctions = (props) => {
   //load the provider description from server
   const getProviderDescription = async (address) => {
-    const url = "https://api.subscrypt.io/profile/getProviderDescription/" + address;
+    const url =
+      "https://api.subscrypt.io/profile/getProviderDescription/" + address;
     return axios
       .get(url)
       .then((result) => {
@@ -22,7 +23,8 @@ export const ServerFunctions = (props) => {
 
   //load the provider income and his users count
   const getProviderIncome = async (address) => {
-    const url = "https://api.subscrypt.io/subscriptions/getProviderData/" + address;
+    const url =
+      "https://api.subscrypt.io/subscriptions/getProviderData/" + address;
     return axios
       .get(url)
       .then((result) => {
@@ -38,7 +40,10 @@ export const ServerFunctions = (props) => {
   //load a plan description from server
   const getProductDescription = async (address, planIndex) => {
     const url =
-      "https://api.subscrypt.io/profile/getProductDescription/" + address + "/" + planIndex;
+      "https://api.subscrypt.io/profile/getProductDescription/" +
+      address +
+      "/" +
+      planIndex;
     return axios
       .get(url)
       .then((result) => {
@@ -68,10 +73,13 @@ export const ServerFunctions = (props) => {
 
   //function for getting all needed provider info for showing in the provider dashboard header from server
   const getProviderHeaderInfo = async (address) => {
-    const promiseList = [await getProviderDescription(address), await getProviderIncome(address)];
+    const promiseList = [
+      await getProviderDescription(address),
+      await getProviderIncome(address),
+    ];
 
     return await Promise.all(promiseList).then((values) => {
-      console.log(values, "values");
+      // console.log(values, "values");
       const data = {
         description: values[0].description,
         name: values[0].name,
@@ -91,6 +99,8 @@ export const ServerFunctions = (props) => {
   };
 
   return (
-    <serverDataContext.Provider value={contextValue}>{props.children}</serverDataContext.Provider>
+    <serverDataContext.Provider value={contextValue}>
+      {props.children}
+    </serverDataContext.Provider>
   );
 };

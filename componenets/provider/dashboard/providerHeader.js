@@ -22,14 +22,14 @@ export default function ProviderHeader() {
           <div className="PlanPart-featureBox">
             <h2>Total Income:</h2>
             <p className="ProviderHeader-income">
-              {user.income || user.income == 0 ? user.income / Math.pow(10, 12) : "Loading..."}{" "}
+              {user.income || user.income === 0 ? user.income / Math.pow(10, 12) : "Loading..."}{" "}
               <span>DOT</span>
             </p>
           </div>
           <div className="PlanPart-featureBox">
             <h2>Total Users:</h2>
             <p className="TotalUsers">
-              {user.usersCount || user.usersCount == 0 ? user.usersCount : "Loading..."}
+              {user.usersCount || user.usersCount === 0 ? user.usersCount : "Loading..."}
             </p>
           </div>
           <div className="PlanPart-featureBox">

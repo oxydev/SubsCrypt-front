@@ -1,0 +1,51 @@
+.PlanDetailsModal {
+  h1 {
+    margin-bottom: 5px;
+    @include text-body--large--medium;
+  }
+  .PlanForm {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+    & > div {
+      width: 50%;
+      flex-shrink: 0;
+      flex-grow: 1;
+      &:first-child {
+        padding-right: 30px;
+      }
+      &:last-child {
+        padding-left: 30px;
+      }
+    }
+    select {
+      height: 54px;
+    }
+  }
+  .PlansForm-refund {
+    height: 46px;
+  }
+  .PlansForm-tag {
+    margin-bottom: 6px;
+  }
+  .PlanDetailsModal-footer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: $border-main;
+    padding-top: 28px;
+    P {
+      @include text-body--lightSmall--light;
+      color: $gray-4;
+      width: 50%;
+    }
+    button {
+      @include primaryButtons(100px, 40px);
+      height: 40px;
+      width: 260px;
+      margin: 0 0 0 auto;
+      border-radius: $borderRadius--regular;
+    }
+  }
+}

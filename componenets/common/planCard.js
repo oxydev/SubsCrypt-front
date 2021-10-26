@@ -7,22 +7,27 @@ import { useRouter } from "next/router";
 import { setDataContext } from "../../context/setData";
 import { modalContext } from "../../context/modal";
 import { operationContext } from "../../context/handleUserOperation";
+import { PlansDetailsModal } from "../provider/dashboard/planDetailsModal";
+import { handleDataContext } from '../../context/handleData'
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
   const router = useRouter();
   const { globalState } = useContext(UserContext);
+  const { getProviderAllInfo, handleSubscriberLoginByWallet } = useContext(handleDataContext);
+
   const { setModal } = useContext(modalContext);
-  const { plan, index, type, address } = props;
+  const { plan, index, type, address,id } = props;
   const localPlans = localData.plans[index];
   const planIndex = plan.planIndex;
-  const { handleSubscribtion } = useContext(setDataContext);
-  const providerAddress = data.providerAddress;
+  const { handleSubscribtion, editPlan } = useContext(setDataContext);
   const { showResultToUser } = useContext(operationContext);
 
   //Subscription function
   function handleSubscribe() {
-    handleSubscribtion(providerAddress, plan, planIndex, callback);
+    handleSubscribtion(address, plan, planIndex, callback).catch(async () => {
+      await showResultToUser("Operation failed!", "The operation has been failed!");
+    });
   }
 
   //callback function after handling subscription
@@ -34,29 +39,37 @@ export default function PlanCard(props) {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      events.forEach(async ({ event: { data, method, section }, phase }) => {
+      for (const {
+        event: { data1, method, section },
+        phase,
+      } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
           // window.alert("The operation has been done successfully");
           await showResultToUser(
-            "Operation Successful!",
-            "The operation has been done successfully"
+            "Successful SubsCryption!",
+            "You are successfully subscribed to this plan, please wait while your transaction gets confirmed on Blockchain."
           );
         }
-      });
-      if (check == false) {
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+      }
+      if (check === false) {
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
-      // loadUserDataByWallet(globalState.user.address);
-      router.push("/user");
+      handleSubscriberLoginByWallet(globalState.user.address);
+      router.push("/")
     }
   }
 
+  function handleEdit() {
+    const modalElement = <PlansDetailsModal plan={plan} handleEditPlan={editPlan} showResultToUser={showResultToUser} getProviderAllInfo={getProviderAllInfo}/>;
+    setModal(modalElement);
+  }
+
   return (
-    <section className="PlanCard" onClick={type == "user" ? handleSubscribe : () => {}}>
+    <section id={id} className="PlanCard" onClick={type === "user" ? handleSubscribe : handleEdit}>
       <header>
         <img
           className="PlanLogo"
@@ -78,22 +91,16 @@ export default function PlanCard(props) {
           <h6>Refund Policy</h6>
           <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
         </div>
+        <div className="PlanCard-price">
+          <h6>Pay with</h6>
+          <p>
+            {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
+            <span>{" "}DOT</span>
+          </p>
+        </div>
       </main>
       <footer>
-        <div className="PlanCard-payMethod">
-          <label>Pay with</label>
-          <select className="PlanCard-coinSelect">
-            <option value="coin1">coin1</option>
-            <option value="coin2">coin2</option>
-          </select>
-        </div>
-        <button className="PlanCard-payBtn" onClick={() => {}}>
-          {/* {type == "provider"
-            ? parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)
-            : plan.price} */}
-          {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
-          <span>DOT</span>
-        </button>
+        <button className="PlanCard-button">{type === "user" ? "Subscribe" : "Edit Plan"}</button>
       </footer>
     </section>
   );

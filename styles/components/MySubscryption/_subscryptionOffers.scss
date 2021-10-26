@@ -16,7 +16,7 @@
     &::before {
       @include pseudo;
       @include box(19px, 17px);
-      background-image: url("/icons/png/sunscryption/Wallet.png");
+      background-image: url("/icons/png/sunscryption/Wallet.svg");
       @include backgroundImage;
       left: -30px;
       top: 0;
@@ -24,14 +24,11 @@
       margin: auto;
     }
   }
-}
-.SubscryptionOffers::after {
-  @include pseudo;
-  @include box(139px, 126px);
-  background-image: url("/icons/png/sunscryption/OffersIcon.png");
-  @include backgroundImage;
-  top: 10%;
-  right: 15%;
+  embed {
+    position: absolute;
+    top: 6%;
+    right: 10%;
+  }
 }
 .OfferPart {
   & > h2 {

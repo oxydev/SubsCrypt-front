@@ -2,25 +2,44 @@
   "networks": [
     {
       "name": "Polkadot",
-      "imageURL": "/icons/png/networks/PolkadotLogo.png"
-    },
-    {
-      "name": "Binance",
-      "imageURL": "/icons/png/networks/BinanceLogo.png"
+      "imageURL": "/icons/png/networks/polkadot.svg"
     }
   ],
   "wallets": [
     {
       "name": "Metamask",
+      "address": "fj5x...lkc8",
       "imageURL": "/icons/png/wallets/MetamaskLogo.png"
     },
     {
       "name": "WalletConnect",
+      "address": "fj5x...lkc8",
       "imageURL": "/icons/png/wallets/WalletConnectLogo.png"
     },
     {
       "name": "Binance Chain Wallet",
+      "address": "fj5x...lkc8",
       "imageURL": "/icons/png/wallets/BinanceChainWalletLogo.png"
+    }
+  ],
+  "roles": [
+    {
+      "name": "Subscriber",
+      "imageURL": "/icons/png/networks/subscriber.png"
+    },
+    {
+      "name": "Provider",
+      "imageURL": "/icons/png/networks/provider2.png"
+    }
+  ],
+  "methods": [
+    {
+      "name": "Wallet",
+      "imageURL": "/icons/png/networks/wallet.png"
+    },
+    {
+      "name": "Username",
+      "imageURL": "/icons/png/networks/username.png"
     }
   ]
 }

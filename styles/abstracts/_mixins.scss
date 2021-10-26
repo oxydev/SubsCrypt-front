@@ -64,6 +64,7 @@
   outline: none;
   @include text-body--verySmall--regular;
   color: $white;
+  transition: all 0.2s ease-in-out;
   &:hover {
     box-shadow: $box-shadow--card;
   }
@@ -78,9 +79,11 @@
   outline: none;
   @include text-body--verySmall--regular;
   color: $gray-3;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     box-shadow: $box-shadow--card;
+    background: $gray-5;
   }
 }
 

@@ -1,26 +1,26 @@
 .ProfileSetting {
-    padding-top: 73px;
-    h1 {
-        @include text--heading2;
-        margin-bottom: 60px;
-    }
+  padding-top: 73px;
+  h1 {
+    @include text--heading2;
+    margin-bottom: 60px;
+  }
 }
 .ResetPassword {
-    h2 {
-        @include text-body--large--regular;
-        margin-bottom: 30px;
+  h2 {
+    @include text-body--large--regular;
+    margin-bottom: 30px;
+  }
+  form {
+    input[type="password"] {
+      @include ordinaryFormInput;
     }
-    form {
-        input[type="password"]{
-            @include ordinaryFormInput;
-        }
-        input[type="submit"] {
-            @include ordinaryFormInput;
-            background-color: $green;
-            color: $white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-        }
+    input[type="submit"] {
+      @include ordinaryFormInput;
+      background-color: $purple;
+      color: $white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
     }
+  }
 }

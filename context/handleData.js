@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { serverDataContext } from "./getServerData";
 import { getBCDataContext } from "./getBCData";
 import { operationContext } from "./handleUserOperation";
+import { FaucetModal } from "../componenets/faucet/faucetMdal";
 
 //Variable for using in dynamicly importing the subscrypt library
 let subscrypt;
@@ -28,13 +29,35 @@ export const HandleDataFunctions = (props) => {
     subscrypt = import("@oxydev/subscrypt");
   }, []);
 
+  const handleWalletBalance = async (address) => {
+    blockChainFuncs.getBalance(address).then((res) => {
+      console.log(res);
+      dispatch({ type: "LOAD_USER_BALANCE", payload: res });
+    });
+  };
+
+  //Function for loading user wallets
+  const handleWalletLists = async () => {
+    blockChainFuncs
+      .getWalletLists()
+      .then((res) => {
+        dispatch({ type: "LOAD_WALLETS", payload: res });
+      })
+      .catch(async () => {
+        await showResultToUser(
+          "Wallet selection Error!",
+          "Unable to get the wallets list!"
+        );
+      });
+  };
+
   //Function for handling the user wallet connection as a subscriber
   const handleSubscriberLoginByWallet = async (address) => {
     setLoading(true);
     blockChainFuncs
       .connectToWallet(address)
       .then(async (res) => {
-        if (res == "notSet") {
+        if (res === "notSet") {
           throw new Error("notSet");
         } else {
           setAuth(true);
@@ -42,16 +65,21 @@ export const HandleDataFunctions = (props) => {
           Cookies.set("subscryptAddress", res.address);
 
           let subscryptUsername = Cookies.get("subscrypt");
-          console.log(subscryptUsername);
+          // console.log(subscryptUsername);
           if (subscryptUsername === undefined) {
             (await subscrypt).getUsername(res.address).then(async (result) => {
-              console.log(result, "username");
+              // console.log(result, "username");
               if (result.status === "Fetched") {
                 const username = result.result;
                 Cookies.set("subscrypt", username);
                 dispatch({
                   type: "LOAD_USER",
-                  payload: { type: "user", wallet: res, address: res.address, username: username },
+                  payload: {
+                    type: "user",
+                    wallet: res,
+                    address: res.address,
+                    username: username,
+                  },
                 });
               } else {
                 dispatch({
@@ -59,8 +87,6 @@ export const HandleDataFunctions = (props) => {
                   payload: { type: "user", wallet: res, address: res.address },
                 });
               }
-              setLoading(false);
-
             });
           } else {
             dispatch({
@@ -77,10 +103,10 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .then(async (res) => {
-        if (res == "notSet") {
+        if (res === "notSet") {
           if (address) {
           } else {
-            // window.alert("You should choose a wallet from your wallet list!");
+            setLoading(false);
             await showResultToUser(
               "Wallet selection Error!",
               "You should choose a wallet from your wallet list!"
@@ -91,6 +117,7 @@ export const HandleDataFunctions = (props) => {
           }
         } else {
           await blockChainFuncs.loadSubscriberPlansbyWallet(res).then((res) => {
+            setLoading(false);
             if (res.length > 0) {
               dispatch({ type: "LOAD_USER_PLANS", payload: res });
             }
@@ -98,7 +125,8 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(async (err) => {
-        if (err.message == "notSet") {
+        setLoading(false);
+        if (err.message === "notSet") {
           if (address) {
             // window.alert("You should choose a wallet from your wallet list!");
             await showResultToUser(
@@ -117,11 +145,12 @@ export const HandleDataFunctions = (props) => {
           }
         } else {
           // window.alert("Can not connect to wallet!");
-          await showResultToUser("Wallet selection Error!", "Can not connect to wallet!").then(
-            () => {
-              router.push("/");
-            }
-          );
+          await showResultToUser(
+            "Wallet selection Error!",
+            "Can not connect to wallet!"
+          ).then(() => {
+            router.push("/");
+          });
         }
       });
   };
@@ -132,7 +161,7 @@ export const HandleDataFunctions = (props) => {
     blockChainFuncs
       .connectToWallet(address)
       .then(async (res) => {
-        if (res == "notSet") {
+        if (res === "notSet") {
           throw new Error("notSet");
         } else {
           setAuth(true);
@@ -142,17 +171,18 @@ export const HandleDataFunctions = (props) => {
             type: "LOAD_USER",
             payload: { type: "provider", wallet: res, address: res.address },
           });
-
           return res.address;
         }
       })
       .then(async (res) => {
-        return await blockChainFuncs.checkProviderRegistration(res).then((response) => {
-          return { address: res, planNum: response };
-        });
+        return await blockChainFuncs
+          .checkProviderRegistration(res)
+          .then((response) => {
+            return { address: res, planNum: response };
+          });
       })
       .then(async (res) => {
-        if (res.planNum == "NotRegistered") {
+        if (res.planNum === "NotRegistered") {
           dispatch({ type: "REGISTERED", payload: false });
           setLoading(false);
         } else {
@@ -161,21 +191,23 @@ export const HandleDataFunctions = (props) => {
           let subscryptUsername = Cookies.get("subscrypt");
           if (subscryptUsername === undefined) {
             (await subscrypt).getUsername(res.address).then(async (result) => {
-              console.log(result, "username");
+              // console.log(result, "username");
               const username = result.result;
               Cookies.set("subscrypt", username);
               dispatch({ type: "LOAD_USER_USERNAME", payload: username });
             });
           } else {
-            dispatch({ type: "LOAD_USER_USERNAME", payload: subscryptUsername });
+            dispatch({
+              type: "LOAD_USER_USERNAME",
+              payload: subscryptUsername,
+            });
           }
-          await getProviderAllInfo(res.address, res.planNum).then(() => {
-            setLoading(false);
-          });
+          setLoading(false);
+          await getProviderAllInfo(res.address, res.planNum);
         }
       })
       .catch(async (err) => {
-        if (err.message == "notSet") {
+        if (err.message === "notSet") {
           if (address) {
             await showResultToUser(
               "Wallet selection Error!",
@@ -192,11 +224,12 @@ export const HandleDataFunctions = (props) => {
           }
         } else {
           // window.alert("Can not connect to wallet!");
-          await showResultToUser("Wallet selection Error!", "Can not connect to wallet!").then(
-            () => {
-              router.push("/");
-            }
-          );
+          await showResultToUser(
+            "Wallet selection Error!",
+            "Can not connect to wallet!"
+          ).then(() => {
+            router.push("/");
+          });
         }
       });
   };
@@ -208,7 +241,7 @@ export const HandleDataFunctions = (props) => {
     )
       .userCheckAuthWithUsername(username, password)
       .then(async (result) => {
-        if (result.result == true) {
+        if (result.result === true) {
           setLoading(true);
           setAuth(true);
           Cookies.set("subscrypt", username);
@@ -216,20 +249,22 @@ export const HandleDataFunctions = (props) => {
           Cookies.set("subscryptType", "user");
           let subscryptAddress = Cookies.get("subscryptAddress");
           if (subscryptAddress === undefined) {
-            (await subscrypt).getAddressByUsername(username).then(async (result) => {
-              const walletAddress = result.result;
-              Cookies.set("subscryptAddress", walletAddress);
-              dispatch({
-                type: "LOAD_USER",
-                payload: {
-                  username: username,
-                  password: password,
-                  type: "user",
-                  address: walletAddress,
-                },
+            (await subscrypt)
+              .getAddressByUsername(username)
+              .then(async (result) => {
+                const walletAddress = result.result;
+                Cookies.set("subscryptAddress", walletAddress);
+                dispatch({
+                  type: "LOAD_USER",
+                  payload: {
+                    username: username,
+                    password: password,
+                    type: "user",
+                    address: walletAddress,
+                  },
+                });
+                return walletAddress;
               });
-              return walletAddress;
-            });
           } else {
             dispatch({
               type: "LOAD_USER",
@@ -246,19 +281,26 @@ export const HandleDataFunctions = (props) => {
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
           // window.alert("Invalid username of password!");
-          await showResultToUser("Authentication Problem!", "Invalid username of password!");
+          await showResultToUser(
+            "Authentication Problem!",
+            "Invalid username of password!"
+          );
         }
       })
       .then(async (res) => {
-        if (res == username) {
-          setLoading(false);
-
-          await blockChainFuncs.loadSubscriberPlansbyUsername(username, password).then((res) => {
-            if (res) dispatch({ type: "LOAD_USER_PLANS", payload: res });
-          });
+        if (res === username) {
+          await blockChainFuncs
+            .loadSubscriberPlansbyUsername(username, password)
+            .then((res) => {
+              setLoading(false);
+              if (res) {
+                dispatch({ type: "LOAD_USER_PLANS", payload: res });
+              }
+            });
         }
       })
-      .catch(async () => {
+      .catch(async (err) => {
+        console.log(err)
         setLoading(false);
         // window.alert("Can not load data!");
         await showResultToUser("Authentication Problem!", "Can not load data!");
@@ -273,11 +315,15 @@ export const HandleDataFunctions = (props) => {
     )
       .providerCheckAuthWithUsername(username, password)
       .then(async (result) => {
-        if (result.result == true) {
+        if (result.result === true) {
           setLoading(true);
           dispatch({
             type: "LOAD_USER",
-            payload: { username: username, password: password, type: "provider" },
+            payload: {
+              username: username,
+              password: password,
+              type: "provider",
+            },
           });
           setAuth(true);
           Cookies.set("subscrypt", username);
@@ -288,11 +334,14 @@ export const HandleDataFunctions = (props) => {
           //getting the user plans after login
         } else {
           dispatch({ type: "LOAD_USER", payload: { username: "Invalid" } });
-          await showResultToUser("Authentication Problem!", "Invalid username of password!");
+          await showResultToUser(
+            "Authentication Problem!",
+            "Invalid username of password!"
+          );
         }
       })
       .then(async (res) => {
-        if (res == username) {
+        if (res === username) {
           dispatch({ type: "REGISTERED", payload: true });
           let subscryptAddress = Cookies.get("subscryptAddress");
           if (subscryptAddress === undefined) {
@@ -322,17 +371,17 @@ export const HandleDataFunctions = (props) => {
         await getProviderAllInfo(address, parseInt(res.result));
       });
     } else {
-      await serverFunctions.getProviderHeaderInfo(address).then((res) => {
+      serverFunctions.getProviderHeaderInfo(address).then((res) => {
         dispatch({ type: "USER_NAME", payload: res.name });
         dispatch({ type: "USER_DESCRIPTION", payload: res.description });
         dispatch({ type: "USER_USERSCOUNT", payload: res.usersCount });
         dispatch({ type: "USER_INCOME", payload: res.income });
       });
-      await blockChainFuncs.getProviderPlanslist(address, count).then((res) => {
+      blockChainFuncs.getProviderPlanslist(address, count).then((res) => {
         dispatch({ type: "LOAD_PROVIDER_PLANS", payload: res });
-      });
-      serverFunctions.getProviderAllUsers(address).then((res) => {
-        dispatch({ type: "PROVIDER_ALLUSERS", payload: res });
+        serverFunctions.getProviderAllUsers(address).then((res) => {
+          dispatch({ type: "PROVIDER_ALLUSERS", payload: res });
+        });
       });
     }
   };
@@ -344,21 +393,26 @@ export const HandleDataFunctions = (props) => {
         await subscrypt
       )
         .getAddressByUsername(providerAddress)
-        .then((result) => {
-          dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
-          loadOffers(result.result);
+        .then(async (result) => {
+          if (result.status === "Fetched") {
+            dispatch({ type: "RESET_PROVIDER_PLAN", payload: [] });
+            await loadOffers(result.result);
+          } else {
+            await showResultToUser(
+              "Provider Not found!",
+              "The username you have entered is not a valid Provider!"
+            );
+          }
         })
-        .catch(async (error) => {
-          // window.alert("The username you have entered is invalid!!");
-          await showResultToUser(
-            "Authentication Problem!",
-            "The username you have entered is invalid!!"
-          );
-        });
+        .catch(() => {});
     } else {
-      await blockChainFuncs.getProviderPlanslist(providerAddress).then((res) => {
-        dispatch({ type: "RESET_PROVIDER_PLAN", payload: res });
-      });
+      await blockChainFuncs
+        .getProviderPlanslist(providerAddress)
+        .then((res) => {
+          if (res !== true) {
+            dispatch({ type: "RESET_PROVIDER_PLAN", payload: res });
+          }
+        });
     }
   };
 
@@ -371,15 +425,15 @@ export const HandleDataFunctions = (props) => {
     if (password) {
       setLoading(true);
       //do the stuff for auth by username
-      if (userType == "user") {
+      if (userType === "user") {
         handleSubscriberloginByUsername(userName, password);
-      } else if (userType == "provider") {
+      } else if (userType === "provider") {
         handleProviderloginByUsername(userName, password);
       }
     } else if (userAddress) {
-      if (userType == "user") {
+      if (userType === "user") {
         handleSubscriberLoginByWallet(userAddress);
-      } else if (userType == "provider") {
+      } else if (userType === "provider") {
         handleProviderLogingByWallet(userAddress);
       }
     }
@@ -387,31 +441,42 @@ export const HandleDataFunctions = (props) => {
 
   //Function for getting the user address for charging money
   const sendMoneyToAddress = () => {
-    const modalElement = (
-      <div>
-        <form className="GiveTokenForm" onSubmit={handleSendMoney}>
-          <label>Please input your wallet address</label>
-          <input id="modalAddressInput" type="text" />
-          <input type="submit" value="submit" />
-        </form>
-      </div>
-    );
-    setModal(modalElement);
+    blockChainFuncs.getWalletLists().then(async (res) => {
+      let modalElement;
+      if (res.length > 0) {
+        modalElement = (
+          <FaucetModal walletList={res} handleSendMoney={handleSendMoney} />
+        );
 
-    async function handleSendMoney() {
+        setModal(modalElement);
+      } else {
+        await showResultToUser(
+          "No wallet to choose",
+          "You do not have any wallet to choose"
+        );
+      }
+    });
+
+    async function handleSendMoney(address) {
       setModal(null);
-      const address = document.getElementById("modalAddressInput").value;
+      // const address = document.getElementById("modalAddressInput").value;
       await (
         await subscrypt
       )
         .transferToken(address)
         .then(async (result) => {
           // window.alert("Operation has been done successful!");
-          await showResultToUser("Operation Successful!", "Operation has been done successfully!");
+          await showResultToUser(
+            "Operation Successful!",
+            "Operation has been done successfully!"
+          );
         })
         .catch(async (error) => {
           // window.alert("Operation failed!");
-          await showResultToUser("Operation Failed!", "Operation has been failed!");
+          await showResultToUser(
+            "Operation Failed!",
+            "Operation has been failed!"
+          );
         });
     }
   };
@@ -431,10 +496,12 @@ export const HandleDataFunctions = (props) => {
   };
 
   const handleDataContextValue = {
+    handleWalletBalance,
     handleSubscriberLoginByWallet,
     handleProviderLogingByWallet,
     checkAuthByCookie,
     sendMoneyToAddress,
+    handleWalletLists,
     handleSubscriberloginByUsername,
     handleProviderloginByUsername,
     loadOffers,

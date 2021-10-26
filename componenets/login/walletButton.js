@@ -9,7 +9,7 @@ export default function WalletButton(props) {
   const type = props.type;
 
   function handleWalletConnection() {
-    if (type == "user") {
+    if (type === "user") {
       handleSubscriberLoginByWallet();
     } else {
       handleProviderLogingByWallet();
@@ -18,7 +18,7 @@ export default function WalletButton(props) {
 
   return (
     <div
-      className={status == "active" ? "WalletButton active" : "WalletButton"}
+      className={status === "active" ? "WalletButton active" : "WalletButton"}
       onClick={handleWalletConnection}
     >
       <div className="WalletButton-ImageContainer">

@@ -3,7 +3,7 @@ import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
-import Login from "./login";
+import Menu from "./menu";
 import { Store } from "../context/store";
 import { Modal } from "../context/modal";
 import React from "react";
@@ -15,6 +15,7 @@ import { HandleDataFunctions } from "../context/handleData";
 import { GetBCDataFunctions } from "../context/getBCData";
 import { SetDataFunctions } from "../context/setData";
 import { Operation } from "../context/handleUserOperation";
+import { Tutorial } from "../context/tutorial";
 
 //Creating context for authentication and loading.
 export const authContext = React.createContext();
@@ -48,36 +49,45 @@ export default function App({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
           rel="stylesheet"
         />
+        <title>SubsCrypt|Blockchain as a Service on PolkaDot</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+        <link rel="manifest" href="/site.webmanifest"/>
       </Head>
       <loadingContext.Provider value={{ loading, setLoading }}>
         <authContext.Provider value={{ auth, setAuth }}>
           <Store>
             <Modal>
               <Operation>
-                <ServerFunctions>
-                  <GetBCDataFunctions>
-                    <HandleDataFunctions>
-                      <SetDataFunctions>
-                        <div className="WholePageWrapper">
-                          <SideBar />
-                          {/* Main componenet is for the main part of the app where each page content is shown */}
-                          {/* Auth context is for checking user authentication. If false header and othe pages are not shown */}
-                          <Main>
+                <Tutorial>
+                  <ServerFunctions>
+                    <GetBCDataFunctions>
+                      <HandleDataFunctions>
+                        <SetDataFunctions>
+                          <div className="WholePageWrapper">
                             {loading ? (
                               <Loading />
                             ) : (
                               <>
-                                {auth && <Header />}
-                                {auth ? <Component {...pageProps} /> : <Login {...pageProps} />}
+                                <SideBar />
+                                {/* Main component is for the main part of the app where each page content is shown */}
+                                {/* Auth context is for checking user authentication. If false header and other pages are not shown */}
+                                <Main>
+                                  <>
+                                    {auth && <Header />}
+                                    {auth ? <Component {...pageProps} /> : <Menu {...pageProps} />}
+                                  </>
+                                </Main>
+                                <div/>
                               </>
                             )}
-                          </Main>
-                          <div></div>
-                        </div>
-                      </SetDataFunctions>
-                    </HandleDataFunctions>
-                  </GetBCDataFunctions>
-                </ServerFunctions>
+                          </div>
+                        </SetDataFunctions>
+                      </HandleDataFunctions>
+                    </GetBCDataFunctions>
+                  </ServerFunctions>
+                </Tutorial>
               </Operation>
             </Modal>
           </Store>

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect } from 'react'
 import SubscryptionOffers from "../../componenets/user/subscryptionOffers";
+import tutData from '../../data/tutorial.json'
+import { tutorialContext } from '../../context/tutorial'
 
 export default function NewOffers() {
+
   return (
     <div className="userDashboard">
-      <h1>We have new plans for offering to you</h1>
+      <h1>Marketplace</h1>
       <div className="row">
         <div className="Container--medium">
           <SubscryptionOffers />

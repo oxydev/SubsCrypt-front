@@ -7,6 +7,14 @@
     position: relative;
     width: fit-content;
     cursor: pointer;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: $gray-3;
+      button {
+        opacity: 0.6;
+      }
+    }
 
     span {
       @include pseudo;
@@ -43,6 +51,7 @@
   margin: auto;
   background-color: $white;
   @include cross(10px);
+  transition: opacity 0.2s ease-in-out;
 }
 .ProviderForm,
 .PlanForm {
@@ -93,7 +102,7 @@
   @include circle(128px);
   display: inline-block;
   background-color: transparent;
-  background-image: url("/icons/png/uploadBtn.png");
+  background-image: url("/icons/png/uploadBtn.svg");
   @include backgroundImage;
   background-size: auto;
   margin: 24px 0;

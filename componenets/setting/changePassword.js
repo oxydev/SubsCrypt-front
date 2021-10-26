@@ -43,7 +43,9 @@ export default function ChangePassword(props) {
     if (data.newPassword !== data.currentPasswordConfirm) return;
     e.preventDefault();
     // console.log(data);
-    changePassword(type, data.newPassword, callback);
+    changePassword(type, data.newPassword, callback).catch(async () => {
+      await showResultToUser("Operation failed!", "The operation has been failed!");
+    });
   }
 
   useEffect(() => {
@@ -80,6 +82,7 @@ export default function ChangePassword(props) {
           className="NewPassField"
           type="password"
           required
+          autoComplete="on"
           placeholder="New Password"
           onChange={(e) => {
             setData({ ...data, newPassword: e.target.value });
@@ -89,6 +92,7 @@ export default function ChangePassword(props) {
           className="NewPassField"
           type="password"
           required
+          autoComplete="on"
           placeholder="Repeat the New Password"
           onChange={(e) => {
             setData({ ...data, currentPasswordConfirm: e.target.value });

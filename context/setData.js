@@ -20,11 +20,43 @@ export const SetDataFunctions = (props) => {
   }, []);
 
   //Refund a plan
-  const refundPlan = async (address, injector, callback, providerAddress, planIndex) => {
+  const refundPlan = async (
+    address,
+    injector,
+    callback,
+    providerAddress,
+    planIndex
+  ) => {
     injector = await injector.then((res) => res);
-    await (await subscrypt).refund(address, injector, callback, providerAddress, planIndex);
+    await (
+      await subscrypt
+    ).refund(address, injector, callback, providerAddress, planIndex);
   };
 
+  const withdraw = async (address, injector, callback) => {
+    await (await subscrypt).withdraw(address, injector, callback);
+  };
+
+  const withdrawMoney = async (address, callback) => {
+    await blockChainFuncs.connectToWallet(address).then(async (res) => {
+      if (res) {
+        const injector = await getWalletInjector(res);
+        await withdraw(res.address, injector, callback).catch(async (err) => {
+          console.log(err);
+          await showResultToUser(
+            "Operation failed!",
+            "The operation has been failed!"
+          );
+        });
+      } else {
+        // window.alert("You are not allowed to do this operation!");
+        await showResultToUser(
+          "Operation Not Allowed!",
+          "You are not allowed to do this operation!"
+        );
+      }
+    });
+  };
   const renewPlan = async (
     address,
     injector,
@@ -36,7 +68,14 @@ export const SetDataFunctions = (props) => {
     injector = await injector.then((res) => res);
     await (
       await subscrypt
-    ).renew(address, injector, callback, providerAddress, planIndex, charcteristicValue);
+    ).renew(
+      address,
+      injector,
+      callback,
+      providerAddress,
+      planIndex,
+      charcteristicValue
+    );
   };
 
   const subscribePlan = async (
@@ -49,22 +88,32 @@ export const SetDataFunctions = (props) => {
     pass,
     planChars
   ) => {
-    await (await subscrypt).getSha2(pass).then(async (res) => {
-      // console.log(address, providerAddress, planIndex, res.result, user, planChars);
-      injector = await injector.then((res) => res);
-      await (
-        await subscrypt
-      ).subscribe(
-        address,
-        injector,
-        callback,
-        providerAddress,
-        planIndex,
-        res.result,
-        user,
-        planChars
-      );
-    });
+    await (
+      await subscrypt
+    )
+      .getSha2(pass)
+      .then(async (res) => {
+        // console.log(address, providerAddress, planIndex, res.result, user, planChars);
+        injector = await injector.then((res) => res);
+        await (
+          await subscrypt
+        ).subscribe(
+          address,
+          injector,
+          callback,
+          providerAddress,
+          planIndex,
+          res.result,
+          user,
+          planChars
+        );
+      })
+      .catch(async () => {
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
+      });
   };
 
   const providerRegisterHandler = async (
@@ -82,53 +131,71 @@ export const SetDataFunctions = (props) => {
     // console.log(prices, refundPolicies, moneyAddress, username, pass, planChars);
     await (await subscrypt).getSha2(pass).then(async (res) => {
       injector = await injector.then((res) => res);
-      await (
-        await subscrypt
-      ).providerRegister(
-        address.address,
-        injector,
-        callback,
-        durations,
-        prices,
-        refundPolicies,
-        moneyAddress,
-        username,
-        res.result,
-        planChars
-      );
+      await (await subscrypt)
+        .providerRegister(
+          address.address,
+          injector,
+          callback,
+          durations,
+          prices,
+          refundPolicies,
+          moneyAddress,
+          username,
+          res.result,
+          planChars
+        )
+        .catch(async () => {
+          await showResultToUser(
+            "Operation failed!",
+            "The operation has been failed!"
+          );
+        });
     });
   };
 
   //Get Injector
   const getWalletInjector = async (address) => {
-    let injector;
-    await (await subscrypt).getInjector(address).then((result) => {
-      injector = result;
-    });
-    return injector;
+    // console.log(address)
+    return await (await subscrypt).getInjector(address);
   };
 
   //function for handle the subscription flow
-  const handleSubscribtion = async (providerAddress, plan, planIndex, callback, manualAddress) => {
+  const handleSubscribtion = async (
+    providerAddress,
+    plan,
+    planIndex,
+    callback,
+    manualAddress
+  ) => {
     let walletAddress = globalState.user.wallet;
-
+    if (providerAddress === globalState.user.address) {
+      await showResultToUser(
+        "Operation not allowed!",
+        "You are not allowed to do this operation!"
+      );
+      return;
+    }
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
-        if (res) {
-          handleSubscribtion(providerAddress, plan, planIndex, callback, res);
-        } else {
-          // window.alert("You are not allowed to do this operation!");s
-          await showResultToUser(
-            "Operation not allowed!",
-            "You are not allowed to do this operation!"
-          );
-        }
-      });
+      await blockChainFuncs
+        .connectToWallet(globalState.user.address)
+        .then(async (res) => {
+          if (res) {
+            handleSubscribtion(providerAddress, plan, planIndex, callback, res);
+          } else {
+            // window.alert("You are not allowed to do this operation!");s
+            await showResultToUser(
+              "Operation not allowed!",
+              "You are not allowed to do this operation!"
+            );
+          }
+        });
     } else {
       if (!walletAddress) {
         walletAddress = manualAddress;
       }
-      const modalElement = <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />;
+      const modalElement = (
+        <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} />
+      );
 
       function handelModalSubmit(e, formData) {
         e.preventDefault();
@@ -138,7 +205,8 @@ export const SetDataFunctions = (props) => {
         function getPlanCharsFromData(formData) {
           var planChar = [];
           Object.keys(formData).forEach((key) => {
-            if (key !== "username" && key !== "password") planChar.push(formData[key]);
+            if (key !== "username" && key !== "password")
+              planChar.push(formData[key]);
           });
           return planChar;
         }
@@ -154,7 +222,12 @@ export const SetDataFunctions = (props) => {
           formData.username,
           formData.password,
           planChar
-        );
+        ).catch(async () => {
+          await showResultToUser(
+            "Operation failed!",
+            "The operation has been failed!"
+          );
+        });
       }
 
       //check if the user has connected to his wallet or not. If not connect to t now.
@@ -164,26 +237,38 @@ export const SetDataFunctions = (props) => {
   };
 
   //Function for handling the Renew flow
-  const handleRenewPlan = async (providerAddress, plan, planIndex, callback, manualAddress) => {
+  const handleRenewPlan = async (
+    providerAddress,
+    plan,
+    planIndex,
+    callback,
+    manualAddress
+  ) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
-        if (res) {
-          handleRenewPlan(providerAddress, plan, planIndex, callback, res);
-        } else {
-          // window.alert("You are not allowed to do this operation!");
-          await showResultToUser(
-            "Operation Not Allowed!",
-            "You are not allowed to do this operation!"
-          );
-        }
-      });
+      await blockChainFuncs
+        .connectToWallet(globalState.user.address)
+        .then(async (res) => {
+          if (res) {
+            handleRenewPlan(providerAddress, plan, planIndex, callback, res);
+          } else {
+            // window.alert("You are not allowed to do this operation!");
+            await showResultToUser(
+              "Operation Not Allowed!",
+              "You are not allowed to do this operation!"
+            );
+          }
+        });
     } else {
       if (!walletAddress) {
         walletAddress = manualAddress;
       }
       const modalElement = (
-        <SubscriptionModal plan={plan} handleSubmit={handelModalSubmit} renew={true} />
+        <SubscriptionModal
+          plan={plan}
+          handleSubmit={handelModalSubmit}
+          renew={true}
+        />
       );
 
       function handelModalSubmit(e, formData) {
@@ -194,7 +279,8 @@ export const SetDataFunctions = (props) => {
         function getPlanCharsFromData(formData) {
           var planChar = [];
           Object.keys(formData).forEach((key) => {
-            if (key !== "username" && key !== "password") planChar.push(formData[key]);
+            if (key !== "username" && key !== "password")
+              planChar.push(formData[key]);
           });
           return planChar;
         }
@@ -208,27 +294,40 @@ export const SetDataFunctions = (props) => {
           providerAddress,
           planIndex,
           planChar
-        );
+        ).catch(async () => {
+          await showResultToUser(
+            "Operation failed!",
+            "The operation has been failed!"
+          );
+        });
       }
       setModal(modalElement);
     }
   };
 
   //Function for handling the Refund flow
-  const handleRefundPlan = async (providerAddress, plan, planIndex, callback, manualAddress) => {
+  const handleRefundPlan = async (
+    providerAddress,
+    plan,
+    planIndex,
+    callback,
+    manualAddress
+  ) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
-        if (res) {
-          handleRefundPlan(providerAddress, plan, planIndex, callback, res);
-        } else {
-          // window.alert("You are not allowed to do this operation!");
-          await showResultToUser(
-            "Operation Not Allowed!",
-            "You are not allowed to do this operation!"
-          );
-        }
-      });
+      await blockChainFuncs
+        .connectToWallet(globalState.user.address)
+        .then(async (res) => {
+          if (res) {
+            handleRefundPlan(providerAddress, plan, planIndex, callback, res);
+          } else {
+            // window.alert("You are not allowed to do this operation!");
+            await showResultToUser(
+              "Operation Not Allowed!",
+              "You are not allowed to do this operation!"
+            );
+          }
+        });
     } else {
       if (!walletAddress) {
         walletAddress = manualAddress;
@@ -239,7 +338,12 @@ export const SetDataFunctions = (props) => {
         callback,
         providerAddress,
         planIndex
-      );
+      ).catch(async () => {
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
+      });
     }
   };
 
@@ -248,31 +352,75 @@ export const SetDataFunctions = (props) => {
     let walletAddress = globalState.user.wallet;
     // console.log(walletAddress);
     var injector = getWalletInjector(walletAddress);
-    await (await subscrypt).retrieveWholeDataWithWallet(walletAddress.address).then(async (res) => {
-      // console.log(res);
-      if (res.status !== "Failed" || type === "provider") {
-        await (await subscrypt).getSha2(newPassword).then(async (res) => {
-          // console.log(res.result);
-          injector = await injector.then((res) => res);
+    await (await subscrypt)
+      .retrieveWholeDataWithWallet(walletAddress.address)
+      .then(async (res) => {
+        // console.log(res);
+        if (res.status !== "Failed" || type === "provider") {
+          await (await subscrypt).getSha2(newPassword).then(async (res) => {
+            // console.log(res.result);
+            injector = await injector.then((res) => res);
 
-          if (type === "user") {
-            await (
-              await subscrypt
-            ).setUserSubscryptPass(walletAddress.address, injector, callback, res.result);
-          } else {
-            await (
-              await subscrypt
-            ).setProviderSubscryptPass(walletAddress.address, injector, callback, res.result);
-          }
-        });
-      } else {
-        // console.log("you have not any subscription so you can not change a password");
-      }
-    });
+            if (type === "user") {
+              await (
+                await subscrypt
+              ).setUserSubscryptPass(
+                walletAddress.address,
+                injector,
+                callback,
+                res.result
+              );
+            } else {
+              await (
+                await subscrypt
+              ).setProviderSubscryptPass(
+                walletAddress.address,
+                injector,
+                callback,
+                res.result
+              );
+            }
+          });
+        } else {
+          // console.log("you have not any subscription so you can not change a password");
+        }
+      });
 
     // console.log(globalState, type, newPassword);
   };
-
+  const editPlan = async (address, callback, data) => {
+    await blockChainFuncs.connectToWallet(address).then(async (res) => {
+      if (res) {
+        const injector = await getWalletInjector(res);
+        // console.log(data.plan_index, data.duration, data.price,
+        //   data.max_refund_permille_policies, data.disabled)
+        await (await subscrypt)
+          .editPlan(
+            res.address,
+            injector,
+            callback,
+            data.plan_index,
+            data.duration,
+            data.price,
+            data.max_refund_permille_policies,
+            data.disabled
+          )
+          .catch(async (err) => {
+            // console.log(err)
+            await showResultToUser(
+              "Operation failed!",
+              "The operation has been failed!"
+            );
+          });
+      } else {
+        // window.alert("You are not allowed to do this operation!");
+        await showResultToUser(
+          "Operation Not Allowed!",
+          "You are not allowed to do this operation!"
+        );
+      }
+    });
+  };
   //function for adding new plan as a provider
   const addNewPlans = async (
     address,
@@ -285,17 +433,27 @@ export const SetDataFunctions = (props) => {
   ) => {
     let walletAddress = globalState.user.wallet;
     if (!walletAddress && !manualAddress) {
-      await blockChainFuncs.connectToWallet(globalState.user.address).then(async (res) => {
-        if (res) {
-          addNewPlans(address, callback, durations, prices, refundPolicies, planChars, res);
-        } else {
-          // window.alert("You are not allowed to do this operation!");
-          await showResultToUser(
-            "Operation Not Allowed!",
-            "You are not allowed to do this operation!"
-          );
-        }
-      });
+      await blockChainFuncs
+        .connectToWallet(globalState.user.address)
+        .then(async (res) => {
+          if (res) {
+            addNewPlans(
+              address,
+              callback,
+              durations,
+              prices,
+              refundPolicies,
+              planChars,
+              res
+            );
+          } else {
+            // window.alert("You are not allowed to do this operation!");
+            await showResultToUser(
+              "Operation Not Allowed!",
+              "You are not allowed to do this operation!"
+            );
+          }
+        });
     } else {
       if (!walletAddress) {
         walletAddress = manualAddress;
@@ -303,17 +461,22 @@ export const SetDataFunctions = (props) => {
 
       var injector = getWalletInjector(walletAddress);
       injector = await injector.then((res) => res);
-      await (
-        await subscrypt
-      ).addPlan(
-        walletAddress.address,
-        injector,
-        callback,
-        durations,
-        prices,
-        refundPolicies,
-        planChars
-      );
+      await (await subscrypt)
+        .addPlan(
+          walletAddress.address,
+          injector,
+          callback,
+          durations,
+          prices,
+          refundPolicies,
+          planChars
+        )
+        .catch(async () => {
+          await showResultToUser(
+            "Operation failed!",
+            "The operation has been failed!"
+          );
+        });
     }
   };
 
@@ -324,8 +487,12 @@ export const SetDataFunctions = (props) => {
     handleRenewPlan,
     addNewPlans,
     providerRegisterHandler,
+    editPlan,
+    withdrawMoney,
   };
   return (
-    <setDataContext.Provider value={setDataContextvalue}>{props.children}</setDataContext.Provider>
+    <setDataContext.Provider value={setDataContextvalue}>
+      {props.children}
+    </setDataContext.Provider>
   );
 };

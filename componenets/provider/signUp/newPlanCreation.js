@@ -36,7 +36,7 @@ export default function NewPlanCreation(props) {
   //function for handle minimizing or maximazing he forms
   function toggleVisibility() {
     const status = plan.visibility;
-    if (status == "visible") {
+    if (status === "visible") {
       handlePlanListUpdate("visibility", "hidden");
     } else {
       handlePlanListUpdate("visibility", "visible");
@@ -50,12 +50,11 @@ export default function NewPlanCreation(props) {
     list.splice(index, 1);
     setPlanList([...list]);
   }
-
   return (
     <section
-      className={plan.visibility == "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
+      className={plan.visibility === "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
     >
-      <h1 onClick={toggleVisibility}>
+      <h1 id={"newPlan"+index+"Creation"} onClick={toggleVisibility}>
         Create a Subscryption Plan #{index + planNumber + 1}
         <span></span>
         {planList.length > 1 && (
@@ -74,6 +73,7 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanTitle"
+
             required
             minLength={3}
             value={plan.title}
@@ -126,7 +126,7 @@ export default function NewPlanCreation(props) {
           <div className="PlansForm-tag">
             <TagInput initailTags={plan.characteristics} handleChange={handlePlanListUpdate} />
           </div>
-          <p>Some characteristics your plan may have e.g. Country, Region and etc.</p>
+          <p>Some information that you want from users like email, address and etc.</p>
         </div>
         <div className="PlanForm-financial">
           <label htmlFor="PlanTokens">Users can pay via these tokens</label>
@@ -141,7 +141,7 @@ export default function NewPlanCreation(props) {
                 handleCoinCheckBox(e);
               }}
             ></input>
-            <img src="/icons/png/networks/PolkadotLogo.png" />
+            <img src="/icons/png/networks/polkadot.svg" />
             <label htmlFor="Polkadot">Polkadot (DOT)</label>
           </div>
           <p>

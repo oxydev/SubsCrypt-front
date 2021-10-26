@@ -39,12 +39,23 @@
       color: $white;
       flex-shrink: 0;
       margin-left: 10px;
+      transition: box-shadow 0.2s ease-in-out;
+
+      &:hover {
+        box-shadow: $box-shadow--card;
+      }
     }
     button {
       width: unset;
       background: transparent;
       border: $border-main;
       color: $gray-3;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+        box-shadow: $gray-5;
+        color: $white;
+      }
     }
   }
 }

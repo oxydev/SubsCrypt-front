@@ -7,11 +7,11 @@ export default function SubscriptionModal(props) {
   const username = globalState.user.username;
 
   const { plan, handleSubmit, renew } = props;
-
+  console.log(plan)
   const characteristics = plan.characteristics;
   const characsInputs = characteristics.map((item) => (
     <div key={item} className="Modal-InputPart">
-      <label>{item}</label>
+      <label>{item+":"}</label>
       <input
         type="text"
         onChange={(e) => {
@@ -46,7 +46,8 @@ export default function SubscriptionModal(props) {
           </div>
         )}
 
-        {!renew && (
+        {(!renew && globalState.plans.filter((planOld) => plan.providerAddress === planOld.providerAddress).length === 0)
+        && (
           <div className="Modal-InputPart">
             <label>password:</label>
             <input

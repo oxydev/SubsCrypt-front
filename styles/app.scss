@@ -14,7 +14,7 @@
 @import "components/containers";
 @import "components/input";
 @import "components/MySubscryption/subscryptionOffers";
-@import "components/MySubscryption/planCard";
+@import "components/common/planCard";
 @import "components/MySubscryption/offerCarousel";
 @import "components/MySubscryption/userPlanCard";
 @import "components/MySubscryption/providerSelection";
@@ -25,7 +25,14 @@
 @import "components/provider/imageUploader";
 @import "components/wallet/walletConnection";
 @import "components/gadjets/percentageBar";
+@import "components/gadjets/toggle";
+
 @import "components/announcement/operationModal";
+@import "components/tutorial/tutorial";
+@import "components/login/card";
+@import "components/login/connection";
+@import "components/provider/providerWithDraw";
+@import "components/common/planDetailsModal";
 
 // Layout
 @import "layout/Main";
@@ -42,6 +49,7 @@
 @import "pages/providerSignUp";
 @import "pages/providerDashboard";
 @import "pages/providerSetting";
+@import "pages/sign_in";
 
 // Sections
 @import "sections/wallet";

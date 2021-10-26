@@ -4,11 +4,11 @@
 export const duration = (milliseconds) => {
   const days = Math.floor(milliseconds / 86400000);
   if (days < 30) {
-    return days + " days";
+    return days + " Days";
   } else if (days < 60) {
-    return days / 30 + "month";
+    return days / 30 + " Month";
   } else {
-    return days / 30 + "months";
+    return days / 30 + " Months";
   }
 };
 
@@ -39,7 +39,7 @@ export const usePercentage = (activationDate, duration) => {
 //convert the address to the format which 3 dots is between
 export const middleDots = (text) => {
   const length = text.length;
-  const firstPart = text.substring(0, 3);
-  const lastPart = text.substring(length - 3, length);
+  const firstPart = text.substring(0, 5);
+  const lastPart = text.substring(length - 5, length);
   return firstPart + "..." + lastPart;
 };

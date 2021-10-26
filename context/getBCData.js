@@ -2,6 +2,8 @@ import React, { useEffect, useContext } from "react";
 import WalletSelectionModal from "../componenets/login/walletSelectionModal";
 import { modalContext } from "./modal";
 import { serverDataContext } from "./getServerData";
+import SingIn from "../pages/login";
+import { operationContext } from "./handleUserOperation";
 
 export const getBCDataContext = React.createContext({});
 
@@ -10,6 +12,7 @@ let subscrypt;
 export const GetBCDataFunctions = (props) => {
   const { setModal, setCallBack } = useContext(modalContext);
   const serverFunctions = useContext(serverDataContext);
+  const { showResultToUser } = useContext(operationContext);
 
   useEffect(() => {
     subscrypt = import("@oxydev/subscrypt");
@@ -26,13 +29,13 @@ export const GetBCDataFunctions = (props) => {
         const walletList = result.map((item) => item);
 
         const walletNumber = walletList.length;
-        if (walletNumber == 1) {
+        if (walletNumber === 1) {
           return walletList[0];
         } else {
           if (address) {
             let targetWallet;
             for (const item of walletList) {
-              if (address == item.address) {
+              if (address === item.address) {
                 targetWallet = item;
               }
             }
@@ -61,6 +64,14 @@ export const GetBCDataFunctions = (props) => {
     let wallet;
 
     const addressList = walletList.map((item) => item.address);
+    const selectWallet = (
+      <SingIn
+        addressList={addressList}
+        handleSubmit={async (value) => {
+          comfirmAddress(value);
+        }}
+      />
+    );
     const modalElement = (
       <WalletSelectionModal
         addressList={addressList}
@@ -84,21 +95,38 @@ export const GetBCDataFunctions = (props) => {
       return new Promise(waitForWallet);
       function waitForWallet(resolve, reject) {
         if (wallet) resolve(wallet);
-        else if (timeout && Date.now() - start >= timeout) reject(new Error("timeout"));
+        else if (timeout && Date.now() - start >= timeout)
+          reject(new Error("timeout"));
         else setTimeout(waitForWallet.bind(this, resolve, reject), 30);
       }
     }
-
-    setModal(modalElement);
-    setCallBack(() => () => {
-      wallet = "notSet";
-    });
+    // selectWallet;
+    // setModal(modalElement);
+    // setCallBack(() => () => {
+    //   wallet = "notSet";
+    // });
     return ensureWalletIsSet(60000)
       .then((res) => {
         return res;
       })
       .catch((err) => {
         return err;
+      });
+  };
+
+  //Function for getting wallet address lists
+  const getWalletLists = async () => {
+    await (await subscrypt).getWalletAccess();
+    return await (
+      await subscrypt
+    )
+      .getWalletAccounts()
+      .then(async (result) => {
+        const walletList = result.map((item) => item);
+        return walletList;
+      })
+      .catch(() => {
+        throw new Error("Connection canceled!");
       });
   };
 
@@ -109,9 +137,9 @@ export const GetBCDataFunctions = (props) => {
     )
       .getPlanLength(address)
       .then((res) => {
-        if (res.status == "Fetched") {
+        if (res.status === "Fetched") {
           const planLength = parseInt(res.result);
-          if (planLength == 0) {
+          if (planLength === 0) {
             return "NotRegistered";
           } else {
             return planLength;
@@ -126,10 +154,19 @@ export const GetBCDataFunctions = (props) => {
   //Functions for getting the provider plans data
   const getProviderPlanslist = async (address, count) => {
     let promiseList = [];
+
     if (!count) {
-      return (await subscrypt).getPlanLength(address).then(async (res) => {
-        return getProviderPlanslist(address, parseInt(res.result));
-      });
+      return (await subscrypt)
+        .getPlanLength(address)
+        .then(async (res) => {
+          // console.log(res)
+          if (res.status === "Fetched")
+            return getProviderPlanslist(address, parseInt(res.result));
+        })
+        .catch(
+          async (err) =>
+            await showResultToUser("Failed!", "The Address is not valid!")
+        );
     } else {
       for (let i = 0; i < count; i++) {
         promiseList.push(
@@ -150,13 +187,15 @@ export const GetBCDataFunctions = (props) => {
 
   //Function for getting a provider plan according to it's index
   const loadPlan = async (address, index) => {
-    return await (await subscrypt).getPlanData(address, index).then(async (result) => {
-      let plan = result.result;
-      plan.planIndex = index;
-      return await loadCharacs(address, index, plan).then((res) => {
-        return res;
+    return await (await subscrypt)
+      .getPlanData(address, index)
+      .then(async (result) => {
+        let plan = result.result;
+        plan.planIndex = index;
+        return await loadCharacs(address, index, plan).then((res) => {
+          return res;
+        });
       });
-    });
   };
 
   //Function for getting plan Characteristic
@@ -166,7 +205,7 @@ export const GetBCDataFunctions = (props) => {
     )
       .getPlanCharacteristics(address, index)
       .then((result) => {
-        if (result.status == "Fetched") {
+        if (result.status === "Fetched") {
           plan.characteristics = result.result;
           plan.providerAddress = address;
           return plan;
@@ -177,6 +216,26 @@ export const GetBCDataFunctions = (props) => {
           return res;
         });
       });
+  };
+
+  //Function for getting plan Characteristic
+  const getWithdrawableAmount = async (address) => {
+    return await (await subscrypt)
+      .getWithdrawableAmount(address)
+      .then((result) => {
+        if (result.status === "Fetched") {
+          return result.result;
+        }
+      });
+  };
+
+  //Function for getting money address
+  const getMoneyAddress = async (address) => {
+    return await (await subscrypt).getMoneyAddress(address).then((result) => {
+      if (result.status === "Fetched") {
+        return result.result;
+      }
+    });
   };
 
   const loadPlanServerInfo = async (address, index, plan) => {
@@ -190,10 +249,12 @@ export const GetBCDataFunctions = (props) => {
         return plan;
       })
       .then(async () => {
-        return await serverFunctions.getProviderDescription(address).then((respones) => {
-          plan.providerName = respones.name;
-          return plan;
-        });
+        return await serverFunctions
+          .getProviderDescription(address)
+          .then((respones) => {
+            plan.providerName = respones.name;
+            return plan;
+          });
       });
   };
 
@@ -205,9 +266,10 @@ export const GetBCDataFunctions = (props) => {
     )
       .retrieveWholeDataWithWallet(address)
       .then(async (result) => {
-        if (result.status == "Fetched") {
+        // console.log(result)
+        if (result.status === "Fetched") {
           plans = result.result;
-          if (plans.length == 0) {
+          if (plans.length === 0) {
             return 0;
           }
           let promiseList = [];
@@ -226,7 +288,8 @@ export const GetBCDataFunctions = (props) => {
           return plans;
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        // console.log(err)
         throw new Error("Problem with loading subscriber plans!");
       });
   };
@@ -250,12 +313,29 @@ export const GetBCDataFunctions = (props) => {
       });
   };
 
+  const getBalance = async (address) => {
+    return (await subscrypt)
+      .getBalance(address)
+      .then((res) => {
+        console.log(res);
+        return res.toNumber() / 1e12;
+      })
+      .catch(async () => {
+        await showResultToUser("Failed!", "Con not get the balance!");
+      });
+  };
+
   const getBCDataContextValue = {
     connectToWallet,
     checkProviderRegistration,
+    getWalletLists,
     getProviderPlanslist,
     loadSubscriberPlansbyWallet,
     loadSubscriberPlansbyUsername,
+    selectwalletFromList,
+    getWithdrawableAmount,
+    getMoneyAddress,
+    getBalance,
   };
 
   return (

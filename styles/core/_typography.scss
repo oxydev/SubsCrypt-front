@@ -6,6 +6,7 @@ $basic-font-family: Rubik;
 html {
   font-family: $basic-font-family;
   font-size: $fontSize-root;
+  scroll-behavior: smooth;
 }
 
 @mixin text--heading1 {

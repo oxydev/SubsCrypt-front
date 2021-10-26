@@ -2,24 +2,38 @@
   "UserSideBar": {
     "menuItem": [
       {
-        "name": "Dashboard",
-        "url": "/user/",
-        "icon": "/dashbord.png"
+        "name": "My SubsCrypt",
+        "url": "/user",
+        "id": "dashbord",
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
-        "name": "New Offers",
+        "name": "Marketplace",
         "url": "/user/newOffers",
+        "id": "newOffers",
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/offer2.svg"
+      },
+      {
+        "name": "Faucet",
+        "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Profile Setting",
         "url": "/user/profilesetting",
-        "icon": "/dashbord.png"
+        "id": "profilesetting",
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/setting.svg"
       },
       {
         "name": "Log Out",
         "url": "/",
-        "icon": "/dashbord.png"
+        "id": "logout",
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/logout.svg"
       }
     ]
   },
@@ -28,31 +42,53 @@
       {
         "name": "Dashboard",
         "url": "/provider/",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/mainMenu.svg"
       },
       {
-        "name": "Add plan",
+        "name": "Add Plan",
         "url": "/provider/addnewplan",
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/addplan.svg"
+      },
+      {
+        "name": "Faucet",
+        "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Profile Setting",
         "url": "/provider/profilesetting",
-        "icon": "/dashbord.png"
+        "icon": "/dashbord.png",
+        "id": "profilesetting",
+        "item": "/icons/png/sideBar/setting.svg"
       },
       {
         "name": "Log Out",
         "url": "/",
-        "icon": "/dashbord.png"
+        "id": "logout",
+        "icon": "/dashbord.png",
+        "item": "/icons/png/sideBar/logout.svg"
+
       }
     ]
   },
   "signUpSideBar": {
     "menuItem": [
       {
+        "name": "Faucet",
+        "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
+        "icon": "/dashbord.png"
+      },
+      {
         "name": "Log Out",
         "url": "/",
+        "id": "logout",
+        "item": "/icons/png/sideBar/logout.svg",
         "icon": "/dashbord.png"
+
       }
     ]
   },
@@ -60,30 +96,31 @@
   "PublicSideBar": {
     "menuItem": [
       {
-        "name": "Login page",
+        "name": "Main Menu",
         "id": "PublicDashboard",
+        "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Login as a user",
+        "name": "Login",
         "id": "PublicUser",
+        "item": "/icons/png/sideBar/login.svg",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Login as a Provider",
-        "id": "PublicProvider",
-        "icon": "/dashbord.png"
-      },
-      {
-        "name": "Sign up as a provider",
+        "name": "Become Provider",
         "id": "publicSignUp",
+        "item": "/icons/png/sideBar/signup.svg",
         "icon": "/dashbord.png"
       },
       {
-        "name": "Give some token",
+        "name": "Faucet",
         "id": "giveSomeToken",
+        "item": "/icons/png/sideBar/faucet.svg",
         "icon": "/dashbord.png"
       }
     ]
   }
 }
+
+

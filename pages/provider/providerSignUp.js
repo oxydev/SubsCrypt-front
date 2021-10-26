@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react'
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { setDataContext } from "../../context/setData";
@@ -6,6 +6,8 @@ import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import { operationContext } from "../../context/handleUserOperation";
+import tutData from '../../data/tutorial.json'
+import { tutorialContext } from '../../context/tutorial'
 
 export default function ProviderSignUp() {
   const router = useRouter();
@@ -13,6 +15,12 @@ export default function ProviderSignUp() {
   const { getProviderAllInfo } = useContext(handleDataContext);
   const { globalState, dispatch } = useContext(UserContext);
   const { showResultToUser } = useContext(operationContext);
+  const tutorialData = tutData.tutorials.becomeProvider;
+  const { handleTutorial } = useContext(tutorialContext);
+
+  useEffect(() => {
+    handleTutorial(tutorialData);
+  }, []);
 
   const [info, setInfo] = useState({
     ProviderMoneyAddress: globalState.user.address,
@@ -42,7 +50,7 @@ export default function ProviderSignUp() {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [] }]);
+    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 }]);
   }
 
   async function callback({ events = [], status }) {
@@ -91,9 +99,9 @@ export default function ProviderSignUp() {
             });
         }
       });
-      if (check == false) {
+      if (check === false) {
         // window.alert("The operation failed!");
-        await showResultToUser("Operation faild!", "The operation has been failed!");
+        await showResultToUser("Operation failed!", "The operation has been failed!");
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -135,7 +143,7 @@ export default function ProviderSignUp() {
       // window.alert("You should upload a photo!");
       await showResultToUser("Photo is necessary!", "You should upload a photo!");
     } else {
-      if (info.ProviderPassword != info.ProviderConfirmedPasswords) {
+      if (info.ProviderPassword !== info.ProviderConfirmedPasswords) {
         // window.alert("Password has not been comfirmed correctly!!");
         await showResultToUser(
           "Password Comfirmation!",
@@ -196,7 +204,9 @@ export default function ProviderSignUp() {
           info.ProviderUsername,
           info.ProviderPassword,
           plansChars
-        );
+        ).catch(async () => {
+          await showResultToUser("Operation failed!", "The operation has been failed!");
+        });
       }
     }
   }
@@ -224,7 +234,7 @@ export default function ProviderSignUp() {
           >
             <ProviderInfo info={info} setInfo={setInfo} />
             {planFormList}
-            <button className="PlansForm-addBtn" onClick={addAnotherPlan}>
+            <button id={"addAnotherPlan"} className="PlansForm-addBtn" onClick={addAnotherPlan}>
               Add another plan
             </button>
             <div className="ProviderRegisteration">
@@ -234,6 +244,7 @@ export default function ProviderSignUp() {
               </p>
               <input
                 type="submit"
+                id={"register"}
                 className="RegisterBtn"
                 onClick={() => {
                   makeFieldsVisible();

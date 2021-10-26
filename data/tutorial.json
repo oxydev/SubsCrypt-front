@@ -1,0 +1,186 @@
+{
+  "tutorials": {
+    "mainMenu": [
+      {
+        "elementName": "loginButton",
+        "title": "Login",
+        "description": "If you want to subscribe to a plan or have already subscribed you can login here. Also if you are a registered provider you can login here."
+      },
+      {
+        "elementName": "SignUpButton",
+        "title": "Become A Provider",
+        "description": "You can Become a provider in SubsCrypt platform by connecting a PolkaDot.js wallet and filling a simple form. You are required to stake a minimum amount of token."
+      },
+      {
+        "elementName": "faucet",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
+      }
+    ],
+    "login": [
+      {
+        "elementName": "network",
+        "title": "Choose Network",
+        "description": "The only supported chain is PolkaDot."
+      },
+      {
+        "elementName": "roleSubscriber",
+        "title": "Subscriber Role",
+        "description": "Choose this if you are a subscriber or you want to be a subscriber."
+      },
+      {
+        "elementName": "roleProvider",
+        "title": "Provider Role",
+        "description": "Choose this if you are a provider in SubsCrypt platform."
+      },
+      {
+        "elementName": "walletButton",
+        "title": "Connect to Wallet",
+        "description": "If you are a new subscriber and you don't have any credentials and have a connected PolkaDot.js wallet on your browser choose this for easy login method."
+      },
+      {
+        "elementName": "usernameButton",
+        "title": "Credential login",
+        "description": "Choose this if you don't have access to your wallet and login with your username and password."
+      },
+      {
+        "elementName": "chooseWalletAccount",
+        "title": "Choose your Wallet",
+        "description": "Choose your preferred account between your connected wallet addresses."
+      }
+    ],
+    "providerDashboard": [
+      {
+        "elementName": "withdraw",
+        "title": "Withdraw",
+        "description": "You can withdraw your tokens by simply requesting a withdraw. The tokens will be transferred to your Money Address."
+      },
+      {
+        "elementName": "addPlan",
+        "title": "Add a Plan",
+        "description": "You can add a new custom plan here."
+      },
+      {
+        "elementName": "plan0Card",
+        "title": "View and Edit Plan",
+        "description": "You can view and edit detail of your plan."
+      },
+      {
+        "elementName": "giveSomeToken",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
+      },
+      {
+        "elementName": "profilesetting",
+        "title": "Change your password",
+        "description": "You can change your password if you have access to your PolkaDot.js wallet."
+      },
+      {
+        "elementName": "logout",
+        "title": "Logout",
+        "description": "Click to log out of your account."
+      }
+    ],
+    "subscriberNewOffer": [
+      {
+        "elementName": "providerAddressSearch",
+        "title": "Choose your provider",
+        "description": "You can enter a provider address or username here or use the default one."
+      },
+      {
+        "elementName": "plan0Card",
+        "title": "Choose a plan",
+        "description": "You can choose a plan "
+      },
+      {
+        "elementName": "profilesetting",
+        "title": "Change your password",
+        "description": "You can change your password if you have access to your PolkaDot.js wallet."
+      },
+      {
+        "elementName": "giveSomeToken",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here."
+      },
+      {
+        "elementName": "logout",
+        "title": "Logout",
+        "description": "Click to log out of your account."
+      }
+    ],
+    "subscriberWithPlan": [
+      {
+        "elementName": "plan0Detail",
+        "title": "See your subscribed plan",
+        "description": "You can check details of your subscribed plans."
+      },
+      {
+        "elementName": "plan0Renew",
+        "title": "Renew your plan",
+        "description": "You can easily renew your plan if you have a connected wallet."
+      },
+      {
+        "elementName": "plan0Refund",
+        "title": "Change your password",
+        "description": "You can easily refund your plan if you have a connected wallet. The refundable amount will be transferred to your wallet."
+      },
+      {
+        "elementName": "newOffers",
+        "title": "Marketplace",
+        "description": "Click to log out of your account."
+      }
+    ],
+    "becomeProvider": [
+      {
+        "elementName": "giveSomeToken",
+        "title": "Get Test Token",
+        "description": "SubsCrypt is a blockchain based project so you need tokens to interact with our platform, you can get 10 free tokens here. You can check your balance in up menu."
+      },
+      {
+        "elementName": "serviceProviderName",
+        "title": "Enter your name",
+        "description": "You will be shown you subscriber with this name."
+      },
+      {
+        "elementName": "serviceProviderDescription",
+        "title": "Enter your description",
+        "description": "This is a short description of you and your services."
+      },
+      {
+        "elementName": "serviceProvideUsername",
+        "title": "Enter your Username",
+        "description": "This is your username for login with credentials, please be aware that you can not change your username in future."
+      },
+      {
+        "elementName": "serviceProvidePassword",
+        "title": "Enter your Password",
+        "description": "This is your password for login with credentials, You can change your password in future."
+      },
+      {
+        "elementName": "moneyAddress",
+        "title": "Enter your Address",
+        "description": "This address will be used to send you your earnings."
+      },
+      {
+        "elementName": "profilePictureUploaded",
+        "title": "Upload your profile",
+        "description": "Please upload a profile picture for your account. This picture will be shown to users."
+      },
+      {
+        "elementName": "newPlan0Creation",
+        "title": "Create your custom plan",
+        "description": "Please fill details of your custom plan, You can change the details in future."
+      },
+      {
+        "elementName": "addAnotherPlan",
+        "title": "Create another custom plan",
+        "description": "You can create more custom plans."
+      },
+      {
+        "elementName": "register",
+        "title": "Register As a provider",
+        "description": "Sign a transaction and lock 0.01 token in the contract to join our platform, Please be sure that your wallet has enough token otherwise use the faucet to get some."
+      }
+    ]
+  }
+}
