@@ -99,7 +99,9 @@ const Login = (props) => {
             : "Login to Your Account"}
         </h1>
         <p className="Topic">Network</p>
-        <div id={"network"} className="ChooseNetworks">{networks}</div>
+        <div id={"network"} className="ChooseNetworks">
+          {networks}
+        </div>
         {steps[1] && (
           <>
             <p className="Topic">Choose Role</p>
@@ -140,5 +142,5 @@ const Login = (props) => {
       {method === 1 && <LoginPart type={role === 0 ? "subscriber" : "provider"} />}
     </div>
   );
-}
-export default Login
+};
+export default Login;
