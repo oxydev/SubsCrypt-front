@@ -9,6 +9,9 @@ export const Tutorial = (props) => {
   const [order, setOrder] = useState(0);
   const [position, setPosition] = useState({ top: -400, left: -400 });
 
+  let boxDim = 310;
+  let line = 100;
+
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -65,7 +68,7 @@ export const Tutorial = (props) => {
         horizontal: tutPos.horizontal,
       });
       target.classList.add("Dominent");
-      // console.log(position);
+      console.log(position);
     }
   }, [order, tutorialList]);
 
@@ -84,31 +87,47 @@ export const Tutorial = (props) => {
     let width = pos.width;
 
     let place = { vertical: "middle", horizontal: "right" };
-    if (top > 160 && bottom > 160) {
+    if (top > boxDim / 2 + 5 && bottom > boxDim / 2 + 5) {
+      console.log("1");
       place.vertical = "middle";
-      place.top = top + height / 2 - 155;
-    } else if (top < 160) {
-      place.vertical = "bottom";
-      place.top = top + height + 100;
-    } else {
+      place.top = top + height / 2 - boxDim / 2;
+    } else if (top > line + boxDim) {
+      console.log("2");
       place.vertical = "top";
-      place.top = top - 409;
+      place.top = top - (line + boxDim);
+    } else if (bottom > line + boxDim) {
+      console.log("3");
+      place.vertical = "bottom";
+      place.top = top + height + line;
+    } else {
+      console.log("4");
+      place.vertical = "bottom";
+      place.top = top + height + line;
+      document.getElementById("MainPart").style.paddingBottom = "100px";
     }
-    if (right > 400) {
+    if (right > boxDim + line) {
       place.horizontal = "right";
-      place.left = left + width + 100;
-    } else if (left > 400) {
+      place.left = left + width + line;
+    } else if (left > boxDim + line) {
       place.horizontal = "left";
-      place.left = left - 409;
+      place.left = left - (line + boxDim);
     } else {
       place.horizontal = "middle";
-      place.left = left + width / 2 - 155;
+      place.left = left + width / 2 - boxDim / 2;
     }
 
     if (place.horizontal == "middle" && place.vertical == "middle") {
+      console.log("4");
       place.vertical = "bottom";
-      place.top = top + height + 100;
+      place.top = top + height + line;
+      if (bottom < boxDim + line) {
+        console.log("4");
+
+        place.top = top + height + bottom - boxDim;
+      }
     }
+
+    console.log(top, right, bottom, left, width, height, vw, vh);
     return place;
   };
 
