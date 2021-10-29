@@ -8,6 +8,7 @@ export const Tutorial = (props) => {
   //lists is like : [{target: dom ref, tutorialElement: jsx}]
   const [order, setOrder] = useState(0);
   const [position, setPosition] = useState({ top: -400, left: -400 });
+  const [lineDim, setLineDime] = useState(100);
 
   let boxDim = 310;
   let line = 100;
@@ -66,11 +67,19 @@ export const Tutorial = (props) => {
         left: tutPos.left,
         vertical: tutPos.vertical,
         horizontal: tutPos.horizontal,
+        direction: tutPos.dir,
       });
       target.classList.add("Dominent");
-      console.log(position);
     }
   }, [order, tutorialList]);
+
+  useEffect(() => {
+    console.log(position);
+  }, [position]);
+
+  useEffect(() => {
+    console.log(lineDim);
+  }, [lineDim]);
 
   const checkPos = async (elm) => {
     elm.scrollIntoView({ block: "center" });
@@ -90,41 +99,70 @@ export const Tutorial = (props) => {
     if (top > boxDim / 2 + 5 && bottom > boxDim / 2 + 5) {
       console.log("1");
       place.vertical = "middle";
+      place.dir = "horizontal";
       place.top = top + height / 2 - boxDim / 2;
+      setLineDime(line - 2);
     } else if (top > line + boxDim) {
       console.log("2");
       place.vertical = "top";
+      place.dir = "vertical";
       place.top = top - (line + boxDim);
+      setLineDime(line - 2);
     } else if (bottom > line + boxDim) {
       console.log("3");
       place.vertical = "bottom";
+      place.dir = "vertical";
       place.top = top + height + line;
+      setLineDime(line - 2);
     } else {
       console.log("4");
       place.vertical = "bottom";
+      place.dir = "s";
       place.top = top + height + line;
-      document.getElementById("MainPart").style.paddingBottom = "100px";
+      setLineDime(line - 2);
     }
     if (right > boxDim + line) {
       place.horizontal = "right";
+      place.dir = "horizontal";
       place.left = left + width + line;
+      setLineDime(line - 2);
     } else if (left > boxDim + line) {
       place.horizontal = "left";
+      place.dir = "horizontal";
       place.left = left - (line + boxDim);
+      setLineDime(line - 2);
     } else {
       place.horizontal = "middle";
+      place.dir = "vertical";
       place.left = left + width / 2 - boxDim / 2;
+      setLineDime(line - 2);
     }
 
     if (place.horizontal == "middle" && place.vertical == "middle") {
-      console.log("4");
-      place.vertical = "bottom";
-      place.top = top + height + line;
-      if (bottom < boxDim + line) {
+      if (top > bottom) {
         console.log("4");
+        place.vertical = "top";
+        place.top = top - (line + boxDim);
 
-        place.top = top + height + bottom - boxDim;
+        if (top < boxDim + line) {
+          console.log("4");
+          place.top = top - (top - boxDim);
+        }
+
+        setLineDime(top - (place.top + boxDim) - 2);
+      } else {
+        console.log("4");
+        place.vertical = "bottom";
+        place.top = top + height + line;
+
+        if (bottom < boxDim + line) {
+          console.log("4");
+          place.top = top + height + bottom - boxDim;
+        }
+
+        setLineDime(place.top - (top + height) - 2);
       }
+      place.dir = "vertical";
     }
 
     console.log(top, right, bottom, left, width, height, vw, vh);
@@ -195,6 +233,28 @@ export const Tutorial = (props) => {
               >
                 Skip
               </button>
+              <div
+                className="Line"
+                style={
+                  position.direction == "vertical"
+                    ? {
+                        height: `${lineDim}px`,
+                        width: "2px",
+                        top: `${
+                          position.vertical == "top" ? boxDim : -lineDim
+                        }px`,
+                        left: `${boxDim / 2}px`,
+                      }
+                    : {
+                        width: `${lineDim}px`,
+                        height: "2px",
+                        top: `${boxDim / 2}px`,
+                        left: `${
+                          position.horizontal == "right" ? -lineDim : boxDim
+                        }px`,
+                      }
+                }
+              />
             </div>
             <div className="TutorialFilter"></div>
           </>

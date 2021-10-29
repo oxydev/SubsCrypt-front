@@ -45,11 +45,11 @@
     }
   }
 
-  &::after {
-    @include pseudo;
-    background-color: #5867ff;
-    position: absolute;
-  }
+  // &::after {
+  //   @include pseudo;
+  //   background-color: #5867ff;
+  //   position: absolute;
+  // }
 
   &.middleleft {
     &::after {
@@ -79,6 +79,11 @@
       width: 2px;
     }
   }
+
+  .Line {
+    position: absolute;
+    background-color: #5867ff;
+  }
 }
 
 $offset: -5px;
@@ -93,8 +98,6 @@ $offset: -5px;
     bottom: $offset;
     border: 2px solid #5867ff;
     transition: all 0.5s ease-in-out;
-    background-color: #fff;
-    z-index: -1;
   }
   z-index: 250 !important;
 }
