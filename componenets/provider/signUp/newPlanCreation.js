@@ -52,9 +52,13 @@ export default function NewPlanCreation(props) {
   }
   return (
     <section
-      className={plan.visibility === "visible" ? "NewPlanCreation" : "NewPlanCreation hidden"}
+      className={
+        plan.visibility === "visible"
+          ? "NewPlanCreation"
+          : "NewPlanCreation hidden"
+      }
     >
-      <h1 id={"newPlan"+index+"Creation"} onClick={toggleVisibility}>
+      <h1 id={"newPlan" + index + "Creation"} onClick={toggleVisibility}>
         Create a Subscryption Plan #{index + planNumber + 1}
         <span></span>
         {planList.length > 1 && (
@@ -73,7 +77,6 @@ export default function NewPlanCreation(props) {
           <input
             type="text"
             name="PlanTitle"
-
             required
             minLength={3}
             value={plan.title}
@@ -120,13 +123,20 @@ export default function NewPlanCreation(props) {
             />
           </div>
           <p>
-            Users can refund <span>{refundValue} percent</span> of the plan at any time.
+            Users can refund <span>{refundValue} percent</span> of the plan at
+            any time.
           </p>
           <label>Special Charactristics of the plan</label>
           <div className="PlansForm-tag">
-            <TagInput initailTags={plan.characteristics} handleChange={handlePlanListUpdate} />
+            <TagInput
+              initailTags={plan.characteristics}
+              handleChange={handlePlanListUpdate}
+            />
           </div>
-          <p>Some information that you want from users like email, address and etc.</p>
+          <p>
+            Some information that you want from users like email, address and
+            etc.
+          </p>
         </div>
         <div className="PlanForm-financial">
           <label htmlFor="PlanTokens">Users can pay via these tokens</label>
@@ -145,8 +155,9 @@ export default function NewPlanCreation(props) {
             <label htmlFor="Polkadot">Polkadot (DOT)</label>
           </div>
           <p>
-            The initial price will be collected in United state dollars and will be converted to the
-            value of these tokens at an average standard rate in market.
+            The initial price will be collected in United state dollars and will
+            be converted to the value of these tokens at an average standard
+            rate in market.
           </p>
           <label>Price</label>
           <input

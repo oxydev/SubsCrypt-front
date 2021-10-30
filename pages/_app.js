@@ -28,10 +28,10 @@ export default function App({ Component, pageProps }) {
 
   //Turn on and off the loading when the page url has been changed
   useEffect(() => {
-    router.events.on("routeChangeStart", (url) => {
+    router.events.on("routeChangeStart", () => {
       setLoading(true);
     });
-    router.events.on("routeChangeComplete", (url) => {
+    router.events.on("routeChangeComplete", () => {
       setTimeout(() => {
         setLoading(false);
       }, 200);
@@ -50,10 +50,24 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
         <title>SubsCrypt|Blockchain as a Service on PolkaDot</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-        <link rel="manifest" href="/site.webmanifest"/>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <loadingContext.Provider value={{ loading, setLoading }}>
         <authContext.Provider value={{ auth, setAuth }}>
@@ -76,10 +90,14 @@ export default function App({ Component, pageProps }) {
                                 <Main>
                                   <>
                                     {auth && <Header />}
-                                    {auth ? <Component {...pageProps} /> : <Menu {...pageProps} />}
+                                    {auth ? (
+                                      <Component {...pageProps} />
+                                    ) : (
+                                      <Menu {...pageProps} />
+                                    )}
                                   </>
                                 </Main>
-                                <div/>
+                                <div />
                               </>
                             )}
                           </div>

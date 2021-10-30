@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from "react";
 import ProviderPlansList from "../../componenets/provider/dashboard/providerPlansList";
 import ProviderHeader from "../../componenets/provider/dashboard/providerHeader";
 import ProviderAllUsers from "../../componenets/provider/dashboard/providerAllUsers";
 import { ProviderWithdraw } from "../../componenets/provider/dashboard/providerWithDraw";
 import { tutorialContext } from "../../context/tutorial";
-import tutData from '../../data/tutorial.json'
+import tutData from "../../data/tutorial.json";
 
 export default function ProviderDashboard() {
   const tutorialData = tutData.tutorials.providerDashboard;

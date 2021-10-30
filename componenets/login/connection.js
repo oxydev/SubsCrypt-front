@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import Select from "react-select";
@@ -8,7 +8,11 @@ const customStyles = {
     ...provided,
     borderBottom: "1px dotted pink",
     color: state.isSelected ? "#fff" : "#212121",
-    backgroundColor: state.isSelected ? "#d71eae" : state.isFocused ? "#eeeeee" : "#fff",
+    backgroundColor: state.isSelected
+      ? "#d71eae"
+      : state.isFocused
+      ? "#eeeeee"
+      : "#fff",
     padding: 20,
     cursor: "pointer",
 
@@ -67,8 +71,8 @@ const customStyles = {
 };
 
 export default function Connection(props) {
-  const { type } = props;
-  const { handleSubscriberLoginByWallet, handleProviderLogingByWallet } =
+  const { type, action } = props;
+  const { handleSubscriberLoginByWallet, handleProviderLoginByWallet } =
     useContext(handleDataContext);
   const { globalState } = useContext(UserContext);
   const [address, setAddress] = useState(null);
@@ -77,7 +81,8 @@ export default function Connection(props) {
     if (type === "subscriber") {
       handleSubscriberLoginByWallet(address);
     } else if (type === "provider") {
-      handleProviderLogingByWallet(address);
+      // console.log(action)
+      handleProviderLoginByWallet(address, action);
     }
   };
 
@@ -103,8 +108,9 @@ export default function Connection(props) {
         <>
           <p className="Topic">Choose your Wallet</p>
           <div className="SelectWallet">
-            <Select id="chooseWalletAccount"
-                    options={addressList}
+            <Select
+              id="chooseWalletAccount"
+              options={addressList}
               styles={customStyles}
               isSearchable={false}
               placeholder="Select your wallet"
@@ -113,20 +119,20 @@ export default function Connection(props) {
               }}
             />
             <button
-              disabled={address ? false : true}
+              disabled={!address}
               onClick={(e) => {
                 e.preventDefault();
                 handleConnection();
               }}
             >
-              Login
+              {action === "signUp" ? "Sign Up" : "Log in"}
             </button>
           </div>
         </>
       ) : (
         <>
           <p className="Topic">You do not have any wallet to connect!</p>
-          <a href="https://polkadot.network/">Polkadot Network</a>
+          <a href="https://polkadot.js.org/extension/">PolkaDot.js Wallet</a>
         </>
       )}
     </div>

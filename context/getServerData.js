@@ -16,7 +16,7 @@ export const ServerFunctions = (props) => {
         const data = result.data;
         return data;
       })
-      .catch((error) => {
+      .catch(() => {
         // console.log(error);
       });
   };
@@ -32,7 +32,7 @@ export const ServerFunctions = (props) => {
         const data = result.data;
         return data;
       })
-      .catch((error) => {
+      .catch(() => {
         // console.log(error);
       });
   };
@@ -51,7 +51,7 @@ export const ServerFunctions = (props) => {
         const data = result.data;
         return data;
       })
-      .catch((error) => {
+      .catch(() => {
         // console.log(error);
       });
   };
@@ -66,7 +66,7 @@ export const ServerFunctions = (props) => {
         const data = result.data.subscriptions;
         return data;
       })
-      .catch((error) => {
+      .catch(() => {
         // console.log(error);
       });
   };

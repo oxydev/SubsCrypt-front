@@ -16,11 +16,16 @@ export const PlansDetailsModal = (props) => {
     duration: utils.duration(parseInt(plan.duration.replace(/,/g, ""))),
     refund: plan.max_refund_permille_policy / 10,
     price: parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12),
-    characteristics: plan.characteristics.map((item) => ({ id: item, text: item })),
+    characteristics: plan.characteristics.map((item) => ({
+      id: item,
+      text: item,
+    })),
   });
   const { globalState } = useContext(UserContext);
 
-  const [refundValue, setRefundValue] = useState(plan.max_refund_permille_policy / 10);
+  const [refundValue, setRefundValue] = useState(
+    plan.max_refund_permille_policy / 10
+  );
   const handleplanInfoUpdate = (key, value) => {
     planInfo[key] = value;
     setplanInfo({ ...planInfo });
@@ -62,12 +67,18 @@ export const PlansDetailsModal = (props) => {
               }
             })
             .catch(async function (error) {
-              await showResultToUser("Operation failed!", "The operation has been failed!");
+              await showResultToUser(
+                "Operation failed!",
+                "The operation has been failed!"
+              );
             });
         }
       }
       if (check === false) {
-        await showResultToUser("Operation failed!", "The operation has been failed!");
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
 
         // await showResultToUser("Operation failed!", "The operation has been failed!");
       }
@@ -79,7 +90,8 @@ export const PlansDetailsModal = (props) => {
   const prepareEditPlan = () => {
     const editedPlanData = {};
     editedPlanData["plan_index"] = planInfo.planIndex;
-    if (planInfo.duration === "1 Month") editedPlanData["duration"] = 30 * 24 * 60 * 60 * 1000;
+    if (planInfo.duration === "1 Month")
+      editedPlanData["duration"] = 30 * 24 * 60 * 60 * 1000;
     else if (planInfo.duration === "3 Months")
       editedPlanData["duration"] = 3 * 30 * 24 * 60 * 60 * 1000;
     else if (planInfo.duration === "6 Months")
@@ -87,10 +99,15 @@ export const PlansDetailsModal = (props) => {
     editedPlanData["price"] = planInfo.price * 1e12;
     editedPlanData["max_refund_permille_policies"] = planInfo.refund * 10;
     editedPlanData["disabled"] = false;
-    handleEditPlan(globalState.user.address, callback, editedPlanData).catch(async () => {
-      //todo
-      await showResultToUser("Operation failed!", "The operation has been failed!");
-    });
+    handleEditPlan(globalState.user.address, callback, editedPlanData).catch(
+      async () => {
+        //todo
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
+      }
+    );
   };
   console.log(planInfo);
   return (
@@ -169,14 +186,15 @@ export const PlansDetailsModal = (props) => {
             />
           </div>
           <p>
-            Users can refund <span>{refundValue} percent</span> of the plan at any time.
+            Users can refund <span>{refundValue} percent</span> of the plan at
+            any time.
           </p>
         </div>
       </div>
       <div className="PlanDetailsModal-footer">
         <p>
-          For signing up you need to send a transaction on chain to put the data in smart contract
-          on blockchain. Normal gas fee applies.
+          For signing up you need to send a transaction on chain to put the data
+          in smart contract on blockchain. Normal gas fee applies.
         </p>
         <button onClick={prepareEditPlan}>Edit</button>
       </div>

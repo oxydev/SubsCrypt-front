@@ -4,7 +4,6 @@ import Connection from "../componenets/login/connection";
 import data from "../data/wallets&networks.json";
 import Card from "../componenets/login/card";
 import { handleDataContext } from "../context/handleData";
-import { UserContext } from "../context/store";
 import tutData from "../data/tutorial.json";
 import { tutorialContext } from "../context/tutorial";
 
@@ -15,7 +14,6 @@ const Login = (props) => {
   const [steps, setSteps] = useState([true, false, false]);
   const [method, setMethod] = useState(-1);
   const { handleWalletLists } = useContext(handleDataContext);
-  const { globalState } = useContext(UserContext);
   const { handleTutorial, continueTutorial } = useContext(tutorialContext);
 
   const users = data.roles.map((item, index) => (
@@ -85,6 +83,7 @@ const Login = (props) => {
       handleTutorial(tutData.tutorials.login.slice(0, 3));
     }
   }, []);
+
   useEffect(() => {
     if (steps[0]) {
       setSteps([true, true, false]);
@@ -118,35 +117,15 @@ const Login = (props) => {
         {steps[2] && action !== "signUp" && (
           <>
             <p className="Topic">Login Method</p>
-            <div className="LoginMethod">
-              {/* <p
-                onClick={() => {
-                  setMethod(0);
-                  handleWalletLists();
-                }}
-              >
-                Login by Wallet
-              </p>
-
-              <span>or</span>
-              <p
-                onClick={() => {
-                  setMethod(1);
-                }}
-              >
-                Login by Username
-              </p> */}
-              {methods}
-            </div>
-            {/* <p className="Topic">Choose Wallet</p>
-            <div className="SelectWallet">
-              <select>{addressList}</select>
-            </div> */}
+            <div className="LoginMethod">{methods}</div>
           </>
         )}
       </div>
       {method === 0 && (
-        <Connection type={role === 0 ? "subscriber" : "provider"} />
+        <Connection
+          type={role === 0 ? "subscriber" : "provider"}
+          action={action}
+        />
       )}
       {method === 1 && (
         <LoginPart type={role === 0 ? "subscriber" : "provider"} />

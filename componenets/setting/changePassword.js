@@ -4,6 +4,7 @@ import { setDataContext } from "../../context/setData";
 import { getBCDataContext } from "../../context/getBCData";
 import { useRouter } from "next/router";
 import { operationContext } from "../../context/handleUserOperation";
+import Cookies from "js-cookie";
 
 //The component for handling changing password part in profile setting
 export default function ChangePassword(props) {
@@ -15,7 +16,7 @@ export default function ChangePassword(props) {
   const { globalState, dispatch } = useContext(UserContext);
   const { showResultToUser } = useContext(operationContext);
 
-  function callback({ events = [], status }) {
+  async function callback({ events = [], status }) {
     // console.log("Transaction status:", status.type);
 
     if (status.isInBlock) {
@@ -23,20 +24,31 @@ export default function ChangePassword(props) {
       // console.log("Events:");
       // console.log(events);
       var txStatus = false;
-      events.forEach(({ event: { data, method, section }, phase }) => {
+      for (const {
+        event: { method },
+      } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           // console.log("success");
           txStatus = true;
-          //todo please show that it changed successfully
+          await showResultToUser(
+            "Operation Successful!",
+            "The operation has been done successfully, please wait while your transaction gets confirmed on Blockchain!"
+          );
         }
-      });
+      }
       if (!txStatus) {
         // console.log("failed");
-        //todo error
+        await showResultToUser(
+          "Operation Failed!",
+          "The operation has been Failed!"
+        );
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
+      Cookies.set("password", data.newPassword);
+      dispatch({ type: "LOAD_USER_PASSWORD", payload: data.newPassword });
+      router.push("/");
     }
   }
   function handleSubmit(e) {
@@ -44,7 +56,10 @@ export default function ChangePassword(props) {
     e.preventDefault();
     // console.log(data);
     changePassword(type, data.newPassword, callback).catch(async () => {
-      await showResultToUser("Operation failed!", "The operation has been failed!");
+      await showResultToUser(
+        "Operation failed!",
+        "The operation has been failed!"
+      );
     });
   }
 

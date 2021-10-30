@@ -10,7 +10,7 @@ export const getBCDataContext = React.createContext({});
 let subscrypt;
 
 export const GetBCDataFunctions = (props) => {
-  const { setModal, setCallBack } = useContext(modalContext);
+  const { setModal } = useContext(modalContext);
   const serverFunctions = useContext(serverDataContext);
   const { showResultToUser } = useContext(operationContext);
 
@@ -258,8 +258,8 @@ export const GetBCDataFunctions = (props) => {
       });
   };
 
-  //Function for getting subscriebr plans according to it's wallet address
-  const loadSubscriberPlansbyWallet = async (address) => {
+  //Function for getting subscriber plans according to it's wallet address
+  const loadSubscriberPlansByWallet = async (address) => {
     let plans = [];
     return await (
       await subscrypt
@@ -294,7 +294,7 @@ export const GetBCDataFunctions = (props) => {
       });
   };
 
-  const loadSubscriberPlansbyUsername = async (username, password) => {
+  const loadSubscriberPlansByUsername = async (username, password) => {
     let promiseList = [];
     return await (await subscrypt)
       .retrieveWholeDataWithUsername(username, password)
@@ -330,8 +330,8 @@ export const GetBCDataFunctions = (props) => {
     checkProviderRegistration,
     getWalletLists,
     getProviderPlanslist,
-    loadSubscriberPlansbyWallet,
-    loadSubscriberPlansbyUsername,
+    loadSubscriberPlansByWallet,
+    loadSubscriberPlansByUsername,
     selectwalletFromList,
     getWithdrawableAmount,
     getMoneyAddress,

@@ -6,7 +6,11 @@ const customStyles = {
     ...provided,
     borderBottom: "1px dotted pink",
     color: state.isSelected ? "#fff" : "#212121",
-    backgroundColor: state.isSelected ? "#d71eae" : state.isFocused ? "#eeeeee" : "#fff",
+    backgroundColor: state.isSelected
+      ? "#d71eae"
+      : state.isFocused
+      ? "#eeeeee"
+      : "#fff",
     padding: 20,
     cursor: "pointer",
 

@@ -1,12 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
-//import UserLogin from "./user/userLogin";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "./_app";
 import { handleDataContext } from "../context/handleData";
 import Cookies from "js-cookie";
 import { tutorialContext } from "../context/tutorial";
 import Login from "./login";
 import tutData from "../data/tutorial.json";
-import { UserContext } from "../context/store";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
@@ -16,7 +14,6 @@ export default function Menu() {
     useContext(handleDataContext);
   const { auth } = useContext(authContext);
   const tutorialData = tutData.tutorials.mainMenu;
-  const { globalState } = useContext(UserContext);
 
   //get cookies
   const password = Cookies.get("subscryptPass");
@@ -87,24 +84,26 @@ export default function Menu() {
   //change the login menu according to selecting each type
   if (task === "none") {
     return (
-      <section className="MainLoginPage">
-        <h1>Main Menu</h1>
-        <div>
-          <button id="loginButton" onClick={handleUserLogin}>
-            Login
-          </button>
-          <button id="SignUpButton" onClick={handleProviderSignUp}>
-            Become Provider
-          </button>
-          <div className="Divider"></div>
-          <button id="faucet" onClick={hanadleGetToken}>
-            Faucet
-          </button>
-        </div>
-      </section>
+      <>
+        <section className="MainLoginPage">
+          <h1>Main Menu</h1>
+          <div>
+            <button id="loginButton" onClick={handleUserLogin}>
+              Login
+            </button>
+            <button id="SignUpButton" onClick={handleProviderSignUp}>
+              Become Provider
+            </button>
+            <div className="Divider"></div>
+            <button id="faucet" onClick={hanadleGetToken}>
+              Faucet
+            </button>
+          </div>
+        </section>
+      </>
     );
   } else if (task === "login") {
-    return <Login />;
+    return <Login action={"login"} />;
   } else if (task === "providerSignUp") {
     return (
       <div className="SignUp-walletConnection">

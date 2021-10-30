@@ -48,7 +48,8 @@ export default function ProviderPlansList() {
       <header>
         <h1>Your Plans</h1>
         <p>Total Plans: {plans.length}</p>
-        <button id={"addPlan"}
+        <button
+          id={"addPlan"}
           onClick={(e) => {
             e.preventDefault();
             router.push("/provider/addnewplan");

@@ -1,24 +1,22 @@
 import React, { useContext } from "react";
-import localData from "../../data/providerPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
-import data from "../../data/testData/providerAddress.json";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import { setDataContext } from "../../context/setData";
 import { modalContext } from "../../context/modal";
 import { operationContext } from "../../context/handleUserOperation";
 import { PlansDetailsModal } from "../provider/dashboard/planDetailsModal";
-import { handleDataContext } from '../../context/handleData'
+import { handleDataContext } from "../../context/handleData";
 
 //this component is for handling the card showing the plan specification
 export default function PlanCard(props) {
   const router = useRouter();
   const { globalState } = useContext(UserContext);
-  const { getProviderAllInfo, handleSubscriberLoginByWallet } = useContext(handleDataContext);
+  const { getProviderAllInfo, handleSubscriberLoginByWallet } =
+    useContext(handleDataContext);
 
   const { setModal } = useContext(modalContext);
-  const { plan, index, type, address,id } = props;
-  const localPlans = localData.plans[index];
+  const { plan, index, type, address, id } = props;
   const planIndex = plan.planIndex;
   const { handleSubscribtion, editPlan } = useContext(setDataContext);
   const { showResultToUser } = useContext(operationContext);
@@ -26,7 +24,10 @@ export default function PlanCard(props) {
   //Subscription function
   function handleSubscribe() {
     handleSubscribtion(address, plan, planIndex, callback).catch(async () => {
-      await showResultToUser("Operation failed!", "The operation has been failed!");
+      await showResultToUser(
+        "Operation failed!",
+        "The operation has been failed!"
+      );
     });
   }
 
@@ -54,22 +55,36 @@ export default function PlanCard(props) {
         }
       }
       if (check === false) {
-        await showResultToUser("Operation failed!", "The operation has been failed!");
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
       handleSubscriberLoginByWallet(globalState.user.address);
-      router.push("/")
+      router.push("/");
     }
   }
 
   function handleEdit() {
-    const modalElement = <PlansDetailsModal plan={plan} handleEditPlan={editPlan} showResultToUser={showResultToUser} getProviderAllInfo={getProviderAllInfo}/>;
+    const modalElement = (
+      <PlansDetailsModal
+        plan={plan}
+        handleEditPlan={editPlan}
+        showResultToUser={showResultToUser}
+        getProviderAllInfo={getProviderAllInfo}
+      />
+    );
     setModal(modalElement);
   }
 
   return (
-    <section id={id} className="PlanCard" onClick={type === "user" ? handleSubscribe : handleEdit}>
+    <section
+      id={id}
+      className="PlanCard"
+      onClick={type === "user" ? handleSubscribe : handleEdit}
+    >
       <header>
         <img
           className="PlanLogo"
@@ -80,27 +95,35 @@ export default function PlanCard(props) {
       <main>
         <div>
           <p className="PlanCard-Provider">{plan.providerName}</p>
-          <p className="PlanCard-Rate">{localPlans.rate}</p>
+          <p className="PlanCard-Rate">4.5</p>
         </div>
-        <p className="PlanCard-description">{plan.description ? plan.description : "Loading..."}</p>
+        <p className="PlanCard-description">
+          {plan.description ? plan.description : "Loading..."}
+        </p>
         <div>
           <h6>Duration</h6>
           <p>{utils.duration(parseInt(plan.duration.replace(/,/g, "")))}</p>
         </div>
         <div>
           <h6>Refund Policy</h6>
-          <p>{"% " + plan.max_refund_permille_policy.replace(/,/g, "") / 10 + " Refund"}</p>
+          <p>
+            {"% " +
+              plan.max_refund_permille_policy.replace(/,/g, "") / 10 +
+              " Refund"}
+          </p>
         </div>
         <div className="PlanCard-price">
           <h6>Pay with</h6>
           <p>
             {parseInt(plan.price.replace(/,/g, "")) / Math.pow(10, 12)}
-            <span>{" "}DOT</span>
+            <span> DOT</span>
           </p>
         </div>
       </main>
       <footer>
-        <button className="PlanCard-button">{type === "user" ? "Subscribe" : "Edit Plan"}</button>
+        <button className="PlanCard-button">
+          {type === "user" ? "Subscribe" : "Edit Plan"}
+        </button>
       </footer>
     </section>
   );

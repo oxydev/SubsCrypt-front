@@ -1,13 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import localData from "../../data/sunscryptionPlans.json";
 import * as utils from "../../utilities/utilityFunctions";
 import { UserContext } from "../../context/store";
 import { setDataContext } from "../../context/setData";
 import PercentageBar from "../gadjets/percentageBar";
 import { operationContext } from "../../context/handleUserOperation";
-import tutData from '../../data/tutorial.json'
-import { tutorialContext } from '../../context/tutorial'
-import { handleDataContext } from '../../context/handleData'
+import tutData from "../../data/tutorial.json";
+import { tutorialContext } from "../../context/tutorial";
+import { handleDataContext } from "../../context/handleData";
 
 let subscrypt;
 
@@ -16,10 +15,10 @@ export default function UserPlanCard(props) {
   let plan = props.plan.plan;
   // console.log(props.plan);
   const index = props.index;
-  const localPlans = localData.userPlans[index];
   const { globalState } = useContext(UserContext);
   const { handleSubscriberLoginByWallet } = useContext(handleDataContext);
-  const { handleSubscribtion, handleRenewPlan, handleRefundPlan } = useContext(setDataContext);
+  const { handleSubscribtion, handleRenewPlan, handleRefundPlan } =
+    useContext(setDataContext);
   const planStatus = props.plan.status;
   const walletAddress = globalState.user.wallet;
   const [localLoading, setLocalLoading] = useState(false);
@@ -57,11 +56,17 @@ export default function UserPlanCard(props) {
         // console.log(result);
         if (result.status === "Fetched") {
           plan.characteristics = result.result;
-          handleSubscribtion(props.plan.provider, plan, props.plan.plan_index, callback).catch(
-            async () => {
-              await showResultToUser("Operation failed!", "The operation has been failed!");
-            }
-          );
+          handleSubscribtion(
+            props.plan.provider,
+            plan,
+            props.plan.plan_index,
+            callback
+          ).catch(async () => {
+            await showResultToUser(
+              "Operation failed!",
+              "The operation has been failed!"
+            );
+          });
           setLocalLoading(false);
         }
       });
@@ -76,19 +81,33 @@ export default function UserPlanCard(props) {
 
   //Refunding function
   function handleRefund() {
-    handleRefundPlan(props.plan.provider, plan, props.plan.plan_index, callback).catch(async () => {
-      await showResultToUser("Operation failed!", "The operation has been failed!");
+    handleRefundPlan(
+      props.plan.provider,
+      plan,
+      props.plan.plan_index,
+      callback
+    ).catch(async () => {
+      await showResultToUser(
+        "Operation failed!",
+        "The operation has been failed!"
+      );
     });
   }
 
   //Renew function
   function handleRenew() {
     // console.log(props.plan);
-    handleRenewPlan(props.plan.provider, props.plan, props.plan.plan_index, callback).catch(
-      async () => {
-        await showResultToUser("Operation failed!", "The operation has been failed!");
-      }
-    );
+    handleRenewPlan(
+      props.plan.provider,
+      props.plan,
+      props.plan.plan_index,
+      callback
+    ).catch(async () => {
+      await showResultToUser(
+        "Operation failed!",
+        "The operation has been failed!"
+      );
+    });
   }
 
   //callback function
@@ -100,7 +119,10 @@ export default function UserPlanCard(props) {
       // console.log("Events:");
       // console.log(events);
       let check = false;
-      for (const { event: { data, method, section }, phase } of events) {
+      for (const {
+        event: { data, method, section },
+        phase,
+      } of events) {
         // console.log("\t", phase.toString(), `: ${section}.${method}`, data.toString());
         if (method === "ExtrinsicSuccess") {
           check = true;
@@ -113,17 +135,21 @@ export default function UserPlanCard(props) {
       }
       if (check === false) {
         // window.alert("The operation failed!");
-        await showResultToUser("Operation failed!", "The operation has been failed!");
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
       handleSubscriberLoginByWallet(globalState.user.address);
-      router.push("/")
+      router.push("/");
     }
   }
 
   return (
-    <section id={"plan"+index+"Detail"}
+    <section
+      id={"plan" + index + "Detail"}
       className={
         planStatus === -1
           ? "UserPlanCard expired"
@@ -134,10 +160,15 @@ export default function UserPlanCard(props) {
     >
       <img
         className="UserPlan-logo"
-        src={"https://api.subscrypt.io/profile/getProviderPic/" + props.plan.provider}
+        src={
+          "https://api.subscrypt.io/profile/getProviderPic/" +
+          props.plan.provider
+        }
       />
       <div className="UserPlan-specs">
-        <p className="UserPlan-name">{props.plan.name ? props.plan.name : "Loading..."}</p>
+        <p className="UserPlan-name">
+          {props.plan.name ? props.plan.name : "Loading..."}
+        </p>
         <p className="UserPlan-Provider">
           {props.plan.providerName ? props.plan.providerName : "Loading..."}
         </p>
@@ -154,7 +185,11 @@ export default function UserPlanCard(props) {
         <p className="UserPlan-desc">{props.plan.description}</p>
         <div className="UserPlan-featurBox">
           <h6>Activation date</h6>
-          <p>{utils.timeStamptoDate(parseInt(props.plan.subscription_time.replace(/,/g, "")))}</p>
+          <p>
+            {utils.timeStamptoDate(
+              parseInt(props.plan.subscription_time.replace(/,/g, ""))
+            )}
+          </p>
         </div>
         <div className="UserPlan-featurBox">
           <h6>Expires on</h6>
@@ -176,9 +211,13 @@ export default function UserPlanCard(props) {
           <PercentageBar percentage={usedPercentage} />
         </div>
 
-        <p className="UsePlan-useAnnounce">You have used {"%" + usedPercentage} of the service</p>
+        <p className="UsePlan-useAnnounce">
+          You have used {"%" + usedPercentage} of the service
+        </p>
         {planStatus !== -1 && (
-          <p className="UsePlan-useAnnounce">Refundable amount: {refundAmount} Dot</p>
+          <p className="UsePlan-useAnnounce">
+            Refundable amount: {refundAmount} Dot
+          </p>
         )}
 
         <div className="UserPlan-PayPart">
@@ -192,7 +231,11 @@ export default function UserPlanCard(props) {
           {planStatus === -1 ? (
             <>
               <button
-                className={localLoading ? "UserPlan-subscribeBtn loading" : "UserPlan-subscribeBtn"}
+                className={
+                  localLoading
+                    ? "UserPlan-subscribeBtn loading"
+                    : "UserPlan-subscribeBtn"
+                }
                 onClick={handleSubscribe}
               >
                 Subscribe
@@ -200,10 +243,18 @@ export default function UserPlanCard(props) {
             </>
           ) : (
             <>
-              <button id={"plan"+index+"Refund"}  className="UserPlan-refundBtn" onClick={handleRefund}>
+              <button
+                id={"plan" + index + "Refund"}
+                className="UserPlan-refundBtn"
+                onClick={handleRefund}
+              >
                 Refund
               </button>
-              <button id={"plan"+index+"Renew"} className="UserPlan-renewBtn" onClick={handleRenew}>
+              <button
+                id={"plan" + index + "Renew"}
+                className="UserPlan-renewBtn"
+                onClick={handleRenew}
+              >
                 Renew
               </button>
             </>
