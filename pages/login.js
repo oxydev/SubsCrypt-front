@@ -67,6 +67,15 @@ const Login = (props) => {
     />
   ));
 
+  const tutorialData = tutData.tutorials.login;
+  const tutSteps = tutorialData.map((item) => ({
+    target: "#" + item.elementName,
+    title: item.title,
+    content: item.description,
+    placementBeacon: "right",
+    placement: "right",
+  }));
+
   useEffect(() => {
     if (data.networks.length === 1) {
       setNetwork(0);
@@ -75,15 +84,17 @@ const Login = (props) => {
       setRole(1);
       setSteps([true, true, true]);
       setMethod(0);
-      handleTutorial([
-        tutData.tutorials.login[0],
-        tutData.tutorials.login[2],
-        tutData.tutorials.login[5],
-      ]);
+      // handleTutorial([
+      //   tutData.tutorials.login[0],
+      //   tutData.tutorials.login[2],
+      //   tutData.tutorials.login[5],
+      // ]);
       handleWalletLists();
     } else {
-      handleTutorial(tutData.tutorials.login.slice(0, 3));
+      // handleTutorial(tutData.tutorials.login.slice(0, 3));
     }
+
+    handleTutorial(tutSteps);
   }, []);
   useEffect(() => {
     if (steps[0]) {

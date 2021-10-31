@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import NewPlanCreation from "../../componenets/provider/signUp/newPlanCreation";
 import ProviderInfo from "../../componenets/provider/signUp/providerInfo";
 import { setDataContext } from "../../context/setData";
@@ -6,8 +6,8 @@ import { handleDataContext } from "../../context/handleData";
 import { UserContext } from "../../context/store";
 import { useRouter } from "next/router";
 import { operationContext } from "../../context/handleUserOperation";
-import tutData from '../../data/tutorial.json'
-import { tutorialContext } from '../../context/tutorial'
+import tutData from "../../data/tutorial.json";
+import { tutorialContext } from "../../context/tutorial";
 
 export default function ProviderSignUp() {
   const router = useRouter();
@@ -18,8 +18,16 @@ export default function ProviderSignUp() {
   const tutorialData = tutData.tutorials.becomeProvider;
   const { handleTutorial } = useContext(tutorialContext);
 
+  const steps = tutorialData.map((item) => ({
+    target: "#" + item.elementName,
+    title: item.title,
+    content: item.description,
+    placementBeacon: "right",
+    placement: "right",
+  }));
+
   useEffect(() => {
-    handleTutorial(tutorialData);
+    handleTutorial(steps);
   }, []);
 
   const [info, setInfo] = useState({
@@ -50,7 +58,16 @@ export default function ProviderSignUp() {
     for (const item of list) {
       item.visibility = "hidden";
     }
-    setPlanList([...list, { visibility: "visible", coins: [], characteristics: [], duration: "1 m", refund: 20 }]);
+    setPlanList([
+      ...list,
+      {
+        visibility: "visible",
+        coins: [],
+        characteristics: [],
+        duration: "1 m",
+        refund: 20,
+      },
+    ]);
   }
 
   async function callback({ events = [], status }) {
@@ -101,7 +118,10 @@ export default function ProviderSignUp() {
       });
       if (check === false) {
         // window.alert("The operation failed!");
-        await showResultToUser("Operation failed!", "The operation has been failed!");
+        await showResultToUser(
+          "Operation failed!",
+          "The operation has been failed!"
+        );
       }
     } else if (status.isFinalized) {
       // console.log("Finalized block hash", status.asFinalized.toHex());
@@ -141,7 +161,10 @@ export default function ProviderSignUp() {
     const image = info.image;
     if (!image) {
       // window.alert("You should upload a photo!");
-      await showResultToUser("Photo is necessary!", "You should upload a photo!");
+      await showResultToUser(
+        "Photo is necessary!",
+        "You should upload a photo!"
+      );
     } else {
       if (info.ProviderPassword !== info.ProviderConfirmedPasswords) {
         // window.alert("Password has not been comfirmed correctly!!");
@@ -155,8 +178,10 @@ export default function ProviderSignUp() {
           var dur = [];
           planList.forEach((plan) => {
             if (plan.duration === "1 m") dur.push(30 * 24 * 60 * 60 * 1000);
-            else if (plan.duration === "3 m") dur.push(3 * 30 * 24 * 60 * 60 * 1000);
-            else if (plan.duration === "6 m") dur.push(6 * 30 * 24 * 60 * 60 * 1000);
+            else if (plan.duration === "3 m")
+              dur.push(3 * 30 * 24 * 60 * 60 * 1000);
+            else if (plan.duration === "6 m")
+              dur.push(6 * 30 * 24 * 60 * 60 * 1000);
           });
           return dur;
         }
@@ -205,7 +230,10 @@ export default function ProviderSignUp() {
           info.ProviderPassword,
           plansChars
         ).catch(async () => {
-          await showResultToUser("Operation failed!", "The operation has been failed!");
+          await showResultToUser(
+            "Operation failed!",
+            "The operation has been failed!"
+          );
         });
       }
     }
@@ -234,13 +262,18 @@ export default function ProviderSignUp() {
           >
             <ProviderInfo info={info} setInfo={setInfo} />
             {planFormList}
-            <button id={"addAnotherPlan"} className="PlansForm-addBtn" onClick={addAnotherPlan}>
+            <button
+              id={"addAnotherPlan"}
+              className="PlansForm-addBtn"
+              onClick={addAnotherPlan}
+            >
               Add another plan
             </button>
             <div className="ProviderRegisteration">
               <p>
-                For signing up you need to send a transaction on chain to put the data in smart
-                contract on blockchain. Normal gas fee applies.
+                For signing up you need to send a transaction on chain to put
+                the data in smart contract on blockchain. Normal gas fee
+                applies.
               </p>
               <input
                 type="submit"

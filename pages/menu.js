@@ -34,12 +34,20 @@ export default function Menu() {
     sendMoneyToAddress();
   }
 
+  const steps = tutorialData.map((item) => ({
+    target: "#" + item.elementName,
+    title: item.title,
+    content: item.description,
+    placementBeacon: "right",
+    placement: "right",
+  }));
+
   useEffect(() => {
     //Check the cookies and authentication if cokkies are set
     if (!auth && (password || userWallet)) {
       checkAuthByCookie();
     } else {
-      handleTutorial(tutorialData);
+      handleTutorial(steps);
     }
 
     //change the status by clicking on sidebar links
