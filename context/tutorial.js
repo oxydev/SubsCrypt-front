@@ -9,11 +9,11 @@ export const Tutorial = (props) => {
   const [run, setRun] = useState(false);
 
   const handleTutorial = (tutLists) => {
-    setSteps([...tutLists]);
+    // setSteps([...tutLists]);
   };
 
   const continueTutorial = (useless) => {
-    console.log("continue");
+    // console.log("continue");
   };
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const Tutorial = (props) => {
   }, [steps]);
 
   useEffect(() => {
-    console.log(steps, run);
+    // console.log(steps, run);
   }, [steps, run]);
 
   return (

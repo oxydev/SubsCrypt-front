@@ -31,7 +31,7 @@ export const HandleDataFunctions = (props) => {
 
   const handleWalletBalance = async (address) => {
     blockChainFuncs.getBalance(address).then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch({ type: "LOAD_USER_BALANCE", payload: res });
     });
   };
@@ -300,7 +300,7 @@ export const HandleDataFunctions = (props) => {
         }
       })
       .catch(async (err) => {
-        console.log(err)
+        console.log(err);
         setLoading(false);
         // window.alert("Can not load data!");
         await showResultToUser("Authentication Problem!", "Can not load data!");

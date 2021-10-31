@@ -6,7 +6,11 @@ const customStyles = {
     ...provided,
     borderBottom: "1px dotted pink",
     color: state.isSelected ? "#fff" : "#212121",
-    backgroundColor: state.isSelected ? "#d71eae" : state.isFocused ? "#eeeeee" : "#fff",
+    backgroundColor: state.isSelected
+      ? "#d71eae"
+      : state.isFocused
+      ? "#eeeeee"
+      : "#fff",
     padding: 20,
     cursor: "pointer",
 
@@ -67,7 +71,7 @@ const customStyles = {
 export const FaucetModal = (props) => {
   const { walletList, handleSendMoney } = props;
   const [address, setAddress] = useState(null);
-  console.log(walletList);
+  // console.log(walletList);
   const addressList = walletList.map((item, index) => {
     const value = (
       <>

@@ -8,7 +8,11 @@ const customStyles = {
     ...provided,
     borderBottom: "1px dotted pink",
     color: state.isSelected ? "#fff" : "#212121",
-    backgroundColor: state.isSelected ? "#d71eae" : state.isFocused ? "#eeeeee" : "#fff",
+    backgroundColor: state.isSelected
+      ? "#d71eae"
+      : state.isFocused
+      ? "#eeeeee"
+      : "#fff",
     padding: 20,
     cursor: "pointer",
 
@@ -74,6 +78,7 @@ export default function Connection(props) {
   const [address, setAddress] = useState(null);
 
   const handleConnection = () => {
+    console.log("handle");
     if (type === "subscriber") {
       handleSubscriberLoginByWallet(address);
     } else if (type === "provider") {
@@ -103,8 +108,9 @@ export default function Connection(props) {
         <>
           <p className="Topic">Choose your Wallet</p>
           <div className="SelectWallet">
-            <Select id="chooseWalletAccount"
-                    options={addressList}
+            <Select
+              id="chooseWalletAccount"
+              options={addressList}
               styles={customStyles}
               isSearchable={false}
               placeholder="Select your wallet"

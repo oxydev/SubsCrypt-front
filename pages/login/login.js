@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import LoginPart from "../componenets/login/loginPart";
-import Connection from "../componenets/login/connection";
-import data from "../data/wallets&networks.json";
-import Card from "../componenets/login/card";
-import { handleDataContext } from "../context/handleData";
-import { UserContext } from "../context/store";
-import tutData from "../data/tutorial.json";
-import { tutorialContext } from "../context/tutorial";
+import LoginPart from "../../componenets/login/loginPart";
+import Connection from "../../componenets/login/connection";
+import data from "../../data/wallets&networks.json";
+import Card from "../../componenets/login/card";
+import { handleDataContext } from "../../context/handleData";
+import { UserContext } from "../../context/store";
+import tutData from "../../data/tutorial.json";
+import { tutorialContext } from "../../context/tutorial";
 
 const Login = (props) => {
   const { action } = props;

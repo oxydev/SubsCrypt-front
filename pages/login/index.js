@@ -1,15 +1,18 @@
 import { useContext, useEffect, useRef, useState } from "react";
 //import UserLogin from "./user/userLogin";
-import { authContext } from "./_app";
-import { handleDataContext } from "../context/handleData";
+import { authContext } from "../_app";
+import { handleDataContext } from "../../context/handleData";
 import Cookies from "js-cookie";
-import { tutorialContext } from "../context/tutorial";
+import { tutorialContext } from "../../context/tutorial";
 import Login from "./login";
-import tutData from "../data/tutorial.json";
-import { UserContext } from "../context/store";
+import tutData from "../../data/tutorial.json";
+import { UserContext } from "../../context/store";
+import Link from "next//link";
+import { useRouter } from "next/router";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
+  const router = useRouter();
   const [task, setTask] = useState("none");
   const { handleTutorial } = useContext(tutorialContext);
   const { checkAuthByCookie, sendMoneyToAddress } =
@@ -21,14 +24,6 @@ export default function Menu() {
   //get cookies
   const password = Cookies.get("subscryptPass");
   const userWallet = Cookies.get("subscryptAddress");
-
-  function handleUserLogin() {
-    setTask("login");
-  }
-
-  function handleProviderSignUp() {
-    setTask("providerSignUp");
-  }
 
   function hanadleGetToken() {
     sendMoneyToAddress();
@@ -59,11 +54,11 @@ export default function Menu() {
 
     if (mainLoginLink) {
       mainLoginLink.onclick = () => {
-        setTask("none");
+        router.push("/login/");
       };
 
       userLoginLink.onclick = () => {
-        setTask("login");
+        router.push("/login/login");
       };
 
       // providerLoginLink.onclick = () => {
@@ -71,7 +66,7 @@ export default function Menu() {
       // };
 
       signUpLink.onclick = () => {
-        setTask("providerSignUp");
+        router.push("/login/signUp");
       };
 
       const sideBarStyleHandler = (elm) => {
@@ -81,43 +76,35 @@ export default function Menu() {
         giveTokenLink.closest("li").classList.remove("select");
         elm.closest("li").classList.add("select");
       };
-
-      if (task === "none") {
-        sideBarStyleHandler(mainLoginLink);
-      } else if (task === "login") {
-        sideBarStyleHandler(userLoginLink);
-      } else if (task === "providerSignUp") {
-        sideBarStyleHandler(signUpLink);
-      }
     }
   }, [auth]);
 
   //change the login menu according to selecting each type
-  if (task === "none") {
-    return (
-      <section className="MainLoginPage">
-        <h1>Main Menu</h1>
-        <div>
-          <button id="loginButton" onClick={handleUserLogin}>
-            Login
-          </button>
-          <button id="SignUpButton" onClick={handleProviderSignUp}>
-            Become Provider
-          </button>
-          <div className="Divider"></div>
-          <button id="faucet" onClick={hanadleGetToken}>
-            Faucet
-          </button>
-        </div>
-      </section>
-    );
-  } else if (task === "login") {
-    return <Login />;
-  } else if (task === "providerSignUp") {
-    return (
-      <div className="SignUp-walletConnection">
-        <Login action={"signUp"} />
+  // if (task === "none") {
+  return (
+    <section className="MainLoginPage">
+      <h1>Main Menu</h1>
+      <div>
+        <Link href="./login/login">
+          <a id="loginButton">Login</a>
+        </Link>
+        <Link href="./login/signUp">
+          <a id="SignUpButton">Become Provider</a>
+        </Link>
+        <div className="Divider"></div>
+        <button id="faucet" onClick={hanadleGetToken}>
+          Faucet
+        </button>
       </div>
-    );
-  }
+    </section>
+  );
+  // } else if (task === "login") {
+  //   return <Login />;
+  // } else if (task === "providerSignUp") {
+  //   return (
+  //     <div className="SignUp-walletConnection">
+  //       <Login action={"signUp"} />
+  //     </div>
+  //   );
+  // }
 }

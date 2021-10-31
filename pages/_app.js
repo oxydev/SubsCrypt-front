@@ -3,7 +3,6 @@ import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
-import Menu from "./menu";
 import { Store } from "../context/store";
 import { Modal } from "../context/modal";
 import React from "react";
@@ -41,6 +40,18 @@ export default function App({ Component, pageProps }) {
     }, 200);
   }, []);
 
+  useEffect(() => {
+    console.log(auth);
+    if (!auth && !router.pathname.includes("/login")) {
+      console.log(router.pathname);
+      router.push("/login/");
+    } else if (auth) {
+      console.log(auth);
+      console.log("push");
+      router.push("/");
+    }
+  }, [auth]);
+
   return (
     <>
       <Head>
@@ -50,10 +61,24 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
         <title>SubsCrypt|Blockchain as a Service on PolkaDot</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-        <link rel="manifest" href="/site.webmanifest"/>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <loadingContext.Provider value={{ loading, setLoading }}>
         <authContext.Provider value={{ auth, setAuth }}>
@@ -76,10 +101,10 @@ export default function App({ Component, pageProps }) {
                                 <Main>
                                   <>
                                     {auth && <Header />}
-                                    {auth ? <Component {...pageProps} /> : <Menu {...pageProps} />}
+                                    <Component {...pageProps} />
                                   </>
                                 </Main>
-                                <div/>
+                                <div />
                               </>
                             )}
                           </div>

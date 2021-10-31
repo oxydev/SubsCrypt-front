@@ -177,7 +177,7 @@ export const Store = (props) => {
     }
   });
 
-  console.log(globalState);
+  // console.log(globalState);
 
   return (
     <UserContext.Provider value={{ globalState, dispatch }}>

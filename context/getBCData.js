@@ -317,7 +317,7 @@ export const GetBCDataFunctions = (props) => {
     return (await subscrypt)
       .getBalance(address)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res.toNumber() / 1e12;
       })
       .catch(async () => {
