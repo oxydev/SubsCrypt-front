@@ -41,9 +41,9 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   useEffect(() => {
+    console.log(window.location.hash);
     console.log(auth);
     if (!auth && !router.pathname.includes("/login")) {
-      console.log(router.pathname);
       router.push("/login/");
     } else if (auth) {
       console.log(auth);
