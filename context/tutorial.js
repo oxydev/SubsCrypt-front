@@ -42,14 +42,10 @@ export const Tutorial = (props) => {
   };
 
   useEffect(() => {
-    console.log(steps);
-    console.log(state);
+    // console.log(steps);
+    // console.log(state);
     setState({ run: true, index: 0 });
   }, [steps]);
-
-  useEffect(() => {
-    console.log(state);
-  });
 
   const toggleTutorial = (condition) => {
     if (condition == "start") {
@@ -64,7 +60,6 @@ export const Tutorial = (props) => {
     index,
     step,
     backProps,
-    closeProps,
     primaryProps,
     tooltipProps,
   }) => (
@@ -86,7 +81,7 @@ export const Tutorial = (props) => {
   const handleJoyrideCallback = (data) => {
     const { action, index, status, type } = data;
 
-    console.log(action, index, status, type);
+    // console.log(action, index, status, type);
     if (EVENTS.STEP_AFTER == type) {
       setState({ ...state, index: index + (action === ACTIONS.PREV ? -1 : 1) });
     } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {

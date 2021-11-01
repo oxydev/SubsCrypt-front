@@ -48,6 +48,10 @@ export default function App({ Component, pageProps }) {
     }
   }, [auth]);
 
+  useEffect(() => {
+    console.log(router.locale);
+  }, [Component]);
+
   return (
     <>
       <Head>

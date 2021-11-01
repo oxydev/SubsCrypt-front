@@ -15,6 +15,7 @@ export default function SideBar() {
 
   const router = useRouter();
   const [select, setSelect] = useState(0);
+  const [path, setPath] = useState("");
   const type = globalState.user.type;
   const registerStatus = globalState.user.registered;
   let sideBarData;
@@ -29,20 +30,21 @@ export default function SideBar() {
     sideBarData = data.PublicSideBar;
   }
   useEffect(() => {
-    setSelect(0);
-    if (router.pathname.indexOf("profilesetting") > 0) {
-      sideBarData.menuItem.forEach((res, index) => {
-        if (res.name === "Profile Setting") setSelect(index);
-      });
-    } else if (router.pathname.indexOf("addnewplan") > 0) {
-      sideBarData.menuItem.forEach((res, index) => {
-        if (res.name === "Add Plan") setSelect(index);
-      });
-    } else if (router.pathname.indexOf("newOffers") > 0) {
-      sideBarData.menuItem.forEach((res, index) => {
-        if (res.name === "Marketplace") setSelect(index);
-      });
-    }
+    // setSelect(0);
+    // if (router.pathname.indexOf("profilesetting") > 0) {
+    //   sideBarData.menuItem.forEach((res, index) => {
+    //     if (res.name === "Profile Setting") setSelect(index);
+    //   });
+    // } else if (router.pathname.indexOf("addnewplan") > 0) {
+    //   sideBarData.menuItem.forEach((res, index) => {
+    //     if (res.name === "Add Plan") setSelect(index);
+    //   });
+    // } else if (router.pathname.indexOf("newOffers") > 0) {
+    //   sideBarData.menuItem.forEach((res, index) => {
+    //     if (res.name === "Marketplace") setSelect(index);
+    //   });
+    // }
+    setPath(router.pathname);
   }, [router.pathname, sideBarData]);
 
   function hanadleGetToken() {
@@ -55,7 +57,7 @@ export default function SideBar() {
         <li
           id={item.id}
           key={item.name}
-          className={select === index ? "select" : ""}
+          className={path === item.url ? "select" : ""}
           onClick={() => {
             setSelect(index);
             if (item.id === "logout") {
