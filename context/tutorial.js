@@ -5,11 +5,18 @@ export const tutorialContext = React.createContext();
 
 export const Tutorial = (props) => {
   const [steps, setSteps] = useState(null);
-  const [run, setRun] = useState(true);
   const [state, setState] = useState({ run: false, index: 0 });
 
-  const handleTutorial = (tutLists) => {
-    setSteps([...tutLists]);
+  const handleTutorial = (tutorialData) => {
+    const stepsList = tutorialData.map((item) => ({
+      target: "#" + item.elementName,
+      title: item.title,
+      content: item.description,
+      placementBeacon: "right",
+      placement: "right",
+    }));
+
+    setSteps([...stepsList]);
   };
 
   const continueTutorial = (useless) => {
@@ -17,12 +24,8 @@ export const Tutorial = (props) => {
   };
 
   useEffect(() => {
-    setRun(true);
-  }, [steps]);
-
-  useEffect(() => {
     setState({ run: true, index: 0 });
-  }, [steps, run]);
+  }, [steps]);
 
   const tooltip = ({
     continuous,
@@ -39,8 +42,11 @@ export const Tutorial = (props) => {
       <p>{step.content}</p>
       <div className="BtnContainer">
         {index > 0 && <button {...backProps}>Previous</button>}
-        {continuous && <button {...primaryProps}>Next</button>}
-        {!continuous && <button {...closeProps}>close</button>}
+        {continuous && (
+          <button {...primaryProps}>
+            {index == steps.length - 1 ? "Last" : "Next"}
+          </button>
+        )}
       </div>
     </div>
   );
@@ -55,9 +61,6 @@ export const Tutorial = (props) => {
       // Need to set our running state to false, so we can restart if we click start again.
       setState({ run: false });
     }
-    console.groupCollapsed(type);
-    console.log(data); //eslint-disable-line no-console
-    console.groupEnd();
   };
 
   return (

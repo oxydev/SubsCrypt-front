@@ -33,7 +33,7 @@ export default function SubscryptionOffers() {
   return (
     <section className="SubscryptionOffers">
       <h1>Currently you don't have any active plans</h1>
-      <embed src={"/icons/png/sunscryption/OffersIcon.svg"}/>
+      <embed src={"/icons/png/sunscryption/OffersIcon.svg"} />
       <ProviderSelection />
       <div className="OfferPart" id={"plan0Card"}>
         <h2>

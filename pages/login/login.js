@@ -68,13 +68,6 @@ const Login = (props) => {
   ));
 
   const tutorialData = tutData.tutorials.login;
-  const tutSteps = tutorialData.map((item) => ({
-    target: "#" + item.elementName,
-    title: item.title,
-    content: item.description,
-    placementBeacon: "right",
-    placement: "right",
-  }));
 
   useEffect(() => {
     if (data.networks.length === 1) {
@@ -94,7 +87,7 @@ const Login = (props) => {
       // handleTutorial(tutData.tutorials.login.slice(0, 3));
     }
 
-    handleTutorial(tutSteps);
+    handleTutorial(tutorialData);
   }, []);
   useEffect(() => {
     if (steps[0]) {

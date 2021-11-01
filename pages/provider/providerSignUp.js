@@ -18,16 +18,8 @@ export default function ProviderSignUp() {
   const tutorialData = tutData.tutorials.becomeProvider;
   const { handleTutorial } = useContext(tutorialContext);
 
-  const steps = tutorialData.map((item) => ({
-    target: "#" + item.elementName,
-    title: item.title,
-    content: item.description,
-    placementBeacon: "right",
-    placement: "right",
-  }));
-
   useEffect(() => {
-    handleTutorial(steps);
+    handleTutorial(tutorialData);
   }, []);
 
   const [info, setInfo] = useState({
