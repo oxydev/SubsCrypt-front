@@ -9,6 +9,7 @@ import tutData from "../../data/tutorial.json";
 import { UserContext } from "../../context/store";
 import Link from "next//link";
 import { useRouter } from "next/router";
+import { loadingContext } from "../_app";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
@@ -20,6 +21,7 @@ export default function Menu() {
   const { auth } = useContext(authContext);
   const tutorialData = tutData.tutorials.mainMenu;
   const { globalState } = useContext(UserContext);
+  const { setLoading } = useContext(loadingContext);
 
   //get cookies
   const password = Cookies.get("subscryptPass");

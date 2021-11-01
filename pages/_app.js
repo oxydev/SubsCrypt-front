@@ -22,22 +22,25 @@ export const loadingContext = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   //Turn on and off the loading when the page url has been changed
   useEffect(() => {
-    router.events.on("routeChangeStart", () => {
-      setLoading(true);
-    });
-    router.events.on("routeChangeComplete", () => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 200);
-    });
+    // router.events.on("routeChangeStart", () => {
+    //   setLoading(true);
+    //   console.log("here!!!");
+    // });
+    // router.events.on("routeChangeComplete", () => {
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //     console.log("here!!!");
+    //   }, 200);
+    // });
     setTimeout(() => {
-      setLoading(false);
-    }, 200);
+      setInitialLoading(false);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -47,10 +50,6 @@ export default function App({ Component, pageProps }) {
       router.push("/");
     }
   }, [auth]);
-
-  useEffect(() => {
-    console.log(router.locale);
-  }, [Component]);
 
   return (
     <>
@@ -91,7 +90,7 @@ export default function App({ Component, pageProps }) {
                       <HandleDataFunctions>
                         <SetDataFunctions>
                           <div className="WholePageWrapper">
-                            {loading ? (
+                            {initialLoading || loading ? (
                               <Loading />
                             ) : (
                               <>

@@ -26,15 +26,6 @@ export const Tutorial = (props) => {
   };
 
   const continueTutorial = async (newTutData, newIndex) => {
-    console.log(newIndex);
-    // const stepsList = newTutData.map((item) => ({
-    //   target: "#" + item.elementName,
-    //   title: item.title,
-    //   content: item.description,
-    //   placementBeacon: "right",
-    //   placement: "right",
-    // }));
-    // setSteps([...stepsList]);
     await sleep(500);
     if (!state.run) {
       setState({ ...state, run: true });
@@ -87,7 +78,6 @@ export const Tutorial = (props) => {
     } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
       setState({ ...state, run: false });
     } else if (EVENTS.TARGET_NOT_FOUND == type) {
-      console.log("hamid");
       setState({ index: index, run: false });
     }
   };
