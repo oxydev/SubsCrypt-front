@@ -3,7 +3,6 @@ import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
-import Menu from "./menu";
 import { Store } from "../context/store";
 import { Modal } from "../context/modal";
 import React from "react";

@@ -110,6 +110,8 @@ export const Tutorial = (props) => {
             run={state.run}
             tooltipComponent={tooltip}
             stepIndex={state.index}
+            disableScrolling={false}
+            disableScrollParentFix={true}
           />
         )}
         {props.children}

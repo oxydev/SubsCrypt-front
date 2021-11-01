@@ -56,8 +56,6 @@ export default function Menu() {
       signUpLink.onclick = () => {
         router.push("/login/signUp");
       };
-
-      con;
     }
   }, [auth]);
 
