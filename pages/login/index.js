@@ -53,21 +53,11 @@ export default function Menu() {
         router.push("/login/login");
       };
 
-      // providerLoginLink.onclick = () => {
-      //   setTask("provider");
-      // };
-
       signUpLink.onclick = () => {
         router.push("/login/signUp");
       };
 
-      const sideBarStyleHandler = (elm) => {
-        mainLoginLink.closest("li").classList.remove("select");
-        userLoginLink.closest("li").classList.remove("select");
-        signUpLink.closest("li").classList.remove("select");
-        giveTokenLink.closest("li").classList.remove("select");
-        elm.closest("li").classList.add("select");
-      };
+      con;
     }
   }, [auth]);
 

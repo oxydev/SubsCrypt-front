@@ -70,7 +70,6 @@
         "id": "logout",
         "icon": "/dashbord.png",
         "item": "/icons/png/sideBar/logout.svg"
-
       }
     ]
   },
@@ -88,7 +87,6 @@
         "id": "logout",
         "item": "/icons/png/sideBar/logout.svg",
         "icon": "/dashbord.png"
-
       }
     ]
   },
@@ -97,18 +95,21 @@
     "menuItem": [
       {
         "name": "Main Menu",
+        "url": "/login",
         "id": "PublicDashboard",
         "item": "/icons/png/sideBar/mainMenu.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Login",
+        "url": "/login/login",
         "id": "PublicUser",
         "item": "/icons/png/sideBar/login.svg",
         "icon": "/dashbord.png"
       },
       {
         "name": "Become Provider",
+        "url": "/login/signUp",
         "id": "publicSignUp",
         "item": "/icons/png/sideBar/signup.svg",
         "icon": "/dashbord.png"
@@ -122,5 +123,3 @@
     ]
   }
 }
-
-

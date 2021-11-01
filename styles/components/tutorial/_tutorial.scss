@@ -1,7 +1,4 @@
 .TutorialBox {
-  position: absolute;
-  top: 200px;
-  left: 400px;
   @include circle(310px);
   border: 1px dashed #414141;
   display: flex;
