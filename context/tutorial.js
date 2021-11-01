@@ -7,7 +7,11 @@ export const Tutorial = (props) => {
   const [steps, setSteps] = useState(null);
   const [state, setState] = useState({ run: false, index: 0 });
 
-  const handleTutorial = (tutorialData) => {
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  const handleTutorial = async (tutorialData) => {
     if (Cookies.get("tutorial") === "on") {
       const stepsList = tutorialData.map((item) => ({
         target: "#" + item.elementName,
@@ -16,14 +20,10 @@ export const Tutorial = (props) => {
         placementBeacon: "right",
         placement: "right",
       }));
-
+      await sleep(1000);
       setSteps([...stepsList]);
     }
   };
-
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
 
   const continueTutorial = async (newTutData, newIndex) => {
     console.log(newIndex);
@@ -51,8 +51,12 @@ export const Tutorial = (props) => {
     console.log(state);
   });
 
-  const closeTutorial = () => {
-    setState({ ...state, run: false });
+  const toggleTutorial = (condition) => {
+    if (condition == "start") {
+      setState({ ...state, run: true });
+    } else if (condition == "end") {
+      setState({ ...state, run: false });
+    }
   };
 
   const tooltip = ({
@@ -95,7 +99,7 @@ export const Tutorial = (props) => {
 
   return (
     <tutorialContext.Provider
-      value={{ handleTutorial, continueTutorial, closeTutorial }}
+      value={{ handleTutorial, continueTutorial, toggleTutorial }}
     >
       <>
         {steps && (

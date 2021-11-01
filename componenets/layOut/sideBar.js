@@ -11,7 +11,7 @@ import { tutorialContext } from "../../context/tutorial";
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut, sendMoneyToAddress } = useContext(handleDataContext);
-  const { closeTutorial } = useContext(tutorialContext);
+  const { toggleTutorial } = useContext(tutorialContext);
 
   const router = useRouter();
   const [select, setSelect] = useState(0);
@@ -84,7 +84,7 @@ export default function SideBar() {
 
   return (
     <div className="SideBar">
-      <ToggleButton onChange={closeTutorial} />
+      <ToggleButton onChange={toggleTutorial} />
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
       <embed className="SideBar-logo" src="/logo/logo.svg"></embed>
     </div>
