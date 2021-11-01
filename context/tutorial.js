@@ -8,15 +8,17 @@ export const Tutorial = (props) => {
   const [state, setState] = useState({ run: false, index: 0 });
 
   const handleTutorial = (tutorialData) => {
-    const stepsList = tutorialData.map((item) => ({
-      target: "#" + item.elementName,
-      title: item.title,
-      content: item.description,
-      placementBeacon: "right",
-      placement: "right",
-    }));
+    if (Cookies.get("tutorial") === "on") {
+      const stepsList = tutorialData.map((item) => ({
+        target: "#" + item.elementName,
+        title: item.title,
+        content: item.description,
+        placementBeacon: "right",
+        placement: "right",
+      }));
 
-    setSteps([...stepsList]);
+      setSteps([...stepsList]);
+    }
   };
 
   function sleep(ms) {
@@ -48,6 +50,10 @@ export const Tutorial = (props) => {
   useEffect(() => {
     console.log(state);
   });
+
+  const closeTutorial = () => {
+    setState({ ...state, run: false });
+  };
 
   const tooltip = ({
     continuous,
@@ -88,7 +94,9 @@ export const Tutorial = (props) => {
   };
 
   return (
-    <tutorialContext.Provider value={{ handleTutorial, continueTutorial }}>
+    <tutorialContext.Provider
+      value={{ handleTutorial, continueTutorial, closeTutorial }}
+    >
       <>
         {steps && (
           <ReactJoyride
