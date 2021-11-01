@@ -19,13 +19,35 @@ export const Tutorial = (props) => {
     setSteps([...stepsList]);
   };
 
-  const continueTutorial = (useless) => {
-    // console.log("continue");
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  const continueTutorial = async (newTutData, newIndex) => {
+    console.log(newIndex);
+    // const stepsList = newTutData.map((item) => ({
+    //   target: "#" + item.elementName,
+    //   title: item.title,
+    //   content: item.description,
+    //   placementBeacon: "right",
+    //   placement: "right",
+    // }));
+    // setSteps([...stepsList]);
+    await sleep(500);
+    if (!state.run) {
+      setState({ ...state, run: true });
+    }
   };
 
   useEffect(() => {
+    console.log(steps);
+    console.log(state);
     setState({ run: true, index: 0 });
   }, [steps]);
+
+  useEffect(() => {
+    console.log(state);
+  });
 
   const tooltip = ({
     continuous,
@@ -54,12 +76,14 @@ export const Tutorial = (props) => {
   const handleJoyrideCallback = (data) => {
     const { action, index, status, type } = data;
 
-    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
-      // Update state to advance the tour
-      setState({ index: index + (action === ACTIONS.PREV ? -1 : 1) });
+    console.log(action, index, status, type);
+    if (EVENTS.STEP_AFTER == type) {
+      setState({ ...state, index: index + (action === ACTIONS.PREV ? -1 : 1) });
     } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
-      // Need to set our running state to false, so we can restart if we click start again.
-      setState({ run: false });
+      setState({ ...state, run: false });
+    } else if (EVENTS.TARGET_NOT_FOUND == type) {
+      console.log("hamid");
+      setState({ index: index, run: false });
     }
   };
 
@@ -73,7 +97,7 @@ export const Tutorial = (props) => {
             continuous={true}
             run={state.run}
             tooltipComponent={tooltip}
-            index={state.index}
+            stepIndex={state.index}
           />
         )}
         {props.children}
