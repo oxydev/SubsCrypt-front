@@ -31,9 +31,10 @@ const ToggleButton = (props) => {
 
     if (toggle) {
       Cookies.set("tutorial", "off");
+      onChange("end");
     } else {
       Cookies.set("tutorial", "on");
-      router.reload(window.location.pathname);
+      onChange("start");
     }
 
     setToggle(!toggle);

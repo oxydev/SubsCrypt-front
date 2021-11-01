@@ -5,11 +5,13 @@ import { UserContext } from "../../context/store";
 import { handleDataContext } from "../../context/handleData";
 import { useRouter } from "next/router";
 import ToggleButton from "../gadjets/toggle";
+import { tutorialContext } from "../../context/tutorial";
 
 //The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut, sendMoneyToAddress } = useContext(handleDataContext);
+  const { toggleTutorial } = useContext(tutorialContext);
 
   const router = useRouter();
   const [select, setSelect] = useState(0);
@@ -82,7 +84,7 @@ export default function SideBar() {
 
   return (
     <div className="SideBar">
-      <ToggleButton />
+      <ToggleButton onChange={toggleTutorial} />
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
       <embed className="SideBar-logo" src="/logo/logo.svg"></embed>
     </div>
