@@ -4,7 +4,6 @@ import Connection from "../../componenets/login/connection";
 import data from "../../data/wallets&networks.json";
 import Card from "../../componenets/login/card";
 import { handleDataContext } from "../../context/handleData";
-import { UserContext } from "../../context/store";
 import tutData from "../../data/tutorial.json";
 import { tutorialContext } from "../../context/tutorial";
 
@@ -15,7 +14,6 @@ const Login = (props) => {
   const [steps, setSteps] = useState([true, false, false]);
   const [method, setMethod] = useState(-1);
   const { handleWalletLists } = useContext(handleDataContext);
-  const { globalState } = useContext(UserContext);
   const { handleTutorial, continueTutorial } = useContext(tutorialContext);
 
   const users = data.roles.map((item, index) => (
