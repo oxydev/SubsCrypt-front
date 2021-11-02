@@ -10,15 +10,19 @@ export default function ProviderAllUsers() {
   useEffect(() => {
     const allUsers = globalState.subscriptedUsers;
     // console.log(allUsers);
-    setUserList(
-      allUsers.map((item, index) => (
-        <ProviderEachUser
-          key={"subscriptedUser" + index}
-          userInfo={item}
-          userIndex={index}
-        />
-      ))
-    );
+    if (allUsers.length > 0) {
+      setUserList(
+        allUsers.map((item, index) => (
+          <ProviderEachUser
+            key={"subscriptedUser" + index}
+            userInfo={item}
+            userIndex={index}
+            plan={globalState.providerPlans[item.plan_index]}
+          />
+        ))
+      );
+    }
+
     // console.log(userList)
   }, [globalState.subscriptedUsers]);
   return (

@@ -216,7 +216,7 @@ export default function UserPlanCard(props) {
         </p>
         {planStatus !== -1 && (
           <p className="UsePlan-useAnnounce">
-            Refundable amount: {refundAmount} Dot
+            Refundable amount: {refundAmount} SubC
           </p>
         )}
 

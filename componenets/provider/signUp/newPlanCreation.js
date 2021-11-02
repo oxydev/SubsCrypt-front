@@ -152,20 +152,15 @@ export default function NewPlanCreation(props) {
               }}
             ></input>
             <img src="/icons/png/networks/polkadot.svg" />
-            <label htmlFor="Polkadot">Polkadot (DOT)</label>
+            <label htmlFor="Polkadot">SubsCrypt (SubC)</label>
           </div>
-          <p>
-            The initial price will be collected in United state dollars and will
-            be converted to the value of these tokens at an average standard
-            rate in market.
-          </p>
           <label>Price</label>
           <input
             type="text"
             name="PlanPrice"
             required
             value={plan.price}
-            placeholder="DOT xx.xx"
+            placeholder="SubC xx.xx"
             onChange={(e) => {
               handlePlanListUpdate("price", e.target.value);
             }}

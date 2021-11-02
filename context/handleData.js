@@ -195,10 +195,10 @@ export const HandleDataFunctions = (props) => {
             throw new Error("notSignedUp");
           }
         } else {
-          console.log(action);
+          // console.log(action);
 
           if (action !== "signUp") {
-            console.log(action);
+            // console.log(action);
             dispatch({ type: "REGISTERED", payload: true });
             dispatch({
               type: "LOAD_PROVIDER_PLANS_COUNT",

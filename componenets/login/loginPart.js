@@ -17,7 +17,6 @@ export default function LoginPart(props) {
     }
   };
   const togglePassVisible = () => {
-    console.log("hamid");
     const state = passShow;
     setPassShow(!state);
   };

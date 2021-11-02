@@ -52,11 +52,7 @@ export const Tutorial = (props) => {
   // }, [state.index, state.run]);
 
   const toggleTutorial = (condition) => {
-    if (condition == "start") {
-      setState({ ...state, run: true });
-    } else if (condition == "end") {
-      setState({ ...state, run: false });
-    }
+    setState({ ...state, run: condition });
   };
 
   const tooltip = ({

@@ -3,11 +3,11 @@ import { UserContext } from "../../context/store";
 
 export default function SubscriptionModal(props) {
   const [formData, setFormData] = useState({});
-  const { globalState, dispatch } = useContext(UserContext);
+  const { globalState } = useContext(UserContext);
   const username = globalState.user.username;
 
   const { plan, handleSubmit, renew } = props;
-  console.log(plan);
+  // console.log(plan);
   const characteristics = plan.characteristics;
   const characsInputs = characteristics.map((item) => (
     <div key={item} className="Modal-InputPart">

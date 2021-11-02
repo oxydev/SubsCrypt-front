@@ -37,7 +37,7 @@ export const ProviderWithdraw = (props) => {
       <h1>Total withdrawable Amount:</h1>
       <p>
         {isNaN(amount / 1e12) ? 0 : amount / 1e12}
-        <span> DOT</span>
+        <span> SubC</span>
       </p>
 
       <button id="withdraw" onClick={handleWithdraw}>

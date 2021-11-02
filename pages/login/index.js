@@ -4,24 +4,18 @@ import { authContext } from "../_app";
 import { handleDataContext } from "../../context/handleData";
 import Cookies from "js-cookie";
 import { tutorialContext } from "../../context/tutorial";
-import Login from "./login";
 import tutData from "../../data/tutorial.json";
-import { UserContext } from "../../context/store";
 import Link from "next//link";
 import { useRouter } from "next/router";
-import { loadingContext } from "../_app";
 
 //This is the login page which consists of a menu for selecting the user part and navigate to the related login menu according to the type
 export default function Menu() {
   const router = useRouter();
-  const [task, setTask] = useState("none");
   const { handleTutorial } = useContext(tutorialContext);
   const { checkAuthByCookie, sendMoneyToAddress } =
     useContext(handleDataContext);
   const { auth } = useContext(authContext);
   const tutorialData = tutData.tutorials.mainMenu;
-  const { globalState } = useContext(UserContext);
-  const { setLoading } = useContext(loadingContext);
 
   //get cookies
   const password = Cookies.get("subscryptPass");
@@ -44,7 +38,6 @@ export default function Menu() {
     const userLoginLink = document.getElementById("PublicUser");
     //const providerLoginLink = document.getElementById("PublicProvider");
     const signUpLink = document.getElementById("publicSignUp");
-    const giveTokenLink = document.getElementById("giveSomeToken");
 
     if (mainLoginLink) {
       mainLoginLink.onclick = () => {
