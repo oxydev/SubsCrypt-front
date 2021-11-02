@@ -12,7 +12,7 @@ export const Tutorial = (props) => {
   }
 
   const handleTutorial = async (tutorialData) => {
-    if (Cookies.get("tutorial") === "on") {
+    if (Cookies.get("tutorial") === undefined || Cookies.get("tutorial") === "on") {
       const stepsList = tutorialData.map((item) => ({
         target: "#" + item.elementName,
         title: item.title,
