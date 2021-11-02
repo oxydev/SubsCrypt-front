@@ -49,7 +49,7 @@ export default function Header() {
               <li>
                 <p>
                   <embed src={"/icons/png/sideBar/balance.svg"} />
-                  <b>{userBalance.toFixed(2)}</b> <span>Dot</span>
+                  <b>{userBalance.toFixed(2)}</b> <span>SubC</span>
                 </p>
               </li>
             )}

@@ -109,7 +109,6 @@ export const PlansDetailsModal = (props) => {
       }
     );
   };
-  console.log(planInfo);
   return (
     <section className="PlanDetailsModal">
       <h1>Plan Details</h1>
@@ -171,7 +170,7 @@ export const PlansDetailsModal = (props) => {
             name="PlanPrice"
             required
             value={planInfo.price}
-            placeholder="DOT xx.xx"
+            placeholder="SubC xx.xx"
             onChange={(e) => {
               handleplanInfoUpdate("price", e.target.value);
             }}

@@ -5,14 +5,17 @@ import { UserContext } from "../../context/store";
 import { handleDataContext } from "../../context/handleData";
 import { useRouter } from "next/router";
 import ToggleButton from "../gadjets/toggle";
+import { tutorialContext } from "../../context/tutorial";
 
 //The component for generating the sidebar for each user according to his role as a provider or ordinary user
 export default function SideBar() {
   const { globalState } = useContext(UserContext);
   const { handleLogOut, sendMoneyToAddress } = useContext(handleDataContext);
+  const { toggleTutorial } = useContext(tutorialContext);
 
   const router = useRouter();
   const [select, setSelect] = useState(0);
+  const [path, setPath] = useState("");
   const type = globalState.user.type;
   const registerStatus = globalState.user.registered;
   let sideBarData;
@@ -27,20 +30,21 @@ export default function SideBar() {
     sideBarData = data.PublicSideBar;
   }
   useEffect(() => {
-    setSelect(0);
-    if (router.pathname.indexOf("profilesetting") > 0) {
-      sideBarData.menuItem.forEach((res, index) => {
-        if (res.name === "Profile Setting") setSelect(index);
-      });
-    } else if (router.pathname.indexOf("addnewplan") > 0) {
-      sideBarData.menuItem.forEach((res, index) => {
-        if (res.name === "Add Plan") setSelect(index);
-      });
-    } else if (router.pathname.indexOf("newOffers") > 0) {
-      sideBarData.menuItem.forEach((res, index) => {
-        if (res.name === "Marketplace") setSelect(index);
-      });
-    }
+    // setSelect(0);
+    // if (router.pathname.indexOf("profilesetting") > 0) {
+    //   sideBarData.menuItem.forEach((res, index) => {
+    //     if (res.name === "Profile Setting") setSelect(index);
+    //   });
+    // } else if (router.pathname.indexOf("addnewplan") > 0) {
+    //   sideBarData.menuItem.forEach((res, index) => {
+    //     if (res.name === "Add Plan") setSelect(index);
+    //   });
+    // } else if (router.pathname.indexOf("newOffers") > 0) {
+    //   sideBarData.menuItem.forEach((res, index) => {
+    //     if (res.name === "Marketplace") setSelect(index);
+    //   });
+    // }
+    setPath(router.pathname);
   }, [router.pathname, sideBarData]);
 
   function hanadleGetToken() {
@@ -53,7 +57,7 @@ export default function SideBar() {
         <li
           id={item.id}
           key={item.name}
-          className={select === index ? "select" : ""}
+          className={path === item.url ? "select" : ""}
           onClick={() => {
             setSelect(index);
             if (item.id === "logout") {
@@ -82,7 +86,7 @@ export default function SideBar() {
 
   return (
     <div className="SideBar">
-      <ToggleButton />
+      <ToggleButton onChange={toggleTutorial} />
       <ul className="SideBarNav">{sideBarMenuItems}</ul>
       <embed className="SideBar-logo" src="/logo/logo.svg"></embed>
     </div>

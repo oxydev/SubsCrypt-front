@@ -32,7 +32,7 @@ export default function ProviderHeader() {
               {user.income || user.income === 0
                 ? user.income / Math.pow(10, 12)
                 : "Loading..."}{" "}
-              <span>DOT</span>
+              <span>SubC</span>
             </p>
           </div>
           <div className="PlanPart-featureBox">

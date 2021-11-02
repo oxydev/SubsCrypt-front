@@ -71,7 +71,7 @@ const customStyles = {
 export const FaucetModal = (props) => {
   const { walletList, handleSendMoney } = props;
   const [address, setAddress] = useState(null);
-  console.log(walletList);
+  // console.log(walletList);
   const addressList = walletList.map((item, index) => {
     const value = (
       <>

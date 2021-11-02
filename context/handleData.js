@@ -54,6 +54,7 @@ export const HandleDataFunctions = (props) => {
   //Function for handling the user wallet connection as a subscriber
   const handleSubscriberLoginByWallet = async (address) => {
     setLoading(true);
+
     blockChainFuncs
       .connectToWallet(address)
       .then(async (res) => {
@@ -106,6 +107,7 @@ export const HandleDataFunctions = (props) => {
         if (res === "notSet") {
           if (!address) {
             setLoading(false);
+
             await showResultToUser(
               "Wallet selection Error!",
               "You should choose a wallet from your wallet list!"
@@ -117,6 +119,7 @@ export const HandleDataFunctions = (props) => {
         } else {
           await blockChainFuncs.loadSubscriberPlansByWallet(res).then((res) => {
             setLoading(false);
+
             if (res.length > 0) {
               dispatch({ type: "LOAD_USER_PLANS", payload: res });
             }
@@ -125,6 +128,7 @@ export const HandleDataFunctions = (props) => {
       })
       .catch(async (err) => {
         setLoading(false);
+
         if (err.message === "notSet") {
           if (address) {
             // window.alert("You should choose a wallet from your wallet list!");
@@ -158,6 +162,7 @@ export const HandleDataFunctions = (props) => {
   const handleProviderLoginByWallet = async (address, action) => {
     // console.log(address, action)
     setLoading(true);
+
     blockChainFuncs
       .connectToWallet(address)
       .then(async (res) => {
@@ -190,10 +195,10 @@ export const HandleDataFunctions = (props) => {
             throw new Error("notSignedUp");
           }
         } else {
-          console.log(action);
+          // console.log(action);
 
           if (action !== "signUp") {
-            console.log(action);
+            // console.log(action);
             dispatch({ type: "REGISTERED", payload: true });
             dispatch({
               type: "LOAD_PROVIDER_PLANS_COUNT",
@@ -216,6 +221,7 @@ export const HandleDataFunctions = (props) => {
               });
             }
             setLoading(false);
+
             await getProviderAllInfo(res.address, res.planNum);
           } else {
             throw new Error("alreadyProvider");
@@ -275,6 +281,7 @@ export const HandleDataFunctions = (props) => {
       .then(async (result) => {
         if (result.result === true) {
           setLoading(true);
+
           setAuth(true);
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
@@ -325,6 +332,7 @@ export const HandleDataFunctions = (props) => {
             .loadSubscriberPlansByUsername(username, password)
             .then((res) => {
               setLoading(false);
+
               if (res) {
                 dispatch({ type: "LOAD_USER_PLANS", payload: res });
               }
@@ -334,6 +342,7 @@ export const HandleDataFunctions = (props) => {
       .catch(async (err) => {
         console.log(err);
         setLoading(false);
+
         // window.alert("Can not load data!");
         await showResultToUser("Authentication Problem!", "Can not load data!");
         // console.log(error);
@@ -349,6 +358,7 @@ export const HandleDataFunctions = (props) => {
       .then(async (result) => {
         if (result.result === true) {
           setLoading(true);
+
           dispatch({
             type: "LOAD_USER",
             payload: {
@@ -387,11 +397,13 @@ export const HandleDataFunctions = (props) => {
           }
           dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
           setLoading(false);
+
           getProviderAllInfo(subscryptAddress);
         }
       })
       .catch(() => {
         setLoading(false);
+
         // console.log(error);
       });
   };
@@ -456,6 +468,7 @@ export const HandleDataFunctions = (props) => {
     const userAddress = Cookies.get("subscryptAddress");
     if (password) {
       setLoading(true);
+
       //do the stuff for auth by username
       if (userType === "user") {
         handleSubscriberloginByUsername(userName, password);

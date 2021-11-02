@@ -1,16 +1,10 @@
-import { useContext } from "react";
-import { UserContext } from "../../../context/store";
 import * as utils from "../../../utilities/utilityFunctions";
 
 //The component for generating every row of the subscripted users list
 export default function ProviderEachUser(props) {
-  const { userInfo, userIndex } = props;
-  const { globalState } = useContext(UserContext);
+  const { userInfo, userIndex ,plan} = props;
   // console.log(userInfo);
-  const planIndex = userInfo.plan_index;
-  const plan = globalState.providerPlans[planIndex];
 
-  // console.log(plan);
   const planName = plan.name;
   const startTime = utils.timeStamptoDate(userInfo.start_time);
   const duration = utils.duration(parseInt(plan.duration.replace(/,/g, "")));

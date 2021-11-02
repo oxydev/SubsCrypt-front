@@ -3,7 +3,6 @@ import Head from "next/head";
 import SideBar from "../componenets/layOut/sideBar";
 import Header from "../componenets/layOut/header";
 import Main from "../componenets/layOut/Main";
-import Menu from "./menu";
 import { Store } from "../context/store";
 import { Modal } from "../context/modal";
 import React from "react";
@@ -23,23 +22,32 @@ export const loadingContext = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   //Turn on and off the loading when the page url has been changed
   useEffect(() => {
     router.events.on("routeChangeStart", () => {
-      setLoading(true);
+      setInitialLoading(true);
     });
     router.events.on("routeChangeComplete", () => {
       setTimeout(() => {
-        setLoading(false);
+        setInitialLoading(false);
       }, 200);
     });
     setTimeout(() => {
-      setLoading(false);
-    }, 200);
+      setInitialLoading(false);
+    }, 1000);
   }, []);
+
+  useEffect(() => {
+    if (!auth && !router.pathname.includes("/login")) {
+      router.push("/login/");
+    } else if (auth) {
+      router.push("/");
+    }
+  }, [auth]);
 
   return (
     <>
@@ -80,7 +88,7 @@ export default function App({ Component, pageProps }) {
                       <HandleDataFunctions>
                         <SetDataFunctions>
                           <div className="WholePageWrapper">
-                            {loading ? (
+                            {initialLoading || loading ? (
                               <Loading />
                             ) : (
                               <>
@@ -90,11 +98,7 @@ export default function App({ Component, pageProps }) {
                                 <Main>
                                   <>
                                     {auth && <Header />}
-                                    {auth ? (
-                                      <Component {...pageProps} />
-                                    ) : (
-                                      <Menu {...pageProps} />
-                                    )}
+                                    <Component {...pageProps} />
                                   </>
                                 </Main>
                                 <div />

@@ -16,7 +16,7 @@ export default function SubscryptionOffers() {
   const { handleTutorial } = useContext(tutorialContext);
 
   useEffect(() => {
-    console.log(globalState);
+    // console.log(globalState);
     if (globalState.user.username) handleTutorial(tutorialData);
     else handleTutorial([...tutorialData.slice(0, 2), tutorialData[3]]);
   }, []);

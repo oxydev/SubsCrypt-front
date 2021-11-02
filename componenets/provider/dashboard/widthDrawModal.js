@@ -66,7 +66,7 @@ export const WithdrwaModal = (props) => {
         <label>Withdrawable Amount:</label>
         <div className="Amount">
           <input type="text" value={withDrawAbleAmount} disabled />
-          <span className="Unit">DOT</span>
+          <span className="Unit">SubC</span>
         </div>
         <input type="submit" value="Withdraw" />
       </form>

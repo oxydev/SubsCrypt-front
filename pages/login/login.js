@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import LoginPart from "../componenets/login/loginPart";
-import Connection from "../componenets/login/connection";
-import data from "../data/wallets&networks.json";
-import Card from "../componenets/login/card";
-import { handleDataContext } from "../context/handleData";
-import tutData from "../data/tutorial.json";
-import { tutorialContext } from "../context/tutorial";
+import LoginPart from "../../componenets/login/loginPart";
+import Connection from "../../componenets/login/connection";
+import data from "../../data/wallets&networks.json";
+import Card from "../../componenets/login/card";
+import { handleDataContext } from "../../context/handleData";
+import tutData from "../../data/tutorial.json";
+import { tutorialContext } from "../../context/tutorial";
 
 const Login = (props) => {
   const { action } = props;
@@ -65,6 +65,8 @@ const Login = (props) => {
     />
   ));
 
+  const tutorialData = tutData.tutorials.login;
+
   useEffect(() => {
     if (data.networks.length === 1) {
       setNetwork(0);
@@ -80,10 +82,9 @@ const Login = (props) => {
       ]);
       handleWalletLists();
     } else {
-      handleTutorial(tutData.tutorials.login.slice(0, 3));
+      handleTutorial(tutorialData);
     }
   }, []);
-
   useEffect(() => {
     if (steps[0]) {
       setSteps([true, true, false]);
@@ -117,15 +118,35 @@ const Login = (props) => {
         {steps[2] && action !== "signUp" && (
           <>
             <p className="Topic">Login Method</p>
-            <div className="LoginMethod">{methods}</div>
+            <div className="LoginMethod">
+              {/* <p
+                onClick={() => {
+                  setMethod(0);
+                  handleWalletLists();
+                }}
+              >
+                Login by Wallet
+              </p>
+
+              <span>or</span>
+              <p
+                onClick={() => {
+                  setMethod(1);
+                }}
+              >
+                Login by Username
+              </p> */}
+              {methods}
+            </div>
+            {/* <p className="Topic">Choose Wallet</p>
+            <div className="SelectWallet">
+              <select>{addressList}</select>
+            </div> */}
           </>
         )}
       </div>
       {method === 0 && (
-        <Connection
-          type={role === 0 ? "subscriber" : "provider"}
-          action={action}
-        />
+        <Connection type={role === 0 ? "subscriber" : "provider"} />
       )}
       {method === 1 && (
         <LoginPart type={role === 0 ? "subscriber" : "provider"} />

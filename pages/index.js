@@ -15,5 +15,5 @@ export default function Home() {
     router.push("/user/");
   }
 
-  return <div className="LoginPage"></div>;
+  return <div className="LoginPage"/>;
 }

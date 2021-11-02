@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Cookies from "js-cookie";
-import { useRouter } from "next/dist/client/router";
 
 const CheckedIcon = () => <>📚</>;
 const UncheckedIcon = () => <>👩‍💻</>;
 
 const ToggleButton = (props) => {
-  const router = useRouter();
   const [toggle, setToggle] = useState(true);
   const { defaultChecked, onChange, disabled, className } = props;
 
@@ -19,8 +17,11 @@ const ToggleButton = (props) => {
   }, [defaultChecked]);
 
   useEffect(() => {
-    if (Cookies.get("tutorial") == "off") {
+    if (Cookies.get("tutorial") === "off") {
       setToggle(false);
+    }
+    if (Cookies.get("tutorial") === undefined) {
+      Cookies.set("tutorial", "on");
     }
   }, []);
 
@@ -31,9 +32,10 @@ const ToggleButton = (props) => {
 
     if (toggle) {
       Cookies.set("tutorial", "off");
+      onChange("end");
     } else {
       Cookies.set("tutorial", "on");
-      router.reload(window.location.pathname);
+      onChange("start");
     }
 
     setToggle(!toggle);

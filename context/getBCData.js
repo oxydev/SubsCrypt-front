@@ -164,7 +164,7 @@ export const GetBCDataFunctions = (props) => {
             return getProviderPlanslist(address, parseInt(res.result));
         })
         .catch(
-          async (err) =>
+          async () =>
             await showResultToUser("Failed!", "The Address is not valid!")
         );
     } else {
@@ -289,7 +289,7 @@ export const GetBCDataFunctions = (props) => {
         }
       })
       .catch((err) => {
-        // console.log(err)
+        console.log(err)
         throw new Error("Problem with loading subscriber plans!");
       });
   };
@@ -317,7 +317,7 @@ export const GetBCDataFunctions = (props) => {
     return (await subscrypt)
       .getBalance(address)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res.toNumber() / 1e12;
       })
       .catch(async () => {
