@@ -38,6 +38,19 @@ export const Tutorial = (props) => {
     setState({ run: true, index: 0 });
   }, [steps]);
 
+  // useEffect(() => {
+  //   const index = state.index;
+  //   if (state.run == true) {
+  //     for (const item of steps) {
+  //       const id = item.target.substring(1);
+  //       document.getElementById(id).classList.remove("Dominent");
+  //     }
+  //     const id = steps[index].target.substring(1);
+  //     console.log(id);
+  //     document.getElementById(id).classList.add("Dominent");
+  //   }
+  // }, [state.index, state.run]);
+
   const toggleTutorial = (condition) => {
     if (condition == "start") {
       setState({ ...state, run: true });
@@ -71,14 +84,43 @@ export const Tutorial = (props) => {
 
   const handleJoyrideCallback = (data) => {
     const { action, index, status, type } = data;
-
     // console.log(action, index, status, type);
+    if (state.run == true && steps) {
+      for (const item of steps) {
+        const id = item.target.substring(1);
+        if (document.getElementById(id)) {
+          document.getElementById(id).classList.remove("Dominent");
+        }
+      }
+      if (steps[index]) {
+        const id = steps[index].target.substring(1);
+        if (document.getElementById(id)) {
+          document.getElementById(id).classList.add("Dominent");
+        }
+      }
+    }
     if (EVENTS.STEP_AFTER == type) {
       setState({ ...state, index: index + (action === ACTIONS.PREV ? -1 : 1) });
     } else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
       setState({ ...state, run: false });
     } else if (EVENTS.TARGET_NOT_FOUND == type) {
       setState({ index: index, run: false });
+    }
+
+    if (
+      [
+        EVENTS.TARGET_NOT_FOUND,
+        STATUS.FINISHED,
+        STATUS.SKIPPED,
+        EVENTS.BEACON,
+      ].includes(type)
+    ) {
+      for (const item of steps) {
+        const id = item.target.substring(1);
+        if (document.getElementById(id)) {
+          document.getElementById(id).classList.remove("Dominent");
+        }
+      }
     }
   };
 
@@ -103,7 +145,7 @@ export const Tutorial = (props) => {
                 primaryColor: "#d71eae",
                 zIndex: 1000,
                 spotlightShadow: "0 0 15px rgba(0, 1, 0, 0.5)",
-                overlayColor: "rgba(1,1,1,0.3)",
+                overlayColor: "rgba(255, 255, 255, 0.329)",
               },
             }}
           />

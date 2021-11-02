@@ -28,16 +28,14 @@ export default function App({ Component, pageProps }) {
 
   //Turn on and off the loading when the page url has been changed
   useEffect(() => {
-    // router.events.on("routeChangeStart", () => {
-    //   setLoading(true);
-    //   console.log("here!!!");
-    // });
-    // router.events.on("routeChangeComplete", () => {
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //     console.log("here!!!");
-    //   }, 200);
-    // });
+    router.events.on("routeChangeStart", () => {
+      setInitialLoading(true);
+    });
+    router.events.on("routeChangeComplete", () => {
+      setTimeout(() => {
+        setInitialLoading(false);
+      }, 200);
+    });
     setTimeout(() => {
       setInitialLoading(false);
     }, 1000);

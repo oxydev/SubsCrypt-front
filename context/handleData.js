@@ -54,7 +54,7 @@ export const HandleDataFunctions = (props) => {
   //Function for handling the user wallet connection as a subscriber
   const handleSubscriberLoginByWallet = async (address) => {
     setLoading(true);
-    console.log("here!!!");
+
     blockChainFuncs
       .connectToWallet(address)
       .then(async (res) => {
@@ -107,7 +107,7 @@ export const HandleDataFunctions = (props) => {
         if (res === "notSet") {
           if (!address) {
             setLoading(false);
-            console.log("here!!!");
+
             await showResultToUser(
               "Wallet selection Error!",
               "You should choose a wallet from your wallet list!"
@@ -119,7 +119,7 @@ export const HandleDataFunctions = (props) => {
         } else {
           await blockChainFuncs.loadSubscriberPlansByWallet(res).then((res) => {
             setLoading(false);
-            console.log("here!!!");
+
             if (res.length > 0) {
               dispatch({ type: "LOAD_USER_PLANS", payload: res });
             }
@@ -128,7 +128,7 @@ export const HandleDataFunctions = (props) => {
       })
       .catch(async (err) => {
         setLoading(false);
-        console.log("here!!!");
+
         if (err.message === "notSet") {
           if (address) {
             // window.alert("You should choose a wallet from your wallet list!");
@@ -162,7 +162,7 @@ export const HandleDataFunctions = (props) => {
   const handleProviderLoginByWallet = async (address, action) => {
     // console.log(address, action)
     setLoading(true);
-    console.log("here!!!");
+
     blockChainFuncs
       .connectToWallet(address)
       .then(async (res) => {
@@ -191,7 +191,6 @@ export const HandleDataFunctions = (props) => {
           if (action !== "login") {
             dispatch({ type: "REGISTERED", payload: false });
             setLoading(false);
-            console.log("here!!!");
           } else {
             throw new Error("notSignedUp");
           }
@@ -222,7 +221,7 @@ export const HandleDataFunctions = (props) => {
               });
             }
             setLoading(false);
-            console.log("here!!!");
+
             await getProviderAllInfo(res.address, res.planNum);
           } else {
             throw new Error("alreadyProvider");
@@ -282,7 +281,7 @@ export const HandleDataFunctions = (props) => {
       .then(async (result) => {
         if (result.result === true) {
           setLoading(true);
-          console.log("here!!!");
+
           setAuth(true);
           Cookies.set("subscrypt", username);
           Cookies.set("subscryptPass", password);
@@ -333,7 +332,7 @@ export const HandleDataFunctions = (props) => {
             .loadSubscriberPlansByUsername(username, password)
             .then((res) => {
               setLoading(false);
-              console.log("here!!!");
+
               if (res) {
                 dispatch({ type: "LOAD_USER_PLANS", payload: res });
               }
@@ -343,7 +342,7 @@ export const HandleDataFunctions = (props) => {
       .catch(async (err) => {
         console.log(err);
         setLoading(false);
-        console.log("here!!!");
+
         // window.alert("Can not load data!");
         await showResultToUser("Authentication Problem!", "Can not load data!");
         // console.log(error);
@@ -359,7 +358,7 @@ export const HandleDataFunctions = (props) => {
       .then(async (result) => {
         if (result.result === true) {
           setLoading(true);
-          console.log("here!!!");
+
           dispatch({
             type: "LOAD_USER",
             payload: {
@@ -398,13 +397,13 @@ export const HandleDataFunctions = (props) => {
           }
           dispatch({ type: "LOAD_USER_ADDRESS", payload: subscryptAddress });
           setLoading(false);
-          console.log("here!!!");
+
           getProviderAllInfo(subscryptAddress);
         }
       })
       .catch(() => {
         setLoading(false);
-        console.log("here!!!");
+
         // console.log(error);
       });
   };
@@ -469,7 +468,7 @@ export const HandleDataFunctions = (props) => {
     const userAddress = Cookies.get("subscryptAddress");
     if (password) {
       setLoading(true);
-      console.log("here!!!");
+
       //do the stuff for auth by username
       if (userType === "user") {
         handleSubscriberloginByUsername(userName, password);
