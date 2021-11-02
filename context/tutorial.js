@@ -84,7 +84,7 @@ export const Tutorial = (props) => {
 
   const handleJoyrideCallback = (data) => {
     const { action, index, status, type } = data;
-    // console.log(action, index, status, type);
+    console.log(action, index, status, type);
     if (state.run == true && steps) {
       for (const item of steps) {
         const id = item.target.substring(1);
@@ -113,8 +113,10 @@ export const Tutorial = (props) => {
         STATUS.FINISHED,
         STATUS.SKIPPED,
         EVENTS.BEACON,
+        EVENTS.TOUR_END,
       ].includes(type)
     ) {
+      console.log("finished");
       for (const item of steps) {
         const id = item.target.substring(1);
         if (document.getElementById(id)) {
