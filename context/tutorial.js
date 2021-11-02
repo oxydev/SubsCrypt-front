@@ -97,6 +97,15 @@ export const Tutorial = (props) => {
             stepIndex={state.index}
             disableScrolling={false}
             disableScrollParentFix={true}
+            styles={{
+              options: {
+                arrowColor: "#5867ff",
+                primaryColor: "#d71eae",
+                zIndex: 1000,
+                spotlightShadow: "0 0 15px rgba(0, 1, 0, 0.5)",
+                overlayColor: "rgba(1,1,1,0.3)",
+              },
+            }}
           />
         )}
         {props.children}
