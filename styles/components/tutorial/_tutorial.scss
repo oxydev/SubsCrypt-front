@@ -11,9 +11,10 @@
   padding: 30px;
 
   img {
-    @include circle(43px);
-    object-fit: cover;
-    border: $border-main;
+    max-width: 100%;
+    height: auto;
+    //object-fit: cover;
+    //border: $border-main;
   }
 
   h2 {
