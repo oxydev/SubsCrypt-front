@@ -64,7 +64,7 @@ export const Tutorial = (props) => {
     tooltipProps,
   }) => (
     <div className="TutorialBox" {...tooltipProps}>
-      <img src="/logo/tutLogo.png" />
+      <embed src="/logo/logo2.svg" />
       <h2>{step.title}</h2>
       <p>{step.content}</p>
       <div className="BtnContainer">
